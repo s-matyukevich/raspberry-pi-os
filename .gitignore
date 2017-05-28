@@ -1,2 +1,3 @@
-src/lesson*/build/*
 backup/*
+**/*.o
+**/*.swp

@@ -1,14 +1,10 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "printf.h"
 #include "boot.h"
 
-//extern void DELAY ( unsigned int);
-//extern void PUT32 ( unsigned int, unsigned int );
-//extern unsigned int GET32 ( unsigned int );
-
 #define PBASE 0x3F000000
-
 #define GPFSEL1         (PBASE+0x00200004)
 #define GPSET0          (PBASE+0x0020001C)
 #define GPCLR0          (PBASE+0x00200028)
@@ -46,13 +42,6 @@ void uart_send ( char c )
 	PUT32(AUX_MU_IO_REG,c);
 }
 
-void uart_send_string(char* str)
-{
-	for (size_t i = 0; str[i] != '\0'; i ++)
-	{
-		uart_send((char)str[i]);
-	}
-}
 
 void uart_init ( void )
 {
@@ -81,11 +70,25 @@ void uart_init ( void )
 	PUT32(AUX_MU_CNTL_REG,3);	//Finaly, enable transmitter and receiver
 }
 
+void putc ( void* p, char c)
+{
+	uart_send(c);
+}
+
+void uart_send_string(char* str)
+{
+       for (size_t i = 0; str[i] != '\0'; i ++)
+       {
+               uart_send((char)str[i]);
+       }
+}
+
 void kernel_main(void)
 {
 	uart_init();
-	uart_send_string("Hello, world!\r\n");
+	int el = GET_EL();
+	printf("Exception level: %d \r\n", el);
 
 	while (1)
-		uart_send(uart_recv());
+		uart_send(uart_recv()); 
 }
