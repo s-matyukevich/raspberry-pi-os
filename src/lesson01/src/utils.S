@@ -1,9 +1,3 @@
-.globl GET_EL
-GET_EL:
-	mrs x0, CurrentEL
-	lsr x0, x0, #2
-	ret
-
 .globl PUT32
 PUT32:
 	str w1,[x0]

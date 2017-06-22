@@ -1,4 +1,4 @@
-.set S_FRAME_SIZE, 256 //size of all saved registers 
+.set S_FRAME_SIZE, 256 		// size of all saved registers 
 
 .macro	ventry	label
 .align	7
@@ -53,23 +53,23 @@ add	sp, sp, #S_FRAME_SIZE
 .globl vectors 
 vectors:
 	ventry	invalid_irq		// Synchronous EL1t
-	ventry	invalid_irq			// IRQ EL1t
-	ventry	invalid_irq			// FIQ EL1t
+	ventry	invalid_irq		// IRQ EL1t
+	ventry	invalid_irq		// FIQ EL1t
 	ventry	invalid_irq		// Error EL1t
 
-	ventry	invalid_irq			// Synchronous EL1h
-	ventry	el1_irq				// IRQ EL1h
-	ventry	invalid_irq			// FIQ EL1h
+	ventry	invalid_irq		// Synchronous EL1h
+	ventry	el1_irq			// IRQ EL1h
+	ventry	invalid_irq		// FIQ EL1h
 	ventry	invalid_irq		// Error EL1h
 
-	ventry	invalid_irq			// Synchronous 64-bit EL0
-	ventry	invalid_irq				// IRQ 64-bit EL0
-	ventry	invalid_irq			// FIQ 64-bit EL0
+	ventry	invalid_irq		// Synchronous 64-bit EL0
+	ventry	invalid_irq		// IRQ 64-bit EL0
+	ventry	invalid_irq		// FIQ 64-bit EL0
 	ventry	invalid_irq		// Error 64-bit EL0
 
 	ventry	invalid_irq		// Synchronous 32-bit EL0
-	ventry	invalid_irq			// IRQ 32-bit EL0
-	ventry	invalid_irq			// FIQ 32-bit EL0
+	ventry	invalid_irq		// IRQ 32-bit EL0
+	ventry	invalid_irq		// FIQ 32-bit EL0
 	ventry	invalid_irq		// Error 32-bit EL0
 
 
@@ -87,8 +87,8 @@ invalid_irq:
 
 .globl irq_vector_init
 irq_vector_init:
-	adrp	x0, vectors			// load VBAR_EL1 with virtual
-	msr	vbar_el1, x0			// vector table address
+	adrp	x0, vectors		// load VBAR_EL1 with virtual
+	msr	vbar_el1, x0		// vector table address
 	ret
 
 .globl enable_processor_interrupts

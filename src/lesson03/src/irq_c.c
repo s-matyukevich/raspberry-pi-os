@@ -24,7 +24,6 @@ void handle_irq(void)
 			handle_timer_irq();
 			break;
 		default:
-			
 			printf("Inknown pending irq: %x", irq);
 	}
 }
