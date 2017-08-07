@@ -34,7 +34,7 @@ master:
 	eret				// Perform exception return to EL1
 
 el1_entry:
-	mov	sp,#0x00100000
+	mov	sp,#0x00400000
 
 	mov	x0, #3 << 20
 	msr	cpacr_el1, x0		// Enable FP/ASIMD

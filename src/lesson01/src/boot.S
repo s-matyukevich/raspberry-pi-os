@@ -8,7 +8,7 @@ _start:
 	b	hang
 
 master:
-	mov	sp,#0x00100000
+	mov	sp,#0x00400000
 	bl	kernel_main
 
 hang: b hang
