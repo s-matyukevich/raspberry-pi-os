@@ -21,4 +21,4 @@ OBJ_FILES += $(ASM_FILES:.S=_s.o)
 kernel7.img: src/linker.ld $(OBJ_FILES)
 	$(ARMGNU)-ld -T src/linker.ld -o kernel7.elf  $(OBJ_FILES)
 	$(ARMGNU)-objcopy kernel7.elf -O binary kernel7.img
-	rm kernel7.elf 
+	#rm kernel7.elf 

@@ -4,8 +4,7 @@
 #include "printf.h"
 #include "utils.h"
 #include "timer.h"
-#include "irq_c.h"
-#include "irq_s.h"
+#include "irq.h"
 #include "mini_uart.h"
 
 
