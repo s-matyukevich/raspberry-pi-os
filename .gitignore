@@ -1,3 +1,5 @@
 backup/*
 **/*.o
 **/*.swp
+**/*.img
+**/*.elf
