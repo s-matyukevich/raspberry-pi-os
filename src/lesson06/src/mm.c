@@ -1,4 +1,5 @@
 #include "mm.h"
+#include "arm/mmu.h"
 #include "printf.h"
 
 static unsigned short mem_map [ PAGING_PAGES ] = {0,};

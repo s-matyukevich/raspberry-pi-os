@@ -9,7 +9,6 @@
 #include "sched.h"
 #include "mini_uart.h"
 #include "sys.h"
-#include "boot.h"
 #include "user.h"
 
 

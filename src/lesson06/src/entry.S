@@ -1,11 +1,6 @@
-.set S_FRAME_SIZE, 272 		// size of all saved registers 
-.set S_X0, 0
-
-.set ESR_ELx_EC_SHIFT,		26
-.set ESR_ELx_EC_SVC64,		0x15
-.set ESR_ELx_EC_DABT_LOW,	0x24
-
-.set __NR_syscalls, 4
+#include "arm/sysregs.h"
+#include "entry.h"
+#include "sys.h"
 
 .globl hang
 hang: b hang
