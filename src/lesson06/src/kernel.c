@@ -31,7 +31,7 @@ void kernel_main(unsigned long start)
 	printf("enabled\n\r");
 	timer_init();
 	enable_interrupt_controller();
-	enable_processor_interrupts();
+	enable_irq();
 
 	int res = copy_process(PF_KTHREAD, (unsigned long)&kernel_process, 0);
 	if (res < 0) {

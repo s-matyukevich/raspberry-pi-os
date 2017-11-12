@@ -78,9 +78,9 @@ void timer_tick()
 		return;
 	}
 	current->counter=0;
-	enable_processor_interrupts();
+	enable_irq();
 	_schedule();
-	disable_processor_interrupts();
+	disable_irq();
 }
 
 void exit_process(){

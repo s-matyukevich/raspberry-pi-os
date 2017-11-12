@@ -12,7 +12,8 @@ _start:
 	cbz	x0, master		// Hang for all non-primary CPU
 	b	hang
 
-hang: b hang
+proc_hang: 
+	b proc_hang
 
 master:
 	mov	x0, #SCTLR_MMU_DISABLED
