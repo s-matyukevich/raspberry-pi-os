@@ -21,14 +21,11 @@ void kernel_process(){
 }
 
 
-void kernel_main(unsigned long start)
+void kernel_main()
 {
 	uart_init();
 	init_printf(NULL, putc);
-	printf("start\n\r");
-	printf("addr: %x\n\r", start >> 32);
 	irq_vector_init();
-	printf("enabled\n\r");
 	timer_init();
 	enable_interrupt_controller();
 	enable_irq();

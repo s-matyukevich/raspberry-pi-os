@@ -31,6 +31,11 @@ master:
 	eret				
 
 el1_entry:
+	adr	x0, bss_begin
+	adr	x1, bss_end
+	sub	x1, x1, x0
+	bl 	memzero
+
 	bl 	__create_page_tables
 
 	mov	x0, #VA_START			

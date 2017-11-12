@@ -1,6 +1,5 @@
 #include "mm.h"
 #include "sched.h"
-#include "printf.h"
 #include "fork.h"
 #include "utils.h"
 
@@ -24,26 +23,6 @@ int copy_process(unsigned long clone_flags, unsigned long fn, unsigned long arg)
 		*cur_regs = *childregs;
 		childregs->regs[0] = 0;
 		copy_virt_memory(p);
-
-		unsigned long adr = PAGE_SIZE;
-		unsigned long *ptr = (unsigned long *)adr;
-		*ptr = 123;
-		unsigned long val = *ptr;
-		printf("val 1: %d\n\r", val);
-
-		printf("pgd2: %x\n\r", p->mm.pgd);
-		set_pgd(p->mm.pgd);
-		*ptr = 456;
-		val = *ptr;
-		printf("val 2: %d\n\r", val);
-
-		printf("pgd2: %x\n\r", task[1]->mm.pgd);
-		set_pgd(task[1]->mm.pgd);
-		//set_pgd(PAGE_SIZE);
-		//unsigned long res = get_pgd();
-		//printf("res 3: %x\n\r", res);
-		val = *ptr;
-		printf("val 3: %d\n\r", val);
 	}
 	p->flags = clone_flags;
 	p->priority = current->priority;

@@ -8,10 +8,7 @@ memcpy:
 
 .globl memzero
 memzero:
-1:	stp	xzr, xzr, [x0], #16
-	subs	x1, x1, #16
-	b.ne	1b
-//	str xzr, [x0], #8
-//	subs x1, x1, #8
-//	b.gt memzero
+	str xzr, [x0], #8
+	subs x1, x1, #8
+	b.gt memzero
 	ret
