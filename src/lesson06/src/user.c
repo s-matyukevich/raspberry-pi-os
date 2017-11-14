@@ -14,9 +14,7 @@ void loop(char* str){
 }
 
 void user_process() {
-	char buf[30];
-	tfp_sprintf(buf, "User Process: %x", (unsigned long)buf);
-	call_sys_write(buf);
+	call_sys_write("User process\n\r");
 	int pid = call_sys_fork();
 	if (pid < 0) {
 		call_sys_write("Errord during fork\n\r");

@@ -1,4 +1,4 @@
-.set THREAD_CPU_CONTEXT, 0 		// offset of cpu_context in task_struct 
+#include "sched.h"
 
 .globl cpu_switch_to
 cpu_switch_to:

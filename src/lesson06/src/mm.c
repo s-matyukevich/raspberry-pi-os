@@ -1,6 +1,5 @@
 #include "mm.h"
 #include "arm/mmu.h"
-#include "printf.h"
 
 static unsigned short mem_map [ PAGING_PAGES ] = {0,};
 
@@ -83,7 +82,6 @@ void map_page(struct task_struct *task, unsigned long va, unsigned long page){
 	map_table_entry((unsigned long *)(pte + VA_START), va, page);
 	struct user_page p = {page, va};
 	task->mm.user_pages[task->mm.user_pages_count++] = p;
-	printf("Alloc: %x\n\r", va);
 }
 
 int copy_virt_memory(struct task_struct *dst) {
@@ -94,7 +92,6 @@ int copy_virt_memory(struct task_struct *dst) {
 			return -1;
 		}
 		memcpy(src->mm.user_pages[i].virt_addr, kernel_va, PAGE_SIZE);
-		printf("Memcpy: %x %x %x %x\r\n", src->mm.user_pages[i].virt_addr, dst->mm.user_pages[i].virt_addr, src->mm.user_pages[i].phys_addr, dst->mm.user_pages[i].phys_addr);
 	}
 	return 0;
 }

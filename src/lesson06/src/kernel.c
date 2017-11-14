@@ -13,7 +13,7 @@
 
 
 void kernel_process(){
-	printf("Kernel process started. EL %d\r\n", GET_EL());
+	printf("Kernel process started. EL %d\r\n", get_el());
 	unsigned long begin = (unsigned long)&user_begin;
 	unsigned long end = (unsigned long)&user_end;
 	unsigned long process = (unsigned long)&user_process;

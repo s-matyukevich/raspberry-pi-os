@@ -9,7 +9,7 @@
 
 void enable_interrupt_controller()
 {
-	PUT32(ENABLE_BASIC_IRQS, ARM_TIMER_IRQ);
+	put32(ENABLE_BASIC_IRQS, ARM_TIMER_IRQ);
 }
 
 void show_invalid_entry_message(int type, unsigned long esr, unsigned long address)
@@ -19,7 +19,7 @@ void show_invalid_entry_message(int type, unsigned long esr, unsigned long addre
 
 void handle_irq(void)
 {
-	uint32_t irq = GET32(IRQ_BASIC_PENDING);
+	uint32_t irq = get32(IRQ_BASIC_PENDING);
 	switch (irq) {
 		case ARM_TIMER_IRQ_PENDING:
 			handle_timer_irq();
