@@ -1,4 +1,4 @@
-ARMGNU ?= aarch64-linux-gnu
+ARMGNU ?= gcc-aarch64-linux-gnu
 
 COPS = -Wall -nostdlib -nostartfiles -ffreestanding -Iinclude -mgeneral-regs-only
 

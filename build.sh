@@ -6,4 +6,4 @@ if [[ -z "$1" ]]; then
   exit 1
 fi
 
-docker run -it smatyukevich/raspberry-pi-os-builder "cd src/$1 && make"
+docker run -it -v $(pwd)"/src/$1:/app" smatyukevich/raspberry-pi-os-builder "cd app && make"
