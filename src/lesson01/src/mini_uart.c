@@ -1,6 +1,3 @@
-#include <stddef.h>
-#include <stdint.h>
-
 #include "utils.h"
 #include "peripherals/mini_uart.h"
 #include "peripherals/gpio.h"
@@ -9,18 +6,18 @@ void uart_send ( char c )
 {
 	while(1)
 	{
-		if(GET32(AUX_MU_LSR_REG)&0x20) break;
+		if(get32(AUX_MU_LSR_REG)&0x20) break;
 	}
-	PUT32(AUX_MU_IO_REG,c);
+	put32(AUX_MU_IO_REG,c);
 }
 
 char uart_recv ( void )
 {
 	while(1)
 	{
-		if(GET32(AUX_MU_LSR_REG)&0x01) break;
+		if(get32(AUX_MU_LSR_REG)&0x01) break;
 	}
-	return(GET32(AUX_MU_IO_REG)&0xFF);
+	return(get32(AUX_MU_IO_REG)&0xFF);
 }
 
 void uart_send_string(char* str)
@@ -33,14 +30,15 @@ void uart_send_string(char* str)
 
 void uart_init ( void )
 {
-	uint32_t ra;
+	unsigned int selector;
 
-	ra=GET32(GPFSEL1);
-	ra&=~(7<<12); //gpio14
-	ra|=2<<12;    //alt5
-	ra&=~(7<<15); //gpio15
-	ra|=2<<15;    //alt5
+	selector = GET32(GPFSEL1);
+	selector &= ~(7<<12);                   // clean gpio14
+	selector |= 2<<12;                      // set alt5 for gpio14
+	selector &= ~(7<<15);                   // clean gpio15
+	selector |= 2<<15;                      // set alt5 for gpio 15
 	PUT32(GPFSEL1,ra);
+
 	PUT32(GPPUD,0);
 	DELAY(150);
 	PUT32(GPPUDCLK0,(1<<14)|(1<<15));

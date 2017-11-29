@@ -1,6 +1,7 @@
-ARMGNU ?= gcc-aarch64-linux-gnu
+ARMGNU ?= aarch64-linux-gnu
 
 COPS = -Wall -nostdlib -nostartfiles -ffreestanding -Iinclude -mgeneral-regs-only
+ASMOPS = -Iinclude 
 
 all : kernel7.img
 
@@ -11,7 +12,7 @@ src/%_c.o: src/%.c
 	$(ARMGNU)-gcc $(COPS) -c $< -o $@
 
 src/%_s.o: src/%.S
-	$(ARMGNU)-as $< -o $@
+	$(ARMGNU)-gcc $(ASMOPS) -c $< -o $@
 
 C_FILES = $(wildcard src/*.c)
 ASM_FILES = $(wildcard src/*.S)

@@ -1,7 +1,3 @@
-#include <stddef.h>
-#include <stdint.h>
-
-#include "utils.h"
 #include "mini_uart.h"
 
 void kernel_main(void)
