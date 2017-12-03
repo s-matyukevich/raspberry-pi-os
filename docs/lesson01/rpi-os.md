@@ -244,7 +244,7 @@ So now you know everything you need to understand the following lines of code, t
 	selector |= 2<<12;                      // set alt5 for gpio14
 	selector &= ~(7<<15);                   // clean gpio15
 	selector |= 2<<15;                      // set alt5 for gpio 15
-	put32(GPFSEL1,ra);
+	put32(GPFSEL1,selector);
 ```
 
 #### GPIO pull-up/down 
@@ -363,7 +363,7 @@ We also have a very simple sunction that is cappable of sending strings instead 
 ```
 void uart_send_string(char* str)
 {
-	for (size_t i = 0; str[i] != '\0'; i ++)
+	for (int i = 0; str[i] != '\0'; i ++)
 	{
 		uart_send((char)str[i]);
 	}
