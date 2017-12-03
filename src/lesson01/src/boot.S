@@ -21,4 +21,3 @@ master:
 	mov	sp, #(2 * SECTION_SIZE) 
 	bl	kernel_main
 
-

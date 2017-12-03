@@ -162,12 +162,14 @@ We have seen that boot code eventually passes control to `kernel_main` function.
 
 void kernel_main(void)
 {
-	uart_init();
-	uart_send_string("Hello, world!\r\n");
+    uart_init();
+    uart_send_string("Hello, world!\r\n");
 
-	while (1)
-		uart_send(uart_recv());
+    while (1) {
+        uart_send(uart_recv());
+    }
 }
+
 ```
 
 This function is one of the simplest in the kernel. It works with `Mini UART` device to print something to the screen and read user input (more about this device in the upcomming section). Kernel just prints `Hello, world!` message and then enters infinite loop that read a character from user and sent it bach to the screen.
@@ -195,30 +197,30 @@ Now let's take a look on how mini UART is initialized. This code is defined in [
 ```
 void uart_init ( void )
 {
-	unsigned int selector;
+    unsigned int selector;
 
-	selector = get32(GPFSEL1);
-	selector &= ~(7<<12);                   // clean gpio14
-	selector |= 2<<12;                      // set alt5 for gpio14
-	selector &= ~(7<<15);                   // clean gpio15
-	selector |= 2<<15;                      // set alt5 for gpio 15
-	put32(GPFSEL1,ra);
+    selector = get32(GPFSEL1);
+    selector &= ~(7<<12);                   // clean gpio14
+    selector |= 2<<12;                      // set alt5 for gpio14
+    selector &= ~(7<<15);                   // clean gpio15
+    selector |= 2<<15;                      // set alt5 for gpio 15
+    put32(GPFSEL1,selector);
 
-	put32(GPPUD,0);
-	delay(150);
-	put32(GPPUDCLK0,(1<<14)|(1<<15));
-	delay(150);
-	put32(GPPUDCLK0,0);
+    put32(GPPUD,0);
+    delay(150);
+    put32(GPPUDCLK0,(1<<14)|(1<<15));
+    delay(150);
+    put32(GPPUDCLK0,0);
 
-	put32(AUX_ENABLES,1); 		//Enable mini uart (this also enables access to it registers)
-	put32(AUX_MU_CNTL_REG,0);	//Disable auto flow control and disable receiver and transmitter (for now)
-	put32(AUX_MU_IER_REG,0); 	//Disable receive and transmit interrupts
-	put32(AUX_MU_LCR_REG,3);	//Enable 8 bit mode
-	put32(AUX_MU_MCR_REG,0);	//Set RTS line to be always high
-	put32(AUX_MU_BAUD_REG,270);	//Set baund rate to 115200
-	put32(AUX_MU_IIR_REG,6);	//Clear FIFO
+    put32(AUX_ENABLES,1);                   //Enable mini uart (this also enables access to it registers)
+    put32(AUX_MU_CNTL_REG,0);               //Disable auto flow control and disable receiver and transmitter (for now)
+    put32(AUX_MU_IER_REG,0);                //Disable receive and transmit interrupts
+    put32(AUX_MU_LCR_REG,3);                //Enable 8 bit mode
+    put32(AUX_MU_MCR_REG,0);                //Set RTS line to be always high
+    put32(AUX_MU_BAUD_REG,270);             //Set baund rate to 115200
+    put32(AUX_MU_IIR_REG,6);                //Clear FIFO
 
-	put32(AUX_MU_CNTL_REG,3);	//Finaly, enable transmitter and receiver
+    put32(AUX_MU_CNTL_REG,3);               //Finaly, enable transmitter and receiver
 }
 ``` 
 
@@ -237,14 +239,14 @@ Here you can see that pins 14 and 15 have TXD1 and RXD1 alternative functions. T
 So now you know everything you need to understand the following lines of code, that are used to configure GPIO pins 14 and 15 to work with mini UART device.
 
 ```
-	unsigned int selector;
+    unsigned int selector;
 
-	selector = get32(GPFSEL1);
-	selector &= ~(7<<12);                   // clean gpio14
-	selector |= 2<<12;                      // set alt5 for gpio14
-	selector &= ~(7<<15);                   // clean gpio15
-	selector |= 2<<15;                      // set alt5 for gpio 15
-	put32(GPFSEL1,selector);
+    selector = get32(GPFSEL1);
+    selector &= ~(7<<12);                   // clean gpio14
+    selector |= 2<<12;                      // set alt5 for gpio14
+    selector &= ~(7<<15);                   // clean gpio15
+    selector |= 2<<15;                      // set alt5 for gpio 15
+    put32(GPFSEL1,selector);
 ```
 
 #### GPIO pull-up/down 
@@ -273,11 +275,11 @@ retain their previous state.
 This procedure desribes how we can remove bosh pull-up and pull-down states from pins 14 and 15, and that is exactly what we are doing in the following lines of code.
 
 ```
-	put32(GPPUD,0);
-	delay(150);
-	put32(GPPUDCLK0,(1<<14)|(1<<15));
-	delay(150);
-	put32(GPPUDCLK0,0);
+    put32(GPPUD,0);
+    delay(150);
+    put32(GPPUDCLK0,(1<<14)|(1<<15));
+    delay(150);
+    put32(GPPUDCLK0,0);
 ```
 
 #### Initializing mini UART
@@ -285,39 +287,39 @@ This procedure desribes how we can remove bosh pull-up and pull-down states from
 Now our mini UART is connected to GPIO pins and those pins are configured. the rest of the function is dedicated to mini UART initialization. Let's examine it line by line. For more information about specific mini UART register, please refer to `BCM2835 ARM Peripherals` manual.
 
 ```
-	put32(AUX_ENABLES,1); 		//Enable mini uart (this also enables access to it registers)
-	put32(AUX_MU_CNTL_REG,0);	//Disable auto flow control and disable receiver and transmitter (for now)
-	put32(AUX_MU_IER_REG,0); 	//Disable receive and transmit interrupts
-	put32(AUX_MU_LCR_REG,3);	//Enable 8 bit mode
-	put32(AUX_MU_MCR_REG,0);	//Set RTS line to be always high
-	put32(AUX_MU_BAUD_REG,270);	//Set baund rate to 115200
-	put32(AUX_MU_IIR_REG,6);	//Clear FIFO
+    put32(AUX_ENABLES,1);                   //Enable mini uart (this also enables access to it registers)
+    put32(AUX_MU_CNTL_REG,0);               //Disable auto flow control and disable receiver and transmitter (for now)
+    put32(AUX_MU_IER_REG,0);                //Disable receive and transmit interrupts
+    put32(AUX_MU_LCR_REG,3);                //Enable 8 bit mode
+    put32(AUX_MU_MCR_REG,0);                //Set RTS line to be always high
+    put32(AUX_MU_BAUD_REG,270);             //Set baund rate to 115200
+    put32(AUX_MU_IIR_REG,6);                //Clear FIFO
 
-	put32(AUX_MU_CNTL_REG,3);	//Finaly, enable transmitter and receiver
+    put32(AUX_MU_CNTL_REG,3);               //Finaly, enable transmitter and receiver
 ```
 
 ```
-	put32(AUX_ENABLES,1); 		//Enable mini uart (this also enables access to it registers)
+    put32(AUX_ENABLES,1);                   //Enable mini uart (this also enables access to it registers)
 ```
 This line enables mini UART. We must to this in the beggining, because this also enables access to all othe mini UART registers.
 
 ```
-	put32(AUX_MU_CNTL_REG,0);	//Disable auto flow control and disable receiver and transmitter (for now)
+    put32(AUX_MU_CNTL_REG,0);               //Disable auto flow control and disable receiver and transmitter (for now)
 ```
 We disabling reciver and transmitter lines before configuration is finished. We also permanently disable auto flow control because it requires us to use additional GPIO pins and TTL to serial cable simply just don't suport it. For more information about auto flow control you can refer to [this](http://www.deater.net/weave/vmwprod/hardware/pi-rts/) article.
 
 ```
-	put32(AUX_MU_IER_REG,0); 	//Disable receive and transmit interrupts
+    put32(AUX_MU_IER_REG,0);                //Disable receive and transmit interrupts
 ```
 It is posible to confugre mini UART to generate a processor interrupt each time new data is vailable. We are going to start working with interrupts only in lesson 3, so for now we just disable this feature.
 
 ```
-	put32(AUX_MU_LCR_REG,3);	//Enable 8 bit mode
+    put32(AUX_MU_LCR_REG,3);                //Enable 8 bit mode
 ```
 Mini UART can support either 7 or 8 bit operations. This is because ASCII character is 7 bits for the standard set and 8 bits for the extended. We are going to use 8 bit mode. Interesting thing is that in description of AUX_MU_LCR_REG register `BCM2835 ARM Peripherals` manual have an error. All such errors are described  [here](https://elinux.org/BCM2835_datasheet_errata)
 
 ```
-	put32(AUX_MU_BAUD_REG,270);	//Set baund rate to 115200
+    put32(AUX_MU_MCR_REG,0);                //Set RTS line to be always high
 ```
 The baud rate is the rate at which information is transferred in a communication channel. In the serial port context, “115200 baud” means that the serial port is capable of transferring a maximum of 115200 bits per second. Baud rate should be configured the same in your Raspberry Pi mini UART device and in your terminal emulator. 
 In raspberry Pi baud rate is calculated accordingly to the following equation
@@ -327,7 +329,7 @@ baudrate = system_clock_freq / (8 * ( baudrate_reg + 1 ))
 `system_clock_freq` is 250 MHz, so we can easily calculate value of `baudrate_reg` as 270.
 
 ``` 
-	put32(AUX_MU_CNTL_REG,3);	//Finaly, enable transmitter and receiver
+    put32(AUX_MU_CNTL_REG,3);               //Finaly, enable transmitter and receiver
 ```
 After this line is executed mini UART device is ready to work!
 
@@ -338,20 +340,20 @@ After mini UART is ready we can try to send and recive some data using it. In or
 ```
 void uart_send ( char c )
 {
-	while(1)
-	{
-		if(get32(AUX_MU_LSR_REG)&0x20) break;
-	}
-	put32(AUX_MU_IO_REG,c);
+    while(1) {
+        if(get32(AUX_MU_LSR_REG)&0x20) 
+            break;
+    }
+    put32(AUX_MU_IO_REG,c);
 }
 
 char uart_recv ( void )
 {
-	while(1)
-	{
-		if(get32(AUX_MU_LSR_REG)&0x01) break;
-	}
-	return(get32(AUX_MU_IO_REG)&0xFF);
+    while(1) {
+        if(get32(AUX_MU_LSR_REG)&0x01) 
+            break;
+    }
+    return(get32(AUX_MU_IO_REG)&0xFF);
 }
 ```
 
@@ -363,10 +365,9 @@ We also have a very simple sunction that is cappable of sending strings instead 
 ```
 void uart_send_string(char* str)
 {
-	for (int i = 0; str[i] != '\0'; i ++)
-	{
-		uart_send((char)str[i]);
-	}
+    for (int i = 0; str[i] != '\0'; i ++) {
+        uart_send((char)str[i]);
+    }
 }
 ```
 This function just iterates over all characters in the string and  send each character one by one. 
