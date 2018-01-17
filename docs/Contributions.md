@@ -14,4 +14,11 @@ The following types of contributions are particulary helpfull for the project.
 1. Validating source code and text of the lessons for errors.
 1. Helping to make lessons content more accurate and easier to understand.
 1. Working on sorce code and description for new lessons.
+1. Sharing source code of the completed exercises.
+1. Suggesting new exercises.
 1. Anything else that can help the project to become a perfect starting point for OS developers.
+
+### Contributing completed exercises.
+
+If you successfully completed any of the suggested exercises you can share your source code. The code should be place in the following folder `/exercises/lessonXX/<exercise number>/<your github username>/` Such folder structure allows to accept pull requests for the same exercise from different people.
+
