@@ -55,7 +55,8 @@ int move_to_user_mode(unsigned long start, unsigned long size, unsigned long pc)
 	return 0;
 }
 
-struct pt_regs * task_pt_regs(struct task_struct *tsk){
+struct pt_regs * task_pt_regs(struct task_struct *tsk)
+{
 	unsigned long p = (unsigned long)tsk + THREAD_SIZE - sizeof(struct pt_regs);
 	return (struct pt_regs *)p;
 }

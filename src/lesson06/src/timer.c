@@ -1,6 +1,5 @@
 #include "utils.h"
 #include "printf.h"
-#include "sched.h"
 #include "peripherals/timer.h"
 
 void timer_init ( void )

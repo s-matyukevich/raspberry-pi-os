@@ -1,9 +1,9 @@
-#ifndef	_UTILS_H
-#define	_UTILS_H
+#ifndef	_BOOT_H
+#define	_BOOT_H
 
-extern void DELAY ( unsigned int);
-extern void PUT32 ( unsigned int, unsigned int );
-extern unsigned int GET32 ( unsigned int );
-extern int GET_EL ( void );
+extern void delay ( unsigned long);
+extern void put32 ( unsigned long, unsigned int );
+extern unsigned int get32 ( unsigned long );
+extern int get_el ( void );
 
-#endif  /*_UTILS_H */
+#endif  /*_BOOT_H */

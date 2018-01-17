@@ -27,13 +27,3 @@ call_sys_fork:
 	mov w8, #SYS_FORK_NUMBER	
 	svc #0
 	ret
-
-.globl get_sp
-get_sp:
-	mov x0, sp
-	ret
-
-.globl get_pc
-get_pc:
-	adr x0, . 
-	ret

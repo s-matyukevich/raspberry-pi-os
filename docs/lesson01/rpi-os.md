@@ -1,4 +1,4 @@
-## Lesson 1: Starting the kernel
+## Lesson 1: Introducing Rasperry PI OS kernel or bare metal hello world.
 
 We are going to start our joirney to OS development world by writing a simple bare metall "Hello, world" application. I asume that at this point you already went through [Prerequisites](https://github.com/s-matyukevich/raspberry-pi-os/docs/Prerequisites.md) and have everything ready for the work. If not - now is the right time to do this.
 
@@ -333,7 +333,7 @@ baudrate = system_clock_freq / (8 * ( baudrate_reg + 1 ))
 ```
 After this line is executed mini UART device is ready to work!
 
-### Seinding data using mini UART
+### Sending data using mini UART
 
 After mini UART is ready we can try to send and recive some data using it. In order to do this we can use the following two functions. 
 

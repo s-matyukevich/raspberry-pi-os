@@ -1,4 +1,4 @@
-## Contributing to Raspberry Pi OS
+## Contributing to Raspberry PI OS
 
 The general workflow is the following:
 

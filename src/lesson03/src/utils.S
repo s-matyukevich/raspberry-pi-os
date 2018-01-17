@@ -1,21 +1,21 @@
-.globl GET_EL
-GET_EL:
+.globl get_el
+get_el:
 	mrs x0, CurrentEL
 	lsr x0, x0, #2
 	ret
 
-.globl PUT32
-PUT32:
+.globl put32
+put32:
 	str w1,[x0]
 	ret
 
-.globl GET32
-GET32:
+.globl get32
+get32:
 	ldr w0,[x0]
 	ret
 
-.globl DELAY
-DELAY:
+.globl delay
+delay:
 	subs x0, x0, #1
-	bne DELAY
+	bne delay
 	ret

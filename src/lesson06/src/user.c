@@ -2,7 +2,8 @@
 #include "user.h"
 #include "printf.h"
 
-void loop(char* str){
+void loop(char* str)
+{
 	char buf[2] = {""};
 	while (1){
 		for (int i = 0; i < 5; i++){
@@ -13,7 +14,8 @@ void loop(char* str){
 	}
 }
 
-void user_process() {
+void user_process() 
+{
 	call_sys_write("User process\n\r");
 	int pid = call_sys_fork();
 	if (pid < 0) {

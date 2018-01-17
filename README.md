@@ -7,10 +7,12 @@ This repository contains complete guide that teaches how to create your own simp
 * Introduction
 * Contribution guide
 * Prerequsities
-* Lesson 1: Starting the kernel
-  1.1 Raspberry PI OS.
-  1.2 Linux kernel. 
-  1.3 Exercises.
+* Lesson 1:Kernel Initialization 
+  1.1 Introducing Rasperry PI OS or bare metal "Hello, world!".
+  1.2 Linux project structure. 
+  1.3 Kernel build system. 
+  1.4 Linux startup sequence. 
+  1.5 Exercises.
 * Lesson 2: Processor initialization.
   2.1 Raspberry PI OS.
   2.2 Linux kernel. 
