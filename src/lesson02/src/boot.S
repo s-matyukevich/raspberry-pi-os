@@ -1,4 +1,3 @@
-#include "arm/mmu.h"
 #include "arm/sysregs.h"
 
 #include "mm.h"
@@ -16,13 +15,16 @@ proc_hang:
 	b proc_hang
 
 master:
-	mov	x0, #SCTLR_MMU_DISABLED
+	ldr	x0, =SCTLR_VALUE_MMU_DISABLED
 	msr	sctlr_el1, x0		
 
-	mov	x0, #SCR_SECURE_64BIT
+	ldr	x0, =HCR_VALUE
+	msr	hcr_el2, x0
+
+	ldr	x0, =SCR_VALUE
 	msr	scr_el3, x0
 
-	mov	x0, #SPSR_VALUE
+	ldr	x0, =SPSR_VALUE
 	msr	spsr_el3, x0
 
 	adr	x0, el1_entry		
