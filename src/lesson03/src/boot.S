@@ -12,7 +12,7 @@ _start:
 	b	proc_hang
 
 proc_hang: 
-	b proc_hang
+	b 	proc_hang
 
 master:
 	ldr	x0, =SCTLR_VALUE_MMU_DISABLED
@@ -40,3 +40,4 @@ el1_entry:
 
 	mov	sp, #(2 * SECTION_SIZE) 
 	bl	kernel_main
+	b 	proc_hang		// should never come here

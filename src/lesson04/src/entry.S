@@ -32,9 +32,21 @@
 	stp	x26, x27, [sp, #16 * 13]
 	stp	x28, x29, [sp, #16 * 14]
 	str	x30, [sp, #16 * 15] 
+
+	mrs	x22, elr_el1
+	mrs	x23, spsr_el1
+
+	stp	x30, x22, [sp, #16 * 15] 
+	str	x23, [sp, #16 * 16]
 	.endm
 
 	.macro	kernel_exit
+	ldr	x23, [sp, #16 * 16]
+	ldp	x30, x22, [sp, #16 * 15] 
+
+	msr	elr_el1, x22			
+	msr	spsr_el1, x23
+
 	ldp	x0, x1, [sp, #16 * 0]
 	ldp	x2, x3, [sp, #16 * 1]
 	ldp	x4, x5, [sp, #16 * 2]
@@ -131,6 +143,12 @@ el1_irq:
 	kernel_entry 
 	bl	handle_irq
 	kernel_exit 
+
+.globl ret_from_fork
+ret_from_fork:
+	bl	schedule_tail
+	mov	x0, x20
+	blr	x19 		//should never return
 
 .globl err_hang
 err_hang: b err_hang

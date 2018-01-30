@@ -41,7 +41,7 @@ struct cpu_context {
 	unsigned long pc;
 };
 
-#define MAX_PAROCESS_PAGES				16	
+#define MAX_PROCESS_PAGES				16	
 
 struct user_page {
 	unsigned long phys_addr;
@@ -51,9 +51,9 @@ struct user_page {
 struct mm_struct {
 	unsigned long pgd;
 	int user_pages_count;
-	struct user_page user_pages[MAX_PAROCESS_PAGES];
+	struct user_page user_pages[MAX_PROCESS_PAGES];
 	int kernel_pages_count;
-	unsigned long kernel_pages[MAX_PAROCESS_PAGES];
+	unsigned long kernel_pages[MAX_PROCESS_PAGES];
 };
 
 struct task_struct {

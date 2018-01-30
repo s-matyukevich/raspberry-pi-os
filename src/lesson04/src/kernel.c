@@ -1,6 +1,3 @@
-#include <stddef.h>
-#include <stdint.h>
-
 #include "printf.h"
 #include "utils.h"
 #include "timer.h"
@@ -14,7 +11,7 @@ void process(char *array)
 	while (1){
 		for (int i = 0; i < 5; i++){
 			uart_send(array[i]);
-			DELAY(100000);
+			delay(100000);
 		}
 	}
 }
@@ -26,11 +23,11 @@ void error(char *message){
 void kernel_main(void)
 {
 	uart_init();
-	init_printf(NULL, putc);
+	init_printf(0, putc);
 	irq_vector_init();
 	timer_init();
 	enable_interrupt_controller();
-	enable_processor_interrupts();
+	enable_irq();
 
 	int res = copy_process(1, (unsigned long)&process, (unsigned long)"12345");
 	if (res != 0) {

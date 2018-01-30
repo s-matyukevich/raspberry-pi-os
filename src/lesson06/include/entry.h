@@ -27,6 +27,8 @@
 
 #ifndef __ASSEMBLER__
 
+void ret_from_fork(void);
+
 const char *entry_error_messages[] = {
 	"SYNC_INVALID_EL1t",
 	"IRQ_INVALID_EL1t",		

@@ -1,6 +1,6 @@
 #include "mm.h"
 #include "sched.h"
-#include "fork.h"
+#include "entry.h"
 
 int copy_process(int nr, unsigned long fn, unsigned long arg)
 {

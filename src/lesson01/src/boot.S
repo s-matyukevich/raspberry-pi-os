@@ -10,7 +10,7 @@ _start:
 	b	proc_hang
 
 proc_hang: 
-	b proc_hang
+	b 	proc_hang
 
 master:
 	adr	x0, bss_begin
@@ -20,4 +20,4 @@ master:
 
 	mov	sp, #(2 * SECTION_SIZE) 
 	bl	kernel_main
-
+	b 	proc_hang		// should never come here

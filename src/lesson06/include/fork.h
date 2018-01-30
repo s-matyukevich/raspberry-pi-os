@@ -15,7 +15,6 @@
 #define PSR_MODE_EL3h	0x0000000d
 
 int copy_process(unsigned long clone_flags, unsigned long fn, unsigned long arg);
-void ret_from_fork(void);
 int move_to_user_mode(unsigned long start, unsigned long size, unsigned long pc);
 struct pt_regs * task_pt_regs(struct task_struct *tsk);
 
