@@ -115,7 +115,7 @@ fiq_invalid_el1t:
 	handle_invalid_entry 1, FIQ_INVALID_EL1t
 
 error_invalid_el1t:
-	handle_invalid_entry 1, ERROR_INVALID_EL1T
+	handle_invalid_entry 1, ERROR_INVALID_EL1t
 
 sync_invalid_el1h:
 	handle_invalid_entry 1, SYNC_INVALID_EL1h

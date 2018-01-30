@@ -1,6 +1,4 @@
-#include "arm/sysregs.h"
 #include "entry.h"
-#include "sys.h"
 
 
 	.macro handle_invalid_entry type
@@ -9,7 +7,7 @@
 	mrs	x1, esr_el1
 	mrs	x2, elr_el1
 	bl	show_invalid_entry_message
-	b	hang
+	b	err_hang
 	.endm
 
 	.macro	ventry	label
@@ -55,6 +53,7 @@
 	ldp	x28, x29, [sp, #16 * 14]
 	ldr	x30, [sp, #16 * 15] 
 	add	sp, sp, #S_FRAME_SIZE		
+	eret
 	.endm
 
 
@@ -94,7 +93,7 @@ fiq_invalid_el1t:
 	handle_invalid_entry  FIQ_INVALID_EL1t
 
 error_invalid_el1t:
-	handle_invalid_entry  ERROR_INVALID_EL1T
+	handle_invalid_entry  ERROR_INVALID_EL1t
 
 sync_invalid_el1h:
 	handle_invalid_entry  SYNC_INVALID_EL1h
@@ -133,15 +132,6 @@ el1_irq:
 	kernel_entry 
 	bl	handle_irq
 	kernel_exit 
-	eret					
 
-.globl irq_vector_init
-irq_vector_init:
-	adrp	x0, vectors		// load VBAR_EL1 with virtual
-	msr	vbar_el1, x0		// vector table address
-	ret
-
-.globl enable_irq
-enable_irq:
-	msr    daifclr, #2 
-	ret
+.globl err_hang
+err_hang: b err_hang

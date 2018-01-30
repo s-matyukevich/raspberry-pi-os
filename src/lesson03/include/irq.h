@@ -4,6 +4,7 @@
 void enable_interrupt_controller( void );
 
 void irq_vector_init( void );
-void enable_processor_interrupts( void );
+void enable_irq( void );
+void disable_irq( void );
 
 #endif  /*_IRQ_C_H */

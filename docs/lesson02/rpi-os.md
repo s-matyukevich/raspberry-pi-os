@@ -1,4 +1,4 @@
-## Lesson 2: Processor initialization
+## Lesson 2: Processor initialization (Raspberry PI OS)
 
 In this lesson we are going to familiarizze yourself with some important concepts, relevant to ARM processors. Understanding of those concept is important in case you want to fully utilize ARM proessor capabilities. So now let's take a breef lool on the most important of them.
 
