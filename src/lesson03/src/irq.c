@@ -20,10 +20,10 @@ const char *entry_error_messages[] = {
 	"FIQ_INVALID_EL0_64",		
 	"ERROR_INVALID_EL0_64",	
 
-	"SYNC_INVALID_EL1_32",		
-	"IRQ_INVALID_EL1_32",		
-	"FIQ_INVALID_EL1_32",		
-	"ERROR_INVALID_EL1_32"	
+	"SYNC_INVALID_EL0_32",		
+	"IRQ_INVALID_EL0_32",		
+	"FIQ_INVALID_EL0_32",		
+	"ERROR_INVALID_EL0_32"	
 };
 
 void enable_interrupt_controller()

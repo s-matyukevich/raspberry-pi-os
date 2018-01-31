@@ -1,7 +1,4 @@
-.set SYS_WRITE_NUMBER, 0 		// syscal numbers 
-.set SYS_MALLOC_NUMBER, 1 	
-.set SYS_CLONE_NUMBER, 2 	
-.set SYS_EXIT_NUMBER, 3 	
+#include "sys.h"
 
 .globl call_sys_write
 call_sys_write:

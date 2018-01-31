@@ -89,10 +89,10 @@ vectors:
 	ventry	fiq_invalid_el0_64			// FIQ 64-bit EL0
 	ventry	error_invalid_el0_64			// Error 64-bit EL0
 
-	ventry	sync_invalid_el1_32			// Synchronous 32-bit EL0
-	ventry	irq_invalid_el1_32			// IRQ 32-bit EL0
-	ventry	fiq_invalid_el1_32			// FIQ 32-bit EL0
-	ventry	error_invalid_el1_32			// Error 32-bit EL0
+	ventry	sync_invalid_el0_32			// Synchronous 32-bit EL0
+	ventry	irq_invalid_el0_32			// IRQ 32-bit EL0
+	ventry	fiq_invalid_el0_32			// FIQ 32-bit EL0
+	ventry	error_invalid_el0_32			// Error 32-bit EL0
 
 sync_invalid_el1t:
 	handle_invalid_entry  SYNC_INVALID_EL1t
@@ -127,17 +127,17 @@ fiq_invalid_el0_64:
 error_invalid_el0_64:
 	handle_invalid_entry  ERROR_INVALID_EL0_64
 
-sync_invalid_el1_32:
-	handle_invalid_entry  SYNC_INVALID_EL1_32
+sync_invalid_el0_32:
+	handle_invalid_entry  SYNC_INVALID_EL0_32
 
-irq_invalid_el1_32:
-	handle_invalid_entry  IRQ_INVALID_EL1_32
+irq_invalid_el0_32:
+	handle_invalid_entry  IRQ_INVALID_EL0_32
 
-fiq_invalid_el1_32:
-	handle_invalid_entry  FIQ_INVALID_EL1_32
+fiq_invalid_el0_32:
+	handle_invalid_entry  FIQ_INVALID_EL0_32
 
-error_invalid_el1_32:
-	handle_invalid_entry  ERROR_INVALID_EL1_32
+error_invalid_el0_32:
+	handle_invalid_entry  ERROR_INVALID_EL0_32
 
 el1_irq:
 	kernel_entry 

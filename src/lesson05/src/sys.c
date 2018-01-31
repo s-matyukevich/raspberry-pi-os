@@ -4,11 +4,6 @@
 #include "sched.h"
 #include "mm.h"
 
-void show_invalid_syscall_message()
-{
-	printf("Bad syscall detected ");
-}
-
 void sys_write(char * buf){
 	printf(buf);
 }
@@ -18,7 +13,11 @@ int sys_clone(unsigned long stack){
 }
 
 unsigned long sys_malloc(){
-	return get_free_page();
+	unsigned long addr = get_free_page();
+    if (!addr) {
+        return -1;
+    }
+    return addr;
 }
 
 void sys_exit(){
