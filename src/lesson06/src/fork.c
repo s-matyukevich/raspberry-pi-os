@@ -2,6 +2,7 @@
 #include "sched.h"
 #include "fork.h"
 #include "utils.h"
+#include "entry.h"
 
 int copy_process(unsigned long clone_flags, unsigned long fn, unsigned long arg)
 {

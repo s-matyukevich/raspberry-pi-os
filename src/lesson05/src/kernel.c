@@ -50,7 +50,7 @@ void kernel_process(){
 	printf("Kernel process started. EL %d\r\n", get_el());
 	int err = move_to_user_mode((unsigned long)&user_process);
 	if (err < 0){
-		printf("Error while moving process to kernel mode\n\r");
+		printf("Error while moving process to user mode\n\r");
 	} 
 }
 

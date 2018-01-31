@@ -1,9 +1,6 @@
 #ifndef _MMU_H
 #define _MMU_H
 
-#define SCTLR_MMU_DISABLED		0
-#define SCTLR_MMU_ENABLED		1
-
 #define MM_TYPE_PAGE_TABLE		0x3
 #define MM_TYPE_PAGE 			0x3
 #define MM_TYPE_BLOCK			0x1

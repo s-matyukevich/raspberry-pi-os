@@ -6,18 +6,21 @@ ASMOPS = -Iinclude
 all : kernel7.img
 
 clean :
-	rm -f src/*.o *.img 
+	rm -f src/*.o src/*.d *.img 
 
 src/%_c.o: src/%.c
-	$(ARMGNU)-gcc $(COPS) -c $< -o $@
+	$(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
 
 src/%_s.o: src/%.S
-	$(ARMGNU)-gcc $(ASMOPS) -c $< -o $@
+	$(ARMGNU)-gcc $(ASMOPS) -MMD -c $< -o $@
 
 C_FILES = $(wildcard src/*.c)
 ASM_FILES = $(wildcard src/*.S)
-OBJ_FILES = $(C_FILES:.c=_c.o)
-OBJ_FILES += $(ASM_FILES:.S=_s.o)
+OBJ_FILES = $(C_FILES:%.c=%_c.o)
+OBJ_FILES += $(ASM_FILES:%.S=%_s.o)
+DEP_FILES = $(OBJ_FILES:%.o=%.d)
+
+-include $(DEP_FILES)
 
 kernel7.img: src/linker.ld $(OBJ_FILES)
 	$(ARMGNU)-ld -T src/linker.ld -o kernel7.elf  $(OBJ_FILES)
