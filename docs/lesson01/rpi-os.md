@@ -14,13 +14,16 @@ All source code samples in this tutorial have the same structure. You can take a
 ### Makefile
 
 Now let's take a closer look on the makefile. The main purpose of the make utility is to automatically determines which pieces of a program need to be recompiled, and issues commands to recompile them. If you are not familiar with make and makefiles I recoment you to read [this](ftp://ftp.gnu.org/old-gnu/Manuals/make-3.79.1/html_chapter/make_2.html) article. 
-Makefile for the first lesson can be found [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson01/Makefile) It starts with defining 3 variables
+Makefile for the first lesson can be found [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson01/Makefile) It starts with variables defenition. 
 
 ```
 ARMGNU ?= aarch64-linux-gnu
 
 COPS = -Wall -nostdlib -nostartfiles -ffreestanding -Iinclude -mgeneral-regs-only
 ASMOPS = -Iinclude 
+
+BUILD_DIR = build
+SRC_DIR = src
 ```
 `ARMGNU` is a cross compiler prefix. We need to use cross compiler because we are compiling the source code for `arm64` architecture on `x86` machine. So instead of `gcc` we are using `aarch64-linux-gnu-gcc`. 
 
@@ -33,29 +36,32 @@ ASMOPS = -Iinclude
 * *-Iinclude*. Search for header files in the `include` folder.
 * *-mgeneral-regs-only*. Use only general registers. ARM processors also have [NEON](https://developer.arm.com/technologies/neon) registers. We don't want compiler to use them, because it adds additional complexity (for example, we need to store them during context switch) 
 
+`SRC_DIR` and `BUILD_DIR` are directories that contains source code and compiled object files respectedly.
+
 Next we define make targets. The first two targets are pretty simple 
 
 ```
 all : kernel7.img
 
 clean :
-	rm -f src/*.o *.img 
+	rm -rf $(BUILD_DIR) *.img 
 ```
 
 `all` target is the default and it is executed  whenever you type `make` without any arguments. It just redirects all work to a different target `kernel7.img`
-`clean` target just removes all object files from `src` directory and all `.img` files.
+`clean` target is responsible for deleting all compilation artifacts and compiled kernel image.
 
 Next two targets are responsible for compiling C and assembler files.
 
 ```
-src/%_c.o: src/%.c
-	$(ARMGNU)-gcc $(COPS) -c $< -o $@
+$(BUILD_DIR)/%_c.o: $(SRC_DIR)/%.c
+	mkdir -p $(@D)
+	$(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
 
-src/%_s.o: src/%.S
-	$(ARMGNU)-gcc $(ASMOPS) -c $< -o $@
+$(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.S
+	$(ARMGNU)-gcc $(ASMOPS) -MMD -c $< -o $@
 ```
 
-If, for example, in the `src` directory we have `foo.c` and `foo.S` file, they will be compiled into `foo_c.o` and `foo_s.o` respectedly by executing `$(ARMGNU)-gcc` compiler with needed options. `$<` and `$@` are substituted in the runtime with the input and output filenames (`foo.c` and `foo_c.o`)
+If, for example, in the `src` directory we have `foo.c` and `foo.S` file, they will be compiled into `/buid/foo_c.o` and `build/foo_s.o` respectedly by executing `$(ARMGNU)-gcc` compiler with needed options. `$<` and `$@` are substituted in the runtime with the input and output filenames (`foo.c` and `foo_c.o`) Before compilling C files we also create `build` directory in case it does't exist.
 
 Finally we need to define  `kernel7.img` target. We call our target `kernel7.img` because this is the name if the file that Raspberry Pi attemts to load and execute. But before we will be able to do this, we need to build an array of all object files, created from both C and assembler source files
 
@@ -65,13 +71,21 @@ ASM_FILES = $(wildcard src/*.S)
 OBJ_FILES = $(C_FILES:.c=_c.o)
 OBJ_FILES += $(ASM_FILES:.S=_s.o)
 ```
-Next we use this array in order to build `kernel7.elf` file.
+
+Next two lines are a little bit tricky. If you once again take a look on how we defined our compilation targets for both C and assembler source files, you might motice that we used `-MMD` parameter. This parameter instruct `gcc` compiler to a dependency file for each generated object file. A dependency file is a file in Makefile format that defines all dependencies of a particular source file. Those dependencies usually includes list of all included headers. Then we need to imclude all generated dependency files, so that make knows what exactly to recompile in case when some header changes. That is what we are doing in the following two lines.
+
+```
+DEP_FILES = $(OBJ_FILES:%.o=%.d)
+-include $(DEP_FILES)
+```
+
+Next we use `OBJ_FILES` array in order to build `kernel7.elf` file.
 
 ```
 $(ARMGNU)-ld -T src/linker.ld -o kernel7.elf  $(OBJ_FILES)
 ``` 
 
-This file is in [ELF](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) format. We use linker script `src/linker.ld`  to define basic layout of the resulting executable file(more about it in the next section). But the problem is that ELF files are designed to be executed by an operating system. In order to write bare metall program we need to extract all executable and data section from ELF file and puth the to `kernel7.img` file. This is exactly what is done in the next line.
+`kernel7.elf` is in [ELF](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) format. We use linker script `src/linker.ld`  to define basic layout of the resulting executable image (we will discuss linker scripts in the next section). But the problem is that ELF files are designed to be executed by an operating system. In order to write bare metall program we need to extract all executable and data section from ELF file and puth the to `kernel7.img` image. This is exactly what is done in the next line.
 
 ```
 $(ARMGNU)-objcopy kernel7.elf -O binary kernel7.img
@@ -83,7 +97,6 @@ So the resulting `kernel7.img` target looks like the following
 kernel7.img: src/linker.ld $(OBJ_FILES)
 	$(ARMGNU)-ld -T src/linker.ld -o kernel7.elf  $(OBJ_FILES)
 	$(ARMGNU)-objcopy kernel7.elf -O binary kernel7.img
-	rm kernel7.elf 
 ```
 
 ### Linker script
