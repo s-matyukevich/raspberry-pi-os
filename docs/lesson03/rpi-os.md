@@ -96,7 +96,7 @@ disable_irq:
 
 ARM processor state has 4 bits that are responsible for holding mask status for different types of interrupts. Those bits are defined as following
 
-* `D` -  Masks debug exceptions. Those are special type of syncronos exceptions. For obvious reasons it is not posible to mask all syncronos exceptions, but it is convinient to have a separate flat that can mask debug exceptions.
+* `D` -  Masks debug exceptions. Those are special type of syncronos exceptions. For obvious reasons it is not posible to mask all syncronos exceptions, but it is convinient to have a separate flag that can mask debug exceptions.
 * `A` - Masks `SErrors`. It is called `A` because `SErrors` sometimes are called asynchronous aborts. 
 * `I` - Masks `IRQs`
 * `F` - Masks `FIQs`
