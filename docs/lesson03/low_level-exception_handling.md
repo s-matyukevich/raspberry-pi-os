@@ -1,4 +1,4 @@
-## Lesson 3: Interrupts (Linux)
+## Lesson 3: Low level exception handling in linux.
 
 Given huge linux kernel source code, what is a good way to find the code that is responsible for interrupt handling? I can suggest one idea. Vector table base address should be stored to 'vbar_el1' register, so if you search for `vbar_el1` you should be able to figure out where exactly vector table is defined. Indeed, the seach gives us just a few ussages, one of those belongs to already familiar to us [head.S](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/head.S). This code is inside [__primary_switched](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/head.S#L323) function. This function is executed after MMU is switched on. The code looks like the following
 
@@ -209,14 +209,54 @@ When task is executed in kernel mode `sp_el0` is not needed. Its value was previ
 Next thing we are going to explore is the handler that is responsible for handling IRQs taken from EL1. From the [vector table](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L374) we can easily find out that the handler is called `el1_irq` and is defined [here](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L562). Let's take a look on the code now and examine it line by line.
 
 ```
+el1_irq:
 	kernel_entry 1
-```
-
-The handler starts with `kernel_entry` macor that we have just examined. Parameter `1` is passed to indicate that exception is taken from EL1.
-
-```
 	enable_dbg
+#ifdef CONFIG_TRACE_IRQFLAGS
+	bl	trace_hardirqs_off
+#endif
+
+	irq_handler
+
+#ifdef CONFIG_PREEMPT
+	ldr	w24, [tsk, #TSK_TI_PREEMPT]	// get preempt count
+	cbnz	w24, 1f				// preempt count != 0
+	ldr	x0, [tsk, #TSK_TI_FLAGS]	// get flags
+	tbz	x0, #TIF_NEED_RESCHED, 1f	// needs rescheduling?
+	bl	el1_preempt
+1:
+#endif
+#ifdef CONFIG_TRACE_IRQFLAGS
+	bl	trace_hardirqs_on
+#endif
+	kernel_exit 1
+ENDPROC(el1_irq)
 ```
 
-Now, when all necessary registers are saved to stack, it is safe to unmast debug exceptions.  Note, that IRQs, FIQs and Syncronos exceptions are still masked at this point.
+The following is done inside this function.
 
+* `kernel_enter` and `kernel_exit` macros are called to save and restore process context. Parameter `1` indicates that exception is taken from EL1.
+* Debug interrupts are unmasked by calling `enable_dbg` macro. At this point it is safe to do so, because context is already saved and even if debug exception occured in the middle of interrupt handler it will be handled corectly. If you wonder why is it necessary to do this at this point - read [this](https://github.com/torvalds/linux/commit/2a2830703a2371b47f7b50b1d35cb15dc0e2b717) commit message. 
+* Code wrapped inside `#ifdef CONFIG_TRACE_IRQFLAGS` block is responsible for tracing interrupts. It records 2 events: interrupt start end end/ 
+* Code inside `#ifdef CONFIG_PREEMPT` block access current task flags to check whether we need call scheduler. This code will be examined details in the next lesson. 
+* `irq_handler` - this is the place were actual interrupt handling is performed. 
+
+[irg_handler](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L351) is a macro and it is defined like the following
+
+```
+	.macro	irq_handler
+	ldr_l	x1, handle_arch_irq
+	mov	x0, sp
+	irq_stack_entry
+	blr	x1
+	irq_stack_exit
+	.endm
+```
+
+As you might see from the code, `irq_handler` executes [handle_arch_irq](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/irq.c#L44)  function. This function is executed with special stack, that is called "irq stack".  Why is it necessary to switch to a different stack? In RPI OS, for example, we didn't do this.  Well, I guess it is not necesarry, but without it interrupt will be handled using task stack, and we can never be sure how much of it is left for the interrupt handler.
+
+Next we need to look at [handle_arch_irq](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/irq.c#L44), but that is not a function but a varialbe. It is set inside [set_handle_irq](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/irq.c#L46) function. But who sets it? We will figure out the answer in the next part of this lesson.  
+
+### Conclusion
+
+As a conclusion I can say that we already explored the low level interrupt handling code and trace the path of the interrupt from the vector table all the way to `handle_arch_irq`. This is the point were an interrupt leaves architecture specific code and started to be handled by driver code. Our goal in the last part of this lesson will be to trace the path of a timer interrupt through the driver source code. 

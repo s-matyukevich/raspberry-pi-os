@@ -3,17 +3,20 @@
 #include "sched.h"
 #include "peripherals/timer.h"
 
+const unsigned int interval = 200000;
+unsigned int curVal = 0;
+
 void timer_init ( void )
 {
-	put32(TIMER_LOAD,0x40); // Timer frequency = Clk/256 * 0x40 
-	put32(TIMER_CONTROL,TIMER_CTRL_23BIT |
-			TIMER_CTRL_ENABLE |
-			TIMER_CTRL_INT_ENABLE |
-			TIMER_CTRL_PRESCALE_256);
+    curVal = get32(TIMER_CLO);
+    curVal += interval;
+    put32(TIMER_C1, curVal);
 }
 
 void handle_timer_irq( void ) 
 {
-	put32(TIMER_IRQ_CLEAR_ACK, 0x1);
+    curVal += interval;
+    put32(TIMER_C1, curVal);
+    put32(TIMER_CS, TIMER_CS_M1);
 	timer_tick();
 }
