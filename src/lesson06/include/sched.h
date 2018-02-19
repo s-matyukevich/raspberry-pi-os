@@ -5,20 +5,20 @@
 
 #ifndef __ASSEMBLER__
 
-#define THREAD_SIZE					4096
+#define THREAD_SIZE				4096
 
-#define NR_TASKS					64 
+#define NR_TASKS				64 
 
 #define FIRST_TASK task[0]
 #define LAST_TASK task[NR_TASKS-1]
 
 #define TASK_RUNNING				0
 #define TASK_INTERRUPTIBLE			1
-#define TASK_UNINTERRUPTIBLE		2
-#define TASK_ZOMBIE					3
+#define TASK_UNINTERRUPTIBLE			2
+#define TASK_ZOMBIE				3
 #define TASK_STOPPED				4
 
-#define PF_KTHREAD					0x00000002	
+#define PF_KTHREAD				0x00000002	
 
 
 extern struct task_struct *current;
@@ -41,7 +41,7 @@ struct cpu_context {
 	unsigned long pc;
 };
 
-#define MAX_PROCESS_PAGES				16	
+#define MAX_PROCESS_PAGES			16	
 
 struct user_page {
 	unsigned long phys_addr;

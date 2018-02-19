@@ -14,10 +14,10 @@ int sys_clone(unsigned long stack){
 
 unsigned long sys_malloc(){
 	unsigned long addr = get_free_page();
-    if (!addr) {
-        return -1;
-    }
-    return addr;
+	if (!addr) {
+		return -1;
+	}
+	return addr;
 }
 
 void sys_exit(){

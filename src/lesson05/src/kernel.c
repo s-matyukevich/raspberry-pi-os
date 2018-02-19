@@ -24,20 +24,20 @@ void user_process(){
 	tfp_sprintf(buf, "User process started\n\r");
 	call_sys_write(buf);
 	unsigned long stack = call_sys_malloc();
-    if (stack < 0) {
+	if (stack < 0) {
 		printf("Error while allocating stack for process 1\n\r");
 		return;
-    }
+	}
 	int err = call_sys_clone((unsigned long)&user_process1, (unsigned long)"12345", stack);
 	if (err < 0){
 		printf("Error while clonning process 1\n\r");
 		return;
 	} 
 	stack = call_sys_malloc();
-    if (stack < 0) {
+	if (stack < 0) {
 		printf("Error while allocating stack for process 1\n\r");
 		return;
-    }
+	}
 	err = call_sys_clone((unsigned long)&user_process1, (unsigned long)"abcd", stack);
 	if (err < 0){
 		printf("Error while clonning process 2\n\r");

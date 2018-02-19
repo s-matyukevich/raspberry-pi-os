@@ -32,11 +32,11 @@ void _schedule(void)
 			p = task[i];
 			if (p && p->state == TASK_RUNNING && p->counter > c) {
 				c = p->counter;
-			       	next = i;
+				next = i;
 			}
 		}
 		if (c) {
-		       	break;
+			break;
 		}
 		for (int i = 0; i < NR_TASKS; i++) {
 			p = task[i];
