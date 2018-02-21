@@ -1,4 +1,4 @@
-## Lesson 3: Interrupts (Raspberry PI OS)
+## Lesson 3: Interrupts 
 
 From the lesson 1 we already know how to communicate with hardware. However, most of the times the pattern of communication is not that simple. Usually this pattern is asyncronos: we send some command to some device, but it doesn't respond imidiately. Instead it notifies us when command is complited. Those asyncronos notifications are called "interrupts" because they interrupts normal execution flow and forces processor to execute "interrupt handler" first and only then returns to the normal flow. 
 
