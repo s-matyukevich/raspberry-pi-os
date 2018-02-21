@@ -42,7 +42,7 @@ el1_entry:
 	bl 	__create_page_tables
 
 	mov	x0, #VA_START			
-	add	sp, x0, #(2 * SECTION_SIZE)
+	add	sp, x0, #LOW_MEMORY
 
 	adrp	x0, pg_dir				
 	msr	ttbr1_el1, x0
