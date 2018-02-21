@@ -2,7 +2,7 @@
 #include "sched.h"
 #include "entry.h"
 
-int copy_process(int nr, unsigned long fn, unsigned long arg)
+int copy_process(unsigned long fn, unsigned long arg)
 {
 	preempt_disable();
 	struct task_struct *p;
@@ -19,7 +19,8 @@ int copy_process(int nr, unsigned long fn, unsigned long arg)
 	p->cpu_context.x20 = arg;
 	p->cpu_context.pc = (unsigned long)ret_from_fork;
 	p->cpu_context.sp = (unsigned long)p + THREAD_SIZE;
-	task[nr] = p;	
+	int pid = nr_tasks++;
+	task[pid] = p;	
 	preempt_enable();
 	return 0;
 }

@@ -5,7 +5,7 @@
 static struct task_struct init_task = INIT_TASK;
 struct task_struct *current = &(init_task);
 struct task_struct * task[NR_TASKS] = {&(init_task), };
-
+int nr_tasks = 1;
 
 void preempt_disable(void)
 {
