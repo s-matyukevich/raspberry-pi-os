@@ -146,14 +146,14 @@ master:
 	sub	x1, x1, x0
 	bl 	memzero
 
-	mov	sp, #(2 * SECTION_SIZE) 
+	mov	sp, #LOW_MEMORY
 	bl	kernel_main
 ```
 
 First of all, we define that everything defined in this file should go to `.text.boot` section. Previously we saw that this section is placed at the beggining of kernel image by the linker script. So whenever kernel is started execution begins at the `start` function. The first thing this functions does is checking processor id. Raspberry Pi 3 has 4 core processor, and after the device is powered on each core beging to execute the same code. But we don't want to work with 4 cores, we want to work only with the first one and send all other cores to endless loop. This is exactly what `_start` function is responsible for. It checks processor ID from [mpidr_el1](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0500g/BABHBJCI.html) system register. 
 If current processon ID is 0 then execution is transfered to `master` function. Here we clean `.bss` section by calling `memzero` function. We will define this function later. In ARMv8 architecture by convention first 7 arguments are passed to called function viar registers x0 - x6. `memzeor` function accept only 2 arguments: start address (`bss_begin`) and size of the section needed to be cleaned (`bss_end - bss_begin`).
 
-After cleanining bss we initialize stack pointer and pass execution to `kernel_main` funnction. Pasberry Pi loads the kernel at address 0, thats why initial stack pointer can be set to any location large enough so that stack will not override kernel image when grows suficiently large. `SECTION_SIZE` is defined in [mm.h](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson01/include/mm.h) and is equal to 2MB Stack for our simple kernel can't grow large and image itself is very small so `2*2MB = 4MB` is more then enough  for us. Acually this size was choose because it is convinient to do virtual memory mapping. But we will tack about virtual memory, pages and sections only in lesson 6.
+After cleanining bss we initialize stack pointer and pass execution to `kernel_main` funnction. Pasberry Pi loads the kernel at address 0, thats why initial stack pointer can be set to any location large enough so that stack will not override kernel image when grows suficiently large. `LOW_MEMORY` is defined in [mm.h](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson01/include/mm.h) and is equal to 4MB Stack for our simple kernel can't grow large and image itself is very small so `4MB` is more then enough  for us. 
 
 For those of you who are not familiar with arm assembler syntax let me quickly summarize what instaructions, that we have used, are actually doing.
 
