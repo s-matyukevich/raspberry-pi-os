@@ -1,43 +1,57 @@
-## Learning operating system development using Linux kernel and Raspberry Pi.
+# Learning operating system development using Linux kernel and Raspberry Pi.
 
-This repository contains a tep-by-step guide that teaches how to create your own simple operating system from scratch. I call it Raspberry Pi OS of just RPi OS. The source code for the RPi OS is largely based on [Linux kernl](https://github.com/torvalds/linux) and it is desined to be run only on [Raspberry PI 3](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/) device. 
+This repository contains a step-by-step guide that teaches how to create a simple operating system from scratch. I call this operating system Raspberry Pi OS or just RPi OS. The source code for the RPi OS is largely based on [Linux kernel](https://github.com/torvalds/linux) and it supports only [Raspberry PI 3](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/) device. 
 
-Each lesson is designed  such that it first teaches how some kernel feature is implemented in RPi OS, and then it tries to explain how the same feature works in linux kernel. Source code for each lesson is stored in a separeate directory so that readers can easily follow the evolution of the code. In order to understand this guid you don't need any specific OS development skills - all lessons explain all new conceps in as much details as posible.
+Each lesson is designed in such a way that it first explains how some kernel feature is implemented in the RPi OS, and then it tries to demonstrate how the same feature works in the linux kernel. Each lesson has a coresponding folder in the [src](https://github.com/s-matyukevich/raspberry-pi-os/tree/master/src) directory, wich contains a snapshot of the OS source code at the time when the lesson had just been completed. This allows to gracefully introduce new concepts and helps readers to follow the evolution of the RPi OS. Understanding this guide don't require any specific OS development skills.
 
-For more information about the project goals and history please read introduction. The project is still under an active devlopment, if you want to participate - please read the contribution guide.
+For more information about the project goals and history please read the [Introduction](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Introduction.md). The project is still under active devlopment, if you are willing to participate - please read the [Contribution guide](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Contributions.md).
 
 ## Table of Content
 
-* Introduction
-* Contribution guide
-* Prerequsities
-* Lesson 1:Kernel Initialization 
-  1.1 Introducing RPi OS, or bare metal "Hello, world!".
-  1.2 Linux project structure. 
-  1.3 Kernel build system. 
-  1.4 Linux startup sequence. 
-  1.5 Exercises.
-* Lesson 2: Processor initialization.
-  2.1 Raspberry PI OS.
-  2.2 Linux kernel. 
-  2.3 Exercises.
-* Lesson 3: Interrupt handling.
-  3.1 Raspberry PI OS.
-  3.2 Low level exception handling in linux.
-  3.3 How linux drivers handles interrupts.
-  3.4 Exercises.
-* Lesson 4: System calls.
-  4.1 Raspberry PI OS.
-  4.2 Linux kernel. 
-  4.3 Exercises.
-* Lesson 5: Process scheduler.
-  5.1 Raspberry PI OS.
-  5.2 Linux kernel. 
-  5.3 Exercises.
-* Lesson 6: Memory management.
-  6.1 Raspberry PI OS.
-  6.2 Linux kernel. 
-  6.3 Exercises.
-* Lesson 7: File systems. (To be done).
-* Lesson 8: Executable files (ELF) (To be done).
-* Lesson 9: Networking. (To be done).
+  ```
+  [Introduction](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Introduction.md)
+  [Contribution guide](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Contributions.md)
+  [Prerequsities](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Prerequisites.md)
+
+  Lesson 1: Kernel Initialization 
+    1.1 [Introducing RPi OS, or bare metal "Hello, world!"](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson01/rpi-os.md)
+    Linux
+      1.2 [Project structure](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson01/project-structure.md)
+      1.3 [Kernel build system](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson01/build-system.md) 
+      1.4 [Startup sequence](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson01/kernel-startup.md)
+    1.5 [Exercises](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson01/exercises.md)
+
+  Lesson 2: Processor initialization
+    2.1 [RPi OS](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson02/rpi-os.md)
+    2.2 [Linux](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson02/linux.md)
+    2.3 [Exercises]()
+
+  Lesson 3: Interrupt handling.
+    3.1 [RPi OS](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson03/rpi-os.md)
+    Linux
+      3.2 [Low level exception handling](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson03/low_level-exception_handling.md) 
+      3.3 [Interrupt controllers](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson03/interrupt_controllers.md)
+      3.4 [Timers](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson03/timer.md)
+    3.5 [Exercises]()
+
+  Lesson 4: Process scheduler
+    4.1 [RPi OS](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson04/rpi-os.md) 
+    4.2 [Linux]()
+    4.3 [Exercises]()
+
+  Lesson 5: User processes and system calls 
+    5.1 [RPi OS]() 
+    5.2 [Linux]()
+    5.3 [Exercises]()
+
+  Lesson 6: Memory management
+    6.1 [RPi OS]() 
+    6.2 [Linux]()
+    6.3 [Exercises]()
+
+  Lesson 7: File systems (To be done).
+
+  Lesson 8: Executable files (ELF) (To be done).
+
+  Lesson 9: Networking (To be done).
+  ```
