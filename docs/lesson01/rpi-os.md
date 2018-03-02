@@ -1,20 +1,20 @@
-## Lesson 1: Introducing Rasperry PI OS kernel or bare metal hello world.
+## Lesson 1: Introducing RPi OS, or bare metal "Hello, world!"
 
-We are going to start our joirney to OS development world by writing a simple bare metall "Hello, world" application. I asume that at this point you already went through [Prerequisites](https://github.com/s-matyukevich/raspberry-pi-os/docs/Prerequisites.md) and have everything ready for the work. If not - now is the right time to do this.
+We are going to start our journey to OS development world by writing a simple bare metal "Hello, world" application. I assume that at this point you have already gone through [Prerequisites](https://github.com/s-matyukevich/raspberry-pi-os/docs/Prerequisites.md) and have everything ready for the work. If not - now is the right time to do this.
 
 ### Project structure
 
-All source code samples in this tutorial have the same structure. You can take a look on the sources for this particular lesson [here](https://github.com/s-matyukevich/raspberry-pi-os/src/lesson01/). Let's brefely desribe it's components
+All source code samples in this tutorial have the same structure. You can take a look at the sources for this particular lesson [here](https://github.com/s-matyukevich/raspberry-pi-os/src/lesson01/). Let's briefly describe its components
 
-1. *Makefile*. We are using [make utility](http://www.math.tau.ac.il/~danha/courses/software1/make-intro.html) to build our kernel. Makefile contains instructions how to compile and link the sources. More on this in the next section.
-1. *build.sh or build.bat*. You need those files if you want to build the kernel using docker. In this way you don't need to have make utility and compiler toolchain installed on your laptop.
+1. *Makefile*. We are using [make utility](http://www.math.tau.ac.il/~danha/courses/software1/make-intro.html) to build our kernel. A makefile contains instructions how to compile and link the sources. More on this in the next section.
+1. *build.sh or build.bat*. You need those files if you want to build the kernel using Docker. In this way, you don't need to have make utility and compiler toolchain installed on your laptop.
 1. *src*. This folder contains all source code files.
 1. *include*. All header files should be placed here. 
 
 ### Makefile
 
-Now let's take a closer look on the makefile. The main purpose of the make utility is to automatically determines which pieces of a program need to be recompiled, and issues commands to recompile them. If you are not familiar with make and makefiles I recoment you to read [this](ftp://ftp.gnu.org/old-gnu/Manuals/make-3.79.1/html_chapter/make_2.html) article. 
-Makefile for the first lesson can be found [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson01/Makefile) It starts with variables defenition. 
+Now let's take a closer look at the makefile. The primary purpose of the make utility is to automatically determine which pieces of a program need to be recompiled, and issue commands to recompile them. If you are not familiar with make and makefiles, I recommend you to read [this](ftp://ftp.gnu.org/old-gnu/Manuals/make-3.79.1/html_chapter/make_2.html) article. 
+Makefile for the first lesson can be found [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson01/Makefile) It starts with variables definition. 
 
 ```
 ARMGNU ?= aarch64-linux-gnu
@@ -25,45 +25,45 @@ ASMOPS = -Iinclude
 BUILD_DIR = build
 SRC_DIR = src
 ```
-`ARMGNU` is a cross compiler prefix. We need to use cross compiler because we are compiling the source code for `arm64` architecture on `x86` machine. So instead of `gcc` we are using `aarch64-linux-gnu-gcc`. 
+`ARMGNU` is a cross-compiler prefix. We need to use cross-compiler because we are compiling the source code for `arm64` architecture on `x86` machine. So instead of `gcc` we are using `aarch64-linux-gnu-gcc`. 
 
-`COPS` and `ASMOPS` are options the we pass to the compiler when compiling C and assembler code respectively. Those options reqires a short explanation.
+`COPS` and `ASMOPS` are options that we pass to the compiler when compiling C and assembler code respectively. Those options require a short explanation.
 
 * *-Wall*. Show all warnings.
-* *-nostdlib*. Don't use C standard library. Most of the calls in C standard library eventually calls underlying operating system. We are writing a bare metall program and we don't have any underlying operating system, wo C standard library are not going to work for us.
-* *-nostartfiles*. Don't use standart startup files. Startup files are required to at least set an initial stack-pointer, initialise static data, and jump to main entry point. We are going to do all of this by ourselves.
+* *-nostdlib*. Don't use C standard library. Most of the calls in C standard library eventually calls underlying operating system. We are writing a bare metal program, and we don't have any underlying operating system, so C standard library is not going to work for us.
+* *-nostartfiles*. Don't use standard startup files. Startup files are required to at least set an initial stack-pointer, initialize static data, and jump to the main entry point. We are going to do all of this by ourselves.
 * *-ffreestanding*. By default, GCC will act as the compiler for a hosted implementation, and presuming that when the names of ISO C functions are used, they have the semantics defined in the standard library. When using this option compiler will not make assumptions about the meanings of function names from the standard library.
 * *-Iinclude*. Search for header files in the `include` folder.
-* *-mgeneral-regs-only*. Use only general registers. ARM processors also have [NEON](https://developer.arm.com/technologies/neon) registers. We don't want compiler to use them, because it adds additional complexity (for example, we need to store them during context switch) 
+* *-mgeneral-regs-only*. Use only general registers. ARM processors also have [NEON](https://developer.arm.com/technologies/neon) registers. We don't want compiler to use them because it adds additional complexity (for example, we need to store the registers during context switch) 
 
-`SRC_DIR` and `BUILD_DIR` are directories that contains source code and compiled object files respectedly.
+`SRC_DIR` and `BUILD_DIR` are directories that contain source code and compiled object files respectively.
 
-Next we define make targets. The first two targets are pretty simple 
+Next, we define make targets. The first two targets are pretty simple 
 
 ```
 all : kernel7.img
 
 clean :
-	rm -rf $(BUILD_DIR) *.img 
+    rm -rf $(BUILD_DIR) *.img 
 ```
 
-`all` target is the default and it is executed  whenever you type `make` without any arguments. It just redirects all work to a different target `kernel7.img`
+`all` target is the default, and it is executed whenever you type `make` without any arguments. It just redirects all work to a different target `kernel7.img`
 `clean` target is responsible for deleting all compilation artifacts and compiled kernel image.
 
 Next two targets are responsible for compiling C and assembler files.
 
 ```
 $(BUILD_DIR)/%_c.o: $(SRC_DIR)/%.c
-	mkdir -p $(@D)
-	$(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
+    mkdir -p $(@D)
+    $(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
 
 $(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.S
-	$(ARMGNU)-gcc $(ASMOPS) -MMD -c $< -o $@
+    $(ARMGNU)-gcc $(ASMOPS) -MMD -c $< -o $@
 ```
 
-If, for example, in the `src` directory we have `foo.c` and `foo.S` file, they will be compiled into `/buid/foo_c.o` and `build/foo_s.o` respectedly by executing `$(ARMGNU)-gcc` compiler with needed options. `$<` and `$@` are substituted in the runtime with the input and output filenames (`foo.c` and `foo_c.o`) Before compilling C files we also create `build` directory in case it does't exist.
+If, for example, in the `src` directory we have `foo.c` and `foo.S` file, they will be compiled into `/buid/foo_c.o` and `build/foo_s.o` respectively by executing `$(ARMGNU)-gcc` compiler with needed options. `$<` and `$@` are substituted in the runtime with the input and output filenames (`foo.c` and `foo_c.o`) Before compiling C files, we also create `build` directory in case it doesn't exist.
 
-Finally we need to define  `kernel7.img` target. We call our target `kernel7.img` because this is the name if the file that Raspberry Pi attemts to load and execute. But before we will be able to do this, we need to build an array of all object files, created from both C and assembler source files
+Finally, we need to define  `kernel7.img` target. We call our target `kernel7.img` because this is the name if the file that Raspberry Pi attempts to load and execute. But before we can do this, we need to build an array of all object files, created from both C and assembler source files
 
 ```
 C_FILES = $(wildcard src/*.c)
@@ -72,20 +72,20 @@ OBJ_FILES = $(C_FILES:.c=_c.o)
 OBJ_FILES += $(ASM_FILES:.S=_s.o)
 ```
 
-Next two lines are a little bit tricky. If you once again take a look on how we defined our compilation targets for both C and assembler source files, you might motice that we used `-MMD` parameter. This parameter instruct `gcc` compiler to a dependency file for each generated object file. A dependency file is a file in Makefile format that defines all dependencies of a particular source file. Those dependencies usually includes list of all included headers. Then we need to imclude all generated dependency files, so that make knows what exactly to recompile in case when some header changes. That is what we are doing in the following two lines.
+Next two lines are a little bit tricky. If you once again take a look at how we defined our compilation targets for both C and assembler source files, you might notice that we used `-MMD` parameter. This parameter instructs `gcc` compiler to create a dependency file for each generated object file. A dependency file is a file in Makefile format that defines all dependencies of a particular source file. Those dependencies usually contain a list of all included headers. Then we need to include all generated dependency files, so that make knows what exactly to recompile in the case when some header changes. That is what we are doing in the following two lines.
 
 ```
 DEP_FILES = $(OBJ_FILES:%.o=%.d)
 -include $(DEP_FILES)
 ```
 
-Next we use `OBJ_FILES` array in order to build `kernel7.elf` file.
+Next, we use `OBJ_FILES` array to build `kernel7.elf` file.
 
 ```
 $(ARMGNU)-ld -T src/linker.ld -o kernel7.elf  $(OBJ_FILES)
 ``` 
 
-`kernel7.elf` is in [ELF](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) format. We use linker script `src/linker.ld`  to define basic layout of the resulting executable image (we will discuss linker scripts in the next section). But the problem is that ELF files are designed to be executed by an operating system. In order to write bare metall program we need to extract all executable and data section from ELF file and puth the to `kernel7.img` image. This is exactly what is done in the next line.
+`kernel7.elf` is in [ELF](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) format. We use linker script `src/linker.ld`  to define basic layout of the resulting executable image (we will discuss linker scripts in the next section). But the problem is that ELF files are designed to be executed by an operating system. To write a bare metal program, we need to extract all executable and data section from ELF file and put them to `kernel7.img` image. That is exactly what you can see in the next line.
 
 ```
 $(ARMGNU)-objcopy kernel7.elf -O binary kernel7.img
@@ -95,13 +95,13 @@ So the resulting `kernel7.img` target looks like the following
 
 ```
 kernel7.img: src/linker.ld $(OBJ_FILES)
-	$(ARMGNU)-ld -T src/linker.ld -o kernel7.elf  $(OBJ_FILES)
-	$(ARMGNU)-objcopy kernel7.elf -O binary kernel7.img
+    $(ARMGNU)-ld -T src/linker.ld -o kernel7.elf  $(OBJ_FILES)
+    $(ARMGNU)-objcopy kernel7.elf -O binary kernel7.img
 ```
 
 ### Linker script
 
-The main purpose of the linker script is to describe how the sections in the input files (`_c.o` and `_s.o`) should be mapped into the output file (`.elf`). More information about linker scripts can be found [here](https://sourceware.org/binutils/docs/ld/Scripts.html#Scripts). Now let's take a look on the linker script.
+The primary purpose of the linker script is to describe how the sections in the input files (`_c.o` and `_s.o`) should be mapped into the output file (`.elf`). More information about linker scripts can be found [here](https://sourceware.org/binutils/docs/ld/Scripts.html#Scripts). Now let's take a look at the linker script.
 
 ```
 SECTIONS
@@ -117,8 +117,8 @@ SECTIONS
 }
 ``` 
 
-After startup Raspberry Pi will load `kernel7.img` into memory and start execution from the beggining of the file. That's why `.text.boot` section must be first. This section we are going to put low level OS startup code. 
-`.text`, `.rodata` and `.data` sections contains kernel compiled instructions, read only data and normal data - there is nothing special to add about them.
+After startup, Raspberry Pi will load `kernel7.img` into memory and start execution from the beginning of the file. That's why `.text.boot` section must be first. This section we are going to put low-level OS startup code. 
+`.text`, `.rodata` and `.data` sections contain kernel compiled instructions, read-only data and normal data - there is nothing special to add about them.
 `.bss` section is responsible for containing data that should be initialized to 0. By puting such data in a separate section compiler can save some space in elf binary - only section size is stored in elf header but section itself is omited. After loading image into memory we should initialize `.bss` section to 0, That's why we need to record start and end of the section (`bss_begin` and `bss_end` symbols store this information) and align section so it starts at the address that is multiple of 8. If section is not aligned it would be more difficult to use `str` instruction to store 0 at the beggining of the bss section, because `str` instruction can only be used with 8 byte aligned address.
 
 ### Booting the kernel
@@ -132,22 +132,22 @@ Now it is time to take a look on [boot.S](https://github.com/s-matyukevich/raspb
 
 .globl _start
 _start:
-	mrs	x0, mpidr_el1		
-	and	x0, x0,#0xFF		// Check processor id
-	cbz	x0, master		// Hang for all non-primary CPU
-	b	proc_hang
+    mrs    x0, mpidr_el1        
+    and    x0, x0,#0xFF        // Check processor id
+    cbz    x0, master        // Hang for all non-primary CPU
+    b    proc_hang
 
 proc_hang: 
-	b proc_hang
+    b proc_hang
 
 master:
-	adr	x0, bss_begin
-	adr	x1, bss_end
-	sub	x1, x1, x0
-	bl 	memzero
+    adr    x0, bss_begin
+    adr    x1, bss_end
+    sub    x1, x1, x0
+    bl     memzero
 
-	mov	sp, #LOW_MEMORY
-	bl	kernel_main
+    mov    sp, #LOW_MEMORY
+    bl    kernel_main
 ```
 
 First of all, we define that everything defined in this file should go to `.text.boot` section. Previously we saw that this section is placed at the beggining of kernel image by the linker script. So whenever kernel is started execution begins at the `start` function. The first thing this functions does is checking processor id. Raspberry Pi 3 has 4 core processor, and after the device is powered on each core beging to execute the same code. But we don't want to work with 4 cores, we want to work only with the first one and send all other cores to endless loop. This is exactly what `_start` function is responsible for. It checks processor ID from [mpidr_el1](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0500g/BABHBJCI.html) system register. 
@@ -413,3 +413,4 @@ Now as we have gone throug all source code in the kernel it is time to see how i
 1. Connect USB to TTL serial cabel as was described in [Prerequsities](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Prerequisites.md)
 1. Power on your Raspberry PI (this can be done using the same USB to TTL serial cabel)
 1. Open your terminal emulator. You should be able to see `Hello, world!` message there.
+
