@@ -13,6 +13,7 @@
 #define LAST_TASK task[NR_TASKS-1]
 
 #define TASK_RUNNING				0
+#define TASK_ZOMBIE				1
 
 #define PF_KTHREAD				0x00000002	
 

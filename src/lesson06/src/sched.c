@@ -87,7 +87,7 @@ void exit_process(){
 	preempt_disable();
 	for (int i = 0; i < NR_TASKS; i++){
 		if (task[i] == current) {
-			task[i] = 0;
+			task[i]->state = TASK_ZOMBIE;
 			break;
 		}
 	}
