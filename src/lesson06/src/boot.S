@@ -53,11 +53,12 @@ el1_entry:
 	ldr	x0, =(MAIR_VALUE)
 	msr	mair_el1, x0
 
-	ldr	x2, =kernel_main
+
 
 	mov	x0, #SCTLR_MMU_ENABLED				
 	msr	sctlr_el1, x0
 
+	ldr	x2, =kernel_main
 	br 	x2
 
 	.macro	create_pgd_entry, tbl, virt, tmp1, tmp2
@@ -75,13 +76,13 @@ el1_entry:
 	.endm
 
 	.macro	create_block_map, tbl, phys, start, end, flags, tmp1
-	lsr	\phys, \phys, #SECTION_SHIFT
 	lsr	\start, \start, #SECTION_SHIFT
 	and	\start, \start, #PTRS_PER_TABLE - 1			// table index
-	mov	\tmp1, #\flags
-	orr	\phys, \tmp1, \phys, lsl #SECTION_SHIFT			// table entry
 	lsr	\end, \end, #SECTION_SHIFT
 	and	\end, \end, #PTRS_PER_TABLE - 1				// table end index
+	lsr	\phys, \phys, #SECTION_SHIFT
+	mov	\tmp1, #\flags
+	orr	\phys, \tmp1, \phys, lsl #SECTION_SHIFT			// table entry
 9999:	str	\phys, [\tbl, \start, lsl #3]				// store the entry
 	add	\start, \start, #1					// next entry
 	add	\phys, \phys, #SECTION_SIZE				// next block

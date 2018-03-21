@@ -27,7 +27,7 @@
 #define PUD_SHIFT			PAGE_SHIFT + 2*TABLE_SHIFT
 #define PMD_SHIFT			PAGE_SHIFT + TABLE_SHIFT
 
-#define PG_DIR_SIZE			(4 * PAGE_SIZE)
+#define PG_DIR_SIZE			(3 * PAGE_SIZE)
 
 #ifndef __ASSEMBLER__
 

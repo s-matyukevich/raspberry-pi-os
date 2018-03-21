@@ -1,4 +1,4 @@
-## Lesson 4: User processes and system calls 
+## Lesson 5: User processes and system calls 
 
 We have already added a loto of reatures to the RPi OS, that make it looks like an actual operating system instead of just a bare metall progremm. The RPi OS ca now manage processes, but there is still a major drawback in this functionality - there is no process isolation at all. In this lesson we are going to fix this issue. First of all we will move all user processes to EL1, wich restrics their access to privileged processor operations. Without this step any other isolation techicks simply don't make sense, because any user progremm will be able to simple rewrite our security settings, thus breaking from isolation. 
 

@@ -44,8 +44,8 @@ int copy_process(unsigned long clone_flags, unsigned long fn, unsigned long arg)
 int move_to_user_mode(unsigned long start, unsigned long size, unsigned long pc)
 {
 	struct pt_regs *regs = task_pt_regs(current);
-	regs->pc = pc;
 	regs->pstate = PSR_MODE_EL0t;
+	regs->pc = pc;
 	regs->sp = 2 *  PAGE_SIZE;  
 	unsigned long code_page = allocate_user_page(current, 0);
 	if (code_page == 0)	{
