@@ -542,3 +542,165 @@ void map_table_entry(unsigned long *pte, unsigned long va, unsigned long pa) {
 `map_table_entry` extracts PTE intex from the virtuall address and then prepares and sets PTE descriptor. It it similar to what we've been doing in the `create_block_map` macro. 
 
 That's it about user page tables allocation. But `map_page` is responsible for one more important role: it keeps track of the pages that has been allocated during virtuall address mapping. All such pages are stored in the [kernel_pages](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/include/sched.h#L53) array. We need this array to be able to cleanup allocated pages after a task exits. There is also [user_pages](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/include/sched.h#L51), wich is also populated by the `map_page` function. This array store information about the corespondence between prcess virtual page any physical pages. We need this information in order to be able to copy process virtuall memory during `fork` (More on this later)
+
+### Forking a process
+
+Before we move forward let me summarize were we are so far: we've seen how first user process is created, its page tables populated, source code copied to the proper location and stack initialized. After all of this preparation the process is ready ro run. The code that is executed inside user process is listed below.
+
+```
+void loop(char* str)
+{
+	char buf[2] = {""};
+	while (1){
+		for (int i = 0; i < 5; i++){
+			buf[0] = str[i];
+			call_sys_write(buf);
+			user_delay(1000000);
+		}
+	}
+}
+
+void user_process() 
+{
+	call_sys_write("User process\n\r");
+	int pid = call_sys_fork();
+	if (pid < 0) {
+		call_sys_write("Error during fork\n\r");
+		call_sys_exit();
+		return;
+	}
+	if (pid == 0){
+		loop("abcde");
+	} else {
+		loop("12345");
+	}
+}
+``` 
+
+The code itself is very simple. The only tricky part is the semantic of the `fork` system call. Unlike `clone`, when doing `fork` we don't need to provide the function that need to be executed in a new process. Also the [fork wrapper function](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/user_sys.S#L26) is much easier then `clone` one. All of this is posible because of the fact that `fork` make a full copy of the process virtuall address space, so the fork wrapper function return twice: one time in the original process and one time in the new one. At this point we have two identical processes, with identical stacks and `pc` positions.The only difference is the return value of the fork syscall: it returns child PID in the parent process and 0 in the child process. Starting from this process both processes begin completely independent live and can modify their stacks and write different things using same addresses in memory - all of this without affecting one another.
+
+Now let's see how `fork` system call is implemented. [copy_process](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/fork.c#L7) function does most of the job.
+
+```
+int copy_process(unsigned long clone_flags, unsigned long fn, unsigned long arg)
+{
+	preempt_disable();
+	struct task_struct *p;
+
+	unsigned long page = allocate_kernel_page();
+	p = (struct task_struct *) page;
+	struct pt_regs *childregs = task_pt_regs(p);
+
+	if (!p)
+		return -1;
+
+	if (clone_flags & PF_KTHREAD) {
+		p->cpu_context.x19 = fn;
+		p->cpu_context.x20 = arg;
+	} else {
+		struct pt_regs * cur_regs = task_pt_regs(current);
+		*cur_regs = *childregs;
+		childregs->regs[0] = 0;
+		copy_virt_memory(p);
+	}
+	p->flags = clone_flags;
+	p->priority = current->priority;
+	p->state = TASK_RUNNING;
+	p->counter = p->priority;
+	p->preempt_count = 1; //disable preemtion untill schedule_tail
+
+	p->cpu_context.pc = (unsigned long)ret_from_fork;
+	p->cpu_context.sp = (unsigned long)childregs;
+	int pid = nr_tasks++;
+	task[pid] = p;	
+
+	preempt_enable();
+	return pid;
+}
+```
+
+This function looks almost exactly the same as in the previous lesson with one exception: when copying user processes, now, instead of modifying new process stack pointer and program counter, we instead call [copy_virt_memory](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/mm.c#L87). `copy_virt_memory` looks like this.
+
+```
+int copy_virt_memory(struct task_struct *dst) {
+	struct task_struct* src = current;
+	for (int i = 0; i < src->mm.user_pages_count; i++) {
+		unsigned long kernel_va = allocate_user_page(dst, src->mm.user_pages[i].virt_addr);
+		if( kernel_va == 0) {
+			return -1;
+		}
+		memcpy(src->mm.user_pages[i].virt_addr, kernel_va, PAGE_SIZE);
+	}
+	return 0;
+}
+```
+
+It iterates over `user_pages` array, wich contains all pages, allocated by the current process. Note, that in `user_pages` array we store only pages that are actually available to the process and contains its source code or data; we don't include here page table page, wich are stored in `kernel_pages` array. Next for each page we allocate another empty page and copy the original page content there. We also map the new page using the same virtuall address, that is used by the original page. This is how we get exact copy of the original process address space.
+
+All other details of the forking procedure works exactly in the same way, as they have been in the previous lesson.
+
+### Allocating new pages on demand
+
+If you go back and take a look on the `move_to_user_mode` function, you may notice that we only map a single page, starting at offset 0. But we also assume that second page will be used as a stack. Why don't we map second page as well? If you thing it is a bug, it is not - it is a feature! Stack page, as well as any other page that a process need to access will be mapped as soon as it will be requested for the first time. Now we are going to explore the inner-workings of this mechanizm.
+
+When a process tries to access some address wich belongs to the page that is not yet mapped a syncronos exception is generated. This is the second type of syncronos exception that we are going to support (the first type is an exception generated by the `svs` instruction wich is a sysstemcall) Syncronos exception handler now looks like the following.
+
+```
+el0_sync:
+	kernel_entry 0
+	mrs	x25, esr_el1				// read the syndrome register
+	lsr	x24, x25, #ESR_ELx_EC_SHIFT		// exception class
+	cmp	x24, #ESR_ELx_EC_SVC64			// SVC in 64-bit state
+	b.eq	el0_svc
+	cmp	x24, #ESR_ELx_EC_DABT_LOW		// data abort in EL0
+	b.eq	el0_da
+	handle_invalid_entry 0, SYNC_ERROR
+```
+
+Here we use `esr_el1` register to determine exception type. If it is a page fault exception (or, wich is the same, data access exception) `el0_da` function is called.
+
+```
+el0_da:
+	bl	enable_irq
+	mrs	x0, far_el1
+	mrs	x1, esr_el1			
+	bl	do_mem_abort
+	cmp x0, 0
+	b.eq 1f
+	handle_invalid_entry 0, DATA_ABORT_ERROR
+1:
+	bl disable_irq				
+	kernel_exit 0
+```
+
+`el0_da` redirects the main work to the [do_mem_abort](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/mm.c#L101) function. This fanction takes 2 arguments
+1. The memory address wich we tried to access. This address is taken from `far_el1`  register (Fault address register)
+1. The content of the `esr_el1` (Exception syndrome register)
+
+`do_mem_abort` is listed below.
+
+```
+int do_mem_abort(unsigned long addr, unsigned long esr) {
+	unsigned long dfs = (esr & 0b111111);
+	if ((dfs & 0b111100) == 0b100) {
+		unsigned long page = get_free_page();
+		if (page == 0) {
+			return -1;
+		}
+		map_page(current, addr & PAGE_MASK, page);
+		ind++;
+		if (ind > 2){
+			return -1;
+		}
+		return 0;
+	}
+	return -1;
+}
+```
+
+In order to understand this function you need to know a little bit about the specifics of that `esr_el1` register. Bits [32:26] of this register are called "Exception Class". We check those bits in the `el0_sync` handler to determine whether is is a syscall, or a data abort exception or potentially something else. Exception class determines the meaning of bits [24:0] - those bits are usually used to provide additional information about the exception. The meaning of [24:0] bits in case of the data abort exception is described on the page 1525 of the `AArch64-Reference-Manual`. In general data abort exception can happen in many different scenarios (it could be a permission fault, or address size fault or a lot of other things) We are only interested in a translation fault wich happens when some of the page table for the curent virtuall address are not initialized.
+So in the first 2 lines of the `do_mem_abort` function we check whether current exception is actually a translation fault. If yes we allocate a new page and map it to the requested virtuall address. All of this happens completely transpared for the user program - it doesn't notice that some of the memory accesses were interrupted and new page tables were allocated in the meantime.
+
+### Conclusion
+
+This was a long and difficult chapter, but I hope it was usefull as well. Virtual memory is really one of the most fundamental pices of any operating system and I am glad we've passe thought this chapter and, hopefully, start to understand how it works at the lowest level. With the introduction of virtual memory now we have full process isolation, but the RPi OS is still far from completion. It still don't support file systems, drivers, signals and interrupt waitlists, networking and a lot of other usefull concepts, and we will continue to uncover them in the upcomming lessons.
