@@ -21,7 +21,7 @@ For more information about project goals and history, please read the [Introduct
 * **Lesson 2: Processor initialization**
   * 2.1 [RPi OS](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson02/rpi-os.md)
   * 2.2 [Linux](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson02/linux.md)
-  * 2.3 [Exercises]()
+  * 2.3 [Exercises](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson02/exercises.md)
 * **Lesson 3: Interrupt handling**
   * 3.1 [RPi OS](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson03/rpi-os.md)
   * Linux
