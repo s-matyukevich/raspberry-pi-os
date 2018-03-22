@@ -1,10 +1,10 @@
 # Learning operating system development using Linux kernel and Raspberry Pi
 
-This repository contains a step-by-step guide that teaches how to create a simple operating system (OS) from scratch. I call this OS Raspberry Pi OS or just RPi OS. The source code for the RPi OS is largely based on [Linux kernel](https://github.com/torvalds/linux), and it supports only [Raspberry PI 3](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/) device. 
+This repository contains a step-by-step guide that teaches how to create a simple operating system (OS) kernel from scratch. I call this OS Raspberry Pi OS or just RPi OS. The RPi OS source code is largely based on [Linux kernel](https://github.com/torvalds/linux), but the OS has very limited functionality and supports only [Raspberry PI 3](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/). 
 
 Each lesson is designed in such a way that it first explains how some kernel feature is implemented in the RPi OS, and then it tries to demonstrate how the same functionality works in the Linux kernel. Each lesson has a corresponding folder in the [src](https://github.com/s-matyukevich/raspberry-pi-os/tree/master/src) directory, which contains a snapshot of the OS source code at the time when the lesson had just been completed. This allows to introduce new concepts gracefully and helps readers to follow the evolution of the RPi OS. Understanding this guide doesn't require any specific OS development skills.
 
-For more information about the project goals and history, please read the [Introduction](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Introduction.md). The project is still under active development, if you are willing to participate - please read the [Contribution guide](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Contributions.md).
+For more information about project goals and history, please read the [Introduction](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Introduction.md). The project is still under active development, if you are willing to participate - please read the [Contribution guide](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Contributions.md).
 
 ## Table of Content
 
@@ -44,7 +44,9 @@ For more information about the project goals and history, please read the [Intro
   * 6.1 [RPi OS](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson06/rpi-os.md) 
   * 6.2 Linux (In progress)
   * 6.3 Exercises (In progress)
-* **Lesson 7: File systems** (To be done)
-* **Lesson 8: Executable files (ELF)** (To be done)
-* **Lesson 9: Networking** (To be done)
+* **Lesson 7: Signals and interrupt waiting** (To be done)
+* **Lesson 8: File systems** (To be done)
+* **Lesson 9: Executable files (ELF)** (To be done)
+* **Lesson 10: Drivers** (To be done)
+* **Lesson 11: Networking** (To be done)
 
