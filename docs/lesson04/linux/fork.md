@@ -1,4 +1,4 @@
-## Lesson 4: Forkin a task
+## Lesson 4: Forking a task
 
 Scheduler is all about selection proper task to run from  the list of all available tasks. But before scheduler will be able to do its job we need to somehow fill this list. The way in wich new tasks can be created is the main topic of this cahpter. 
 

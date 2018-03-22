@@ -1,5 +1,5 @@
-## Lesson 4: Basic scheduler structures and concepts  
-
+## Lesson 4: Basic scheduler structures
+ 
 In all previous lessons we have been working mostly with either architecture specific code or driver code - and not it is the first time we will dig deep into the core of the linux kernel. This task isn't simple and it requires some preparations: before you will be able to understand linux schedule source code you need to become familiar with a few major conceprs that the schedule is based on.
 
 ### [task_struct](https://github.com/torvalds/linux/blob/v4.14/include/linux/sched.h#L519)

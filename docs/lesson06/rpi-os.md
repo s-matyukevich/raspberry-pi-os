@@ -1,4 +1,4 @@
-## Lesson 4: Virtual memory 
+## Lesson 4: Virtual memory management 
 
 The RPi OS now can run and schedule user processes, but the isolation between them is not complete - all processes and the kernel itself share the same memory. This allows any process to easily access somebody else's data and even kernel data. And even if we assume that there all our processes are not malicios there is another drawback: before allocating memory each process need to know which memory regions are already occupied - this makes memory allocation more comlicated.
 
