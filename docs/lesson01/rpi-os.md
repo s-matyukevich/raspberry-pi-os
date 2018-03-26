@@ -1,12 +1,12 @@
-## Lesson 1: Introducing RPi OS, or bare metal "Hello, world!"
+## 1.1: Introducing the RPi OS, or bare metal "Hello, world!"
 
-We are going to start our journey to OS development world by writing a simple bare metal "Hello, world" application. I assume that at this point you have already gone through [Prerequisites](https://github.com/s-matyukevich/raspberry-pi-os/docs/Prerequisites.md) and have everything ready for the work. If not - now is the right time to do this.
+We are going to start our journey to the OS development world by writing a simple bare metal "Hello, world" application. I assume that at this time you have gone through the [Prerequisites](https://github.com/s-matyukevich/raspberry-pi-os/docs/Prerequisites.md) and have everything ready for the work. If not - now is the right time to do this.
 
 ### Project structure
 
-All source code samples in this tutorial have the same structure. You can take a look at the sources for this particular lesson [here](https://github.com/s-matyukevich/raspberry-pi-os/src/lesson01/). Let's briefly describe its components
+Source code for each lesson in this tutorial has the same structure. You can find the sources for this particular lesson [here](https://github.com/s-matyukevich/raspberry-pi-os/src/lesson01/). Let's briefly describe the major components of this folder.
 
-1. *Makefile*. We are using [make utility](http://www.math.tau.ac.il/~danha/courses/software1/make-intro.html) to build our kernel. A makefile contains instructions how to compile and link the sources. More on this in the next section.
+1. **Makefile**. We are using [make utility](http://www.math.tau.ac.il/~danha/courses/software1/make-intro.html) to build the kernel. A makefile contains instructions how to compile and link the sources. More on this in the next section.
 1. *build.sh or build.bat*. You need those files if you want to build the kernel using Docker. In this way, you don't need to have make utility and compiler toolchain installed on your laptop.
 1. *src*. This folder contains all source code files.
 1. *include*. All header files should be placed here. 
