@@ -12,7 +12,7 @@ For more information about project goals and history, please read the [Introduct
 * **[Contribution guide](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Contributions.md)**
 * **[Prerequsities](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Prerequisites.md)**
 * **Lesson 1: Kernel Initialization** 
-  * 1.1 [Introducing the RPi OS, or bare metal "Hello, world!"](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson01/rpi-os.md)
+  * 1.1 [Introducing RPi OS, or bare metal "Hello, world!"](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson01/rpi-os.md)
   * Linux
     * 1.2 [Project structure](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson01/linux/project-structure.md)
     * 1.3 [Kernel build system](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson01/linux/build-system.md) 

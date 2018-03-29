@@ -14,7 +14,7 @@ The following types of contributions are particularly useful for the project.
 1. Validating the source code and text of the lessons, fixing bugs and errors.
 1. Help in making lessons content more accurate and easier to understand.
 1. Working on the source code and content for new lessons.
-1. Sharing source code of the completed exercises.
+1. Sharing source code of completed exercises.
 1. Suggesting new exercises.
 1. Providing feedback, requesting new features and content.
 1. Anything else that can help the project.
