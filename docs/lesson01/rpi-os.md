@@ -300,7 +300,7 @@ Here we use two functions `put32` and `get32`. Those functions are very simple -
 
 First of all, we need to activate GPIO pins. Most of the pins can be used with different devices, so, before using a particular pin, we need to select pin `alternative function`. An `alternative function` is just a number from 0 to 5 that can be set for each pin and that configures which device is connected to the pin. You can see the list of all available GPIO alternative functions on the image below (The image is taken from page 102 of `BCM2835 ARM Peripherals` manual)
 
-![Raspberry Pi GPIO alternative functions](../../images/alt.png?raw=true)
+![Raspberry Pi GPIO alternative functions](../../../blob/master/images/alt.png?raw=true)
 
 Here you can see that pins 14 and 15 have TXD1 and RXD1 alternative functions available. This means that if we select alternative function number 5 for pins 14 and 15, they will be used as mini UART Transmit Data pin and mini UART Receive Data pin correspondingly. `GPFSEL1` register is used to control alternative functions for pins 10-19. The meaning of all bits in that registers is shown in the following table (page 92 of `BCM2835 ARM Peripherals` manual) 
 
