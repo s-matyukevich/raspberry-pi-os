@@ -254,11 +254,11 @@ From the `kernel_main` function, you can guess that we are going to work with a 
 
 Another device that you need to familiarize yourself with is a GPIO [General-purpose input/output](https://en.wikipedia.org/wiki/General-purpose_input/output) GPIO is responsible for controlling `GPIO pins`. You should be able to easily recognize them in the image below.
 
-![Raspberry Pi GPIO pins](../images/gpio-pins.jpg)
+![Raspberry Pi GPIO pins](../../images/gpio-pins.jpg)
 
 GPIO can be used to configure the behavior of different GPIO pins. For example, to be able to use the Mini UART, we need to activate pins 14 and 15  and setup them to use this device. The image below illustrates how numbers are assigned to the GPIO pins.
 
-![Raspberry Pi GPIO pin numbers](../images/gpio-numbers.png)
+![Raspberry Pi GPIO pin numbers](../../images/gpio-numbers.png)
 
 ### Mini UART initialization
 
