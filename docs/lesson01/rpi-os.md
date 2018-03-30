@@ -254,11 +254,11 @@ From the `kernel_main` function, you can guess that we are going to work with a 
 
 Another device that you need to familiarize yourself with is a GPIO [General-purpose input/output](https://en.wikipedia.org/wiki/General-purpose_input/output) GPIO is responsible for controlling `GPIO pins`. You should be able to easily recognize them in the image below.
 
-![Raspberry Pi GPIO pins](https://www.raspberrypi.org/documentation/usage/gpio-plus-and-raspi2/images/gpio-pins-pi2.jpg)
+![Raspberry Pi GPIO pins](../images/gpio-pins.jpg)
 
-GPIO can be used to configure the behavior of different GIPIO pins. For example, to be able to use the Mini UART, we need to activate pins 14 and 15  and setup them to use this device. The image below illustrates how numbers are assigned to the GPIO pins.
+GPIO can be used to configure the behavior of different GPIO pins. For example, to be able to use the Mini UART, we need to activate pins 14 and 15  and setup them to use this device. The image below illustrates how numbers are assigned to the GPIO pins.
 
-![Raspberry Pi GPIO pins](https://www.raspberrypi.org/documentation/usage/gpio-plus-and-raspi2/images/gpio-numbers-pi2.png)
+![Raspberry Pi GPIO pin numbers](../images/gpio-numbers.png)
 
 ### Mini UART initialization
 
@@ -300,7 +300,7 @@ Here we use two functions `put32` and `get32`. Those functions are very simple -
 
 First of all, we need to activate GPIO pins. Most of the pins can be used with different devices, so, before using a particular pin, we need to select pin `alternative function`. An `alternative function` is just a number from 0 to 5 that can be set for each pin and that configures which device is connected to the pin. You can see the list of all available GPIO alternative functions on the image below (The image is taken from page 102 of `BCM2835 ARM Peripherals` manual)
 
-![Raspberry Pi GPIO alternative functions](../blob/master/images/alt.png?raw=true)
+![Raspberry Pi GPIO alternative functions](../../images/alt.png?raw=true)
 
 Here you can see that pins 14 and 15 have TXD1 and RXD1 alternative functions available. This means that if we select alternative function number 5 for pins 14 and 15, they will be used as mini UART Transmit Data pin and mini UART Receive Data pin correspondingly. `GPFSEL1` register is used to control alternative functions for pins 10-19. The meaning of all bits in that registers is shown in the following table (page 92 of `BCM2835 ARM Peripherals` manual) 
 
