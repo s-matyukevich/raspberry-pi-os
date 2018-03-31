@@ -1,6 +1,6 @@
 ## 1.3: Kernel build system.
 
-After we examined Linux kernel structure, it worth spending some time investigating how we can build and run is. Linux also uses `make` utility to build the kernel, though Linux makefile is much more complicated. Before we will take a look at the makefile, let's learn some important concepts about Linux build system, wich is called "kbuid".
+After we examined Linux kernel structure, it worth spending some time investigating how we can build and run it. Linux also uses `make` utility to build the kernel, though Linux makefile is much more complicated. Before we will take a look at the makefile, let's learn some important concepts about Linux build system, which is called "kbuild".
 
 ### A few essential kbuild concepts
 
