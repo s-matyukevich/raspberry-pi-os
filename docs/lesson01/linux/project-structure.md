@@ -16,7 +16,7 @@ git checkout v4.14
 
 We are using `v4.14` version because this was the latest version at the time of writing. All references to the Linux source code will be made using this specific version.
 
-Next, let's take a look at the folders that we can find inside the Linux repository. We are not going to look at all of them, but only at those that I consider the most important to start with:
+Next, let's take a look at the folders that we can find inside the Linux repository. We are not going to look at all of them, but only at those that I consider the most important to start with.
 
 * [arch](https://github.com/torvalds/linux/tree/v4.14/arch) This folder contains subfolders, each for a specific processor architecture. Mostly we are going to work with [arm64](https://github.com/torvalds/linux/tree/v4.14/arch/arm64) - this is the one that is compatible with ARM.v8 processors.
 * [init](https://github.com/torvalds/linux/tree/v4.14/init) Kernel is always booted by architecture specific code. But then execution is passed to the [start_kernel](https://github.com/torvalds/linux/blob/v4.14/init/main.c#L509) function that is responsible for common kernel initialization and is an architecture independent kernel starting point. `start_kernel` function, together with some other initialization functions, is defined in the `init` folder.
