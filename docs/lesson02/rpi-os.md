@@ -1,30 +1,30 @@
 ## 2.1: Processor initialization 
 
-In this lesson, we are going to work more closely with the ARM processor. it has some essential features that can be utilized by an OS. The first such feature is called "Exception levels"
+In this lesson, we are going to work more closely with the ARM processor. It has some essential features that can be utilized by the OS. The first such feature is called "Exception levels"
 
 ### Exception levels
 
-Each ARM processor that supports ARM.v8 architecture has 4 exception levels. You can think about an exception level (or `EL` for short) as a processor execution mode in which only a subset of all operations and registers are available. The least privileged exception level is level 0. When processor operates at this level, it mostly uses only general purpose registers (X0 - X30) and stack pointer register (SP). EL0 also allows using `STR` and `LDR` commands to load and store data to and from memory and a few other instructions commonly used by a user program.
+Each ARM processor that supports ARM.v8 architecture has 4 exception levels. You can think about an exception level (or `EL` for short) as a processor execution mode in which only a subset of all operations and registers is available. The least privileged exception level is level 0. When processor operates at this level, it mostly uses only general purpose registers (X0 - X30) and stack pointer register (SP). EL0 also allows using `STR` and `LDR` commands to load and store data to and from memory and a few other instructions commonly used by a user program.
 
 An operating system should deal with exception levels because it needs to implement process isolation. A user process should not be able to access other process's data. To achieve such behavior, an operating system always runs each user process at EL0. Operating at this exception level a process can only use it's own virtual memory and can't access any instructions that change virtual memory settings. So, to ensure process isolation, an OS need to prepare separate virtual memory mapping for each process and put the processor into EL0 before transferring execution to a user process.
 
 An operating system itself usually works at EL1. While running at this exception level processor gets access to the registers that allows configuring virtual memory settings as well as to some system registers. Raspberry Pi OS also will be using EL1.
 
-We are not going to use exceptions levels 2 and 3 a lot, but I just wanted to briefly describe them so you can get an idea why they are needed. 
+We are not going to use exceptions levels 2 and 3 a lot, but I just want to briefly describe them so you can get an idea why they are needed. 
 
-EL2 is needed in a scenario when we are using a hypervisor. In this case host operating system runs at EL2 and guest operating systems can only use EL 1. This allows host OS to isolate guest OSes in a similar way how OS isolates user processes.
+EL2 is used in a scenario when we are using a hypervisor. In this case host operating system runs at EL2 and guest operating systems can only use EL 1. This allows host OS to isolate guest OSes in a similar way how OS isolates user processes.
 
-EL3 is used for transitions from ARM "Secure World" to "Insecure world". Those concepts exist to provide full hardware isolation between the software running in two different "worlds". Application from an "Insecure world" can in no way access or modify information (both instruction and data) that belongs to "Secure world", and this restriction is enforced at the hardware level. 
+EL3 is used for transitions from ARM "Secure World" to "Insecure world". This abstraction exist to provide full hardware isolation between the software running in two different "worlds". Application from an "Insecure world" can in no way access or modify information (both instruction and data) that belongs to "Secure world", and this restriction is enforced at the hardware level. 
 
 ### Debugging the kernel
 
-Next thing that I want to do is to figure out what Exception level we are currently using. But when I tried to do this, I realized that the kernel could only print some constant string on a screen, but what I need is some analog of [printf](https://en.wikipedia.org/wiki/Printf_format_string) function. With `printf` I can easily display values of different registers and variables. Such functionality is essential for the kernel development because you don't have any other debugger support and `printf` becomes the only mean by which you can figure out what is going on inside your program.
+Next thing that I want to do is to figure out which Exception level we are currently using. But when I tried to do this, I realized that the kernel could only print some constant string on a screen, but what I need is some analog of [printf](https://en.wikipedia.org/wiki/Printf_format_string) function. With `printf` I can easily display values of different registers and variables. Such functionality is essential for the kernel development because you don't have any other debugger support and `printf` becomes the only mean by which you can figure out what is going on inside your program.
 
-For the RPi OS I decided not to reinvent the wheel and use one of  [existing printf implementations](http://www.sparetimelabs.com/tinyprintf/tinyprintf.php) This function consists mostly from string manipulations and is not very interesting from a kernel developer point of view. The implementation that I used is very small and don't have external dependencies, that allows it to be easily integrated into the kernel. The only thing that I have to do is to define `putc`  function that can send a single character on the screen. This function is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/mini_uart.c#L59) and it just uses already existing `uart_send` function. Also, we need to initialize the `printf` library and specify the location of the `putc` function. This is done in a single [line of code](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/kernel.c#L8)
+For the RPi OS I decided not to reinvent the wheel and use one of  [existing printf implementations](http://www.sparetimelabs.com/tinyprintf/tinyprintf.php) This function consists mostly from string manipulations and is not very interesting from a kernel developer point of view. The implementation that I used is very small and don't have external dependencies, that allows it to be easily integrated into the kernel. The only thing that I have to do is to define `putc`  function that can send a single character to the screen. This function is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/mini_uart.c#L59) and it just uses already existing `uart_send` function. Also, we need to initialize the `printf` library and specify the location of the `putc` function. This is done in a single [line of code](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/kernel.c#L8)
 
-### Finding out current Exception level
+### Finding current Exception level
 
-Now when we are equipped with the `printf` function we can complete our original task: figure out at which exception level we are currently booted. A small function that can answer this question is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/utils.S#L1) and looks like this
+Now, when we are equipped with the `printf` function, we can complete our original task: figure out at which exception level the OS is booted. A small function that can answer this question is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/utils.S#L1) and looks like this
 
 ```
 .globl get_el
@@ -45,7 +45,7 @@ If you reproduce this experiment, you should see `Exception level: 3` on the scr
 
 ### Changing current exception level
 
-In ARM architecture there is no way how a program can increase its own exception level without the participation of the software that already runs on a higher level. This makes a perfect sense: otherwise, any program would be able to escape its assigned EL and access other programs data. The only thing a program can do is to generate an exception. An exception is generated whenever a program executes some illegal instruction (for example, tries to access memory location at a nonexisting address, or tries to divide by 0) Also an application can run `svc` instruction to generate an exception on purpose. Hardware generated interrupts are also handled as a special type of exceptions. Whenever an exception is generated the following sequence of steps takes place (In the description I am assuming that the exception is handled at EL `n`, were `n` could be 1, 2 or 3).
+In ARM architecture there is no way how a program can increase its own exception level without the participation of the software that already runs on a higher level. This makes a perfect sense: otherwise, any program would be able to escape its assigned EL and access other programs data. Current EL can be changed only if an exception is generated. This can happen if a program executes some illegal instruction (for example, tries to access memory location at a nonexisting address, or tries to divide by 0) Also an application can run `svc` instruction to generate an exception on purpose. Hardware generated interrupts are also handled as a special type of exceptions. Whenever an exception is generated the following sequence of steps takes place (In the description I am assuming that the exception is handled at EL `n`, were `n` could be 1, 2 or 3).
 
 1. Address of the current instruction is saved in the `ELR_ELn`  register. (It is called `Exception link register`)
 1. Current processor state is stored in `SPSR_ELn` register (`Saved Program Status Register`)
@@ -54,7 +54,7 @@ In ARM architecture there is no way how a program can increase its own exception
 
 In practice the process is a little more complicated because exception handler also needs to store the state of all general purpose registers and restore it back afterwards, but we will discuss this process in details in the next lesson. For now, we need just to understand the process in general and remember the meaning of the `ELR_ELm` and `SPSR_ELn` registers.
 
-An important thing to know is that exception handler is not obliged to return to that same location from which the exception originates. Both `ELR_ELm` and `SPSR_ELn` are writable and exception handler can modify them if it wants to. We are going to use this technique to our advantage when we try to switch from EL3 to EL1 in our code.
+An important thing to know is that exception handler is not obliged to return to the same location from which the exception originates. Both `ELR_ELm` and `SPSR_ELn` are writable and exception handler can modify them if it wants to. We are going to use this technique to our advantage when we try to switch from EL3 to EL1 in our code.
 
 ### Switching to EL1
 
@@ -134,7 +134,7 @@ It worth saying a few words explaining what processor state is. Processor state 
 
 * Some other information, required to fully restore the processor execution state after an exception is handled.
 
-Usually `spsr_el3` is saved automatically when an exception is taken to EL3. However this register is writable, so we take advantage of this fack and manually prepare processor state. `SPSR_VALUE` is prepared [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/include/arm/sysregs.h#L35) and we initialize the following fields:
+Usually `spsr_el3` is saved automatically when an exception is taken to EL3. However this register is writable, so we take advantage of this fact and manually prepare processor state. `SPSR_VALUE` is prepared [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/include/arm/sysregs.h#L35) and we initialize the following fields:
 
 * `#define SPSR_MASK_ALL        (7 << 6)` After we change EL to EL1 all types of interrupts will be masked (or disabled, which is the same).
 * `#define SPSR_EL1h        (5 << 0)` At EL1 we can either use our own dedicated stack pointer or use EL0 stack pointer. `EL1h` mode means that we are using EL1 dedicated stack pointer. 
