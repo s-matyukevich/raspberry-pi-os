@@ -48,7 +48,7 @@ preserve_boot_args:
 ENDPROC(preserve_boot_args)
 ```
 
-Accordingly to [kernel boot protocol](https://github.com/torvalds/linux/blob/v4.14/Documentation/arm64/booting.txt#L150), parameters are passed to the kernel in registers `x0 - x3`. `x0` contains the physical address of device tree blob (`.dtb`) in system RAM. `x1 - x3` for now are reserved for future usage. What this function is doing is copying the content of `x0 - x3` registers to the [boot_args](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/setup.c#L93) array and then [invalidate](https://developer.arm.com/products/architecture/a-profile/docs/den0024/latest/caches/cache-maintenance) the corresponding cache line from the data cache. Cache maintenance in a multiprocessor system is a large topic on its own, and we are going to skip it for now. For thous who are interested in this subject, I can recommend reading [Caches](https://developer.arm.com/products/architecture/a-profile/docs/den0024/latest/caches) and [Multi-core processors](https://developer.arm.com/products/architecture/a-profile/docs/den0024/latest/multi-core-processors) chapters of the `ARM Programmer’s Guide`.
+Accordingly to the [kernel boot protocol](https://github.com/torvalds/linux/blob/v4.14/Documentation/arm64/booting.txt#L150), parameters are passed to the kernel in registers `x0 - x3`. `x0` contains the physical address of device tree blob (`.dtb`) in system RAM. `x1 - x3` are reserved for future usage. What this function is doing is copying the content of `x0 - x3` registers to the [boot_args](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/setup.c#L93) array and then [invalidate](https://developer.arm.com/products/architecture/a-profile/docs/den0024/latest/caches/cache-maintenance) the corresponding cache line from the data cache. Cache maintenance in a multiprocessor system is a large topic on its own, and we are going to skip it for now. For those who are interested in this subject, I can recommend reading [Caches](https://developer.arm.com/products/architecture/a-profile/docs/den0024/latest/caches) and [Multi-core processors](https://developer.arm.com/products/architecture/a-profile/docs/den0024/latest/multi-core-processors) chapters of the `ARM Programmer’s Guide`.
 
 ### el2_setup
 
@@ -78,7 +78,7 @@ CPU_LE(    bic    x0, x0, #(3 << 24)    )    // Clear the EE and E0E bits for EL
     ret
 ```
 
-If it happens that we execute at EL1 `sctlr_el1` register is updated so that CPU works in either `big-endian` of `little-endian` mode depending on the value of [CPU_BIG_ENDIAN](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/Kconfig#L612) config setting. Then we just exit from the `el2_setup` function and return [BOOT_CPU_MODE_EL1](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/virt.h#L55) constant. Accordingly to [ARM64 Function Calling Conventions](http://infocenter.arm.com/help/topic/com.arm.doc.ihi0055b/IHI0055B_aapcs64.pdf) return value should be placed in `x0` register (or `w0` in our case. You can think about `w0` register as the first 32 bit of `x0`)
+If it happens that we execute at EL1, `sctlr_el1` register is updated so that CPU works in either `big-endian` of `little-endian` mode depending on the value of [CPU_BIG_ENDIAN](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/Kconfig#L612) config setting. Then we just exit from the `el2_setup` function and return [BOOT_CPU_MODE_EL1](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/virt.h#L55) constant. Accordingly to [ARM64 Function Calling Conventions](http://infocenter.arm.com/help/topic/com.arm.doc.ihi0055b/IHI0055B_aapcs64.pdf) return value should be placed in `x0` register (or `w0` in our case. You can think about `w0` register as the first 32 bit of `x0`)
 
 ```
 1:    mrs    x0, sctlr_el2
@@ -103,7 +103,7 @@ If it appears that we are booted in EL2 we are doing the same kind of setup for 
 #endif
 ```
 
-If [Virtualization Host Extensions (VHE)](https://developer.arm.com/products/architecture/a-profile/docs/100942/latest/aarch64-virtualization) are enabled via [ARM64_VHE](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/Kconfig#L926) config variable and the host machine also supports them - `x2` then is updated with non zero value. `x2` will be used to check whether `VHE` is enabled later in the same function.
+If [Virtualization Host Extensions (VHE)](https://developer.arm.com/products/architecture/a-profile/docs/100942/latest/aarch64-virtualization) is enabled via [ARM64_VHE](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/Kconfig#L926) config variable and the host machine supports them, `x2` then is updated with non zero value. `x2` will be used to check whether `VHE` is enabled later in the same function.
 
 ```
     mov    x0, #HCR_RW            // 64-bit EL1
@@ -115,7 +115,7 @@ set_hcr:
     isb
 ```
 
-Here we set `hcr_el2` register. We used the same register to set 64-bit execution mode for EL1 for the RPi OS. This is exactly what is done in the first line of the provided code sample. Also if `x2 != 0`, which means that VHE is available and the kernel is configured to use it, `hcr_el2` is also used to enable VHE.
+Here we set `hcr_el2` register. We used the same register to set 64-bit execution mode for EL1 in the RPi OS. This is exactly what is done in the first line of the provided code sample. Also if `x2 != 0`, which means that VHE is available and the kernel is configured to use it, `hcr_el2` is also used to enable VHE.
 
 ```
     /*
@@ -172,7 +172,7 @@ The provided code is responsible for enabling SRE (System Register Interface) Th
     msr    vmpidr_el2, x1
 ```
 
-`midr_el1` and `mpidr_el1` are read-only registers from the Identification registers group. They provide various information about processor manufacturer, processor architecture name, number of cores and some other info. It is possible to change this information for all readers that try to access it from EL1. Here we populate `vpidr_el2` and ` vmpidr_el2` with identical values, so this information is the same whether you try to access it from EL1 or  higer exception levels.
+`midr_el1` and `mpidr_el1` are read-only registers from the Identification registers group. They provide various information about processor manufacturer, processor architecture name, number of cores and some other info. It is possible to change this information for all readers that try to access it from EL1. Here we populate `vpidr_el2` and ` vmpidr_el2` with the values taken from `midr_el1` and `mpidr_el1`, so this information is the same whether you try to access it from EL1 or  higer exception levels.
 
 ```
 #ifdef CONFIG_COMPAT
@@ -235,7 +235,7 @@ CPU_LE(    movk    x0, #0x30d0, lsl #16    )    // Clear EE and E0E on LE system
 
 ```
 
-If we reach this point it means that we are going to switch to EL1 soon, so early EL1 initialization needs to be done here.  The copied code snippet is responsible for `sctlr_el1` (System Control Register) initialization. We already did the same job [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/boot.S#L18) for the RPi OS.
+If we reach this point it means that we don't need VHE and are going to switch to EL1 soon, so early EL1 initialization needs to be done here.  The copied code snippet is responsible for `sctlr_el1` (System Control Register) initialization. We already did the same job [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/boot.S#L18) for the RPi OS.
 
 ```
     /* Coprocessor traps. */
@@ -253,7 +253,7 @@ This code allows EL1 to access `cpacr_el1` register and, as a result, to control
 
 We don't plan to use EL2 now, though some functionality requires it. We need it, for example, to implement [kexec](https://linux.die.net/man/8/kexec) system call that enables you to load and boot into another kernel from the currently running kernel. 
 
-[_hyp_stub_vectors](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/hyp-stub.S#L33  holds the addresses of all exception handlers for EL2. We are going to implement similar functionality for EL1 in the next lesson, when we will talk about interrupts and exception handling in details.
+[_hyp_stub_vectors](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/hyp-stub.S#L33)  holds the addresses of all exception handlers for EL2. We are going to implement exception handling functionality for EL1 in the next lesson, after we talk about interrupts and exception handling in details.
 
 ```
     /* spsr */
@@ -267,7 +267,7 @@ We don't plan to use EL2 now, though some functionality requires it. We need it,
 
 Finally, we need to initialize processor state at EL1 and switch exception levels. We already did it for the [RPi OS](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/boot.S#L27-L33) so I am not going to explain the details of this code. 
 
-The only new thing here is the way how `elr_el2` is initialized. `lr` or Link Register is an alias for `x30`. Whenever you execute `br` (Branch Link) instruction it is automatically populated with the current execution address. This fact is usually used by `ret` instruction, so it know where exactly to return. In our case, `lr` points to [this](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/head.S#L119) instruction and, because of the way how we initialized  `elr_el2`, this is also the instruction from which the execution is going to be resumed after switching to EL1.
+The only new thing here is the way how `elr_el2` is initialized. `lr` or Link Register is an alias for `x30`. Whenever you execute `br` (Branch Link) instruction `x30` is automatically populated with the address of the current instruction. This fact is usually used by `ret` instruction, so it knows where exactly to return. In our case, `lr` points [here](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/head.S#L119) and, because of the way how we initialized  `elr_el2`, this is also the place from which the execution is going to be resumed after switching to EL1.
 
 ### Processor initialization at EL1
 
@@ -277,13 +277,13 @@ Now we are back to the `stext` function. Next few lines are not very important f
     adrp    x23, __PHYS_OFFSET
     and    x23, x23, MIN_KIMG_ALIGN - 1    // KASLR offset, defaults to 0
 ```
-[KASLR](https://lwn.net/Articles/569635/), or Kernel address space layout randomization, is a technique that allows to place the kernel itself at a random address in memory. This is required only for security reasons. For more information, you can read the link above.
+[KASLR](https://lwn.net/Articles/569635/), or Kernel address space layout randomization, is a technique that allows to place the kernel at a random address in the memory. This is required only for security reasons. For more information, you can read the link above.
 
 ```
     bl    set_cpu_boot_mode_flag
 ```
 
-Here CPU boot mode is saved into [__boot_cpu_mode](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/virt.h#L74) variable. The code that does this is very similar `preserve_boot_args` function that we explored previously.  
+Here CPU boot mode is saved into [__boot_cpu_mode](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/virt.h#L74) variable. The code that does this is very similar to `preserve_boot_args` function that we explored previously.  
 
 ```
     bl    __create_page_tables
@@ -297,5 +297,6 @@ The last 3 functions are very important, but they all are related to virtual mem
 * `__primary_switch` Enable MMU and jump to [start_kernel](https://github.com/torvalds/linux/blob/v4.14/init/main.c#L509) function, which is architecture independent starting point.
 
 ### Conclusion
+
 In this chapter, we briefly discussed how a processor is initialized when the Linux kernel is booted. In the next lesson, we will continue to closely work with the ARM processor and investigate a vital topic for any OS: interrupt handling.
  
