@@ -1,10 +1,10 @@
 ## 3.1: Interrupts 
 
-From the lesson 1, we already know how to communicate with hardware. However, most of the time the pattern of communication is not that simple. Usually, this pattern is asynchronous: we send some command to a device, but it doesn't respond immediately. Instead, it notifies us when the work is completed. Such asynchronous notifications are called "interrupts" because they interrupt normal execution flow and forces processor to execute "interrupt handler" first, and only then the execution is returned to the normal flow. 
+From the lesson 1, we already know how to communicate with hardware. However, most of the time the pattern of communication is not that simple. Usually, this pattern is asynchronous: we send some command to a device, but it doesn't respond immediately. Instead, it notifies us when the work is completed. Such asynchronous notifications are called "interrupts" because they interrupt normal execution flow and force the processor to execute an "interrupt handler". 
 
-There is one device that is particularly useful in operating system development - system timer. It is a device that can be configured to periodically interrupt a processor with some configurable frequency. One particular application of timer interrupts is anthe implementation of process scheduling. A schedule needs to measure how long each process has been executed and use this information to select next process to run. This measurement is based on timer interrupts.
+There is one device that is particularly useful in operating system development: system timer. It is a device that can be configured to periodically interrupt a processor with some predefined frequency. One particular application of the timer that it is used in the process scheduling. A schedule needs to measure for how long each process has been executed and use this information to select the next process to run. This measurement is based on timer interrupts.
 
-We are going to talk about process scheduling in details in the next lesson, but for now, our task would be to initialize system timer and implement a timer interrupt handler. 
+We are going to talk about process scheduling in details in the next lesson, but for now, our task will be to initialize system timer and implement a timer interrupt handler. 
 
 ### Interrupts vs exceptions 
 
@@ -17,16 +17,16 @@ In ARM.v8 architecture interrupts are part of a more general term: exceptions. T
 
 ### Exception vectors
 
-Each exception type needs its own handler. Also, separate handlers should be defined for each different execution state, in which exception is generated. There are 4 different execution states, that are interesting from the exception handling standpoint. If we are working at EL1 those states can be defined as follows:
+Each exception type needs its own handler. Also, separate handlers should be defined for each different execution state, in which exception is generated. There are 4 execution states that are interesting from the exception handling standpoint. If we are working at EL1 those states can be defined as follows:
 
 1. **EL1t** Exception is taken from EL1 while stack pointer was shared with EL0. This happens when `SPSel` register holds the value `0`.
 1. **EL1h** Exception is taken from EL1 at the time when dedicated stack pointer was allocated for EL1. This means that `SPsel` holds the value `1` and this is the mode that we are currently using.
 1. **EL0_64** Exception is taken from EL0 executing in 64-bit mode.
 1. **EL0_32** Exception is taken from EL0 executing in 32-bit mode.
 
-In total, we need to define 16 exception handlers (4 exception levels multiplied by 4 execution states) A special structure that holds addresses of all exception handlers is called "exception vector table" of just "vector table". The structure of a vector table is defined in `Table D1-6 Vector offsets from vector table base address` at page 1430 of the [AArch64-Reference-Manual](https://developer.arm.com/docs/ddi0487/latest/arm-architecture-reference-manual-armv8-for-armv8-a-architecture-profile) You can think of a vector table as an array of exception vectors, where each exception vector (or handler) is a continuous sequence of instructions responsible for handling a particular exception. Accordingly, to `Table D1-6` from `AArch64-Reference-Manual`, each exception vector can ocupy `0x80` bytes maximum. This is not much, but nobody prevents us from jumping to some other memory location from an exception vector. 
+In total, we need to define 16 exception handlers (4 exception levels multiplied by 4 execution states) A special structure that holds addresses of all exception handlers is called "exception vector table" or just "vector table". The structure of a vector table is defined in `Table D1-6 Vector offsets from vector table base address` at page 1430 of the [AArch64-Reference-Manual](https://developer.arm.com/docs/ddi0487/latest/arm-architecture-reference-manual-armv8-for-armv8-a-architecture-profile) You can think of a vector table as an array of exception vectors, where each exception vector (or handler) is a continuous sequence of instructions responsible for handling a particular exception. Accordingly, to `Table D1-6` from `AArch64-Reference-Manual`, each exception vector can ocupy `0x80` bytes maximum. This is not much, but nobody prevents us from jumping to some other memory location from an exception vector. 
 
-I think all of this will be much cleaner by example, so now it is time to see how exception vectors are implemented in the RPI-OS. Everything related to exception handling is defined in [entry.S](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S) and we are going to start examining it right now.
+I think all of this will be much cleaner by an example, so now it is time to see how exception vectors are implemented in the RPI-OS. Everything related to exception handling is defined in [entry.S](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S) and we are going to start examining it right now.
 
 The first useful macro is called [ventry](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S#L12) and it is used to create entries in the vector table.
 
@@ -39,7 +39,7 @@ The first useful macro is called [ventry](https://github.com/s-matyukevich/raspb
 
 As you might infer from this definition, we are not going to handle exceptions right inside the exception vector, but instead, we jump to a label that is provided for the macro as `label` argument. We need `.align 7` instruction because all exception vectors should be located at offset `0x80` bytes one from another. 
 
-Vector table is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S#L64) and it consist of 16 `ventry` definitions. For now we are only interested in handling `IRQ` from `EL1h` but still, we need to define all 16 handlers. This is not because of some hardware requirement, but rather because we want to see a meaningful error message in case if something goes wrong. All handlers that should never be executed in normal flow have `invalid` postfix and uses [handle_invalid_entry](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S#L64) Let's take a look at how this macro is defined.
+Vector table is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S#L64) and it consist of 16 `ventry` definitions. For now we are only interested in handling `IRQ` from `EL1h` but still, we need to define all 16 handlers. This is not because of some hardware requirement, but rather because we want to see a meaningful error message in case if something goes wrong. All handlers that should never be executed in normal flow have `invalid` postfix and uses [handle_invalid_entry](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S#L3) macro. Let's take a look at how this macro is defined.
 
 ```
     .macro handle_invalid_entry type
@@ -52,19 +52,19 @@ Vector table is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/
     .endm
 ```
 
-In the first line, you can see that another macro is used - `kernel_entry`. We will discuss it shortly.
-Then we call [show_invalid_entry_message](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/irq.c#L34) and prepare 3 arguments for it. The first argument is exception type that can take one of [this](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/include/entry.h#L6) values. It tells us what exactly exception handler has been executed.
-The second parameter is the most important one and is called `ESR` which stands for Exception Syndrome Register. This argument is taken from `esr_el1` register, which is described at page 1899 of `AArch64-Reference-Manual`. This register contains detaild information about what causes an exception. 
+In the first line, you can see that another macro is used: `kernel_entry`. We will discuss it shortly.
+Then we call [show_invalid_entry_message](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/irq.c#L34) and prepare 3 arguments for it. The first argument is exception type that can take one of [this](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/include/entry.h#L6) values. It tells us which exactly exception handler has been executed.
+The second parameter is the most important one, it is called `ESR` which stands for Exception Syndrome Register. This argument is taken from `esr_el1` register, which is described at page 1899 of `AArch64-Reference-Manual`. This register contains detaild information about what causes an exception. 
 The third argument is important mostly in case of synchronous exceptions. Its value is taken from already familiar to us `elr_el1` register, which contains the address of the instruction that had been executed when the exception was generated. For synchronous exceptions, this is also the instruction that causes the exception.
 After `show_invalid_entry_message`  function prints all this information to the screen we put the processor in an infinite loop because there is not much else we can do.
 
 ### Saving register state
 
-After an exception handler finishes execution, we wand all general purpose registers to have the same values they had before the exception was generated. If we don't implement such functionality, an interrupt that has nothing to do with currently executing code can influence the behavior of this code unpredictably. That's why the first thing we must do after an exception is generated is to save the processor state. This is done in the [kernel_entry](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S) macro. This macro is very simple - it just stores registers `x0 - x30` to the stack. There is also a corresponding macro [kernel_exit](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S#L37), which is called after an exception handler finishes execution. `kernel_exit` restores processor state by copying back the values of `x0 - x30` registers. It also executes `eret` instruction, which returns us back to normal execution flow. By the way, general purpose registers are not the only thing that needs to be saved before executing an exception handler, but it is enough for our simple kernel for now. In later lessons, we will add more functionality to the `kernel_entry` and `kernel_exit` macros.
+After an exception handler finishes execution, we wand all general purpose registers to have the same values they had before the exception was generated. If we don't implement such functionality, an interrupt that has nothing to do with currently executing code, can influence the behavior of this code unpredictably. That's why the first thing we must do after an exception is generated is to save the processor state. This is done in the [kernel_entry](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S) macro. This macro is very simple: it just stores registers `x0 - x30` to the stack. There is also a corresponding macro [kernel_exit](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S#L37), which is called after an exception handler finishes execution. `kernel_exit` restores processor state by copying back the values of `x0 - x30` registers. It also executes `eret` instruction, which returns us back to normal execution flow. By the way, general purpose registers are not the only thing that needs to be saved before executing an exception handler, but it is enough for our simple kernel for now. In later lessons, we will add more functionality to the `kernel_entry` and `kernel_exit` macros.
 
-### Setting vector table
+### Setting the vector table
 
-Ok, now we have prepared vector table, but the processor doesn't know where it is located and therefore can't use it. In order for exception handling to work, we must set `vbar_el1` (Vector Base Address Register) to the location of the vector table. This is done [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/irq.S#L2)
+Ok, now we have prepared the vector table, but the processor doesn't know where it is located and therefore can't use it. In order for the exception handling to work, we must set `vbar_el1` (Vector Base Address Register) to the vector table address. This is done [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/irq.S#L2)
 
 ```
 .globl irq_vector_init
@@ -174,5 +174,5 @@ Here we first update compare register so that that next interrupt will be genera
 
 ### Conclusion
 
-The last thing that might want to take a look at is the [kernel_main](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/kernel.c#L7) function where all previously discussed functionality is orchestrated. After you compile and run the sample it should print "Timer interrupt received" message after an interrupt is taken. Please, try to do it by yourself and don't forget to carefully examine the code and experiment with it.
+The last thing that you might want to take a look at is the [kernel_main](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/kernel.c#L7) function where all previously discussed functionality is orchestrated. After you compile and run the sample it should print "Timer interrupt received" message after an interrupt is taken. Please, try to do it by yourself and don't forget to carefully examine the code and experiment with it.
 
