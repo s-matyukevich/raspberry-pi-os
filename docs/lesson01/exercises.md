@@ -1,4 +1,4 @@
-## Lesson 1: Exercises.
+## 1.5: Exercises.
 
 Exercises are optional, though I strongly recommend you to experiment with the source code a little bit. If you were able to complete any of the exercises - please share your source code with others. For details see the [contribution guide](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Contributions.md)
 
