@@ -13,7 +13,7 @@ When implementing interrupts in the RPi OS we have been working with 2 devices: 
 
 Stop, but why do we have 4 devices instead of 2? This requires some explanation, and we will tackle this question in the next section.
 
-### Local vs global interrupt controllers.
+### Local vs global interrupt controllers
 
 When you think about interrupt handling in multiprocessor systems, one question you should ask yourself is which core should be responsible for processing a particular interrupt? When an interrupt occurs, are all 4 cores interrupted, or only a single one? Is it possible to route a particular interrupt to a specific core? Another question you may wonder is how one processor can notify another processor if he needs to pass some information to it? 
 
@@ -27,13 +27,13 @@ The behavior of a local interrupt controller as well as a local timer is documen
 
 I already mentioned local timer several times. Now you probably wonder why do we need two independent timers in the system? I guess that the primary use-case for using the local timer is when you want to configure all 4 cores to receive timer interrupts simultaneously. If you use system timer you can only route interrupts to a single core. 
 
-When working with the RPi OS we didn't work with either local interrupt controller or local timer. That is because by default local interrupt controller is configured in such a way that all external interrupts are sent to the first core, with is exactly what we need. We haven't used local timer because we use system timer instead.
+When working with the RPi OS we didn't work with either local interrupt controller or local timer. That is because by default local interrupt controller is configured in such a way that all external interrupts are sent to the first core, which is exactly what we need. We haven't used local timer because we use system timer instead.
 
-### Local interrupt controller driver
+### Local interrupt controller 
 
 Accordingly to the [bcm2837.dtsi](https://github.com/torvalds/linux/blob/v4.14/arch/arm/boot/dts/bcm2837.dtsi#L75) the global interrupt controller is a child of the local one. Thus it makes sense to start our exploration with the local controller.
 
-If we need to find a driver that works with a particular device, we should use [compatible](https://github.com/torvalds/linux/blob/v4.14/arch/arm/boot/dts/bcm2837.dtsi#L12) property. Searching for the value of this property you can easily find that there is a single driver that is compatible with RPi local interrupt controller - here is the corresponding [definition] (https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L315). 
+If we need to find a driver that works with a particular device, we should use [compatible](https://github.com/torvalds/linux/blob/v4.14/arch/arm/boot/dts/bcm2837.dtsi#L12) property. Searching for the value of this property you can easily find that there is a single driver that is compatible with RPi local interrupt controller - here is the corresponding [definition](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L315) 
 
 ```
 IRQCHIP_DECLARE(bcm2836_arm_irqchip_l1_intc, "brcm,bcm2836-l1-intc",
@@ -79,11 +79,11 @@ static int __init bcm2836_arm_irqchip_l1_intc_of_init(struct device_node *node,
 }
 ```
 
-Initialization function takes 2 parameters: 'node' and 'parent', both of them are of the type [struct device_node](https://github.com/torvalds/linux/blob/v4.14/include/linux/of.h#L49). `node` represents the current node in the device tree, and in our case it points [here](https://github.com/torvalds/linux/blob/v4.14/arch/arm/boot/dts/bcm2837.dtsi#L11)  `parent` is a parent node in the device tree hierarchy, and for the local interrupt controller it points to `soc` element (`soc` stands for "system on chip" and it is the simplest possible bus which maps all device registers directly to main memory)
+The initialization function takes 2 parameters: 'node' and 'parent', both of them are of the type [struct device_node](https://github.com/torvalds/linux/blob/v4.14/include/linux/of.h#L49). `node` represents the current node in the device tree, and in our case it points [here](https://github.com/torvalds/linux/blob/v4.14/arch/arm/boot/dts/bcm2837.dtsi#L11)  `parent` is a parent node in the device tree hierarchy, and for the local interrupt controller it points to `soc` element (`soc` stands for "system on chip" and it is the simplest possible bus which maps all device registers directly to main memory)
 
 `node` can be used to read various properties from the current device tree node. For example, the first line of the `bcm2836_arm_irqchip_l1_intc_of_init` function reads the device base address from [reg](https://github.com/torvalds/linux/blob/v4.14/arch/arm/boot/dts/bcm2837.dtsi#L13) property. However, the process is more complicated than that, because when this function is executed MMU is already enabled, and before we will be able to access some region of physical memory we must map this region to some virtual address. This is exactly what [of_iomap](https://github.com/torvalds/linux/blob/v4.14/drivers/of/address.c#L759) function is doing: it reads `reg` property of the provided node and maps the whole memory region, described by `reg` property, to some virtual memory region.
 
-Next local timer frequency is initialized in ][bcm2835_init_local_timer_frequency](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L264) function. There is nothing specific about this funciton: it just uses some of the registers, described in [BCM2836 ARM-local peripherals](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2836/QA7_rev3.4.pdf) manual, to initialize local timer.
+Next local timer frequency is initialized in [bcm2835_init_local_timer_frequency](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L264) function. There is nothing specific about this funciton: it just uses some of the registers, described in [BCM2836 ARM-local peripherals](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2836/QA7_rev3.4.pdf) manual, to initialize local timer.
 
 Next line requires some explanations.
 
@@ -93,7 +93,7 @@ Next line requires some explanations.
                         NULL);
 ```
 
-Linux assigns a unique integer number to each interrupt, you can think about this number as a unique interrupt ID. This ID is used each time you want to do something with an interrupt (for example, assign a handler, or assign which CPU should handle it). Each interrupt also has a hardware interrupt number. This is usually a number that tells which interrupt line was triggered. `BCM2835 ARM Peripherals manual` has the peripheral interrupt table at page 113 - you can think about an index in this table as a hardware interrupt number. So obviously we need some mechanism to map Linux irq numbers to hardware irq number and vise versa. If there is only one interrupt controller it would be possible to use one to one mapping but in general case a more sophisticated mechanism need to be used. In Linux [struct irq_domain](https://github.com/torvalds/linux/blob/v4.14/include/linux/irqdomain.h#L152) implements such mapping. Each interrupt controller driver should create its own irq domain and register all interrupts that it can handle with this domain. Registration function returns Linux irql number that later is used to work with the interrupt.
+Linux assigns a unique integer number to each interrupt, you can think about this number as a unique interrupt ID. This ID is used each time you want to do something with an interrupt (for example, assign a handler, or assign which CPU should handle it). Each interrupt also has a hardware interrupt number. This is usually a number that tells which interrupt line was triggered. `BCM2835 ARM Peripherals manual` has the peripheral interrupt table at page 113 - you can think about an index in this table as a hardware interrupt number. So obviously we need some mechanism to map Linux irq numbers to hardware irq number and vise versa. If there is only one interrupt controller it would be possible to use one to one mapping but in general case a more sophisticated mechanism need to be used. In Linux [struct irq_domain](https://github.com/torvalds/linux/blob/v4.14/include/linux/irqdomain.h#L152) implements such mapping. Each interrupt controller driver should create its own irq domain and register all interrupts that it can handle with this domain. Registration function returns Linux irq number that later is used to work with the interrupt.
 
 Next 6 lines are responsible for registering each supported interrupt with the irq domain.
 
@@ -112,7 +112,7 @@ Next 6 lines are responsible for registering each supported interrupt with the i
                      &bcm2836_arm_irqchip_pmu);
 ```
 
-Accordingly to [BCM2836 ARM-local peripherals](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2836/QA7_rev3.4.pdf) manual local interrupt controller handles 10 different interrupts: 0 - 3 are interrupts from local timer, 4 - 7 are mailbox interrupts, which are used in interprocess communication, 8 corresponds to all interrupts generated by the global interrupt controller and interrupt 9 is a performance monitor interrupt. [Here](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L67) you can see that the driver defines a constant that holds hardware irq number per each interrupt. The registration code above registers all interrupts, except mailbox interrupts, which are registered separately. In order to understand the registration code better lets examine [bcm2836_arm_irqchip_register_irq](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L154) function.
+Accordingly to [BCM2836 ARM-local peripherals](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2836/QA7_rev3.4.pdf) manual local interrupt controller handles 10 different interrupts: 0 - 3 are interrupts from local timer, 4 - 7 are mailbox interrupts, which are used in interprocess communication, 8 corresponds to all interrupts generated by the global interrupt controller and interrupt 9 is a performance monitor interrupt. [Here](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L67) you can see that the driver defines a set of constants that holds hardware irq number per each interrupt. The registration code above registers all interrupts, except mailbox interrupts, which are registered separately. In order to understand the registration code better lets examine [bcm2836_arm_irqchip_register_irq](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L154) function.
 
 ```
 static void bcm2836_arm_irqchip_register_irq(int hwirq, struct irq_chip *chip)
@@ -129,11 +129,11 @@ The first line here performs actual interrupt registration. [irq_create_mapping]
 
 [irq_set_percpu_devid](https://github.com/torvalds/linux/blob/v4.14/kernel/irq/irqdesc.c#L849) configures interrupt as "per CPU", so that it will be handled only on the current CPU. This makes perfect sense because all interrupts that we are discussing now are local and they all can be handled only on the current CPU.
 
-[irq_set_chip_and_handler](https://github.com/torvalds/linux/blob/v4.14/include/linux/irq.h#L608), as its name suggest, sets irq chip and irq handler. Irq chip is a special struct, wich needs to be created by the driver, that has methods for masking and unmasking a particular interrupt. The driver that we are examining right now defines 3 different irq chips: [timer](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L118) chip, [PMU](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L134) chip and [GPU](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L148) chip, which controls all interrupts generated by the external peripheral devices. Handler is a function that is responsible for processing an interrupt. In this case, the handler is set to generic [handle_percpu_devid_irq](https://github.com/torvalds/linux/blob/v4.14/kernel/irq/chip.c#L859) function that passes the execution to a child interrupt controller (more on this later). 
+[irq_set_chip_and_handler](https://github.com/torvalds/linux/blob/v4.14/include/linux/irq.h#L608), as its name suggest, sets irq chip and irq handler. Irq chip is a special struct, wich needs to be created by the driver, that has methods for masking and unmasking a particular interrupt. The driver that we are examining right now defines 3 different irq chips: [timer](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L118) chip, [PMU](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L134) chip and [GPU](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L148) chip, which controls all interrupts generated by the external peripheral devices. Handler is a function that is responsible for processing an interrupt. In this case, the handler is set to generic [handle_percpu_devid_irq](https://github.com/torvalds/linux/blob/v4.14/kernel/irq/chip.c#L859) function. This handler later will be rewritten by the global interrupt controller driver. 
 
-[irq_set_chip_and_handler](https://github.com/torvalds/linux/blob/v4.14/include/linux/irq.h#L652) in this particular case sets a flag, indicating that the current interrupt should be enabled manually and should not be enabled by default.
+[irq_set_status_flags](https://github.com/torvalds/linux/blob/v4.14/include/linux/irq.h#L652) in this particular case sets a flag, indicating that the current interrupt should be enabled manually and should not be enabled by default.
 
-Going back to the `handle_percpu_devid_irq` function, there are only 2 function calls left. The first one is [bcm2836_arm_irqchip_smp_init](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L243). Here mailbox interrupts are enabled allowing, processors cores to communicate with each other. 
+Going back to the `bcm2836_arm_irqchip_l1_intc_of_init` function, there are only 2 calls left. The first one is [bcm2836_arm_irqchip_smp_init](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L243). Here mailbox interrupts are enabled allowing, processors cores to communicate with each other. 
 
 The last function call is extremely important - this is the place were low-level exception handling code is connected to the driver.
 
@@ -141,7 +141,7 @@ The last function call is extremely important - this is the place were low-level
     set_handle_irq(bcm2836_arm_irqchip_handle_irq);
 ``` 
 
-[set_handle_irq](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/irq.c#L46) is defined in architecture specific code and we already encountered this function. From the line above we can understand that [bcm2836_arm_irqchip_handle_irq]()https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L164 will be called by the low-level exception code. The function itself is listed below.
+[set_handle_irq](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/irq.c#L46) is defined in architecture specific code and we already encountered this function. From the line above we can understand that [bcm2836_arm_irqchip_handle_irq](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L164) will be called by the low-level exception code. The function itself is listed below.
 
 ```
 static void
@@ -177,11 +177,60 @@ This function reads `LOCAL_IRQ_PENDING` register to figure out what interrupts a
         handle_domain_irq(intc.domain, hwirq, regs);
 ```
 
-This is were interrupt is passed to the next handler. First of all hardware irq number is calculated. [ffs](https://github.com/torvalds/linux/blob/v4.14/include/asm-generic/bitops/ffs.h#L13) (Find first bit) function is used to do this. After hardware irq number is calculated [handle_domain_irq](https://github.com/torvalds/linux/blob/v4.14/kernel/irq/irqdesc.c#L622) function is called. This function uses irq domain to translate hardware irq number to Linux irq number, then checks irq configuration (it is stored in [irq_desc](https://github.com/torvalds/linux/blob/v4.14/include/linux/irqdesc.h#L55) struct) and calls previously registered interrupt handler. In our case this handler is [handle_percpu_devid_irq](https://github.com/torvalds/linux/blob/v4.14/kernel/irq/chip.c#L859). You can probably guess that at this point work should be somehow passed to the global interrupt controller, but examining the source code of `handle_percpu_devid_irq` gives us no clues. This handler just passes execution to the [action](https://github.com/torvalds/linux/blob/v4.14/include/linux/irqdesc.h#L63) field of `irq_desc` struct. But where the `action` field is set? You might guess that driver corresponding to the global irq controller should somehow do this. And that is something we are going to explore in the next section.
+This is were interrupt is passed to the next handler. First of all hardware irq number is calculated. [ffs](https://github.com/torvalds/linux/blob/v4.14/include/asm-generic/bitops/ffs.h#L13) (Find first bit) function is used to do this. After hardware irq number is calculated [handle_domain_irq](https://github.com/torvalds/linux/blob/v4.14/kernel/irq/irqdesc.c#L622) function is called. This function uses irq domain to translate hardware irq number to Linux irq number, then checks irq configuration (it is stored in [irq_desc](https://github.com/torvalds/linux/blob/v4.14/include/linux/irqdesc.h#L55) struct) and calls an interrupt handler. We've seen that the handler was set to [handle_percpu_devid_irq](https://github.com/torvalds/linux/blob/v4.14/kernel/irq/chip.c#L859). However, this handler will be overwritten by the child interrupt controller later. Now, let's examine how this happens. 
 
 ### Generic interrupt controller 
 
 We have already seen how to use device tree and `compatible` property to find the driver corresponding to some device, so I am going to skip this part and jump straight to the generic interrupt controller driver source code. You can find it in [irq-bcm2835.c](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2835.c) file. As usual, we are going to start our exploration with the initialization function. It is called [armctrl_of_init](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2835.c#L141).  
+
+```
+static int __init armctrl_of_init(struct device_node *node,
+				  struct device_node *parent,
+				  bool is_2836)
+{
+	void __iomem *base;
+	int irq, b, i;
+
+	base = of_iomap(node, 0);
+	if (!base)
+		panic("%pOF: unable to map IC registers\n", node);
+
+	intc.domain = irq_domain_add_linear(node, MAKE_HWIRQ(NR_BANKS, 0),
+			&armctrl_ops, NULL);
+	if (!intc.domain)
+		panic("%pOF: unable to create IRQ domain\n", node);
+
+	for (b = 0; b < NR_BANKS; b++) {
+		intc.pending[b] = base + reg_pending[b];
+		intc.enable[b] = base + reg_enable[b];
+		intc.disable[b] = base + reg_disable[b];
+
+		for (i = 0; i < bank_irqs[b]; i++) {
+			irq = irq_create_mapping(intc.domain, MAKE_HWIRQ(b, i));
+			BUG_ON(irq <= 0);
+			irq_set_chip_and_handler(irq, &armctrl_chip,
+				handle_level_irq);
+			irq_set_probe(irq);
+		}
+	}
+
+	if (is_2836) {
+		int parent_irq = irq_of_parse_and_map(node, 0);
+
+		if (!parent_irq) {
+			panic("%pOF: unable to get parent interrupt.\n",
+			      node);
+		}
+		irq_set_chained_handler(parent_irq, bcm2836_chained_handle_irq);
+	} else {
+		set_handle_irq(bcm2835_handle_irq);
+	}
+
+	return 0;
+}
+```
+
+Now, let's investigate this function in more details.
 
 ```
     void __iomem *base;
@@ -198,7 +247,7 @@ We have already seen how to use device tree and `compatible` property to find th
 
 ```
 
-The function starts with the code that reads device base address from the device three and initializes an irq domain. This part should be already familiar to you because we have seen similar code in the local irq controller driver.
+The function starts with the code that reads device base address from the device three and initializes the irq domain. This part should be already familiar to you because we have seen similar code in the local irq controller driver.
 
 ```
     for (b = 0; b < NR_BANKS; b++) {
@@ -225,7 +274,7 @@ We already saw how the same functions are used in the local interrupt controller
 
 * [MAKE_HWIRQ](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2835.c#L57) macro is used to calculate hardware irq number. It is calculated based on bank index and irq index inside the bank.
 * [handle_level_irq](https://github.com/torvalds/linux/blob/v4.14/kernel/irq/chip.c#L603) is a common handler that is used for interrupts of the level type. Interrupts of such type keep interrupt line set to "high" until the interrupt is acknowledged. There are also edge type interrupts that works in a different way.
-* [irq_set_probe](https://github.com/torvalds/linux/blob/v4.14/include/linux/irq.h#L667) function just unsets [IRQ_NOPROBE](https://github.com/torvalds/linux/blob/v4.14/include/linux/irq.h#L64) interrupt flag, effectively enabling interrupt auto probing. Interrupt auto-probing is a process that allows different drivers to discover which interrupt line their corresponding devices are connected to. This is not needed for Raspberry Pi, because this information is encoded in the device tree, however, for some devices, this might be useful. Please, refer to [this](https://github.com/torvalds/linux/blob/v4.14/include/linux/interrupt.h#L662) comment to understand how auto-probing works in the Linux kernel.
+* [irq_set_probe](https://github.com/torvalds/linux/blob/v4.14/include/linux/irq.h#L667) function just unsets [IRQ_NOPROBE](https://github.com/torvalds/linux/blob/v4.14/include/linux/irq.h#L64) interrupt flag, effectively disabling interrupt auto-probing. Interrupt auto-probing is a process that allows different drivers to discover which interrupt line their devices are connected to. This is not needed for Raspberry Pi, because this information is encoded in the device tree, however, for some devices, this might be useful. Please, refer to [this](https://github.com/torvalds/linux/blob/v4.14/include/linux/interrupt.h#L662) comment to understand how auto-probing works in the Linux kernel.
 
 Next piece of code is different for BCM2836 and BCM2835 interrupt controllers (the first one corresponds to the RPi models 2 and 3, and the second one to RPi Model 1).  If we are dealing with BCM2836 the following code is executed.
 
@@ -253,5 +302,5 @@ static void bcm2836_chained_handle_irq(struct irq_desc *desc)
 }
 ```
 
-You can think about this code as an advanced version of what we did [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/irq.c#L39) for the RPi OS.[get_next_armctrl_hwirq](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2835.c#L217) uses all 3 pending registers to figure out which interrupt was fired. [irq_linear_revmap](https://github.com/torvalds/linux/blob/v4.14/include/linux/irqdomain.h#L377) uses irq domain to translate hardware irq number into Linux irq number and [generic_handle_irq](https://github.com/torvalds/linux/blob/v4.14/include/linux/irqdesc.h#L156) just executes irq handler. Irq handler was set in the initialization function and it points to [handle_level_irq](https://github.com/torvalds/linux/blob/v4.14/kernel/irq/chip.c#L603) that eventually executes all irq actions associated with the interrupt (this is actually done [here](https://github.com/torvalds/linux/blob/v4.14/kernel/irq/handle.c#L135)). For now, the list of irq actions is empty for all supported interrupts - a driver that is interested in handling some interrupt should add an action to the appropriate list. In the next chapter, we are going to see how this works using system timer as an example.
+You can think about this code as an advanced version of what we did [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/irq.c#L39) for the RPi OS. [get_next_armctrl_hwirq](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2835.c#L217) uses all 3 pending registers to figure out which interrupt was fired. [irq_linear_revmap](https://github.com/torvalds/linux/blob/v4.14/include/linux/irqdomain.h#L377) uses irq domain to translate hardware irq number into Linux irq number and [generic_handle_irq](https://github.com/torvalds/linux/blob/v4.14/include/linux/irqdesc.h#L156) just executes irq handler. Irq handler was set in the initialization function and it points to [handle_level_irq](https://github.com/torvalds/linux/blob/v4.14/kernel/irq/chip.c#L603) that eventually executes all irq actions associated with the interrupt (this is actually done [here](https://github.com/torvalds/linux/blob/v4.14/kernel/irq/handle.c#L135)). For now, the list of irq actions is empty for all supported interrupts - a driver that is interested in handling some interrupt should add an action to the appropriate list. In the next chapter, we are going to see how this is done using system timer as an example.
 
