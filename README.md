@@ -32,7 +32,7 @@ For more information about project goals and history, please read the [Introduct
 * **Lesson 4: Process scheduler**
   * 4.1 [RPi OS](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson04/rpi-os.md) 
   * Linux
-    * 4.2 [Basic scheduler structures](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson04/linux/basic_structures.md)
+    * 4.2 [Scheduler basic structures](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson04/linux/basic_structures.md)
     * 4.3 [Forking a task](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson04/linux/fork.md)
     * 4.4 [Scheduler](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson04/linux/scheduler.md)
   * 4.5 [Exercises]()

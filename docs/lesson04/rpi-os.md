@@ -1,6 +1,6 @@
 ## 4.1: Scheduler 
 
-By now the PRi OS is already a fairly complicated bare metal program, but to be honest, we still can't call it an operating system. The reason is that it can't do any of the core tasks that any OS should do. One of such core tasks is called process scheduling. By scheduling I mean that an operating system should be able to share CPU time between different processes. The hard part of it is that a process should be unaware of the scheduling happening - it should view itself as the only one occupying the CPU. In this lesson, we are going to add this functionality to the RPi OS.
+By now, the PRi OS is already a fairly complicated bare metal program, but to be honest, we still can't call it an operating system. The reason is that it can't do any of the core tasks that any OS should do. One of such core tasks is called process scheduling. By scheduling I mean that an operating system should be able to share CPU time between different processes. The hard part of it is that a process should be unaware of the scheduling happening: it should view itself as the only one occupying the CPU. In this lesson, we are going to add this functionality to the RPi OS.
 
 ### task_struct
 
@@ -35,7 +35,7 @@ struct task_struct {
 This struct has the following members:
 
 * `cpu_context` This is an embedded structure that contains values of all registers that might be different between the tasks, that are being switched. A reasonable question to ask is why do we save not all registers, but only registers `x19 - x30` and `sp`? (`fp` is `x29` and `pc` is `x30`) The answer is that actual context switch happens only when a task calls [cpu_switch_to](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.S#L4) function. So, from the point of view of the task that is being switched, it just calls `cpu_switch_to` function and it returns after some (potentially long) time. The task doesn't notice that another task happens to runs during this period.  Accordingly to ARM calling conventions registers `x0 - x18` can be overwritten by the called function, so the caller must not assume that the values of those registers will survive after a function call. That's why it doesn't make sense to save `x0 - x18` registers.
-* `state` This is the state of the currently running task. For tasks that are just doing some work on CPU the state would always be [TASK_RUNNING](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/include/sched.h#L15). Actually, this is the only state that the RPi OS is going to support for now. However, later we will have to add a few additional states. For example, a task that is waiting for an interrupt should be moved to a different state, because it doesn't make sense to awaken the task while the required interrupt hasn't yet happened.
+* `state` This is the state of the currently running task. For tasks that are just doing some work on the CPU the state will always be [TASK_RUNNING](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/include/sched.h#L15). Actually, this is the only state that the RPi OS is going to support for now. However, later we will have to add a few additional states. For example, a task that is waiting for an interrupt should be moved to a different state, because it doesn't make sense to awake the task while the required interrupt hasn't yet happened.
 * `counter` This field is used to determine how long the current task has been running. `counter` decreases by 1 each timer tick and when it reaches 0 another task is scheduled.
 * `priority`  When a new task is scheduled its `priority` is copied to `counter`. By setting tasks priority, we can regulate the amount of processor time that the task gets relative to other tasks.
 * `preempt_count` If this field has a non-zero value it is an indicator that right now the current task is executing some critical function that must not be interrupted (for example, it runs the scheduling function) If timer tick occurs at such time it is ignored and rescheduling is not triggered.
@@ -44,11 +44,11 @@ After the kernel startup, there is only one task running: the one that runs [ker
 
 All tasks are stored in [task](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/include/sched.h#L53) array. This array has only 64 slots - that is the maximum number of simultaneous tasks that we can have in the RPi OS. It is definitely not the best solution for the production-ready OS, but it is ok for our goals.
 
-There is also a very important variable called [current](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L6) that always points to the currently executing task. Both `current` and `task` array are initially set to a pointer to the init task. There is also a global variable called [nr_tasks](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L8) - it contains the number of currently running tasks in the system.
+There is also a very important variable called [current](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L6) that always points to the currently executing task. Both `current` and `task` array are initially set to hold a pointer to the init task. There is also a global variable called [nr_tasks](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L8) - it contains the number of currently running tasks in the system.
 
-That are all structures and global variables that we are going to use to implement the scheduler functionality. In the description of the `task_struct` I already briefly mentioned some aspects of how scheduling works, because it is impossible to understand the meaning and purpose of a particular `task_struct` field without understanding how this field is used. Now we are going to examine the scheduling algorithm in much more details and we will start with the main function.
+Those are all structures and global variables that we are going to use to implement the scheduler functionality. In the description of the `task_struct` I already briefly mentioned some aspects of how scheduling works, because it is impossible to understand the meaning of a particular `task_struct` field without understanding how this field is used. Now we are going to examine the scheduling algorithm in much more details and we will start with the `kernel_main` function.
 
-### Kernel main function
+### `kernel_main` function
 
 Before we dig into the scheduler implementation, I want to quickly show you how we are going to prove that the scheduler actually works. To understand it, you need to take a look at the [kernel.c](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/kernel.c) file. Let me copy the relevant content here.
 
@@ -98,7 +98,7 @@ void process(char *array)
 }
 ``` 
 
-It just keeps printing on the screen characters from the array, that is passed as an argument The first time it is called with the argument "12345" and second time the argument is "abcde". If our scheduler implementation is correct, we should see on the screen mixed output from both functions. 
+It just keeps printing on the screen characters from the array, that is passed as an argument The first time it is called with the argument "12345" and second time the argument is "abcde". If our scheduler implementation is correct, we should see on the screen mixed output from both threads. 
 
 ### Memory allocation
 
@@ -199,7 +199,9 @@ ret_from_fork:
     blr    x19         //should never return
 ```
 
-As you can see `ret_from_fork` first call [schedule_tail](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L65), which just enabled preemption, and then it calls the function stored in `x19` register with the argument stored in `x20`. `x19` and `x20` are restored from the `cpu_context` just before `ret_from_fork` function is called. Now, let's go back to the `copy_process`.
+As you can see `ret_from_fork` first call [schedule_tail](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L65), which just enabled preemption, and then it calls the function stored in `x19` register with the argument stored in `x20`. `x19` and `x20` are restored from the `cpu_context` just before `ret_from_fork` function is called. 
+
+Now, let's go back to `copy_process`.
 
 ```
     int pid = nr_tasks++;
@@ -214,7 +216,7 @@ An important thing to understand about the `copu_process` function is that after
 
 ### Who calls `schedule`?
 
-Before we get into the details of the `schedule` function lets first figure out how `schedule` is called. There are 2 scenarios.
+Before we get into the details of the `schedule` function, lets first figure out how `schedule` is called. There are 2 scenarios.
 
 1. When some task doesn't have anything to do right now, but it nevertheless can't be terminated, it can call `schedule` voluntarily. That is something `kernel_main` function does.
 1. `schedule` is also called on a regular basis from the [timer interrupt handler](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/timer.c#L21).
@@ -234,7 +236,7 @@ void timer_tick()
     disable_irq();
 ```
 
-First of all, it decreases current task's counter. If the counter is greater then 0 or preemption is currently disabled the function returns, but otherwise`schedule` is called with interrupts enabled. (We are inside an interrupt handler, in interrupts are disabled by default) We will see why interrupts must be enabled during scheduler execution in the next section. 
+First of all, it decreases current task's counter. If the counter is greater then 0 or preemption is currently disabled the function returns, but otherwise`schedule` is called with interrupts enabled. (We are inside an interrupt handler, and interrupts are disabled by default) We will see why interrupts must be enabled during scheduler execution in the next section. 
 
 ### Scheduling algorithm
 
@@ -280,7 +282,7 @@ The algorithm works like the following:
 
 * Then the process is repeated. If there are at least one task in `TASK_RUNNIG` state, the second iteration of the outer `while` loop will be the last one because after the first iteration all counters are already non-zero. However, if no `TASK_RUNNING` tasks are there, the process is repeated over and over again until some of the tasks will move to `TASK_RUNNING` state. But if we are running on a single CPU, how then a task state can change while this loop is running? The answer is that if some task is waiting for an interrupt, this interrupt can happen while `schedule` function is executed and interrupt handler can change the state of the task. This actually explains why interrupts must be enabled during `schedule` execution. This also demonstrates an important distinction between disabling interrupts and disabling preemption. `schedule` disables preemption for the duration of the whole function. This ensures that nester` schedule` will not be called while we are in the middle of the original function execution. However, interrupts can legally happen during `schedule` function execution.
 
-I paid a lot of attention to the situation were some task is waiting for an interrupt, though this functionality isn't implemented in RPi OS yet. But I still consider it necessary to understand this case because it is a part of the core scheduler algorithm and similar functionality will be added later. 
+I paid a lot of attention to the situation were some task is waiting for an interrupt, though this functionality isn't implemented in the RPi OS yet. But I still consider it necessary to understand this case because it is a part of the core scheduler algorithm and similar functionality will be added later. 
 
 ### Switching tasks
 
@@ -362,7 +364,7 @@ Now `x10` contains an offset of the `cpu_context` structure inside `task_struct`
     mov    sp, x9
 ```
 
-Callee saved registers are restored from next `cpu_context`.
+Callee saved registers are restored from the next `cpu_context`.
 
 ```
     ret
@@ -437,7 +439,7 @@ We have already examined all source code related to the context switch. However,
     ```
 1. `kernel_main` volantirely calls [schedule](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L21) function and it desides to run task 1.
 1. [cpu_switch_to](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.S#L4) saves calee-saved registers in the init task `cpu_context`, wich is located inside the kernel image.
-1 `cpu_switch_to` restores calee-saved registers from task 1 `cpu_context`. `sp` now points to `0x00401000`, link register to [ret_from_fork](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L146) function, `x19` contains a pointer to [process](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/kernel.c#L9) function and `x20` a pointer to string "12345", wich is located somewhere in the kernel image.
+1. `cpu_switch_to` restores calee-saved registers from task 1 `cpu_context`. `sp` now points to `0x00401000`, link register to [ret_from_fork](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L146) function, `x19` contains a pointer to [process](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/kernel.c#L9) function and `x20` a pointer to string "12345", wich is located somewhere in the kernel image.
 1. `cpu_switch_to` calls `ret` instruction, which jums to the `ret_from_fork` function.
 1. `ret_from_fork` reads `x19` and `x20` registers and  calls `process` function with the argument "12345". After `process` function starts to execute it stack begins to grow.
     ```
@@ -491,7 +493,7 @@ We have already examined all source code related to the context switch. However,
                | device registers       |
     0x40000000 +------------------------+
     ```
-1. `schedule` is called and it decides to run task 2. Task 1 stack continues to grow below task 1 saved registers region. On the diagram, this part of the stack is marked as (int), which means "interrupt stack"
+1. `schedule` is called and it decides to run task 2. But we still run task 1 and its stack continues to grow below task 1 saved registers region. On the diagram, this part of the stack is marked as (int), which means "interrupt stack"
     ```
              0 +------------------------+
                | kernel image           |
@@ -587,7 +589,7 @@ We have already examined all source code related to the context switch. However,
     0x40000000 +------------------------+
     ```
 1. `schedule` is called. It observes that all tasks have their counters set to 0 and set counters to their tasks priorities.
-1. `schedule` selects init task to run. (This is because all tasks now have their counters set to 1 and init task is the first in the list). But actually, it would be fully legal for `schedule` to select task 1 or task 2 at this point, because their counters are counters has equal values. We are more interested in the case when task 1 is selected so let's now assume that this is what had happened.
+1. `schedule` selects init task to run. (This is because all tasks now have their counters set to 1 and init task is the first in the list). But actually, it would be fully legal for `schedule` to select task 1 or task 2 at this point, because their counters has equal values. We are more interested in the case when task 1 is selected so let's now assume that this is what had happened.
 1. `cpu_switch_to` is called and it restores previously saved callee-saved registers from task 1 `cpu_context`. Link register now points [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L63) because this is the place from which `cpu_switch_to` was called last time when task 1 was executed. `sp` points to the bottom of task 1 interrupt stack. 
 1. `timer_tick` function resumes execution, starting from [this](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L79) line. It disables interrupts and finally [kernel_exit](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L79) is executed. By the time `kernel_exit` is called, task 1 interrupt stack is collapsed to 0.
     ```
@@ -659,5 +661,5 @@ The described above sequence of steps is very important - I personally consider 
 
 ### Conclusion
 
-We are done with scheduling, but right now our kernel can manage only kernel processes: they executed at EL1 and can directly access any kernel functions or data. In the next 2 lessons we are going fix this and introduce system calls and virtual memory..
+We are done with scheduling, but right now our kernel can manage only kernel threads: they are executed at EL1 and can directly access any kernel functions or data. In the next 2 lessons we are going fix this and introduce system calls and virtual memory.
 
