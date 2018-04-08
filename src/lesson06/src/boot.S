@@ -54,11 +54,11 @@ el1_entry:
 	msr	mair_el1, x0
 
 
+	ldr	x2, =kernel_main
 
 	mov	x0, #SCTLR_MMU_ENABLED				
 	msr	sctlr_el1, x0
 
-	ldr	x2, =kernel_main
 	br 	x2
 
 	.macro	create_pgd_entry, tbl, virt, tmp1, tmp2

@@ -335,18 +335,16 @@ We are updating init task stack pointer. Now it uses virtuall address, instead o
 We already discussed `mair` register in the "Configuring page attributes" section. Here we just set its value. 
 
 ```
+	ldr	x2, =kernel_main
+
 	mov	x0, #SCTLR_MMU_ENABLED				
 	msr	sctlr_el1, x0
-```
 
-This is the place were MMU is actually enabled. 
-
-```
-	ldr	x2, =kernel_main
 	br 	x2
 ```
 
-Now we can jump the the `kernel_main` function. An interesting question is why can't we just execute `br kernel_main` instruction? Indeed, we can't. Before the MMU was enabled we have been working with physical memory, the kernel is loaded at a physical offset 0 - this means that current program counter is very clse to 0. Switching on the MMU doesn't update the programm counter. If we now execute `br kernel_main` instruction, this instruction will use offset relative to the current programm counter and jumps to the place were `kernel_main` would have been if we don't turn on the MMU. `ldr	x2, =kernel_main` on the other hand loads `x2` with the absolute address of the `kernel_main` function. Because of the fact that we  set image base address to `0xffff000000000000` in the linker script, absolute address of the `kernel_main` function will be calculate as offset of thie function from the beggining of the image plus `0xffff000000000000` - wich is exactly what we need.
+`msr	sctlr_el1, x0` is the line were MMU is actually enabled. Now we can jump the the `kernel_main` function. An interesting question is why can't we just execute `br kernel_main` instruction? Indeed, we can't. Before the MMU was enabled we have been working with physical memory, the kernel is loaded at a physical offset 0 - this means that current program counter is very clse to 0. Switching on the MMU doesn't update the programm counter. If we now execute `br kernel_main` instruction, this instruction will use offset relative to the current programm counter and jumps to the place were `kernel_main` would have been if we don't turn on the MMU. `ldr	x2, =kernel_main` on the other hand loads `x2` with the absolute address of the `kernel_main` function. Because of the fact that we  set image base address to `0xffff000000000000` in the linker script, absolute address of the `kernel_main` function will be calculate as offset of thie function from the beggining of the image plus `0xffff000000000000` - wich is exactly what we need.
+Another important thing that you need to understand is why `ldr	x2, =kernel_main` instruction must be executed before we turn on the MMU. The reason is that `ldr` uses `pc` relative offset, so if we try to execute this instruction after MMU is on but before we jump to the image base address, the instruction will generate a page fault.
 
 ### Allocating user processes
 
