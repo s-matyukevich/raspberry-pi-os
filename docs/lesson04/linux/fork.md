@@ -2,13 +2,13 @@
 
 Scheduling is all about selecting a proper task to run from the list of available tasks. But before the scheduler will be able to do its job we need to somehow fill this list. The way in which new tasks can be created is the main topic of this chapter. 
 
-For now, we want to focus only on kernel threads and postpone the discussion of user-mode functionality till the next lesson. However, not everywhere it would be possible, so be prepared to learn a little bit about executing tasks in user mode as well.
+For now, we want to focus only on kernel threads and postpone the discussion of user-mode functionality till the next lesson. However, not everywhere it will be possible, so be prepared to learn a little bit about executing tasks in user mode as well.
 
 ### Init task
 
 When the kernel is started there is a single task running: init task. The corresponding `task_struct` is defined [here](https://github.com/torvalds/linux/blob/v4.14/init/init_task.c#L20) and is initialized by [INIT_TASK](https://github.com/torvalds/linux/blob/v4.14/include/linux/init_task.h#L226) macro. This task is critical for the system because all other tasks in the system are derived from it.
 
-### Creating new kernel threads
+### Creating new tasks 
 
 In Linux it is not possible to create a new task from scratch - instead, all tasks are forked from a currently running task. Now, as we've seen from were the initial task came from, we can try to explore how new tasks can be created from it. 
 
@@ -23,7 +23,7 @@ All of the above functions calls [_do_fork](https://github.com/torvalds/linux/bl
 
 * `clone_flags` Flags are used to configure fork behavior. The complete list of the flags can be found [here](https://github.com/torvalds/linux/blob/v4.14/include/uapi/linux/sched.h#L8)
 * `stack_start` In case of `clone` syscall this parameter indicates the location of the user stack for the new task. If 'kernel_thread' calls `_do_fork` this parameter points to the function that needs to be executed in a kernel thread.
-* `stack_size` In `arm64` architecture this parameter is only used in `kernel_thread` case - it is a pointer to the argument that needs to be passed to the kernel thread function. (And yes, I also find the naming of the last two parameters misleading)
+* `stack_size` In `arm64` architecture this parameter is only used in the case when `_do_fork` is called by `kernel_thread. It is a pointer to the argument that needs to be passed to the kernel thread function. (And yes, I also find the naming of the last two parameters misleading)
 * `parent_tidptr` `child_tidptr` Those 2 parameters are used only in `clone` syscall. Fork will store the child thread ID at the location `parent_tidptr` in the parent's memory, or it can store parent's ID at `child_tidptr`location.
 * `tls`  [Thread Local Storage](https://en.wikipedia.org/wiki/Thread-local_storage)
 
@@ -40,7 +40,7 @@ Next, I want to highlight the most important events that take place during `_do_
 1. A lot of different properties, such as information about filesystems, open files, virtual memory, signals, namespaces, are either reused or copied from the current task. The decision whether to copy something or reuse current property is usually made based on the `clone_flags` parameter. [link](https://github.com/torvalds/linux/blob/v4.14/kernel/fork.c#L1731-L1765)
 1. [copy_thread_tls](https://github.com/torvalds/linux/blob/v4.14/kernel/fork.c#L1766) is called which in turn calls architecture specific [copy_thread](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/process.c#L254) function. This function deserves a special attention because it works as a prototype for the [copy_process](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/fork.c#L5) function in the RPi OS, and I want to investigate it deeper.
 
-### copy_process
+### copy_thread
 
 The whole function is listed below.
 
