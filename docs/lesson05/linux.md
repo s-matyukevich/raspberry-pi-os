@@ -1,4 +1,4 @@
-## 4.2: User processes and system calls 
+## 5.2: User processes and system calls 
 
 This chapter is going to be a short one. The reason is that I copied syscall implementation from Linux to RPi OS almost precisely, therefore it doesn't require a lot of explanations. But still I want to guide you through the Linux source code so that you can see where and how a particular syscall functionality is implemented.
 
@@ -6,7 +6,7 @@ This chapter is going to be a short one. The reason is that I copied syscall imp
 
 The first question we are going to tackle is how the first user process is created.  A good place to start looking for the answer is [start_kernel](https://github.com/torvalds/linux/blob/v4.14/init/main.c#L509) function - as we've seen previously, this is the first architecture independent function that is called early in the kernel boot process. This is where the kernel initialization begins, and it would make sense to run the first user process during kernel initialization.
 
-An indeed, if you follow the logic of `start_kernel` you will soon discover kernel_init(https://github.com/torvalds/linux/blob/v4.14/init/main.c#L989) function that has the following code.
+An indeed, if you follow the logic of `start_kernel` you will soon discover [kernel_init](https://github.com/torvalds/linux/blob/v4.14/init/main.c#L989) function that has the following code.
 
 ```
     if (!try_to_run_init_process("/sbin/init") ||
@@ -37,7 +37,7 @@ static inline void start_thread(struct pt_regs *regs, unsigned long pc,
 }
 ```
 
-By the time when `start_thread` is executed, the current process operates in the kernel mode. `start_thred` is given access to the current `pt_regs` struct, which is used to set saved `pstate`, `sp` and `pc` fields. The logic here is exactly the same as in the RPi OS `move_to_user_mode` function`, so I don't want to repeat it one more time. An important thing to remember is that `start_thread` prepares saved processor state in such a way, that `kernel_exit` macro will eventually move the process to user mode.
+By the time when `start_thread` is executed, the current process operates in the kernel mode. `start_thred` is given access to the current `pt_regs` struct, which is used to set saved `pstate`, `sp` and `pc` fields. The logic here is exactly the same as in the RPi OS `move_to_user_mode` function, so I don't want to repeat it one more time. An important thing to remember is that `start_thread` prepares saved processor state in such a way, that `kernel_exit` macro will eventually move the process to user mode.
 
 ###  Linux syscalls
 
@@ -65,13 +65,13 @@ void * const sys_call_table[__NR_syscalls] __aligned(4096) = {
 };
 ``` 
 
-All syscalls are initially allocated to point to `sys_ni_syscall` function ("ni" here means "non-existent"). Syscall with number `0` and all syscalls that aren't defined for the current architecture will keep this handler. All other syscall handlers in the `sys_call_table` array are rewritten in the [asm/unistd.h](https://github.com/torvalds/linux/blob/v4.14/include/uapi/asm-generic/unistd.h) header file. As you might see this file simply provide a mapping between syscall number and syscall handler function.
+All syscalls are initially allocated to point to `sys_ni_syscall` function ("ni" here means "non-existent"). Syscall with number `0` and all syscalls that aren't defined for the current architecture will keep this handler. All other syscall handlers in the `sys_call_table` array are rewritten in the [asm/unistd.h](https://github.com/torvalds/linux/blob/v4.14/include/uapi/asm-generic/unistd.h) header file. As you might see, this file simply provide a mapping between syscall number and syscall handler function.
 
 ### Low-level syscall handling code
 
 Ok, we've seen how `sys_call_table` is created and populated, now it is time to investigate how it is used by the low-level syscall handling code. And once again the basic mechanism here will be almost exactly the same as in the RPi OS. 
 
-We know that any syscall is a synchronous exception and all exception handlers are defined in the exception vector table (it is our favorite [vectors](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L367) array) Hhe handler that we are interested in should be the one that handles synchronous exceptions generated at EL0. All of this makes it trivial to find the right handler, it is called [el0_sync](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L598) and looks like the following.
+We know that any syscall is a synchronous exception and all exception handlers are defined in the exception vector table (it is our favorite [vectors](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L367) array) The handler that we are interested in should be the one that handles synchronous exceptions generated at EL0. All of this makes it trivial to find the right handler, it is called [el0_sync](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L598) and looks like the following.
 
 ```
 el0_sync:
@@ -101,7 +101,7 @@ el0_sync:
     b    el0_inv
 ```
 
-Here `esr_el1` (exception syndrome register) is used to figure out whether the current exception is caused by the `svc` instruction and it is, therefore, a system call. If this is the case [el0_svc](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L837) function is called. This function is listed below.
+Here `esr_el1` (exception syndrome register) is used to figure out whether the current exception is a system call. If this is the case [el0_svc](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L837) function is called. This function is listed below.
 
 ```
 el0_svc:
@@ -179,7 +179,7 @@ If current syscall number is greater then total syscall count an error is return
     b    ret_fast_syscall
 ```
 
-Syscall number is used as an index in the syscall table array in order to find the handler. Then handler address is loaded into `x16` register and it is executed. Finally `ret_fast_syscall` function is called. 
+Syscall number is used as an index in the syscall table array to find the handler. Then handler address is loaded into `x16` register and it is executed. Finally `ret_fast_syscall` function is called. 
 
 ```
 ret_fast_syscall:
@@ -193,9 +193,9 @@ ret_fast_syscall:
     enable_step_tsk x1, x2
     kernel_exit 0
 ```
-The important things here are the first line, were interrupts are disabled, and the last line, were `kernel_exit` is called - everything else is related to special case processing. So as you might guess this is the place were system call actually finishes and execution is transfered to user process.
+The important things here are the first line, were interrupts are disabled, and the last line, were `kernel_exit` is called - everything else is related to special case processing. So as you might guess this is the place where a system call actually finishes and execution is transfered to user process.
 
 ### Conclusion
 
-We've now gone through the process of generating and processing a system call. This process is relatively simple, but it is vital for the OS, because it allows the kernel to set up an API and make sure that this API is the means of communication between a user program and the kernel.
+We've now gone through the process of generating and processing a system call. This process is relatively simple, but it is vital for the OS, because it allows the kernel to set up an API and make sure that this API is the only mean of communication between a user program and the kernel.
 
