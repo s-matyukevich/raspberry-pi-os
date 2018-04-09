@@ -1,6 +1,6 @@
 ## 1.1: Introducing RPi OS, or bare metal "Hello, world!"
 
-We are going to start our journey to the OS development world by writing a small bare metal "Hello, world" application. I assume that at this time you have gone through the [Prerequisites](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Prerequisites.md) and have everything ready for the work. If not - now is the right time to do this.
+We are going to start our journey to the OS development world by writing a small bare metal "Hello, world" application. I assume that at this time you have gone through the [Prerequisites](docs/Prerequisites.md) and have everything ready for the work. If not - now is the right time to do this.
 
 Before we move forward, I want to establish a very simple naming convention. From the README you can see that the whole tutorial is divided into lessons. Each lesson in its turn consists of individual files that I call "chapters". (Right now, you are reding lesson 1, chapter 1.1) A chapter is further divided into "sections" by headers. This naming convention allows me to make references to different parts of the material.
 
@@ -475,7 +475,7 @@ Now, as we have gone through all source code, it is time to see how it works. To
 1. Execute `./build.sh` of `./build.bat` from [src/lesson01](https://github.com/s-matyukevich/raspberry-pi-os/tree/master/src/lesson01) in order to build the kernel. 
 1. Copy generated `kernel7.img` file to `boot` partition of your Raspberry Pi flash card.
 1. Modify `config.txt` file as was described in the previous section.
-1. Connect USB to TTL serial cable as was described in the [Prerequsities](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/Prerequisites.md)
+1. Connect USB to TTL serial cable as was described in the [Prerequsities](docs/Prerequisites.md)
 1. Power on your Raspberry PI (This can be done using the same USB to TTL serial cable)
 1. Open your terminal emulator. You should be able to see `Hello, world!` message there.
 
