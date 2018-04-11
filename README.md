@@ -6,7 +6,7 @@ Each lesson is designed in such a way that it first explains how some kernel fea
 
 For more information about project goals and history, please read the [Introduction](docs/Introduction.md). The project is still under active development, if you are willing to participate - please read the [Contribution guide](docs/Contributions.md).
 
-[![Follow @RPi_OS](images/rpi.png)](https://twitter.com/RPi_OS)
+[<img src="https://raw.githubusercontent.com/s-matyukevich/raspberry-pi-os/twitter/images/rpi.png" alt="Follow @RPi_OS" style="height: 20px">](http://google.com.au/)
 
 ## Table of Content
 
