@@ -214,14 +214,16 @@ After cleaning the `.bss` section we initialize stack pointer and pass execution
 
 For those of you who are not familiar with arm assembler syntax let me quickly summarize the instructions, that we have used.
 
-* **mrs**  Load value from a system register to one of the general purpose registers (x0 - x30)
-* **and** Perform logical AND operation. We use this command to strip the last two bytes from the value we obtain from `mpidr_el1` register.
-* **cbz** Compare the result of the previously executed operation to 0 and jump (or `branch` in arm terminology) to the provided label if the comparison yielded true.
-* **b** Perform an unconditional branch to some label.
-* **lrd** Load the address of some label in a general purpose register. 
-* **sub** Subtract values from two registers.
-* **bl** "Branch with a link" perform unconditional branch and store return address in x30 register. When called function execute `ret` instruction the value from `x30` register is used to jump back to the original location.
-* **mov** Moves some value between registers or from a constant to a register.
+* [**mrs**](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289881374.htm)  Load value from a system register to one of the general purpose registers (x0 - x30)
+* [**and**](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289863017.htm) Perform logical AND operation. We use this command to strip the last two bytes from the value we obtain from `mpidr_el1` register.
+* [**cbz**](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289867296.htm) Compare the result of the previously executed operation to 0 and jump (or `branch` in arm terminology) to the provided label if the comparison yielded true.
+* [**b**](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289863797.htm) Perform an unconditional branch to some label.
+* [**adr**](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289862147.htm) Load a label's relative address into the target register. In this case, we want pointers to the start and end of the `.bss` region.
+* [**sub**](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289908389.htm) Subtract values from two registers.
+* [**bl**](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289865686.htm) "Branch with a link": perform an unconditional branch and store the return address in x30 (the Link Register). When the subroutine is finished, use the `ret` instruction to jump back to the return address.
+* [**mov**](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289878994.htm) Moves some value between registers or from a constant to a register.
+
+[Here](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.den0024a/index.html) is the ARMv8-A developer's guide. It will be a good resource if the ARM ISA is unfamiliar. [This page](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.den0024a/ch09s01s01.html) specifically outlines the register usage convention in the ABI.
 
 ### `kernel_main` function
 
