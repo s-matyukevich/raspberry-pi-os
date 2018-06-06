@@ -477,7 +477,7 @@ Now, as we have gone through all source code, it is time to see how it works. To
 1. Execute `./build.sh` of `./build.bat` from [src/lesson01](https://github.com/s-matyukevich/raspberry-pi-os/tree/master/src/lesson01) in order to build the kernel. 
 1. Copy generated `kernel7.img` file to `boot` partition of your Raspberry Pi flash card.
 1. Modify `config.txt` file as was described in the previous section.
-1. Connect USB to TTL serial cable as was described in the [Prerequsities](docs/Prerequisites.md)
+1. Connect USB to TTL serial cable as was described in the [Prerequisites](../Prerequisites.md)
 1. Power on your Raspberry PI (This can be done using the same USB to TTL serial cable)
 1. Open your terminal emulator. You should be able to see `Hello, world!` message there.
 
