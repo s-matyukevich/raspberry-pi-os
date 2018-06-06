@@ -14,7 +14,7 @@ For more information about project goals and history, please read the [Introduct
 
 * **[Introduction](docs/Introduction.md)**
 * **[Contribution guide](docs/Contributions.md)**
-* **[Prerequsities](docs/Prerequisites.md)**
+* **[Prerequisites](docs/Prerequisites.md)**
 * **Lesson 1: Kernel Initialization** 
   * 1.1 [Introducing RPi OS, or bare metal "Hello, world!"](docs/lesson01/rpi-os.md)
   * Linux
