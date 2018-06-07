@@ -474,7 +474,7 @@ disable_commandline_tags=1
 
 Now, as we have gone through all source code, it is time to see how it works. To build and test the kernel you need to  do the following:
 
-1. Execute `./build.sh` of `./build.bat` from [src/lesson01](https://github.com/s-matyukevich/raspberry-pi-os/tree/master/src/lesson01) in order to build the kernel. 
+1. Execute `./build.sh` or `./build.bat` from [src/lesson01](https://github.com/s-matyukevich/raspberry-pi-os/tree/master/src/lesson01) in order to build the kernel. 
 1. Copy generated `kernel7.img` file to `boot` partition of your Raspberry Pi flash card.
 1. Modify `config.txt` file as was described in the previous section.
 1. Connect USB to TTL serial cable as was described in the [Prerequisites](../Prerequisites.md)
