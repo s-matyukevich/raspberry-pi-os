@@ -39,7 +39,7 @@ For more information about project goals and history, please read the [Introduct
     * 4.2 [Scheduler basic structures](docs/lesson04/linux/basic_structures.md)
     * 4.3 [Forking a task](docs/lesson04/linux/fork.md)
     * 4.4 [Scheduler](docs/lesson04/linux/scheduler.md)
-  * 4.5 [Exercises]()
+  * 4.5 [Exercises](docs/lesson04/exercises.md)
 * **Lesson 5: User processes and system calls** 
   * 5.1 [RPi OS](docs/lesson05/rpi-os.md) 
   * 5.2 [Linux](docs/lesson05/linux.md)
@@ -47,7 +47,7 @@ For more information about project goals and history, please read the [Introduct
 * **Lesson 6: Virtual memory management**
   * 6.1 [RPi OS](docs/lesson06/rpi-os.md) 
   * 6.2 Linux (In progress)
-  * 6.3 Exercises (In progress)
+  * 6.3 [Exercises](docs/lesson06/exercises.md)
 * **Lesson 7: Signals and interrupt waiting** (To be done)
 * **Lesson 8: File systems** (To be done)
 * **Lesson 9: Executable files (ELF)** (To be done)
