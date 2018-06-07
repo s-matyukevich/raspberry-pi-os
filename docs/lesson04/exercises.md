@@ -4,5 +4,5 @@
 1. Introduce a way to assign priority to the tasks. Make sure that a task with higher priority gets more processor time that the one with lower priority.
 1. Allow user processes to use FP/SIMD registers. Those registers should be saved in the task context and swapped during the context switch.
 1. Allow the kernel to have an unlimited number of tasks (right now the limit is 64). 
-
+1. Adopt lesson 04 to run on qemu. Check [this](https://github.com/s-matyukevich/raspberry-pi-os/issues/8) issue for reference.
 
