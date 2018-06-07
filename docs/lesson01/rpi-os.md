@@ -98,7 +98,7 @@ $(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.S
     $(ARMGNU)-gcc $(ASMOPS) -MMD -c $< -o $@
 ```
 
-Next two targets are responsible for compiling C and assembler files. If, for example, in the `src` directory we have `foo.c` and `foo.S` files, they will be compiled into `/buid/foo_c.o` and `build/foo_s.o` respectively. `$<` and `$@` are substituted at the runtime with the input and output filenames (`foo.c` and `foo_c.o`) Before compiling C files, we also create `build` directory in case it doesn't exist yet.
+Next two targets are responsible for compiling C and assembler files. If, for example, in the `src` directory we have `foo.c` and `foo.S` files, they will be compiled into `build/foo_c.o` and `build/foo_s.o` respectively. `$<` and `$@` are substituted at the runtime with the input and output filenames (`foo.c` and `foo_c.o`) Before compiling C files, we also create `build` directory in case it doesn't exist yet.
 
 ```
 C_FILES = $(wildcard src/*.c)
