@@ -98,7 +98,7 @@ $(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.S
     $(ARMGNU)-gcc $(ASMOPS) -MMD -c $< -o $@
 ```
 
-Next two targets are responsible for compiling C and assembler files. If, for example, in the `src` directory we have `foo.c` and `foo.S` files, they will be compiled into `/buid/foo_c.o` and `build/foo_s.o` respectively. `$<` and `$@` are substituted at the runtime with the input and output filenames (`foo.c` and `foo_c.o`) Before compiling C files, we also create `build` directory in case it doesn't exist yet.
+Next two targets are responsible for compiling C and assembler files. If, for example, in the `src` directory we have `foo.c` and `foo.S` files, they will be compiled into `build/foo_c.o` and `build/foo_s.o` respectively. `$<` and `$@` are substituted at the runtime with the input and output filenames (`foo.c` and `foo_c.o`) Before compiling C files, we also create `build` directory in case it doesn't exist yet.
 
 ```
 C_FILES = $(wildcard src/*.c)
@@ -250,7 +250,7 @@ This function is one of the simplest in the kernel. It works with `Mini UART` de
 
 Now is the first time we are going to dig into something specific to Raspberry Pi. Before we begin, I recommend you to download [BCM2835 ARM Peripherals manual](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2835/BCM2835-ARM-Peripherals.pdf) BCM2835 is a board that is used by the Raspberry Pi Model A, B, B+. Raspberry Pi 3 uses the BCM2837 board, but its underlying architecture is identical to BCM2835.
 
-Before we proceed to the implementation details, I want to share some basic concepts on how to work with memory mapped devices. BCM2835 is a simple SOC (System On Chip) board. In such a board, access to all devices is performed via memory mapped registers. Raspberry Pi 3 reserves the memory above the address `0x3F000000`  for devices. To activate or configure a particular device, you need to write some data in one of the device's registers. Device register is just a 32-bit region of memory. The meaning of each bit in each device register is described in the BCM2835 ARM Peripherals manual.
+Before we proceed to the implementation details, I want to share some basic concepts on how to work with memory mapped devices. BCM2835 is a simple [SOC (System on a chip)](https://en.wikipedia.org/wiki/System_on_a_chip) board. In such a board, access to all devices is performed via memory mapped registers. Raspberry Pi 3 reserves the memory above the address `0x3F000000`  for devices. To activate or configure a particular device, you need to write some data in one of the device's registers. Device register is just a 32-bit region of memory. The meaning of each bit in each device register is described in the BCM2835 ARM Peripherals manual.
 
 From the `kernel_main` function, you can guess that we are going to work with a Mini UART device. UART stands for [Universal asynchronous receiver-transmitter](https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter) This device is capable of converting values stored in one of its memory mapped registers to a sequence of high and low voltage. This sequence is passed to your computer via `TTL to serial cable` and is interpreted by your terminal emulator. We are going to use the Mini UART to organize communication with our Raspberry Pi. If you want to see the specification of all Mini UART registers, please open page 8 of the `BCM2835 ARM Peripherals` manual.
 
