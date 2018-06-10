@@ -23,3 +23,10 @@ The following types of contributions are particularly useful for the project.
 
 If you successfully completed any of the exercises you can share your source code. The code should be placed in the following folder `/exercises/lessonXX/<exercise number>/<your github username>/` Such folder structure allows to accept pull requests for the same exercise from different people.
 
+##### Previous Page
+
+[Introduction](../docs/Introduction.md)
+
+##### Next Page
+
+[Prerequisites](../docs/Prerequisites.md)
