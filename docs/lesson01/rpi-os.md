@@ -98,7 +98,11 @@ $(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.S
     $(ARMGNU)-gcc $(ASMOPS) -MMD -c $< -o $@
 ```
 
+<<<<<<< HEAD
 The next two targets are responsible for compiling C and assembler files. If, for example, in the `src` directory we have `foo.c` and `foo.S` files, they will be compiled into `/buid/foo_c.o` and `build/foo_s.o` respectively. `$<` and `$@` are substituted at runtime with the input and output filenames (`foo.c` and `foo_c.o`). Before compiling C files, we also create a `build` directory in case it doesn't exist yet.
+=======
+Next two targets are responsible for compiling C and assembler files. If, for example, in the `src` directory we have `foo.c` and `foo.S` files, they will be compiled into `build/foo_c.o` and `build/foo_s.o` respectively. `$<` and `$@` are substituted at the runtime with the input and output filenames (`foo.c` and `foo_c.o`) Before compiling C files, we also create `build` directory in case it doesn't exist yet.
+>>>>>>> 1d44dc4142a7f9c8fbbae9037f2cc637ddd8de99
 
 ```
 C_FILES = $(wildcard src/*.c)
@@ -250,7 +254,7 @@ This function is one of the simplest in the kernel. It works with the `Mini UART
 
 Now is the first time we are going to dig into something specific to Raspberry Pi. Before we begin, I recommend that you download the [BCM2835 ARM Peripherals manual](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2835/BCM2835-ARM-Peripherals.pdf). BCM2835 is a board that is used by the Raspberry Pi Models A, B, and B+. The Raspberry Pi 3 uses the BCM2837 board, but its underlying architecture is identical to BCM2835.
 
-Before we proceed to the implementation details, I want to share some basic concepts on how to work with memory mapped devices. BCM2835 is a simple SOC (System On Chip) board. In such a board, access to all devices is performed via memory mapped registers. The Raspberry Pi 3 reserves the memory above the address `0x3F000000` for devices. To activate or configure a particular device, you need to write some data in one of the device's registers. A device register is just a 32-bit region of memory. The meaning of each bit in each device register is described in the BCM2835 ARM Peripherals manual.
+Before we proceed to the implementation details, I want to share some basic concepts on how to work with memory mapped devices. BCM2835 is a simple [SOC (System on a chip)](https://en.wikipedia.org/wiki/System_on_a_chip) board. In such a board, access to all devices is performed via memory-mapped registers. The Raspberry Pi 3 reserves the memory above the address `0x3F000000` for devices. To activate or configure a particular device, you need to write some data in one of the device's registers. A device register is just a 32-bit region of memory. The meaning of each bit in each device register is described in the BCM2835 ARM Peripherals manual.
 
 From the `kernel_main` function, you can guess that we are going to work with a Mini UART device. UART stands for [Universal asynchronous receiver-transmitter](https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter). This device is capable of converting values stored in one of its memory mapped registers to a sequence of high and low voltages. This sequence is passed to your computer via the `TTL to serial cable` and is interpreted by your terminal emulator. We are going to use the Mini UART to facilitate communication with our Raspberry Pi. If you want to see the specification of all Mini UART registers, please open page 8 of the `BCM2835 ARM Peripherals` manual.
 
@@ -475,11 +479,19 @@ disable_commandline_tags=1
 Now that we have gone through all source code, it is time to see it work. To build and test the kernel you need to  do the following:
 
 1. Execute `./build.sh` or `./build.bat` from [src/lesson01](https://github.com/s-matyukevich/raspberry-pi-os/tree/master/src/lesson01) in order to build the kernel. 
+<<<<<<< HEAD
 1. Copy the generated `kernel7.img` file to the `boot` partition of your Raspberry Pi flash card.
 1. Modify the `config.txt` file as described in the previous section.
 1. Connect the USB-to-TTL serial cable as was described in the [Prerequisites](../Prerequisites.md).
 1. Power on your Raspberry Pi (This can be done using the same USB to TTL serial cable).
 1. Open your terminal emulator. You should be able to see the `Hello, world!` message there.
+=======
+1. Copy generated `kernel7.img` file to `boot` partition of your Raspberry Pi flash card.
+1. Modify `config.txt` file as was described in the previous section.
+1. Connect USB to TTL serial cable as was described in the [Prerequisites](../Prerequisites.md)
+1. Power on your Raspberry PI (This can be done using the same USB to TTL serial cable)
+1. Open your terminal emulator. You should be able to see `Hello, world!` message there.
+>>>>>>> 1d44dc4142a7f9c8fbbae9037f2cc637ddd8de99
 
 
 
