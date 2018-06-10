@@ -4,7 +4,7 @@
 
 After taking a look at the Linux project structure and examining how it can be built, next logical step is to find the program entry point. This step might be trivial for a lot of programs, but not for the Linux kernel. 
 
-The first file we are going to do is to take a look at [arm64 linker script](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/vmlinux.lds.S). We have already seen how the linker script [is used in the main makefile](https://github.com/torvalds/linux/blob/v4.14/Makefile#L970). From this line, we can easily infer, where the linker script for a particular architecture can be found.
+The first thing we are going to do is to take a look at [arm64 linker script](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/vmlinux.lds.S). We have already seen how the linker script [is used in the main makefile](https://github.com/torvalds/linux/blob/v4.14/Makefile#L970). From this line, we can easily infer, where the linker script for a particular architecture can be found.
 
 It should be mentioned that the file we are going to examine is not an actual linker script - it is a template, from which the actual linker script is built by substituting some macros with their actual values. But precisely because this file consists mostly of macros it becomes much easier to read and to port between different architectures.
 
