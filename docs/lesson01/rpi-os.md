@@ -1,6 +1,6 @@
 ## 1.1: Introducing RPi OS, or bare metal "Hello, world!"
 
-We are going to start our journey through the OS development world by writing a small bare-metal "Hello, world" application. I assume that at this time you have gone through the [Prerequisites](../Prerequisites.md) and have everything ready. If not, now is the right time to do this.
+We are going to start our journey through the OS development world by writing a small bare-metal "Hello, world" application. I assume that by this time you have gone through the [Prerequisites](../Prerequisites.md) and have everything ready. If not, now is the right time to do this.
 
 Before we move forward, I want to establish a very simple naming convention. From the README you can see that the whole tutorial is divided into lessons. Each lesson in turn consists of individual files that I call "chapters" (right now, you are reading lesson 1, chapter 1.1). A chapter is further divided into "sections" by headers. This naming convention allows me to make references to different parts of the material.
 
@@ -8,9 +8,9 @@ Another thing I want you to pay attention to is that the tutorial contains a lot
 
 ### Project structure
 
-The source code of each lesson has the same structure. You can find this particular lesson's source code [here](https://github.com/s-matyukevich/raspberry-pi-os/tree/master/src/lesson01). Let's briefly describe the main components of this folder.
+The source code of each lesson has the same structure. You can find this particular lesson's source code [here](https://github.com/s-matyukevich/raspberry-pi-os/tree/master/src/lesson01). Let's briefly describe the main components of this folder:
 1. **Makefile** We will use the [make](http://www.math.tau.ac.il/~danha/courses/software1/make-intro.html) utility to build the kernel. `make`'s behavior is configured by a Makefile, which contains instructions on how to compile and link the source code. 
-1. **build.sh or build.bat** You'll need these files if you want to build the kernel using Docker. This way, you don't need to have the make utility or the compiler toolchain installed on your laptop.
+1. **build.sh or build.bat** You'll need these files if you want to build the kernel using Docker. You won't need to have the make utility or the compiler toolchain installed on your laptop.
 1. **src** This folder contains all of the source code.
 1. **include** All of the header files are placed here. 
 
@@ -97,7 +97,7 @@ $(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.S
     $(ARMGNU)-gcc $(ASMOPS) -MMD -c $< -o $@
 ```
 
-The next two targets are responsible for compiling C and assembler files. If, for example, in the `src` directory we have `foo.c` and `foo.S` files, they will be compiled into `build/foo_c.o` and `build/foo_s.o` respectively. `$<` and `$@` are substituted at the runtime with the input and output filenames (`foo.c` and `foo_c.o`). Before compiling C files, we also create a `build` directory in case it doesn't exist yet.
+The next two targets are responsible for compiling C and assembler files. If, for example, in the `src` directory we have `foo.c` and `foo.S` files, they will be compiled into `build/foo_c.o` and `build/foo_s.o` respectively. `$<` and `$@` are substituted at runtime with the input and output filenames (`foo.c` and `foo_c.o`). Before compiling C files, we also create a `build` directory in case it doesn't exist yet.
 
 ```
 C_FILES = $(wildcard src/*.c)
@@ -113,7 +113,7 @@ DEP_FILES = $(OBJ_FILES:%.o=%.d)
 -include $(DEP_FILES)
 ```
 
-The next two lines are a little bit tricky. If you once again take a look at how we defined our compilation targets for both C and assembler source files, you might notice that we used the `-MMD` parameter. This parameter instructs the `gcc` compiler to create a dependency file for each generated object file. A dependency file is a file that defines all of the dependencies for a particular source file. These dependencies usually contain a list of all included headers. We need to include all of the generated dependency files so that make knows what exactly to recompile in case some header changes. 
+The next two lines are a little bit tricky. If you once again take a look at how we defined our compilation targets for both C and assembler source files, you might notice that we used the `-MMD` parameter. This parameter instructs the `gcc` compiler to create a dependency file for each generated object file. A dependency file is a file that defines all of the dependencies for a particular source file. These dependencies usually contain a list of all included headers. We need to include all of the generated dependency files so that make knows what exactly to recompile in case a header changes. 
 
 ```
 $(ARMGNU)-ld -T src/linker.ld -o kernel7.elf  $(OBJ_FILES)
@@ -181,7 +181,7 @@ Let's review this file in detail:
 ```
 .section ".text.boot"
 ```
-First, we specify that everything defined in `boot.S` should go in the `.text.boot` section. Previously, we saw that this section is placed at the beginning of the kernel image by the linker script. So when the kernel is started, execution begins at the `start` function. 
+First, we specify that everything defined in `boot.S` should go in the `.text.boot` section. Previously, we saw that this section is placed at the beginning of the kernel image by the linker script. So when the kernel is started, execution begins at the `start` function:
 ```
 .globl _start
 _start:
@@ -220,7 +220,7 @@ For those of you who are not familiar with ARM assembler syntax, let me quickly 
 * [**adr**](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289862147.htm) Load a label's relative address into the target register. In this case, we want pointers to the start and end of the `.bss` region.
 * [**sub**](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289908389.htm) Subtract values from two registers.
 * [**bl**](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289865686.htm) "Branch with a link": perform an unconditional branch and store the return address in x30 (the Link Register). When the subroutine is finished, use the `ret` instruction to jump back to the return address.
-* [**mov**](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289878994.htm) Moves some value between registers or from a constant to a register.
+* [**mov**](http://www.keil.com/support/man/docs/armasm/armasm_dom1361289878994.htm) Move a value between registers or from a constant to a register.
 
 [Here](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.den0024a/index.html) is the ARMv8-A developer's guide. It's a good resource if the ARM ISA is unfamiliar to you. [This page](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.den0024a/ch09s01s01.html) specifically outlines the register usage convention in the ABI.
 
@@ -243,7 +243,7 @@ void kernel_main(void)
 
 ```
 
-This function is one of the simplest in the kernel. It works with the `Mini UART` device to print to screen and read user input. The kernel just prints `Hello, world!` and then enters an infinite loop that reads a character from the user and sends it back to the screen.
+This function is one of the simplest in the kernel. It works with the `Mini UART` device to print to screen and read user input. The kernel just prints `Hello, world!` and then enters an infinite loop that reads characters from the user and sends them back to the screen.
 
 ### Raspberry Pi devices 
 
@@ -251,13 +251,13 @@ Now is the first time we are going to dig into something specific to the Raspber
 
 Before we proceed to the implementation details, I want to share some basic concepts on how to work with memory mapped devices. BCM2835 is a simple [SOC (System on a chip)](https://en.wikipedia.org/wiki/System_on_a_chip) board. In such a board, access to all devices is performed via memory-mapped registers. The Raspberry Pi 3 reserves memory above address `0x3F000000` for devices. To activate or configure a particular device, you need to write some data in one of the device's registers. A device register is just a 32-bit region of memory. The meaning of each bit in each device register is described in the BCM2835 ARM Peripherals manual.
 
-From the `kernel_main` function, you can guess that we are going to work with a Mini UART device. UART stands for [Universal asynchronous receiver-transmitter](https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter). This device is capable of converting values stored in one of its memory mapped registers to a sequence of high and low voltages. This sequence is passed to your computer via the `TTL-to-serial cable` and is interpreted by your terminal emulator. We are going to use the Mini UART to facilitate communication with our Raspberry Pi. If you want to see the specification of all Mini UART registers, please open page 8 of the `BCM2835 ARM Peripherals` manual.
+From the `kernel_main` function, you can guess that we are going to work with a Mini UART device. UART stands for [Universal asynchronous receiver-transmitter](https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter). This device is capable of converting values stored in one of its memory mapped registers to a sequence of high and low voltages. This sequence is passed to your computer via the `TTL-to-serial cable` and is interpreted by your terminal emulator. We are going to use the Mini UART to facilitate communication with our Raspberry Pi. If you want to see the specification of the Mini UART registers, please open page 8 of the `BCM2835 ARM Peripherals` manual.
 
-Another device that you need to familiarize yourself with is a GPIO [General-purpose input/output](https://en.wikipedia.org/wiki/General-purpose_input/output). GPIOs are responsible for controlling `GPIO pins`. You should be able to easily recognize them in the image below:
+Another device that you need to familiarize yourself with is the GPIO [General-purpose input/output](https://en.wikipedia.org/wiki/General-purpose_input/output). GPIOs are responsible for controlling `GPIO pins`. You should be able to easily recognize them in the image below:
 
 ![Raspberry Pi GPIO pins](../../images/gpio-pins.jpg)
 
-A GPIO can be used to configure the behavior of different GPIO pins. For example, to be able to use the Mini UART, we need to activate pins 14 and 15  and set them up to use this device. The image below illustrates how numbers are assigned to the GPIO pins:
+The GPIO can be used to configure the behavior of different GPIO pins. For example, to be able to use the Mini UART, we need to activate pins 14 and 15  and set them up to use this device. The image below illustrates how numbers are assigned to the GPIO pins:
 
 ![Raspberry Pi GPIO pin numbers](../../images/gpio-numbers.png)
 
@@ -299,7 +299,7 @@ Here, we use the two functions `put32` and `get32`. Those functions are very sim
 
 #### GPIO alternative function selection 
 
-First of all, we need to activate GPIO pins. Most of the pins can be used with different devices, so before using a particular pin, we need to select pin `alternative function`. An `alternative function` is just a number from 0 to 5 that can be set for each pin and configures which device is connected to the pin. You can see the list of all available GPIO alternative functions in the image below (the image is taken from page 102 of `BCM2835 ARM Peripherals` manual):
+First of all, we need to activate GPIO pins. Most of the pins can be used with different devices, so before using a particular pin, we need to select the pin's `alternative function`. An `alternative function` is just a number from 0 to 5 that can be set for each pin and configures which device is connected to the pin. You can see the list of all available GPIO alternative functions in the image below (the image is taken from page 102 of `BCM2835 ARM Peripherals` manual):
 
 ![Raspberry Pi GPIO alternative functions](../../images/alt.png?raw=true)
 
@@ -384,12 +384,12 @@ Here we disable the receiver and transmitter before the configuration is finishe
 ```
     put32(AUX_MU_IER_REG,0);                //Disable receive and transmit interrupts
 ```
-It is possible to configure the Mini UART to generate a processor interrupt each time new data is available. We are going to start working with interrupts only in lesson 3, so for now, we just disable this feature.
+It is possible to configure the Mini UART to generate a processor interrupt each time new data is available. We are going to start working with interrupts only in lesson 3, so for now, we will just disable this feature.
 
 ```
     put32(AUX_MU_LCR_REG,3);                //Enable 8 bit mode
 ```
-Mini UART can support either 7 or 8-bit operations. This is because an ASCII character is 7 bits for the standard set and 8 bits for the extended. We are going to use 8-bit mode. The interesting thing is that the description of the `AUX_MU_LCR_REG` register in the `BCM2835 ARM Peripherals` manual has an error. All such errors are listed  [here](https://elinux.org/BCM2835_datasheet_errata)
+Mini UART can support either 7 or 8-bit operations. This is because an ASCII character is 7 bits for the standard set and 8 bits for the extended. We are going to use 8-bit mode. Note that the description of the `AUX_MU_LCR_REG` register in the `BCM2835 ARM Peripherals` manual has an error. All such errors are listed  [here](https://elinux.org/BCM2835_datasheet_errata)
 
 ```
     put32(AUX_MU_MCR_REG,0);                //Set RTS line to be always high
@@ -435,9 +435,9 @@ char uart_recv ( void )
 ```
 
 Both of the functions start with an infinite loop, the purpose of which is to verify whether the device is ready to transmit or receive data. We are using  the `AUX_MU_LSR_REG` register to do this. The first bit, if set to 1, indicates that the data is ready; this means that we can read from the UART. The fifth bit tells us that the transmitter is empty, meaning that we can write to the UART.
-Next, we use `AUX_MU_IO_REG` to either store the value of the transmitting character or read the value of the receiving character.
+Next, we use `AUX_MU_IO_REG` to either store the value of the transmitted character or read the value of the received character.
 
-We also have a very simple function that is capable of sending strings instead of characters.
+We also have a very simple function that is capable of sending strings instead of characters:
 
 ```
 void uart_send_string(char* str)
@@ -476,8 +476,8 @@ Now that we have gone through all of the source code, it is time to see it work.
 1. Execute `./build.sh` or `./build.bat` from [src/lesson01](https://github.com/s-matyukevich/raspberry-pi-os/tree/master/src/lesson01) in order to build the kernel. 
 1. Copy the generated `kernel7.img` file to the `boot` partition of your Raspberry Pi flash card.
 1. Modify the `config.txt` file as described in the previous section.
-1. Connect USB-to-TTL serial cable as described in the [Prerequisites](../Prerequisites.md).
-1. Power on your Raspberry PI (this can be done using the same USB-to-TTL serial cable).
+1. Connect the USB-to-TTL serial cable as described in the [Prerequisites](../Prerequisites.md).
+1. Power on your Raspberry Pi (this can be done using the same USB-to-TTL serial cable).
 1. Open your terminal emulator. You should be able to see the `Hello, world!` message there.
 
 
