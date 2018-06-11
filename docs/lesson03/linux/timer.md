@@ -258,3 +258,10 @@ A few important things are done in this function:
 
 Now you see how long is the way of an ordinary timer interrupt, but we followed it from the beginning to the very end. One of the things that are the most important, is that we finally reached the place were the shceduler is called. The scheduler is one of the most critical parts of any operating system and it relies heavily on timer interrupts. So now, when we've seen where the scheduler functionality is triggered, its time to discuss its implementation - that is something we are going to do in the next lesson.
 
+##### Previous Page
+
+3.3 [Interrupt handling: Interrupt controllers](../../../docs/lesson03/linux/interrupt_controllers.md)
+
+##### Next Page
+
+3.5 [Interrupt handling: Exercises](../../../docs/lesson03/exercises.md)

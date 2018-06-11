@@ -26,3 +26,11 @@ Next, let's take a look at the folders that we can find inside the Linux reposit
 * [fs](https://github.com/torvalds/linux/tree/v4.14/fs) You can look here to find different filesystem implementations.
 
 This explanation is very high-level, but this is enough for now.In the next chapter, we will try to examine Linux build system in some details. 
+
+##### Previous Page
+
+1.1 [Kernel Initialization: Introducing RPi OS, or bare metal "Hello, world!"](../../../docs/lesson01/rpi-os.md)
+
+##### Next Page
+
+1.3 [Kernel Initialization: Kernel build system](../../../docs/lesson01/linux/build-system.md)

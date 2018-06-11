@@ -480,4 +480,10 @@ Now that we have gone through all of the source code, it is time to see it work.
 1. Power on your Raspberry Pi (this can be done using the same USB-to-TTL serial cable).
 1. Open your terminal emulator. You should be able to see the `Hello, world!` message there.
 
+##### Previous Page
 
+[Prerequisites](../../docs/Prerequisites.md)
+
+##### Next Page
+
+1.2 [Kernel Initialization: Linux project structure](../../docs/lesson01/linux/project-structure.md)

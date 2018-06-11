@@ -663,3 +663,10 @@ The described above sequence of steps is very important - I personally consider 
 
 We are done with scheduling, but right now our kernel can manage only kernel threads: they are executed at EL1 and can directly access any kernel functions or data. In the next 2 lessons we are going fix this and introduce system calls and virtual memory.
 
+##### Previous Page
+
+3.5 [Interrupt handling: Exercises](../../docs/lesson03/exercises.md)
+
+##### Next Page
+
+4.2 [Process scheduler: Scheduler basic structures](../../docs/lesson04/linux/basic_structures.md)

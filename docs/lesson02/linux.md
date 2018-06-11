@@ -300,3 +300,10 @@ The last 3 functions are very important, but they all are related to virtual mem
 
 In this chapter, we briefly discussed how a processor is initialized when the Linux kernel is booted. In the next lesson, we will continue to closely work with the ARM processor and investigate a vital topic for any OS: interrupt handling.
  
+##### Previous Page
+
+2.1 [Processor initialization: RPi OS](../../docs/lesson02/rpi-os.md)
+
+##### Next Page
+
+2.3 [Processor initialization: Exercises](../../docs/lesson02/exercises.md)

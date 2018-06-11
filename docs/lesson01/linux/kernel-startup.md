@@ -62,3 +62,10 @@ And indeed, if you search for `bcm2835-aux-uart` in the Linux source code, you c
 
 You can think about this chapter as a preparation for reading `arm64` boot code - without understanding the concepts that we've just explored you would have a hard time learning it. In the next lesson, we will go back to the `stext` function and examine in details how it works.
 
+##### Previous Page
+
+1.3 [Kernel Initialization: Kernel build system](../../../docs/lesson01/linux/build-system.md)
+
+##### Next Page
+
+1.5 [Kernel Initialization: Exercises](../../../docs/lesson01/exercises.md)

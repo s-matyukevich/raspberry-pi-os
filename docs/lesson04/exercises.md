@@ -6,3 +6,10 @@
 1. Allow the kernel to have an unlimited number of tasks (right now the limit is 64). 
 1. Adopt lesson 04 to run on qemu. Check [this](https://github.com/s-matyukevich/raspberry-pi-os/issues/8) issue for reference.
 
+##### Previous Page
+
+4.4 [Process scheduler: Scheduler](../../docs/lesson04/linux/scheduler.md)
+
+##### Next Page
+
+5.1 [User processes and system calls: RPi OS](../../docs/lesson05/rpi-os.md)
