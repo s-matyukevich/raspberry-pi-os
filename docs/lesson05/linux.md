@@ -199,3 +199,10 @@ The important things here are the first line, were interrupts are disabled, and 
 
 We've now gone through the process of generating and processing a system call. This process is relatively simple, but it is vital for the OS, because it allows the kernel to set up an API and make sure that this API is the only mean of communication between a user program and the kernel.
 
+##### Previous Page
+
+5.1 [User processes and system calls: RPi OS](../../docs/lesson05/rpi-os.md)
+
+##### Next Page
+
+5.3 [User processes and system calls: Exercises](../../docs/lesson05/exercises.md)

@@ -7,3 +7,10 @@ Exercises are optional, though I strongly recommend you to experiment with the s
 1. Try to use all 4 processor cores. The OS should print `Hello, from processor <processor index>` for all of the cores. Don't forget to set up a separate stack for each core and make sure that Mini UART is initialized only once. You can use a combination of global variables and `delay` function for synchronization.
 1. Adapt lesson 01 to run on qemu. Check [this](https://github.com/s-matyukevich/raspberry-pi-os/issues/8) issue for reference.
 
+##### Previous Page
+
+1.4 [Kernel Initialization: Linux startup sequence](../../docs/lesson01/linux/kernel-startup.md)
+
+##### Next Page
+
+2.1 [Processor initialization: RPi OS](../../docs/lesson02/rpi-os.md)

@@ -55,3 +55,10 @@ I have already shown you how all general purpose registers are saved on the stac
 
 There are far more important structures, algorithms and concepts related to scheduling, but what we've just explored is a minimal set, required to understand the next two chapters. Now it's time to see how all of this actually works.
 
+##### Previous Page
+
+4.1 [Process scheduler: RPi OS Scheduler](../../../docs/lesson04/rpi-os.md)
+
+##### Next Page
+
+4.3 [Process scheduler: Forking a task](../../../docs/lesson04/linux/fork.md)

@@ -153,3 +153,11 @@ Usually `spsr_el3` is saved automatically when an exception is taken to EL3. How
 ### Conclusion
 
 That is pretty much it: when we enter `el1_entry` function the execution should be already at EL1 mode. Go ahead and try it out! 
+
+##### Previous Page
+
+1.5 [Kernel Initialization: Exercises](../../docs/lesson01/exercises.md)
+
+##### Next Page
+
+2.2 [Processor initialization: Linux](../../docs/lesson02/linux.md)

@@ -299,3 +299,10 @@ Following Linux convention, we are not deleting the task at once but set its sta
 
 Now, when RPi OS can manage user tasks, we become much closer to the full process isolation. But one important step is still missing: all user tasks share the same physical memory and can easily read one another's data. In the next lesson, we are going to introduce virtual memory and fix this issue.
 
+##### Previous Page
+
+4.5 [Process scheduler: Exercises](../../docs/lesson04/exercises.md)
+
+##### Next Page
+
+5.2 [User processes and system calls: Linux](../../docs/lesson05/linux.md)

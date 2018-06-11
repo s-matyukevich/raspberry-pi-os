@@ -210,3 +210,11 @@ Wow, it was a long journey inside kernel build system internals! Still, we skipp
 1. How `vmlinux` is linked from all top-level `build-in.o` files.
 
 My main goal was that after reading this chapter you will gain a general understanding of all above points.
+
+##### Previous Page
+
+1.2 [Kernel Initialization: Linux project structure](../../../docs/lesson01/linux/project-structure.md)
+
+##### Next Page
+
+1.4 [Kernel Initialization: Linux startup sequence](../../../docs/lesson01/linux/kernel-startup.md)

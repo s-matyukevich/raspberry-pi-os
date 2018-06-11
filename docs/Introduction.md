@@ -50,6 +50,10 @@ The OS is not compatible with the older versions of the Raspberry Pi, because ne
 
 One major drawback of any technical book is that very soon after release each book becomes obsolete. Technology nowadays is evolving so fast that it is almost impossible for book writers to keep up with it. That's why I like the idea of an "open source book" - a book that is freely available on the internet and encourages its readers to participate in content creation and validation. If the book content is available on Github, it is very easy for any reader to fix and develop new code samples, update the book content, and participate in writing new chapters. I understand that right now the project is not perfect, and at the time of writing it is even not finished. But I still want to publish it now, because I hope that with the help of the community I will be able to not only complete the project faster but also to make it much better and much more useful than it was in the beginning. 
 
+##### Previous Page
+
+[Main Page](https://github.com/s-matyukevich/raspberry-pi-os#learning-operating-system-development-using-linux-kernel-and-raspberry-pi)
+
 ##### Next Page
 
-[Contribution guide](../docs/Contributions.md)
+[Contributing to the Raspberry PI OS](../docs/Contributions.md)

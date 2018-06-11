@@ -148,3 +148,10 @@ That's it about `copy_thread` function. Now let's return to the place in the for
 
 Now, when you understand how new tasks are created and added to the scheduler, it is time to take a look on how the scheduler itself works and how context switch is implemented - that is something we are going to explore in the next chapter.
 
+##### Previous Page
+
+4.2 [Process scheduler: Scheduler basic structures](../../../docs/lesson04/linux/basic_structures.md)
+
+##### Next Page
+
+4.4 [Process scheduler: Scheduler](../../../docs/lesson04/linux/scheduler.md)

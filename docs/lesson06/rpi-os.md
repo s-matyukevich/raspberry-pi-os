@@ -705,4 +705,11 @@ So in the first 2 lines of the `do_mem_abort` function, we check whether the cur
 
 This was a long and difficult chapter, but I hope it was useful as well. Virtual memory is really one of the most fundamental pieces of any operating system and I am glad we've passe thought this chapter and, hopefully, start to understand how it works at the lowest level. With the introduction of virtual memory now we have full process isolation, but the RPi OS is still far from completion. It still doesn't support file systems, drivers, signals and interrupt waitlists, networking and a lot of other useful concepts, and we will continue to uncover them in the upcoming lessons.
 
+##### Previous Page
 
+5.3 [User processes and system calls: Exercises](../../docs/lesson05/exercises.md)
+
+##### Next Page
+
+6.2 Virtual memory management: Linux (in progress)  
+6.3 jump forward to [Virtual memory management: Exercises](../../docs/lesson06/exercises.md)
