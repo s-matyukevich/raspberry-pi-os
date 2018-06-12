@@ -25,7 +25,7 @@ Next, let's take a look at the folders that we can find inside the Linux reposit
 * [drivers](https://github.com/torvalds/linux/tree/v4.14/drivers) This is the largest folder in the Linux kernel. It contains implementations of all device drivers.
 * [fs](https://github.com/torvalds/linux/tree/v4.14/fs) You can look here to find different filesystem implementations.
 
-This explanation is very high-level, but this is enough for now.In the next chapter, we will try to examine Linux build system in some details. 
+This explanation is very high-level, but this is enough for now. In the next chapter, we will try to examine Linux build system in some details. 
 
 ##### Previous Page
 
