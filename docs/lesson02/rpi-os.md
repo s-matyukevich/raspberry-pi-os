@@ -89,7 +89,7 @@ As you can see the code consists mostly of configuring a few system registers. N
     msr    sctlr_el1, x0        
 ```
 
-Here we set the value of the `sctlr_el1` system register. `sctlr_el1` is responsible for configuring different parameters of the processor, when it operates at EL1. For example, it controls whether the cache is enabled and, what is most important for us, whether the MMU (Memory Mapping Unit) is turned on. `sctlr_el1` is accessible from all exception levels higher or equal then EL1 (you can infer this from `_el1` postfix) 
+Here we set the value of the `sctlr_el1` system register. `sctlr_el1` is responsible for configuring different parameters of the processor, when it operates at EL1. For example, it controls whether the cache is enabled and, what is most important for us, whether the MMU (Memory Mapping Unit) is turned on. `sctlr_el1` is accessible from all exception levels higher or equal than EL1 (you can infer this from `_el1` postfix) 
 
 `SCTLR_VALUE_MMU_DISABLED` constant is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/include/arm/sysregs.h#L16) Individual bits of this value are defined like this:
 
