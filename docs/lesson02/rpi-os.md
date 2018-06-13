@@ -126,7 +126,7 @@ This register is responsible for configuring security settings. For example, it 
 ```
 
 This register should be already familiar to you - we mentioned it when discussed the process of changing exception levels. `spsr_el3` contains processor state, that will be restored after we execute `eret` instruction.
-It worth saying a few words explaining what processor state is. Processor state includes the following information:
+It is worth saying a few words explaining what processor state is. Processor state includes the following information:
 
 * **Condition Flags** Those flags contains information about previously executed operation: whether the result was negative (N flag), zero (A flag), has unsigned overflow (C flag) or has signed overflow (V flag). Values of those flags can be used in conditional branch instructions. For example, `b.eq` instruction will jump to the provided label only if the result of the last comparison operation is equal to 0. The processor checks this by testing whether Z flag is set to 1.
 
