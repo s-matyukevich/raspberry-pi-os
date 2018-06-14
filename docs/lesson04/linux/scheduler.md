@@ -44,3 +44,10 @@ We have already seen so many examples were `schedule` is used, so now you are pr
 
 Now we are done with the Linux scheduler. The good thing is that it appears to be not soo difficult if you focus only on the very basic workflow. After you understand the basic workflow you probably might want to to make another path through the schedule code and pay more attention to the details, because there are so many of them. But for now, we are happy with our current understanding and ready to move to the following lesson, which describes user processes and system calls.
 
+##### Previous Page
+
+4.3 [Process scheduler: Forking a task](../../../docs/lesson04/linux/fork.md)
+
+##### Next Page
+
+4.5 [Process scheduler: Exercises](../../../docs/lesson04/exercises.md)

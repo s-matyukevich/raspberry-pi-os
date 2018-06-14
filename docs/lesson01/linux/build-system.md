@@ -6,7 +6,7 @@ After we examined Linux kernel structure, it worth spending some time investigat
 
 * Build process can be customized by using kbuild variables. Those variables are defined in `Kconfig` files. Here you can define the variables themselves and their default values. Variables can have different types, including string, boolean and integer. In a Kconfig file you can also define dependencies between variables (for example, you can say that if variable X is selected then variable Y will be selected implicitly). As an example, you can take a look at [arm64 Kconfig file](https://github.com/torvalds/linux/tree/v4.14/arch/arm64/Kconfig). This file defines all variables, specific for `arm64` architecture. `Kconfig` functionality is not part of the standard `make` and is implemented in the Linux makefile. Variables, defined in `Kconfig` are exposed to the kernel source code as well as to the nested makefiles. Variable values can be set during kernel configuration step (for example, if you type `make menuconfig` a console GUI will be shown. It allows you to customize values for all kernel variables and stores the values in `.config`. Use `make help` command to view all possible options to configure the kernel)
 
-* Linux uses recursive build. This means that each subfolder of the Linux kernel can define it's own `Makefile` and `Kconfig. Most of the nested Makefiles are very simple and just define what object files need to be compiled. Usually, such definitions have the following format.
+* Linux uses recursive build. This means that each subfolder of the Linux kernel can define it's own `Makefile` and `Kconfig`. Most of the nested Makefiles are very simple and just define what object files need to be compiled. Usually, such definitions have the following format.
 
   ```
   obj-$(SOME_CONFIG_VARIABLE) += some_file.o
@@ -106,7 +106,7 @@ We are going to tackle the second question first.
   vmlinux-deps := $(KBUILD_LDS) $(KBUILD_VMLINUX_INIT) $(KBUILD_VMLINUX_MAIN) $(KBUILD_VMLINUX_LIBS)
   ```
 
-  It all starts with variables like `init-y`, `core-y`, etc., which combined contains all subfolders of the Linux kernel that contains buildable source code. Then `built-in.o` is appended to all the subfolder names, so, for example, `drivers/` becomes `drivers/built-in.o`. `vmlinux-deps` then just aggregates all resulting values. This explins how `vmlinux` eventually becomes dependent on all `build-in.o` files.
+  It all starts with variables like `init-y`, `core-y`, etc., which combined contains all subfolders of the Linux kernel that contains buildable source code. Then `built-in.o` is appended to all the subfolder names, so, for example, `drivers/` becomes `drivers/built-in.o`. `vmlinux-deps` then just aggregates all resulting values. This explains how `vmlinux` eventually becomes dependent on all `build-in.o` files.
 
 * Next question is how all `built-in.o` objects are created? Once again, let me copy all relevant lines and explain how it all works.
 
@@ -132,14 +132,14 @@ We are going to tackle the second question first.
 
   This line just calls another makefile  ([scripts/Makefile.build](https://github.com/torvalds/linux/blob/v4.14/scripts/Makefile.build)) and passes `obj` variable, which contains a folder to be compiled. 
 
-* Next logical step is to take a look at [scripts/Makefile.build](https://github.com/torvalds/linux/blob/v4.14/scripts/Makefile.build). The first important thing that happens after it is executed is that all variables from `Makefile` or `Kbuild` files, defined in the current directory, are included. By current directory I mean the directory referenced by the `obj` variable. The inclusin is done in the [following 3 lines](https://github.com/torvalds/linux/blob/v4.14/scripts/Makefile.build#L43-L45)
+* Next logical step is to take a look at [scripts/Makefile.build](https://github.com/torvalds/linux/blob/v4.14/scripts/Makefile.build). The first important thing that happens after it is executed is that all variables from `Makefile` or `Kbuild` files, defined in the current directory, are included. By current directory I mean the directory referenced by the `obj` variable. The inclusion is done in the [following 3 lines](https://github.com/torvalds/linux/blob/v4.14/scripts/Makefile.build#L43-L45)
 
   ```
   kbuild-dir := $(if $(filter /%,$(src)),$(src),$(srctree)/$(src))
   kbuild-file := $(if $(wildcard $(kbuild-dir)/Kbuild),$(kbuild-dir)/Kbuild,$(kbuild-dir)/Makefile)
   include $(kbuild-file)
   ```
-  Nested makefiles are mostly responsible for initializing variables like `obj-y`. As a quick reminder: `obj-y` variable should contain list of all source code files, locaated in the current directory. Another important variable that is initialized by the nested makefiles is `subdir-y`. This variable contains a list of all subfolders that need to be visited before the source code in the curent directory can be buit. `subdir-y` is used to implement recursive descending into subfolders.
+  Nested makefiles are mostly responsible for initializing variables like `obj-y`. As a quick reminder: `obj-y` variable should contain list of all source code files, located in the current directory. Another important variable that is initialized by the nested makefiles is `subdir-y`. This variable contains a list of all subfolders that need to be visited before the source code in the curent directory can be built. `subdir-y` is used to implement recursive descending into subfolders.
 
 * When `make` is called without specifying the target (as it is in the case when `scripts/Makefile.build` is executed) it uses the first target. The first target for `scripts/Makefile.build` is called `__build` and it can be found [here](https://github.com/torvalds/linux/blob/v4.14/scripts/Makefile.build#L96) Let's take a look at it.
 
@@ -178,9 +178,9 @@ We are going to tackle the second question first.
       $(call if_changed,link_o_target)
   ```
 
-  This target depends on `$(obj-y)` target and `obj-y` is a list of all object files that need to be buit in the current folder. After those files become ready `cmd_link_o_target` command is executed. In case if `obj-y` variable is empty `cmd_make_empty_builtin` is called, wich just creates an empty `built-in.o`. Otherwise, `cmd_make_builtin` command is executed; it uses familiar to us `ar` tool to create `built-in.o` thin archive.
+  This target depends on `$(obj-y)` target and `obj-y` is a list of all object files that need to be built in the current folder. After those files become ready `cmd_link_o_target` command is executed. In case if `obj-y` variable is empty `cmd_make_empty_builtin` is called, wich just creates an empty `built-in.o`. Otherwise, `cmd_make_builtin` command is executed; it uses familiar to us `ar` tool to create `built-in.o` thin archive.
 
-* Finally we got to the point where we need to compile something. You remember that our last unexplored dependency is `$(obj-y)` and `obj-y` is just a list of object files. The target that compiles all object files from corresponding `.c` files is defined [here](https://github.com/torvalds/linux/blob/v4.14/scripts/Makefile.build#L313) Let's examine all lines, needed to understand this target.
+* Finally we got to the point where we need to compile something. You remember that our last unexplored dependency is `$(obj-y)` and `obj-y` is just a list of object files. The target that compiles all object files from corresponding `.c` files is defined [here](https://github.com/torvalds/linux/blob/v4.14/scripts/Makefile.build#L313). Let's examine all lines, needed to understand this target.
 
   ```
   cmd_cc_o_c = $(CC) $(c_flags) -c -o $@ $<
@@ -210,3 +210,11 @@ Wow, it was a long journey inside kernel build system internals! Still, we skipp
 1. How `vmlinux` is linked from all top-level `build-in.o` files.
 
 My main goal was that after reading this chapter you will gain a general understanding of all above points.
+
+##### Previous Page
+
+1.2 [Kernel Initialization: Linux project structure](../../../docs/lesson01/linux/project-structure.md)
+
+##### Next Page
+
+1.4 [Kernel Initialization: Linux startup sequence](../../../docs/lesson01/linux/kernel-startup.md)

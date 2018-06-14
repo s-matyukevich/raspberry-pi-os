@@ -7,7 +7,7 @@ You may find this chapter a little bit boring because it mostly discusses differ
 1. It is necessary to understand the interface that the hardware provides to the software. Just by knowing this interface you will be able, in many cases, to deconstruct how a particular kernel feature is implemented and how software and hardware collaborate to implement this feature.
 1. Different options in the system register are usually related to enabling/disabling various hardware features. If you learn what different system registers an ARM processor have you will already have an idea what kind of functionality it supports.
 
-Ok, not let's resume our investigation of the `stext` function.
+Ok, now let's resume our investigation of the `stext` function.
 
 ```
 ENTRY(stext)
@@ -300,3 +300,10 @@ The last 3 functions are very important, but they all are related to virtual mem
 
 In this chapter, we briefly discussed how a processor is initialized when the Linux kernel is booted. In the next lesson, we will continue to closely work with the ARM processor and investigate a vital topic for any OS: interrupt handling.
  
+##### Previous Page
+
+2.1 [Processor initialization: RPi OS](../../docs/lesson02/rpi-os.md)
+
+##### Next Page
+
+2.3 [Processor initialization: Exercises](../../docs/lesson02/exercises.md)

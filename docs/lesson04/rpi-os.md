@@ -278,7 +278,7 @@ The algorithm works like the following:
  * The first inner `for` loop iterates over all tasks and tries to find a task in `TASK_RUNNING` state with the maximum counter. If such task is found and its counter is greater then 0, we immediately break from the outer `while` loop and switch to this task. If no such task is found this means that no tasks in `TASK_RUNNING`  state currently exist or all such tasks have 0 counters. In a real OS, the first case might happen, for example, when all tasks are waiting for an interrupt. In this case, the second nested `for` loop is executed. For each task (no matter what state it is in) this loop increases its counter. The counter increase is done in a very smart way:
 
     1. The more iterations of the second `for` loop a task passes, the more its counter will be increased.
-    2. A task counter can newer get larger than `2 * priority` 
+    2. A task counter can never get larger than `2 * priority` 
 
 * Then the process is repeated. If there are at least one task in `TASK_RUNNIG` state, the second iteration of the outer `while` loop will be the last one because after the first iteration all counters are already non-zero. However, if no `TASK_RUNNING` tasks are there, the process is repeated over and over again until some of the tasks will move to `TASK_RUNNING` state. But if we are running on a single CPU, how then a task state can change while this loop is running? The answer is that if some task is waiting for an interrupt, this interrupt can happen while `schedule` function is executed and interrupt handler can change the state of the task. This actually explains why interrupts must be enabled during `schedule` execution. This also demonstrates an important distinction between disabling interrupts and disabling preemption. `schedule` disables preemption for the duration of the whole function. This ensures that nester` schedule` will not be called while we are in the middle of the original function execution. However, interrupts can legally happen during `schedule` function execution.
 
@@ -663,3 +663,10 @@ The described above sequence of steps is very important - I personally consider 
 
 We are done with scheduling, but right now our kernel can manage only kernel threads: they are executed at EL1 and can directly access any kernel functions or data. In the next 2 lessons we are going fix this and introduce system calls and virtual memory.
 
+##### Previous Page
+
+3.5 [Interrupt handling: Exercises](../../docs/lesson03/exercises.md)
+
+##### Next Page
+
+4.2 [Process scheduler: Scheduler basic structures](../../docs/lesson04/linux/basic_structures.md)

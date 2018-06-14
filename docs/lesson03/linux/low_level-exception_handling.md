@@ -369,3 +369,10 @@ Next, we need to look at [handle_arch_irq](https://github.com/torvalds/linux/blo
 
 As a conclusion, I can say that we've already explored the low-level interrupt handling code and trace the path of an interrupt from the vector table all the way to the `handle_arch_irq`. This is the point were an interrupt leaves architecture specific code and started to be handled by a driver code. Our goal in the next chapter will be to trace the path of a timer interrupt through the driver source code. 
 
+##### Previous Page
+
+3.1 [Interrupt handling: RPi OS](../../../docs/lesson03/rpi-os.md)
+
+##### Next Page
+
+3.3 [Interrupt handling: Interrupt controllers](../../../docs/lesson03/linux/interrupt_controllers.md)

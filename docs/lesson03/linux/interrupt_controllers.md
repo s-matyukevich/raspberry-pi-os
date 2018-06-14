@@ -304,3 +304,10 @@ static void bcm2836_chained_handle_irq(struct irq_desc *desc)
 
 You can think about this code as an advanced version of what we did [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/irq.c#L39) for the RPi OS. [get_next_armctrl_hwirq](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2835.c#L217) uses all 3 pending registers to figure out which interrupt was fired. [irq_linear_revmap](https://github.com/torvalds/linux/blob/v4.14/include/linux/irqdomain.h#L377) uses irq domain to translate hardware irq number into Linux irq number and [generic_handle_irq](https://github.com/torvalds/linux/blob/v4.14/include/linux/irqdesc.h#L156) just executes irq handler. Irq handler was set in the initialization function and it points to [handle_level_irq](https://github.com/torvalds/linux/blob/v4.14/kernel/irq/chip.c#L603) that eventually executes all irq actions associated with the interrupt (this is actually done [here](https://github.com/torvalds/linux/blob/v4.14/kernel/irq/handle.c#L135)). For now, the list of irq actions is empty for all supported interrupts - a driver that is interested in handling some interrupt should add an action to the appropriate list. In the next chapter, we are going to see how this is done using system timer as an example.
 
+##### Previous Page
+
+3.2 [Interrupt handling: Low-level exception handling in Linux](../../../docs/lesson03/linux/low_level-exception_handling.md)
+
+##### Next Page
+
+3.4 [Interrupt handling: Timers](../../../docs/lesson03/linux/timer.md)

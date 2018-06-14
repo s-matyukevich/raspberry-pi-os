@@ -1,4 +1,4 @@
-## 1.1: Linux project structure
+## 1.2: Linux project structure
 
 This is the first time we are going to talk about Linux. The idea is first to complete some small step in writing our own kernel, and then take a look at how the same things work in Linux. So far we have done very little: we just implemented our first bare metal hello world program, Still, we will be able to find some similarities between the RPi OS and Linux. And now we are going to explore some of them. 
 
@@ -25,4 +25,12 @@ Next, let's take a look at the folders that we can find inside the Linux reposit
 * [drivers](https://github.com/torvalds/linux/tree/v4.14/drivers) This is the largest folder in the Linux kernel. It contains implementations of all device drivers.
 * [fs](https://github.com/torvalds/linux/tree/v4.14/fs) You can look here to find different filesystem implementations.
 
-This explanation is very high-level, but this is enough for now.In the next chapter, we will try to examine Linux build system in some details. 
+This explanation is very high-level, but this is enough for now. In the next chapter, we will try to examine Linux build system in some details. 
+
+##### Previous Page
+
+1.1 [Kernel Initialization: Introducing RPi OS, or bare metal "Hello, world!"](../../../docs/lesson01/rpi-os.md)
+
+##### Next Page
+
+1.3 [Kernel Initialization: Kernel build system](../../../docs/lesson01/linux/build-system.md)
