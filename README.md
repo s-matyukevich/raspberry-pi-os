@@ -10,6 +10,10 @@ For more information about project goals and history, please read the [Introduct
   <img src="https://raw.githubusercontent.com/s-matyukevich/raspberry-pi-os/master/images/rpi.png" alt="Follow @RPi_OS" height="20">
 </a>
 
+<a href="https://www.facebook.com/groups/251043708976964/">
+  <img src="https://raw.githubusercontent.com/s-matyukevich/raspberry-pi-os/master/images/facebook.png" alt="Follow Raspberry Pi OS on facebook" height="20">
+</a>
+
 ## Table of Content
 
 * **[Introduction](docs/Introduction.md)**
