@@ -202,7 +202,7 @@ master:
     bl     memzero
 ```
 
-Here, we clean the `.bss` section by calling `memzero`. We will define this function later. In ARMv8 architecture, by convention, the first seven arguments are passed to the called function via registers x0–x6. The `memzeo` function accepts only two arguments: the start address (`bss_begin`) and the size of the section needed to be cleaned (`bss_end - bss_begin`).
+Here, we clean the `.bss` section by calling `memzero`. We will define this function later. In ARMv8 architecture, by convention, the first seven arguments are passed to the called function via registers x0–x6. The `memzero` function accepts only two arguments: the start address (`bss_begin`) and the size of the section needed to be cleaned (`bss_end - bss_begin`).
 
 ```
     mov    sp, #LOW_MEMORY
