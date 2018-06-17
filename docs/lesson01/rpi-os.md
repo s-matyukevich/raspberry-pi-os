@@ -434,7 +434,7 @@ char uart_recv ( void )
 }
 ```
 
-Both of the functions start with an infinite loop, the purpose of which is to verify whether the device is ready to transmit or receive data. We are using  the `AUX_MU_LSR_REG` register to do this. The first bit, if set to 1, indicates that the data is ready; this means that we can read from the UART. The fifth bit tells us that the transmitter is empty, meaning that we can write to the UART.
+Both of the functions start with an infinite loop, the purpose of which is to verify whether the device is ready to transmit or receive data. We are using  the `AUX_MU_LSR_REG` register to do this. Bit zero, if set to 1, indicates that the data is ready; this means that we can read from the UART. Bit five, if set to 1, tells us that the transmitter is empty, meaning that we can write to the UART.
 Next, we use `AUX_MU_IO_REG` to either store the value of the transmitted character or read the value of the received character.
 
 We also have a very simple function that is capable of sending strings instead of characters:
