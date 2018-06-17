@@ -39,8 +39,8 @@ $(BUILD_DIR)/%_c.o: $(SRC_DIR)/%.c
 $(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.S
     $(ARMGNU)-gcc $(ASMOPS) -MMD -c $< -o $@
 
-C_FILES = $(wildcard src/*.c)
-ASM_FILES = $(wildcard src/*.S)
+C_FILES = $(wildcard $(SRC_DIR)/*.c)
+ASM_FILES = $(wildcard $(SRC_DIR)/*.S)
 OBJ_FILES = $(C_FILES:$(SRC_DIR)/%.c=$(BUILD_DIR)/%_c.o)
 OBJ_FILES += $(ASM_FILES:$(SRC_DIR)/%.S=$(BUILD_DIR)/%_s.o)
 
@@ -48,7 +48,7 @@ DEP_FILES = $(OBJ_FILES:%.o=%.d)
 -include $(DEP_FILES)
 
 kernel7.img: $(SRC_DIR)/linker.ld $(OBJ_FILES)
-    $(ARMGNU)-ld -T src/linker.ld -o $(BUILD_DIR)/kernel7.elf  $(OBJ_FILES)
+    $(ARMGNU)-ld -T $(SRC_DIR)/linker.ld -o $(BUILD_DIR)/kernel7.elf  $(OBJ_FILES)
     $(ARMGNU)-objcopy $(BUILD_DIR)/kernel7.elf -O binary kernel7.img
 ``` 
 Now, let's inspect this file in detail:
@@ -100,8 +100,8 @@ $(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.S
 The next two targets are responsible for compiling C and assembler files. If, for example, in the `src` directory we have `foo.c` and `foo.S` files, they will be compiled into `build/foo_c.o` and `build/foo_s.o`, respectively. `$<` and `$@` are substituted at runtime with the input and output filenames (`foo.c` and `foo_c.o`). Before compiling C files, we also create a `build` directory in case it doesn't exist yet.
 
 ```
-C_FILES = $(wildcard src/*.c)
-ASM_FILES = $(wildcard src/*.S)
+C_FILES = $(wildcard $(SRC_DIR)/*.c)
+ASM_FILES = $(wildcard $(SRC_DIR)/*.S)
 OBJ_FILES = $(C_FILES:$(SRC_DIR)/%.c=$(BUILD_DIR)/%_c.o)
 OBJ_FILES += $(ASM_FILES:$(SRC_DIR)/%.S=$(BUILD_DIR)/%_s.o)
 ```
@@ -116,7 +116,7 @@ DEP_FILES = $(OBJ_FILES:%.o=%.d)
 The next two lines are a little bit tricky. If you take a look at how we defined our compilation targets for both C and assembler source files, you will notice that we used the `-MMD` parameter. This parameter instructs the `gcc` compiler to create a dependency file for each generated object file. A dependency file defines all of the dependencies for a particular source file. These dependencies usually contain a list of all included headers. We need to include all of the generated dependency files so that make knows what exactly to recompile in case a header changes. 
 
 ```
-$(ARMGNU)-ld -T src/linker.ld -o kernel7.elf  $(OBJ_FILES)
+$(ARMGNU)-ld -T $(SRC_DIR)/linker.ld -o kernel7.elf  $(OBJ_FILES)
 ``` 
 
 We use the `OBJ_FILES` array to build the `kernel7.elf` file. We use the linker script `src/linker.ld` to define the basic layout of the resulting executable image (we will discuss the linker script in the next section).
