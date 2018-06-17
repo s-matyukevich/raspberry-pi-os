@@ -102,8 +102,8 @@ The next two targets are responsible for compiling C and assembler files. If, fo
 ```
 C_FILES = $(wildcard src/*.c)
 ASM_FILES = $(wildcard src/*.S)
-OBJ_FILES = $(C_FILES:.c=_c.o)
-OBJ_FILES += $(ASM_FILES:.S=_s.o)
+OBJ_FILES = $(C_FILES:$(SRC_DIR)/%.c=$(BUILD_DIR)/%_c.o)
+OBJ_FILES += $(ASM_FILES:$(SRC_DIR)/%.S=$(BUILD_DIR)/%_s.o)
 ```
 
 Here we are building an array of all object files (`OBJ_FILES`) created from the concatenation of both C and assembler source files.
