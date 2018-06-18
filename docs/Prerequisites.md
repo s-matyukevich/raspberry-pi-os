@@ -6,8 +6,11 @@ Older versions of Raspberry Pi are not going to work with this tutorial because 
 
 ### 2. [USB to TTL serial cable](https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=usb+to+ttl+serial+cable&rh=i%3Aaps%2Ck%3Ausb+to+ttl+serial+cable) 
 
-After you get a serial cable, you need to test your connection. If you never did this before I recommend you to follow [this guide](https://cdn-learn.adafruit.com/downloads/pdf/adafruits-raspberry-pi-lesson-5-using-a-console-cable.pdf) It describes the process of connecting your Raspberry PI via a serial cable in great details. One thing that I can recommend you to do is to use the serial cable to power your Raspberry Pi. How to do this is described in the link above.
+After you get a serial cable, you need to test your connection. If you never did this before I recommend you to follow [this guide](https://cdn-learn.adafruit.com/downloads/pdf/adafruits-raspberry-pi-lesson-5-using-a-console-cable.pdf) It describes the process of connecting your Raspberry PI via a serial cable in great details. 
 
+The guide also describes how to power your Raspberry Pi using a serial cable. RPi OS works fine with such kind of setup, however, in this case you need to run your terminal emulator right after you plug in the cable. Check [this](https://github.com/s-matyukevich/raspberry-pi-os/issues/2)
+ issue for details..
+ 
 ### 3. [SD card](https://www.raspberrypi.org/documentation/installation/sd-cards.md) with installed [Raspbian OS](https://www.raspberrypi.org/downloads/raspbian/)
 
 We need Raspbian to test USB to TTL cable connectivity initially. Another reason is that after installation it leaves the SD card formatted in the right way.
