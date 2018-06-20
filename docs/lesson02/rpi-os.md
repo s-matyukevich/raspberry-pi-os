@@ -80,7 +80,7 @@ master:
     eret                
 ```
 
-As you can see the code consists mostly of configuring a few system registers. Now we are going to examine those registers one by one. In order to do this we first need to download [AArch64-Reference-Manual](https://developer.arm.com/docs/ddi0487/latest/arm-architecture-reference-manual-armv8-for-armv8-a-architecture-profile) This document contains the detailed specification of the `ARM.v8` architecture. 
+As you can see the code consists mostly of configuring a few system registers. Now we are going to examine those registers one by one. In order to do this we first need to download [AArch64-Reference-Manual](https://developer.arm.com/docs/ddi0487/ca/arm-architecture-reference-manual-armv8-for-armv8-a-architecture-profile). This document contains the detailed specification of the `ARM.v8` architecture. 
 
 #### SCTLR_EL1, System Control Register (EL1), Page 2025 of AArch64-Reference-Manual.
 
