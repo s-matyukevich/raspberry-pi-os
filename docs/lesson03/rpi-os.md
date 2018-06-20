@@ -54,7 +54,7 @@ Vector table is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/
 
 In the first line, you can see that another macro is used: `kernel_entry`. We will discuss it shortly.
 Then we call [show_invalid_entry_message](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/irq.c#L34) and prepare 3 arguments for it. The first argument is exception type that can take one of [this](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/include/entry.h#L6) values. It tells us which exactly exception handler has been executed.
-The second parameter is the most important one, it is called `ESR` which stands for Exception Syndrome Register. This argument is taken from `esr_el1` register, which is described at page 1899 of `AArch64-Reference-Manual`. This register contains detaild information about what causes an exception. 
+The second parameter is the most important one, it is called `ESR` which stands for Exception Syndrome Register. This argument is taken from `esr_el1` register, which is described at page 2431 of `AArch64-Reference-Manual`. This register contains detaild information about what causes an exception. 
 The third argument is important mostly in case of synchronous exceptions. Its value is taken from already familiar to us `elr_el1` register, which contains the address of the instruction that had been executed when the exception was generated. For synchronous exceptions, this is also the instruction that causes the exception.
 After `show_invalid_entry_message`  function prints all this information to the screen we put the processor in an infinite loop because there is not much else we can do.
 
