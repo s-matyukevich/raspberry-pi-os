@@ -206,7 +206,7 @@ When the processor is executing in 32-bit execution mode, there is a concept of 
     msr    mdcr_el2, x3            // Configure debug traps
 ```
 
-This piece of code is responsible for configuring `mdcr_el2` (Monitor Debug Configuration Register (EL2)). This register is responsible for setting different debug traps, related to the virtualization extension.  I am going to leave the details of this code block unexplained because debug and tracing are a little bit out of scope for our discussion. If you are interested in details, I can recommend you to read the description of `mdcr_el2` register on page `2114` of the [AArch64-Reference-Manual](https://developer.arm.com/docs/ddi0487/latest/arm-architecture-reference-manual-armv8-for-armv8-a-architecture-profile)
+This piece of code is responsible for configuring `mdcr_el2` (Monitor Debug Configuration Register (EL2)). This register is responsible for setting different debug traps, related to the virtualization extension.  I am going to leave the details of this code block unexplained because debug and tracing are a little bit out of scope for our discussion. If you are interested in details, I can recommend you to read the description of `mdcr_el2` register on page `2810` of the [AArch64-Reference-Manual](https://developer.arm.com/docs/ddi0487/ca/arm-architecture-reference-manual-armv8-for-armv8-a-architecture-profile).
 
 ```
     /* Stage-2 translation */
