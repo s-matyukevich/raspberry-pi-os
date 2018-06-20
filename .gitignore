@@ -5,3 +5,9 @@ src/*/build
 **/*.swp
 **/*.img
 **/*.elf
+
+# gnu global files
+GPATH
+GRTAGS
+GSYMS
+GTAGS
