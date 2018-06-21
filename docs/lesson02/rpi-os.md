@@ -97,7 +97,7 @@ Here we set the value of the `sctlr_el1` system register. `sctlr_el1` is respons
 * `#define SCTLR_EE_LITTLE_ENDIAN          (0 << 25)` Exception [Endianness](https://en.wikipedia.org/wiki/Endianness) This field controls endianess of explicit data access at EL1. We are going to configure the processor to work only with `little-endian` format.
 * `#define SCTLR_EOE_LITTLE_ENDIAN         (0 << 24)` Similar to previous field but this one controls endianess of explicit data access at EL0, instead of EL1. 
 * `#define SCTLR_I_CACHE_DISABLED          (0 << 12)` Disable instruction cache. We are going to disable all caches for simplicity. You can find more information about data and instruction caches [here](https://stackoverflow.com/questions/22394750/what-is-meant-by-data-cache-and-instruction-cache).
-* `#define SCTLR_D_CACHE_DISABLED          (0 << 2)` Disable data chache.
+* `#define SCTLR_D_CACHE_DISABLED          (0 << 2)` Disable data cache.
 * `#define SCTLR_MMU_DISABLED              (0 << 0)` Disable MMU. MMU must be disabled until the lesson 6, where we are going to prepare page tables and start working with virtual memory.
 
 #### HCR_EL2, Hypervisor Configuration Register (EL2), Page 2487 of AArch64-Reference-Manual. 
