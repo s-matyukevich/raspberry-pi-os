@@ -1,3 +1,3 @@
 #!/bin/bash
 
-qemu-system-aarch64 -machine raspi3 -nographic -kernel kernel7.img
+qemu-system-aarch64 -machine raspi3 -serial null -serial mon:stdio -nographic -kernel kernel7.img
