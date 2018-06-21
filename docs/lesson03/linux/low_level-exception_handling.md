@@ -190,7 +190,7 @@ In 32-bit mode, we use 32-bit general purpose registers (`w0` instead of `x0`). 
     stp    x28, x29, [sp, #16 * 14]
 ```
 
-This part saves all general purpose registers on the stack. Note, that stack pointer was already adjusted in the [kernel_ventry](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L74) fo fit everything that needs to be stored. The order in which we save registers matters because in Linux there is a special structure [pt_regs](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/ptrace.h#L119) that is used to access saved registers later inside an exception handler. As you might see this structure contains not only general purpose registers but also some other information, which is mostly populated later in the `kernel_entry` macro. I recommend you to remember `pt_regs` struct because we are going to implement and use a similar one in the next few lessons.
+This part saves all general purpose registers on the stack. Note, that stack pointer was already adjusted in the [kernel_ventry](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L74) to fit everything that needs to be stored. The order in which we save registers matters because in Linux there is a special structure [pt_regs](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/ptrace.h#L119) that is used to access saved registers later inside an exception handler. As you might see this structure contains not only general purpose registers but also some other information, which is mostly populated later in the `kernel_entry` macro. I recommend you to remember `pt_regs` struct because we are going to implement and use a similar one in the next few lessons.
 
 ```
     .if    \el == 0
