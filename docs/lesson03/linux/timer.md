@@ -12,7 +12,7 @@ In the next section, we are going to see how system timer is used to implement c
 
 As usual, we start the exploration of a particular device with finding its location in the device tree. System timer node is defined [here](https://github.com/torvalds/linux/blob/v4.14/arch/arm/boot/dts/bcm283x.dtsi#L57). You can keep this definition open for a while because we are going to reference it several times.
 
-Next, we need to use `compatible` property to figure out the location of the corresponding driver. The driver can be found [herea](https://github.com/torvalds/linux/blob/v4.14/drivers/clocksource/bcm2835_timer.c). The first thing we are going to look at is [bcm2835_timer](https://github.com/torvalds/linux/blob/v4.14/drivers/clocksource/bcm2835_timer.c#L42) structure.
+Next, we need to use `compatible` property to figure out the location of the corresponding driver. The driver can be found [here](https://github.com/torvalds/linux/blob/v4.14/drivers/clocksource/bcm2835_timer.c). The first thing we are going to look at is [bcm2835_timer](https://github.com/torvalds/linux/blob/v4.14/drivers/clocksource/bcm2835_timer.c#L42) structure.
 
 ```
 struct bcm2835_timer {
