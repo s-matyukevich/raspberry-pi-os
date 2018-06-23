@@ -27,7 +27,7 @@ ASMOPS = -Iinclude
 BUILD_DIR = build
 SRC_DIR = src
 
-all : kernel7.img
+all : kernel8.img
 
 clean :
     rm -rf $(BUILD_DIR) *.img 
@@ -47,9 +47,9 @@ OBJ_FILES += $(ASM_FILES:$(SRC_DIR)/%.S=$(BUILD_DIR)/%_s.o)
 DEP_FILES = $(OBJ_FILES:%.o=%.d)
 -include $(DEP_FILES)
 
-kernel7.img: $(SRC_DIR)/linker.ld $(OBJ_FILES)
-    $(ARMGNU)-ld -T $(SRC_DIR)/linker.ld -o $(BUILD_DIR)/kernel7.elf  $(OBJ_FILES)
-    $(ARMGNU)-objcopy $(BUILD_DIR)/kernel7.elf -O binary kernel7.img
+kernel8.img: $(SRC_DIR)/linker.ld $(OBJ_FILES)
+    $(ARMGNU)-ld -T $(SRC_DIR)/linker.ld -o $(BUILD_DIR)/kernel8.elf  $(OBJ_FILES)
+    $(ARMGNU)-objcopy $(BUILD_DIR)/kernel8.elf -O binary kernel8.img
 ``` 
 Now, let's inspect this file in detail:
 ```
@@ -79,13 +79,13 @@ SRC_DIR = src
 `SRC_DIR` and `BUILD_DIR` are directories that contain source code and compiled object files, respectively.
 
 ```
-all : kernel7.img
+all : kernel8.img
 
 clean :
     rm -rf $(BUILD_DIR) *.img 
 ```
 
-Next, we define make targets. The first two targets are pretty simple: the `all` target is the default one, and it is executed whenever you type `make` without any arguments (`make` always uses the first target as the default). This target just redirects all work to a different target, `kernel7.img`.
+Next, we define make targets. The first two targets are pretty simple: the `all` target is the default one, and it is executed whenever you type `make` without any arguments (`make` always uses the first target as the default). This target just redirects all work to a different target, `kernel8.img`. 
 The `clean` target is responsible for deleting all compilation artifacts and the compiled kernel image.
 
 ```
@@ -116,16 +116,16 @@ DEP_FILES = $(OBJ_FILES:%.o=%.d)
 The next two lines are a little bit tricky. If you take a look at how we defined our compilation targets for both C and assembler source files, you will notice that we used the `-MMD` parameter. This parameter instructs the `gcc` compiler to create a dependency file for each generated object file. A dependency file defines all of the dependencies for a particular source file. These dependencies usually contain a list of all included headers. We need to include all of the generated dependency files so that make knows what exactly to recompile in case a header changes. 
 
 ```
-$(ARMGNU)-ld -T $(SRC_DIR)/linker.ld -o kernel7.elf  $(OBJ_FILES)
+$(ARMGNU)-ld -T $(SRC_DIR)/linker.ld -o kernel8.elf  $(OBJ_FILES)
 ``` 
 
-We use the `OBJ_FILES` array to build the `kernel7.elf` file. We use the linker script `src/linker.ld` to define the basic layout of the resulting executable image (we will discuss the linker script in the next section).
+We use the `OBJ_FILES` array to build the `kernel8.elf` file. We use the linker script `src/linker.ld` to define the basic layout of the resulting executable image (we will discuss the linker script in the next section).
 
 ```
-$(ARMGNU)-objcopy kernel7.elf -O binary kernel7.img
+$(ARMGNU)-objcopy kernel8.elf -O binary kernel8.img
 ```
 
-`kernel7.elf` is in the [ELF](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) format. The problem is that ELF files are designed to be executed by an operating system. To write a bare-metal program, we need to extract all executable and data sections from the ELF file and put them into the `kernel7.img` image. 
+`kernel8.elf` is in the [ELF](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) format. The problem is that ELF files are designed to be executed by an operating system. To write a bare-metal program, we need to extract all executable and data sections from the ELF file and put them into the `kernel8.img` image. The trailing `8` denotes ARMv8 which is a 64-bit architecture. This filename tells the processor to boot into 64-bit mode.
 
 ### The linker script
 
@@ -145,7 +145,7 @@ SECTIONS
 }
 ``` 
 
-After startup, the Raspberry Pi loads `kernel7.img` into memory and starts execution from the beginning of the file. That's why the `.text.boot` section must be first; we are going to put the OS startup code inside this section. 
+After startup, the Raspberry Pi loads `kernel8.img` into memory and starts execution from the beginning of the file. That's why the `.text.boot` section must be first; we are going to put the OS startup code inside this section. 
 The `.text`, `.rodata`, and `.data` sections contain kernel-compiled instructions, read-only data, and normal data––there is nothing special to add about them.
 The `.bss` section contains data that should be initialized to 0. By putting such data in a separate section, the compiler can save some space in the ELF binary––only the section size is stored in the ELF header, but the section itself is omitted. After loading the image into memory, we must initialize the `.bss` section to 0; that's why we need to record the start and end of the section (hence the `bss_begin` and `bss_end` symbols) and align the section so that it starts at an address that is a multiple of 8. If the section is not aligned, it would be more difficult to use the `str` instruction to store 0 at the beginning of the `bss` section because the `str` instruction can be used only with 8-byte-aligned addresses.
 
@@ -454,16 +454,14 @@ The Raspberry Pi startup sequence is the following (simplified):
 
 1. The device is powered on.
 1. The GPU starts up and reads the `config.txt` file from the boot partition. This file contains some configuration parameters that the GPU uses to further adjust the startup sequence.
-1. `kernel7.img` is loaded into memory and executed.
+1. `kernel8.img` is loaded into memory and executed.
 
 To be able to run our simple OS, the `config.txt` file should be the following:
 
 ```
-arm_control=0x200
 kernel_old=1
 disable_commandline_tags=1
 ```
-* `arm_control=0x200` specifies that the processor should be booted in 64-bit mode. 
 * `kernel_old=1` specifies that the kernel image should be loaded at address 0.
 * `disable_commandline_tags` instructs the GPU to not pass any command line arguments to the booted image.
 
@@ -473,7 +471,7 @@ disable_commandline_tags=1
 Now that we have gone through all of the source code, it is time to see it work. To build and test the kernel you need to  do the following:
 
 1. Execute `./build.sh` or `./build.bat` from [src/lesson01](https://github.com/s-matyukevich/raspberry-pi-os/tree/master/src/lesson01) in order to build the kernel. 
-1. Copy the generated `kernel7.img` file to the `boot` partition of your Raspberry Pi flash card. Make sure you left all other files in the boot partition untouched (see [this](https://github.com/s-matyukevich/raspberry-pi-os/issues/43) issue for details)
+1. Copy the generated `kernel8.img` file to the `boot` partition of your Raspberry Pi flash card. Make sure you left all other files in the boot partition untouched (see [this](https://github.com/s-matyukevich/raspberry-pi-os/issues/43) issue for details)
 1. Modify the `config.txt` file as described in the previous section.
 1. Connect the USB-to-TTL serial cable as described in the [Prerequisites](../Prerequisites.md).
 1. Power on your Raspberry Pi.
