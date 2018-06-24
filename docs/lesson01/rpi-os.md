@@ -125,7 +125,8 @@ We use the `OBJ_FILES` array to build the `kernel8.elf` file. We use the linker 
 $(ARMGNU)-objcopy kernel8.elf -O binary kernel8.img
 ```
 
-`kernel8.elf` is in the [ELF](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) format. The problem is that ELF files are designed to be executed by an operating system. To write a bare-metal program, we need to extract all executable and data sections from the ELF file and put them into the `kernel8.img` image. The trailing `8` denotes ARMv8 which is a 64-bit architecture. This filename tells the processor to boot into 64-bit mode.
+`kernel8.elf` is in the [ELF](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) format. The problem is that ELF files are designed to be executed by an operating system. To write a bare-metal program, we need to extract all executable and data sections from the ELF file and put them into the `kernel8.img` image. The trailing `8` denotes ARMv8 which is a 64-bit architecture. This filename tells the firmware to boot the processor into 64-bit mode.
+You can also boot the CPU in the 64-bit mode by using `arm_control=0x200` flag in the `config.txt` file. The RPi OS previously used this method, and you can still find it in some of the exercise answers. However, `arm_control` flag is undocumented and it is preferable to use `kernel8.img` naming convention instead.
 
 ### The linker script
 
