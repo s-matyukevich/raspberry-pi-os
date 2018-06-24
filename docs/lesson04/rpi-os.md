@@ -143,7 +143,7 @@ int copy_process(unsigned long fn, unsigned long arg)
     p->priority = current->priority;
     p->state = TASK_RUNNING;
     p->counter = p->priority;
-    p->preempt_count = 1; //disable preemtion untill schedule_tail
+    p->preempt_count = 1; //disable preemtion until schedule_tail
 
     p->cpu_context.x19 = fn;
     p->cpu_context.x20 = arg;
@@ -163,7 +163,7 @@ Now, we are going to examine it in details.
     struct task_struct *p;
 ```
 
-The function starts with disabling preemption and allocating a pointer for the new task. Preemption is disabled because we don't want to be rescheduled to a different task in the middle of the `copy__process` function.  
+The function starts with disabling preemption and allocating a pointer for the new task. Preemption is disabled because we don't want to be rescheduled to a different task in the middle of the `copy_process` function.  
 
 ```
     p = (struct task_struct *) get_free_page();
@@ -212,7 +212,7 @@ Now, let's go back to `copy_process`.
 
 Finally, `copy_process` adds the newly created task to the `task` array and enables preemption for the current task.
 
-An important thing to understand about the `copu_process` function is that after it finishes execution, no context switch happens. The function only prepares new `task_struct` and adds it to the `task` array - this task will be executed only after `schedule` function is called.
+An important thing to understand about the `cpu_process` function is that after it finishes execution, no context switch happens. The function only prepares new `task_struct` and adds it to the `task` array — this task will be executed only after `schedule` function is called.
 
 ### Who calls `schedule`?
 
@@ -374,7 +374,7 @@ Function returns to the location pointed to by the link register (`x30`) If we a
 
 ### How scheduling works with exception entry/exit?
 
-In the previous lesson, we have seen how [kernel_entry](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L17) and [kernel_exit](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L4) macros are used to save and restore the processor state. After the scheduler has been introduced, a new problem arrives: now it becomes fully legal to enter an interrupt as one task and leave it as a different one. This is a problem, because `eret` instruction, which we are using to return from an interrupts, relies on the fact that return address should be stored in `elr_el1` and processor state in `spsr_el1` registers. So, if we want to switch tasks while processing an interrupt, we must save and restore those 2 registers alongside with all other general purpose registers. The code that does this is very straightforward, you can find the save part [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L35) and restore [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L35)
+In the previous lesson, we have seen how [kernel_entry](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L17) and [kernel_exit](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L4) macros are used to save and restore the processor state. After the scheduler has been introduced, a new problem arrives: now it becomes fully legal to enter an interrupt as one task and leave it as a different one. This is a problem, because `eret` instruction, which we are using to return from an interrupts, relies on the fact that return address should be stored in `elr_el1` and processor state in `spsr_el1` registers. So, if we want to switch tasks while processing an interrupt, we must save and restore those 2 registers alongside with all other general purpose registers. The code that does this is very straightforward, you can find the save part [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L35) and restore [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L46)
 
 ### Tracking system state during a context switch
 
@@ -441,7 +441,7 @@ We have already examined all source code related to the context switch. However,
 1. [cpu_switch_to](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.S#L4) saves calee-saved registers in the init task `cpu_context`, wich is located inside the kernel image.
 1. `cpu_switch_to` restores calee-saved registers from task 1 `cpu_context`. `sp` now points to `0x00401000`, link register to [ret_from_fork](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L146) function, `x19` contains a pointer to [process](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/kernel.c#L9) function and `x20` a pointer to string "12345", wich is located somewhere in the kernel image.
 1. `cpu_switch_to` calls `ret` instruction, which jums to the `ret_from_fork` function.
-1. `ret_from_fork` reads `x19` and `x20` registers and  calls `process` function with the argument "12345". After `process` function starts to execute it stack begins to grow.
+1. `ret_from_fork` reads `x19` and `x20` registers and  calls `process` function with the argument "12345". After `process` function starts to execute its stack begins to grow.
     ```
              0 +------------------+ 
                | kernel image     |
@@ -657,7 +657,7 @@ We have already examined all source code related to the context switch. However,
     ```
 1. `kernel_exit` executes `eret` instruction witch uses `elr_el1` register to jump back to `process` function. Task 1 resumes it normal execution.
 
-The described above sequence of steps is very important - I personally consider it one of the most important things in the whole tutorial. If you have difficulties with understanding it, I can advise you to work on the exercise number 1 from this lesson.
+The described above sequence of steps is very important — I personally consider it one of the most important things in the whole tutorial. If you have difficulties with understanding it, I can advise you to work on the exercise number 1 from this lesson.
 
 ### Conclusion
 
