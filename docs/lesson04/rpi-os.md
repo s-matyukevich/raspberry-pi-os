@@ -177,7 +177,7 @@ Next, a new page is allocated. At the bottom of this page, we are putting the `t
     p->priority = current->priority;
     p->state = TASK_RUNNING;
     p->counter = p->priority;
-    p->preempt_count = 1; //disable preemtion untill schedule_tail
+    p->preempt_count = 1; //disable preemtion until schedule_tail
 ```
 
 After the `task_struct` is allocated, we can initialize its properties.  Priority and initial counter are set based on the current task priority. The state is set to `TASK_RUNNING`, indicating that the new task is ready to be started. `preempt_count` is set to 1, meaning that after the task is executed it should not be rescheduled until it completes some initialization work.
@@ -212,7 +212,7 @@ Now, let's go back to `copy_process`.
 
 Finally, `copy_process` adds the newly created task to the `task` array and enables preemption for the current task.
 
-An important thing to understand about the `cpu_process` function is that after it finishes execution, no context switch happens. The function only prepares new `task_struct` and adds it to the `task` array — this task will be executed only after `schedule` function is called.
+An important thing to understand about the `copy_process` function is that after it finishes execution, no context switch happens. The function only prepares new `task_struct` and adds it to the `task` array — this task will be executed only after `schedule` function is called.
 
 ### Who calls `schedule`?
 

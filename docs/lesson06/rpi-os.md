@@ -607,7 +607,7 @@ int copy_process(unsigned long clone_flags, unsigned long fn, unsigned long arg)
     p->priority = current->priority;
     p->state = TASK_RUNNING;
     p->counter = p->priority;
-    p->preempt_count = 1; //disable preemtion untill schedule_tail
+    p->preempt_count = 1; //disable preemtion until schedule_tail
 
     p->cpu_context.pc = (unsigned long)ret_from_fork;
     p->cpu_context.sp = (unsigned long)childregs;
