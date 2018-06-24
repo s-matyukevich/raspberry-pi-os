@@ -1,0 +1,42 @@
+copy_process: pid=1, sp=401000
+copy_process: pid=2, sp=402000
+schedule switch_to 1
+tasks:
+[0] sp=0
+[1] sp=401000
+[2] sp=402000
+schedule switch_to 2
+tasks:
+[0] sp=3fff70
+[1] sp=401000
+[2] sp=402000
+schedule switch_to 0
+tasks:
+[0] sp=3fff70
+[1] sp=400e20
+[2] sp=402000
+schedule switch_to 1
+tasks:
+[0] sp=3fff70
+[1] sp=400e20
+[2] sp=401e20
+schedule switch_to 2
+tasks:
+[0] sp=3fff70
+[1] sp=400e20
+[2] sp=401e20
+schedule switch_to 0
+tasks:
+[0] sp=3fff70
+[1] sp=400e20
+[2] sp=401e20
+schedule switch_to 1
+tasks:
+[0] sp=3fff70
+[1] sp=400e20
+[2] sp=401e20
+schedule switch_to 2
+tasks:
+[0] sp=3fff70
+[1] sp=400e20
+[2] sp=401e20
