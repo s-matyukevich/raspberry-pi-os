@@ -343,7 +343,7 @@ ENDPROC(el1_irq)
 
 The following is done inside this function.
 
-* `kernel_enter` and `kernel_exit` macros are called to save and restore processor state. The first parameter indicates that the exception is taken from EL1.
+* `kernel_entry` and `kernel_exit` macros are called to save and restore processor state. The first parameter indicates that the exception is taken from EL1.
 * Debug interrupts are unmasked by calling `enable_dbg` macro. At this point, it is safe to do so, because the processor state is already saved and, even if debug exception occurred in the middle of the interrupt handler, it will be processed correctly. If you wonder why is it necessary to unmask debug exceptions during an interrupt processing in the first place - read [this](https://github.com/torvalds/linux/commit/2a2830703a2371b47f7b50b1d35cb15dc0e2b717) commit message. 
 * Code inside `#ifdef CONFIG_TRACE_IRQFLAGS` block is responsible for tracing interrupts. It records 2 events: interrupt start and end. 
 * Code inside `#ifdef CONFIG_PREEMPT` block access current task flags to check whether we need to call the scheduler. This code will be examined details in the next lesson. 
