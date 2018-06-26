@@ -31,22 +31,22 @@ In this lesson, we are going to fix all issues mentioned above by introducing vi
 
 The following facts are critical to understand this diagram and memory translation process in general.
 
-* Memory for a process is always allocated in pages. Page is a contignious memory region 4KB in size (ARM processors support larger pages, but 4KB is the most comon casee and we are going to limit our discussion only to this page size)
-* Page tables have a hierarchical structure. An Item in any of the tables contains an address of the next table in the hierarchy 
+* Memory for a process is always allocated in pages. A page is a contignious memory region 4KB in size (ARM processors support larger pages, but 4KB is the most common case and we are going to limit our discussion only to this page size)
+* Page tables have a hierarchical structure. An item in any of the tables contains an address of the next table in the hierarchy 
 * There are 4 levels in the table hierarchy: PGD (Page Global Directory), PUD (Page Upper Directory), PMD (Page Middle Directory), PTE (Page Table Entry). PTE is the last table in the hierarchy and it points to the actual page in the physical memory.
 * Memory translation process starts by locating the address of PGD (Page Global Directory) table. The address of this table is stored in the `ttbr0_el1` register. Each process has its own copy of all page tables, including PGD, and therefore each process must keep its PGD address. During a context switch, PGD address of the next process is loaded into the `ttbr0_el1`  register.
-* Next, MMU uses PGD pointer and virtual address to calculate the corresponding physical address. All virtual addresses use only 48 out of 64 available bits.  When doing translation MMU splits an address into 4 parts.
+* Next, MMU uses PGD pointer and virtual address to calculate the corresponding physical address. All virtual addresses use only 48 out of 64 available bits.  When doing a translation, MMU splits an address into 4 parts:
   * Bits [39 - 47] contain an index in the PGD table. MMU uses this index to find the location of the PUD.
   * Bits [30 - 38] contain an index in the PUD table. MMU uses this index to find the location of the PMD.
   * Bits [21 - 29] contain an index in the PMD table. MMU uses this index to find the location of the PTE.
   * Bits [12 - 20] contain an index in the PTE table. MMU uses this index to find a page in the physical memory.
   * Bits [0 - 11] contain an offset in the physical page. MMU uses this offset to determine the exact position in the previously found page that corresponds to the original virtual address.
 
-Now let's make a small exercise and calculate the size of a page table. From the diagram above we know that index in a page table occupies 9 bits (This is true for all page table levels) This means that each page table contains `2^9 = 512` items. Each item in a page table is an address of either next page table in the hierarchy or a physical page in case of PTE. As we are using 64-bit processor, each address must be 64 bit or 8 bytes in size. Putting all of this together we can calculate that the size of a page table must be `512 * 8 = 4096` bytes or 4 KB. But this is exactly the size of a page! This might give you an intuition why MMU designers chose such numbers. 
+Now, let's make a small exercise and calculate the size of a page table. From the diagram above we know that index in a page table occupies 9 bits (this is true for all page table levels). This means that each page table contains `2^9 = 512` items. Each item in a page table is an address of either the next page table in the hierarchy or a physical page in case of PTE. As we are using a 64-bit processor, each address must be 64 bit or 8 bytes in size. Putting all of this together we can calculate that the size of a page table must be `512 * 8 = 4096` bytes or 4 KB. But this is exactly the size of a page! This might give you an intuition why MMU designers chose such numbers. 
 
 ### Section mapping
 
-There is one more thing that I want to discuss before we start looking at the source code: section mapping. Sometimes there is a need to map large parts of continuous physical memory. In this case, instead of 4 KB pages, we can directly map 2 MB blocks that are called sections. This allows eliminating 1 level of translation. The translation diagram, in this case, looks like the following.
+There is one more thing that I want to discuss before we start looking at the source code: section mapping. Sometimes there is the need to map large parts of continuous physical memory. In this case, instead of 4 KB pages, we can directly map 2 MB blocks that are called sections. This allows to eliminate 1 level of translation. The translation diagram, in this case, looks like the following.
 
 ```
                            Virtual address                                               Physical Memory
@@ -71,7 +71,7 @@ There is one more thing that I want to discuss before we start looking at the so
                                                                                        +------------------+
 ```
 
-As you can see the difference here is that now PMD contains a pointer to the physical section. Also offset occupies 21 bit instead of 12 bit (this is because we need 21 bit to encode offset from 0 to 2MB) 
+As you can see the difference here is that now PMD contains a pointer to the physical section. Also, the offset occupies 21 bits instead of 12 bits (this is because we need 21 bit2 to encode a 2MB range) 
 
 ### Page descriptor format
 
@@ -88,8 +88,8 @@ You may ask how does the MMU know whether PMD item points to a PTE or a physical
 
 The key thing to understand here is that each descriptor always points to something that is page aligned (either a physical page, a section or the next page table in the hierarchy). This means that last 12 bits of the address, stored in a descriptor, will always be 0. This also means that MUU can use those bits to store something more useful - and that is exactly what it does. Now let me explain the meaning of all bits in a descriptor.
 
-* **Bit 0** This bit must be set to 1 for all valid descriptors. If MMU encounter non-valid descriptor during translation process a synchronous exception is generated. The kernel then should handle this exception, allocate new page and prepare correct descriptor (We will look in details on how this works a little bit later)
-* **Bit 1** This bit indicates whether current descriptor points to a next page table in the hierarchy (we call such descriptor a "table descriptor") or it points instead to a physical page or a section (such descriptors are called "block descriptors").
+* **Bit 0** This bit must be set to 1 for all valid descriptors. If MMU encounter non-valid descriptor during translation process a synchronous exception is generated. The kernel then should handle this exception, allocate a new page and prepare a correct descriptor (We will look in details on how this works a little bit later)
+* **Bit 1** This bit indicates whether the current descriptor points to a next page table in the hierarchy (we call such descriptor a "table descriptor") or it points instead to a physical page or a section (such descriptors are called "block descriptors").
 * **Bits [11:2]** Those bits are ignored for table descriptors. For block descriptors they contain some attributes that control, for example, whether the mapped page is cachable, executable, etc.
 * **Bits [47:12]**. This is the place where the address that a descriptor points to is stored. As I mentioned previously, only bits [47:12] of the address need to be stored, because all other bits are always 0.
 * **Bits [63:48] Another set of attributes.
@@ -98,7 +98,7 @@ The key thing to understand here is that each descriptor always points to someth
 
 As I mentioned in the previous section, each block descriptor contains a set of attributes that controls various virtual page parameters. However, the attributes that are most important for our discussion are not configured directly in the descriptor. Instead, ARM processors implement a trick, which allows them to save some space in the descriptor attributes section.
 
-ARM.v8 architecture introduces `mair_el1` register. This register consists of 8 sections 8 bits long. Each such section configures a common set of attributes. A descriptor then specifies just an index of the `mair` section, instead of specifying all attributes directly. This allows using only 2 bits in the descriptor to reference a `mair` section. The meaning of each bit in the `mair` section is described on the page 2609 of the `AArch64-Reference-Manual`. In the RPi OS we are using only a few of available attribute options. [Here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/include/arm/mmu.h#L11)  is the code that prepares values for the `mair` register.
+ARM.v8 architecture introduces `mair_el1` register. This register consists of 8 sections, each being 8 bits long. Each such section configures a common set of attributes. A descriptor then specifies just an index of the `mair` section, instead of specifying all attributes directly. This allows using only 2 bits in the descriptor to reference a `mair` section. The meaning of each bit in the `mair` section is described on the page 2609 of the `AArch64-Reference-Manual`. In the RPi OS we are using only a few of available attribute options. [Here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/include/arm/mmu.h#L11)  is the code that prepares values for the `mair` register.
 
 ```
 /*
@@ -120,24 +120,24 @@ Here we are using only 2 out of 8 available slots in the `mair` registers. The f
 
 ### Kernel vs user virtual memory
 
-After the MMU is switched on, each memory access must use virtual memory instead of physical memory. One consequence of this fact is that the kernel itself must be prepared to use virtual memory and maintain its own set of page tables. One possible solution could be to reload `pgd`  register each time we switch from user to kernel mode. The problem is that switching `pgd` is very expensive operation because it requires invalidating of all caches. Having in mind how often we need to switch from user mode to kernel mode, this solution would make caching completely useless and therefore this solution is never used in OS development. What operating system are doing instead is splitting address space into 2 parts: user space and kernel space. 32-bit architectures usually allocate first 3 GB of the address space for user programs and reserve last 1 GB for the kernel. 64-bit architectures are much more favorable in this regard because of their huge address space. And even more: ARM.v8 architecture comes with a native feature that can be used to easily implement user/kernel address split.
+After the MMU is switched on, each memory access must use virtual memory instead of physical memory. One consequence of this fact is that the kernel itself must be prepared to use virtual memory and maintain its own set of page tables. One possible solution could be to reload `pgd`  register each time we switch from user to kernel mode. The problem is that switching `pgd` is very expensive operation because it requires the invalidation of all caches. Having in mind how often we need to switch from user mode to kernel mode, this solution would make caching completely useless and therefore this solution is never used in OS development. What operating system are doing instead is splitting address space into 2 parts: user space and kernel space. 32-bit architectures usually allocate first 3 GB of the address space for user programs and reserve last 1 GB for the kernel. 64-bit architectures are much more favorable in this regard because of their huge address space. And even more: ARM.v8 architecture comes with a native feature that can be used to easily implement user/kernel address split.
 
 There are 2 registers that can hold the address of the PGD: `ttbr0_el1` and `ttbr1_el1`. As you might remember we are using only 48 bits in the addresses out of 64 available, so the upper 16 bits can be used to distinguish between `ttbr0`  and `ttbr1` translation processes. If upper 16 bits are all equal to 0 then PGD address stored in `ttbr0_el1` is used, and if the address starts with `0xffff`(first 16 bit are all equal to 1) then PGD address stored in the `ttbr1_el1` is selected. The architecture also ensures that a process running at EL0 can never access virtual addresses started with `0xffff` without generating a synchronous exception.  From this description, you can easily infer that a pointer to the kernel PGD is stored in the `ttbr1_el1` and is kept there throughout the life of the kernel, and `ttbr0_el1` is used to store current user process PGD.
 
 One implication of this approach is that all absolute kernel addresses must start with `0xffff`. There are 2 places in the RPi OS source code, were we handle this. In the [linker script](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/linker.ld#L3) we specify base address of the image as `0xffff000000000000`. This will make the compiler think that our image is going to be loaded at `0xffff000000000000` address, and therefore whenever it needs to generate an absolute address it will make it right. (There are a few more changes to the linker script, but we will discuss them later)
 
-There is one more place were we hardcode absolute kernel base addresses: in the [header](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/include/peripherals/base.h#L7) where we define device base address. Now we will access all device memory starting from `0xffff00003F000000` Certainly, that in order for this to work we need first to map all memory, which kernel needs to access In the next section we will explore in detail the code that creates this mapping.
+There is one more place were we hardcode absolute kernel base addresses: in the [header](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/include/peripherals/base.h#L7) where we define device base address. Now we will access all device memory starting from `0xffff00003F000000` Certainly, in order for this to work, we need first to map all memory, which kernel needs to access. In the next section we will explore in detail the code that creates this mapping.
 
 ### Initializing kernel page tables
 
-The process of creating kernel page tables is something that we need to handle very early in the boot process. It starts in the [boot.S](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/boot.S#L42) file. Right after we switch to EL1 and cleared the BSS [__create_page_tables](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/boot.S#L92) function is called. Let's examine it line by line.
+The process of creating kernel page tables is something that we need to handle very early in the boot process. It starts in the [boot.S](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/boot.S#L42) file. Right after we switch to EL1 and clear the BSS [__create_page_tables](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/boot.S#L92) function is called. Let's examine it line by line.
 
 ```
 __create_page_tables:
     mov    x29, x30                        // save return address
 ``` 
 
-First, the function saves `x30` (link register). As we are going to call other functions from `__create_page_tables`, `x30` will be overwritten. Usually `x30` is saved on the stack, but as we know that we are not going to use recursion and nobody else will use `x29` during `__create_page_tables` execution this simple method of preserving link register also works fine.
+First, the function saves `x30` (link register). As we are going to call other functions from `__create_page_tables`, `x30` will be overwritten. Usually `x30` is saved on the stack but, as we know that we are not going to use recursion and nobody else will use `x29` during `__create_page_tables` execution, this simple method of preserving link register also works fine.
 
 ```
     adrp    x0, pg_dir
@@ -145,7 +145,7 @@ First, the function saves `x30` (link register). As we are going to call other f
     bl     memzero
 ```
 
-Next, we clear initial page tables area. an important thing to understand here is where this area is located and how do we know its size? Initial page tables area is defined in the [linker script](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/linker.ld#L20) - this means that we are allocating the spot for this area in the kernel image itself. Calculating the size of this area is a little bit trickier. First, we need to understand the structure of the initial kernel page tables. We know that all our mappings are all inside 1 GB region (this is the size of RPi memory). One PGD descriptor can cover `2^39 = 512 GB`  and one PUD descriptor can cover `x^30 = 1 GB` of continuous virtual mapping area. (Those values are calculated based on the PGD and PUD indexes location in the virtual address) This means that we need just one PGD and one PUD to map the whole RPi memory, and even more - both PGD and PUD will contain a single descriptor. If we have a single PUD entry there also must be a single PMD table, to which this entry will point. (Single PMD entry covers 2 MB, there are 512 items in a PMD, so in total the whole PMD table covers the same 1 GB of memory that is covered by a single PUD descriptor) 
+Next, we clear the initial page tables area. An important thing to understand here is where this area is located and how do we know its size? Initial page tables area is defined in the [linker script](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/linker.ld#L20) - this means that we are allocating the spot for this area in the kernel image itself. Calculating the size of this area is a little bit trickier. First, we need to understand the structure of the initial kernel page tables. We know that all our mappings are all inside 1 GB region (this is the size of RPi memory). One PGD descriptor can cover `2^39 = 512 GB`  and one PUD descriptor can cover `2^30 = 1 GB` of continuous virtual mapping area. (Those values are calculated based on the PGD and PUD indexes location in the virtual address) This means that we need just one PGD and one PUD to map the whole RPi memory, and even more - both PGD and PUD will contain a single descriptor. If we have a single PUD entry there also must be a single PMD table, to which this entry will point. (Single PMD entry covers 2 MB, there are 512 items in a PMD, so in total the whole PMD table covers the same 1 GB of memory that is covered by a single PUD descriptor) 
 Next, we know that we need to map 1 GB region of memory, which is a multiple of 2 MB - so we can use section mapping. This means that we don't need PTE at all. So in total, we need 3 pages: one for PGD, PUD and PMD - this is precisely the size of the initial page table area. 
 
 Now we are going to step outside `__create_page_tables` function and take a look on 2 essential macros: [create_table_entry](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/boot.S#L68) and [create_block_map](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/boot.S#L77)
@@ -467,7 +467,7 @@ unsigned long allocate_user_page(struct task_struct *task, unsigned long va) {
 }
 ```
 
-This function allocates a new page, maps it to the provided virtual address and returns a pointer to the page. When we say "a pointer" now we need to distinguish between 3 things: a pointer to a physical page, a pointer inside kernel address space and a pinter inside user address space - all these 3 different pointers can lead to the same location in memory. In our case `page` variable is a physical pointer and the return value is a pointer inside kernel address space. This pointer can be easily calculated because we linearly map the whole physical memory starting at `VA_START` virtual address. We also don't need to worry about allocating new kernel page table because all of the memory is already mapped in the `boot.S`. But user mapping is still required to be created and this happens in the [map_page](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/mm.c#L62) function, which we will explore next.
+This function allocates a new page, maps it to the provided virtual address and returns a pointer to the page. When we say "a pointer" now we need to distinguish between 3 things: a pointer to a physical page, a pointer inside kernel address space and a pointer inside user address space - all these 3 different pointers can lead to the same location in memory. In our case `page` variable is a physical pointer and the return value is a pointer inside kernel address space. This pointer can be easily calculated because we linearly map the whole physical memory starting at `VA_START` virtual address. We also don't need to worry about allocating new kernel page table because all of the memory is already mapped in `boot.S`. User mapping is still required to be created and this happens in the [map_page](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/mm.c#L62) function, which we will explore next.
 
 ```
 void map_page(struct task_struct *task, unsigned long va, unsigned long page){
@@ -496,7 +496,7 @@ void map_page(struct task_struct *task, unsigned long va, unsigned long page){
 }
 ```
 
-`map_page` in some way duplicates what we've been doing in the `__create_page_tables` function: it allocates and populates a page table hierarchy. There are 3 important difference, however: now we are doing this in C, instead of assembler, `map_page` maps a single page, instead of the whole memory and `map_page` use normal page mapping, instead of section mapping.
+`map_page` in some way duplicates what we've been doing in the `__create_page_tables` function: it allocates and populates a page table hierarchy. There are 3 important difference, however: now we are doing this in C, instead of assembler. `map_page` maps a single page, instead of the whole memory, and use normal page mapping, instead of section mapping.
 
 There are 2 important functions involved in the process:  [map_table](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/mm.c#L47) and [map_table_entry](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/mm.c#L40). 
 
@@ -541,7 +541,7 @@ void map_table_entry(unsigned long *pte, unsigned long va, unsigned long pa) {
 
 `map_table_entry` extracts PTE index from the virtual address and then prepares and sets PTE descriptor. It is similar to what we've been doing in the `create_block_map` macro. 
 
-That's it about user page tables allocation. But `map_page` is responsible for one more important role: it keeps track of the pages that have been allocated during the process of virtuall address mapping. All such pages are stored in the [kernel_pages](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/include/sched.h#L53) array. We need this array to be able to clean up allocated pages after a task exits. There is also [user_pages](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/include/sched.h#L51) array, which is also populated by the `map_page` function. This array store information about the correspondence between process virtual pages any physical pages. We need this information in order to be able to copy process virtual memory during `fork` (More on this later)
+That's it about user page tables allocation, but `map_page` is responsible for one more important role: it keeps track of the pages that have been allocated during the process of virtual address mapping. All such pages are stored in the [kernel_pages](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/include/sched.h#L53) array. We need this array to be able to clean up allocated pages after a task exits. There is also [user_pages](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/include/sched.h#L51) array, which is also populated by the `map_page` function. This array store information about the correspondence between process virtual pages any physical pages. We need this information in order to be able to copy process virtual memory during `fork` (More on this later)
 
 ### Forking a process
 
@@ -577,7 +577,7 @@ void user_process()
 }
 ``` 
 
-The code itself is very simple. The only tricky part is the semantics of the `fork` system call. Unlike `clone`, when doing `fork` we don't need to provide the function that needs to be executed in a new process. Also, the [fork wrapper function](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/user_sys.S#L26) is much easier than the `clone` one. All of this is possible because of the fact that `fork` make a full copy of the process virtual address space, so the fork wrapper function return twice: one time in the original process and one time in the new one. At this point, we have two identical processes, with identical stacks and `pc` positions.The only difference is the return value of the fork syscall: it returns child PID in the parent process and 0 in the child process. Starting from this point both processes begin completely independent life and can modify their stacks and write different things using same addresses in memory - all of this without affecting one another.
+The code itself is very simple. The only tricky part is the semantics of the `fork` system call. Unlike `clone`, when doing `fork` we don't need to provide the function that needs to be executed in a new process. Also, the [fork wrapper function](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/user_sys.S#L26) is much easier than the `clone` one. All of this is possible because of the fact that `fork` make a full copy of the process virtual address space, so the fork wrapper function return twice: one time in the original process and one time in the new one. At this point, we have two identical processes, with identical stacks and `pc` positions.The only difference is the return value of the `fork` syscall: it returns child PID in the parent process and 0 in the child process. Starting from this point both processes begin completely independent life and can modify their stacks and write different things using same addresses in memory - all of this without affecting one another.
 
 Now let's see how `fork` system call is implemented. [copy_process](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/fork.c#L7) function does most of the job.
 
@@ -643,7 +643,7 @@ All other details of the forking procedure work exactly in the same way, as they
 
 If you go back and take a look at the `move_to_user_mode` function, you may notice that we only map a single page, starting at offset 0. But we also assume that the second page will be used as a stack. Why don't we map the second page as well? If you think it is a bug, it is not - it is a feature! Stack page, as well as any other page that a process needs to access will be mapped as soon as it will be requested for the first time. Now we are going to explore the inner-workings of this mechanism.
 
-When a process tries to access some address which belongs to the page that is not yet mapped a synchronous exception is generated. This is the second type of synchronous exception that we are going to support (the first type is an exception generated by the `svs` instruction which is a system call) Syncronos exception handler now looks like the following.
+When a process tries to access some address which belongs to the page that is not yet mapped a synchronous exception is generated. This is the second type of synchronous exception that we are going to support (the first type is an exception generated by the `svs` instruction which is a system call). Syncronos exception handler now looks like the following.
 
 ```
 el0_sync:
@@ -703,7 +703,7 @@ So in the first 2 lines of the `do_mem_abort` function, we check whether the cur
 
 ### Conclusion
 
-This was a long and difficult chapter, but I hope it was useful as well. Virtual memory is really one of the most fundamental pieces of any operating system and I am glad we've passe thought this chapter and, hopefully, start to understand how it works at the lowest level. With the introduction of virtual memory now we have full process isolation, but the RPi OS is still far from completion. It still doesn't support file systems, drivers, signals and interrupt waitlists, networking and a lot of other useful concepts, and we will continue to uncover them in the upcoming lessons.
+This was a long and difficult chapter, but I hope it was useful as well. Virtual memory is really one of the most fundamental pieces of any operating system and I am glad we've passed through this chapter and, hopefully, started to understand how it works at the lowest level. With the introduction of virtual memory we now have full process isolation, but the RPi OS is still far from completion. It still doesn't support file systems, drivers, signals and interrupt waitlists, networking and a lot of other useful concepts, and we will continue to uncover them in the upcoming lessons.
 
 ##### Previous Page
 
