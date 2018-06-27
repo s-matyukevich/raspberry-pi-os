@@ -83,7 +83,7 @@ The initialization function takes 2 parameters: 'node' and 'parent', both of the
 
 `node` can be used to read various properties from the current device tree node. For example, the first line of the `bcm2836_arm_irqchip_l1_intc_of_init` function reads the device base address from [reg](https://github.com/torvalds/linux/blob/v4.14/arch/arm/boot/dts/bcm2837.dtsi#L13) property. However, the process is more complicated than that, because when this function is executed MMU is already enabled, and before we will be able to access some region of physical memory we must map this region to some virtual address. This is exactly what [of_iomap](https://github.com/torvalds/linux/blob/v4.14/drivers/of/address.c#L759) function is doing: it reads `reg` property of the provided node and maps the whole memory region, described by `reg` property, to some virtual memory region.
 
-Next local timer frequency is initialized in [bcm2835_init_local_timer_frequency](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L264) function. There is nothing specific about this funciton: it just uses some of the registers, described in [BCM2836 ARM-local peripherals](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2836/QA7_rev3.4.pdf) manual, to initialize local timer.
+Next local timer frequency is initialized in [bcm2835_init_local_timer_frequency](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L264) function. There is nothing specific about this function: it just uses some of the registers, described in [BCM2836 ARM-local peripherals](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2836/QA7_rev3.4.pdf) manual, to initialize local timer.
 
 Next line requires some explanations.
 
@@ -133,7 +133,7 @@ The first line here performs actual interrupt registration. [irq_create_mapping]
 
 [irq_set_status_flags](https://github.com/torvalds/linux/blob/v4.14/include/linux/irq.h#L652) in this particular case sets a flag, indicating that the current interrupt should be enabled manually and should not be enabled by default.
 
-Going back to the `bcm2836_arm_irqchip_l1_intc_of_init` function, there are only 2 calls left. The first one is [bcm2836_arm_irqchip_smp_init](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L243). Here mailbox interrupts are enabled allowing, processors cores to communicate with each other. 
+Going back to the `bcm2836_arm_irqchip_l1_intc_of_init` function, there are only 2 calls left. The first one is [bcm2836_arm_irqchip_smp_init](https://github.com/torvalds/linux/blob/v4.14/drivers/irqchip/irq-bcm2836.c#L243). Here mailbox interrupts are enabled, allowing processors cores to communicate with each other. 
 
 The last function call is extremely important - this is the place were low-level exception handling code is connected to the driver.
 
