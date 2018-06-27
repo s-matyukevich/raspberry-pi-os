@@ -177,7 +177,7 @@ This macro is very important, so we are going to spend some time understanding i
     and    \tmp1, \tmp1, #PTRS_PER_TABLE - 1            // table index
 ```
 
-The first two lines of the macro are responsible for extracting table index from the virtual address. We are applying left shift first to strip everything to the right of the index and then using `and` operation to strip everything to the left.
+The first two lines of the macro are responsible for extracting table index from the virtual address. We are applying right shift first to strip everything to the right of the index and then using `and` operation to strip everything to the left.
 
 ```
     add    \tmp2, \tbl, #PAGE_SIZE
