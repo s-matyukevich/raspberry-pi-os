@@ -481,12 +481,12 @@ Now that we have gone through all of the source code, it is time to see it work.
 Note that the sequence of speps described above asumes that you have Raspbian installed on your CD card. It is also posible to run the RPi OS using an empty CD card.
 
 1. Prepare your CD card:
-  * Use an MBR partition table
-  * Format the boot partition as FAT32
-  The card should be formatted exactly in the same way as it is required to install Raspbian. Check `HOW TO FORMAT AN SD CARD AS FAT` section in the [official documenation](https://www.raspberrypi.org/documentation/installation/noobs.md) for more information.
+    * Use an MBR partition table
+    * Format the boot partition as FAT32
+    > The card should be formatted exactly in the same way as it is required to install Raspbian. Check `HOW TO FORMAT AN SD CARD AS FAT` section in the [official documenation](https://www.raspberrypi.org/documentation/installation/noobs.md) for more information.
 1. Copy the following files to the card:
-  * [bootcode.bin](https://github.com/raspberrypi/firmware/blob/master/boot/bootcode.bin) This is the GPU bootloader, it contains the GPU code to start the GPU and load the GPU firmware. 
-  * [start.elf](https://github.com/raspberrypi/firmware/blob/master/boot/start.elf) This is the GPU firmware. It reads `config.txt` and enables the GPU to load and run ARM specific user code from `kernel8.img`
+    * [bootcode.bin](https://github.com/raspberrypi/firmware/blob/master/boot/bootcode.bin) This is the GPU bootloader, it contains the GPU code to start the GPU and load the GPU firmware. 
+    * [start.elf](https://github.com/raspberrypi/firmware/blob/master/boot/start.elf) This is the GPU firmware. It reads `config.txt` and enables the GPU to load and run ARM specific user code from `kernel8.img`
 1. Copy `kernel8.img` and `config.txt` files. 
 1. Connect the USB-to-TTL serial cable.
 1. Power on your Raspberry Pi.
