@@ -480,9 +480,9 @@ Now that we have gone through all of the source code, it is time to see it work.
 1. Power on your Raspberry Pi.
 1. Open your terminal emulator. You should be able to see the `Hello, world!` message there.
 
-Note that the sequence of speps described above asumes that you have Raspbian installed on your CD card. It is also posible to run the RPi OS using an empty CD card.
+Note that the sequence of steps described above asumes that you have Raspbian installed on your SD card. It is also posible to run the RPi OS using an empty SD card.
 
-1. Prepare your CD card:
+1. Prepare your SD card:
     * Use an MBR partition table
     * Format the boot partition as FAT32
     > The card should be formatted exactly in the same way as it is required to install Raspbian. Check `HOW TO FORMAT AN SD CARD AS FAT` section in the [official documenation](https://www.raspberrypi.org/documentation/installation/noobs.md) for more information.
