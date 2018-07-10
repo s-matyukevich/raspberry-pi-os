@@ -4,7 +4,7 @@ In all previous lessons we have been working mostly with either architecture spe
 
 ### [task_struct](https://github.com/torvalds/linux/blob/v4.14/include/linux/sched.h#L519)
 
-This is one of the most critical structures in the whole kernel — it contains all information about a running task. We already briefly touched `task_struct`  in lesson 2 and we even have implemented our own `task_struct` for the RPi OS, so I assume that by this time you should already have a basic understanding how it is used. Now I want to highlit a few important fields of this struct that are relevant to our discussion.
+This is one of the most critical structures in the whole kernel — it contains all information about a running task. We already briefly touched `task_struct`  in lesson 2 and we even have implemented our own `task_struct` for the RPi OS, so I assume that by this time you should already have a basic understanding how it is used. Now I want to highlight a few important fields of this struct that are relevant to our discussion.
 
 * [thread_info](https://github.com/torvalds/linux/blob/v4.14/include/linux/sched.h#L525) This is the first field of the `task_struct` and it contains all fields that must be accessed by the low-level architecture code. We have already seen how this happens in lesson 2 and will encounter a few other examples later. [thread_info](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/thread_info.h#L39) is architecture specific. In `arm64` case, it is a simple structure with a few fields.
   ```
