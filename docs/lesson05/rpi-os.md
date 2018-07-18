@@ -2,7 +2,7 @@
 
 We have already added a lot of features to the RPi OS that makes it looks like an actual operating system instead of just a bare metal program. The RPi OS can now manage processes, but there is still a major drawback in this functionality: there is no process isolation at all. In this lesson, we are going to fix this issue. First of all, we will move all user processes to EL0, which restricts their access to privileged processor operations. Without this step any other isolation technics don't make sense, because any user program will be able to rewrite our security settings, thus breaking from isolation. 
 
-If we restrict user programs from direct access to kernel functions, this brings us a different problem. What if a user program needs, for example, to print something to a user? We definitely don't want it to work with the UART device directly. Instead, it would be nice if the OS provides each program with a set of API methods. Such API can't be implemented as a simple set of methods, because each time a user program wants to call one of the API methods current exception level should be rased to EL1. Individual methods in such API are called "system calls", and in this lesson, we will add a set of system calls to the RPi OS.
+If we restrict user programs from direct access to kernel functions, this brings us a different problem. What if a user program needs, for example, to print something to a user? We definitely don't want it to work with the UART device directly. Instead, it would be nice if the OS provides each program with a set of API methods. Such API can't be implemented as a simple set of methods, because each time a user program wants to call one of the API methods current exception level should be raised to EL1. Individual methods in such API are called "system calls", and in this lesson, we will add a set of system calls to the RPi OS.
 
 There is also a third aspect of process isolation: each process should have its own independent view of memory — we are going to tackle this issue in the lesson 6.
 
@@ -65,7 +65,7 @@ ni_sys:
     handle_invalid_entry 0, SYSCALL_ERROR
 ```
 
-`el0_svc` first loads the address of the syscall table in the `stbl` (it is just an alias to the `x27` register) and syscall number in the `scno` variable. Then interrupts are enabled and syscall number is compared to the total number of syscalls in the system — if it is greater or equal an error message is shown. If syscall number fails within the required range, it is used as an index in the syscall table array to obtain a pointer to the syscall handler. Next, the handler is executed and after it finishes `ret_from_syscall` is called. Note, that we don't touch here registers `x0` – `x7` — they are transparently passed to the handler.
+`el0_svc` first loads the address of the syscall table in the `stbl` (it is just an alias to the `x27` register) and syscall number in the `scno` variable. Then interrupts are enabled and syscall number is compared to the total number of syscalls in the system — if it is greater or equal an error message is shown. If syscall number falls within the required range, it is used as an index in the syscall table array to obtain a pointer to the syscall handler. Next, the handler is executed and after it finishes `ret_from_syscall` is called. Note, that we don't touch here registers `x0` – `x7` — they are transparently passed to the handler.
 
 ```
 ret_from_syscall:
@@ -146,13 +146,13 @@ int move_to_user_mode(unsigned long pc)
 
 Right now we are in the middle of execution of a kernel thread that was created by forking from the init task. In the previous lesson we've discussed the forking process, and we've seen that a small area (`pt_regs` area) was reserved at the top of the stack of the newly created task. This is the first time we are going to use this area: we will save manually prepared processor state there. This state will have exactly the same format as `kernel_exit` macro expects and its structure is described by the [pt_regs](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/include/fork.h#L21) struct. 
 
-The following fields of the `pt_regst` struct are initialized in the `move_to_user_mode` function.
+The following fields of the `pt_regs` struct are initialized in the `move_to_user_mode` function.
 
 * `pc` It now points to the function that needs to be executed in the user mode. `kernel_exit`  will copy `pc` to the `elr_el1` register, thus making sure that we will return to the `pc` address after performing exception return.
 * `pstate` This field will be copied to `spsr_el1` by the `kernel_exit` and becomes the processor state after exception return is completed. [PSR_MODE_EL0t](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/include/fork.h#L9) constant, which is copied to the `pstate` field, is prepared in such a way that exception return will be made to EL0 level. We already did the same trick in the lesson 2 when switching from EL3 to EL1.
 * `stack` `move_to_user_mode`  allocates a new page for the user stack and sets `sp` field to point to the top of this page.
 
-`task_pt_regs` function is used to calculate the location of the `pt_regs` area. Because of the way how we initialized current kernel thread, we are sure that after it finished `sp` will point right before the `pt_regs` area. This happens in the middle of the [ret_from_fork](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/entry.S#L188) function.
+`task_pt_regs` function is used to calculate the location of the `pt_regs` area. Because of the way we initialized the current kernel thread, we are sure that after it finished `sp` will point right before the `pt_regs` area. This happens in the middle of the [ret_from_fork](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/entry.S#L188) function.
 
 ```
 .globl ret_from_fork
@@ -170,7 +170,7 @@ As you might notice `ret_from_fork` has been updated. Now, after a kernel thread
 
 ### Forking user processes
 
-Now let's go back to the `kernel.c` file. As we've seen in the previous section, after `kernel_process` finishes, [user_process](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/kernel.c#L22) function will be executed in the user mode. This function calls `clone` system call 2 times in order to  execute [user_process1](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/kernel.c#L10) function in 2 parallel threads. `clone` system call requires that the location of a new user stack will be passed to it, we also need to call `malloc` syscall in order to allocate 2 new memory pages. Let's now take a look at how `clone` syscall wrapping function looks like. You can find it [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/sys.S#L22)
+Now let's go back to the `kernel.c` file. As we've seen in the previous section, after `kernel_process` finishes, [user_process](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/kernel.c#L22) function will be executed in the user mode. This function calls `clone` system call 2 times in order to  execute [user_process1](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/kernel.c#L10) function in 2 parallel threads. `clone` system call requires that the location of a new user stack will be passed to it, we also need to call `malloc` syscall in order to allocate 2 new memory pages. Let's now take a look at what the `clone` syscall wrapping function looks like. You can find it [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/sys.S#L22)
 
 ```
 .globl call_sys_clone
@@ -205,7 +205,7 @@ In the design of the `clone` syscall wrapping function, I tried to emulate the b
 
 1. Saves registers `x0` – `x3`, those registers contain parameters of the syscall and later will be overwritten by the syscall handler.
 1. Calls syscall handler.
-1. Check return value of the syscall handler: if it is `0` this means that we return here right after the syscall finishes and we are executing inside the original thread — just return to the caller in this case.
+1. Checks return value of the syscall handler: if it is `0` this means that we return here right after the syscall finishes and we are executing inside the original thread — just return to the caller in this case.
 1. If the return value is non-zero, then it is PID of the new task and we are executing inside of the newly created thread.  In this case, execution goes to `thread_start`  label.
 1. The function, originally passed as the first argument, is called in a new thread.
 1. After the function finishes, `exit` syscall is performed — it never returns.
@@ -264,7 +264,7 @@ In case, when we are creating a new kernel thread, the function behaves exactly 
         p->stack = stack;
 ```
 
-The first thing that we are doing here is getting access to the processor state, saved by the `kernel_entry` macro. It is not obvious, however, why we can use the same `task_pt_regs` function, which just returns `pt_regs` area at the top of the kernel stack? Why isn't it possible that `pt_regs` will be stored somewhere else on the stack? The answer is that this code can be executed only after `clone` syscall was called. At the time when syscall was triggered the current kernel stack was empty (we left it empty after moving to user mode). That's why `pt_regs` will always be stored at the top of the kernel stack. This rule will be kept for all subsequent syscalls because each of them will leave kernel stack empty before returning to user mode.
+The first thing that we are doing here is getting access to the processor state, saved by the `kernel_entry` macro. It is not obvious, however, why we can use the same `task_pt_regs` function, which just returns `pt_regs` area at the top of the kernel stack. Why isn't it possible that `pt_regs` will be stored somewhere else on the stack? The answer is that this code can be executed only after `clone` syscall was called. At the time when syscall was triggered the current kernel stack was empty (we left it empty after moving to user mode). That's why `pt_regs` will always be stored at the top of the kernel stack. This rule will be kept for all subsequent syscalls because each of them will leave kernel stack empty before returning to user mode.
 
 In the second line current processor state is copied to the new task's state. `x0` in the new state is set to `0`, because `x0` will be interpreted by the caller as a return value of the syscall. We've just seen how clone wrapper function uses this value to determine whether we are still executing as a part of the original thread or a new one.
 
@@ -297,7 +297,7 @@ Following Linux convention, we are not deleting the task at once but set its sta
 
 ### Conclusion
 
-Now, when RPi OS can manage user tasks, we become much closer to the full process isolation. But one important step is still missing: all user tasks share the same physical memory and can easily read one another's data. In the next lesson, we are going to introduce virtual memory and fix this issue.
+Now that the RPi OS can manage user tasks, we become much closer to the full process isolation. But one important step is still missing: all user tasks share the same physical memory and can easily read one another's data. In the next lesson, we are going to introduce virtual memory and fix this issue.
 
 ##### Previous Page
 
