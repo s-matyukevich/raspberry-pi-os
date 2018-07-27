@@ -1,0 +1,8 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+#main_content a[target] {
+  text-decoration: none;
+}
