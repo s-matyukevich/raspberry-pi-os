@@ -7,15 +7,15 @@ Each lesson is designed in such a way that it first explains how some kernel fea
 For more information about project goals and history, please read the [Introduction](docs/Introduction.md). The project is still under active development, if you are willing to participate - please read the [Contribution guide](docs/Contributions.md).
 
 <p>
-  <a href="https://twitter.com/RPi_OS" target="_blank">
+  <a href="https://twitter.com/RPi_OS" target="_blank" style="text-decoration: none">
     <img src="https://raw.githubusercontent.com/s-matyukevich/raspberry-pi-os/master/images/twitter.png" alt="Follow @RPi_OS on twitter" height="34" >
   </a>
 
-  <a href="https://www.facebook.com/groups/251043708976964/" target="_blank">
+  <a href="https://www.facebook.com/groups/251043708976964/" target="_blank" style="text-decoration: none">
     <img src="https://raw.githubusercontent.com/s-matyukevich/raspberry-pi-os/master/images/facebook.png" alt="Follow Raspberry Pi OS on facebook" height="34" >
   </a>
 
-  <a href="https://www.producthunt.com/upcoming/raspberry-pi-os" target="_blank">
+  <a href="https://www.producthunt.com/upcoming/raspberry-pi-os" target="_blank" style="text-decoration: none">
     <img src="https://raw.githubusercontent.com/s-matyukevich/raspberry-pi-os/master/images/subscribe.png" alt="Subscribe for updates" height="34" >
   </a>
 </p>
