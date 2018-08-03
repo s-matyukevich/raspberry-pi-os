@@ -15,7 +15,7 @@ void _schedule(void) {
   struct task_struct *p, *next;
   while (1) {
     c = -1;
-    for (p = init; p->next; p = p->next) {
+    for (p = init; p; p = p->next) {
       if (p && p->state == TASK_RUNNING && p->counter > c) {
         c = p->counter;
         next = p;
@@ -24,7 +24,7 @@ void _schedule(void) {
     if (c) {
       break;
     }
-    for (p = init; p->next; p = p->next) {
+    for (p = init; p; p = p->next) {
       if (p) {
         p->counter = (p->counter >> 1) + p->priority;
       }
