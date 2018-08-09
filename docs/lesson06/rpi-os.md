@@ -189,7 +189,7 @@ Then the address of the next page table is calculated. Here we are using the con
     orr    \tmp2, \tmp2, #MM_TYPE_PAGE_TABLE    
 ```
 
-Next, a pointer to the next зage table in the hierarchy is converted to a table descriptor. (A descriptor must have 2 lower bits set to `1`)
+Next, a pointer to the next page table in the hierarchy is converted to a table descriptor. (A descriptor must have 2 lower bits set to `1`)
 
 ```
     str    \tmp2, [\tbl, \tmp1, lsl #3]
