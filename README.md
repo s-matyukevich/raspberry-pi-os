@@ -18,6 +18,9 @@ For more information about project goals and history, please read the [Introduct
   <a href="https://www.producthunt.com/upcoming/raspberry-pi-os" target="_blank">
     <img src="https://raw.githubusercontent.com/s-matyukevich/raspberry-pi-os/master/images/subscribe.png" alt="Subscribe for updates" height="34" >
   </a>
+  <a href="https://join.slack.com/t/rpi-os/shared_invite/enQtNDQ1NTg2ODc1MDEwLTUxNjc5ZGUzN2EyNWEyNGEyZWU1ZDY1MWJjZTBjYTQzNDBhMzIzNzJhMWNmYzQ1YzQwOGRjOTEzOWYzYzM1YmE" target="_blank">
+    <img src="https://raw.githubusercontent.com/s-matyukevich/raspberry-pi-os/master/images/slack.png" alt="Join Raspberry Pi OS in slack" height="34" >
+  </a>
 </p>
 
 ## Table of Content
