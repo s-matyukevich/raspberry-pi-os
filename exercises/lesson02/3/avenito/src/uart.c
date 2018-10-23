@@ -46,3 +46,10 @@ void uart_init ( void )
 
 	put32(UART_CR,0x301);					// enable UART, RX and TX
 }
+
+
+// This function is required by printf function
+void putc ( void* p, char c)
+{
+	uart_send(c);
+}
