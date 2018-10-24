@@ -1,0 +1,5 @@
+Una vez haya corrido build.sh copiar kernel.img 8 a la SD y modificar el
+archivo config.txt como esta en src ademas borrar la imagen anterior
+probablement llamada kernel7.img
+
+Once build has run copy kernel8.img into the SD and modify config.txt as in src also delete the previous image called kernel7.img
