@@ -1,7 +1,7 @@
 #ifndef	_P_UART_H
 #define	_P_UART_H
 
-#include "base.h"
+#include "peripherals/base.h"
 
 #define AUX_ENABLES     (PBASE+0x00201000)
 
