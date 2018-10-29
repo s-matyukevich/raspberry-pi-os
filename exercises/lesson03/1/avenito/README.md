@@ -1,6 +1,6 @@
 # Getting information about the hardware
 
-1. Looking at the suggested issue (https://github.com/s-matyukevich/raspberry-pi-os/issues/70), we can find out by [BCM2836 ARM-local peripherals](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2836/QA7_rev3.4.pdf) how to use the peripherals.
+1. Looking at the suggested issue [here](https://github.com/s-matyukevich/raspberry-pi-os/issues/70), we can find out by [BCM2836 ARM-local peripherals](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2836/QA7_rev3.4.pdf) how to use the peripherals.
 
 1. BCM2836 ARM-local peripherals, page 3, has the ARM address map and we can verify the base address of Local peripherals is 0x40000000.
 
