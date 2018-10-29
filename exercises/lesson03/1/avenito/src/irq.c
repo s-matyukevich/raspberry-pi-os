@@ -3,6 +3,7 @@
 #include "timer.h"
 #include "entry.h"
 #include "peripherals/irq.h"
+#include "peripherals/timer.h"
 
 const char *entry_error_messages[] = {
 	"SYNC_INVALID_EL1t",
@@ -28,8 +29,9 @@ const char *entry_error_messages[] = {
 
 void enable_interrupt_controller()
 {
-	// enable source interrupt
-	//put32(CORE0_INT_SOURCE, (1 << 11));
+	// it isn't the interrupt controller, but enable local timer interrupt
+	unsigned int local_timer_ctrl = get32(TIMER_CTRL);
+	put32(TIMER_CTRL, (local_timer_ctrl | (1 << 29)));
 }
 
 void show_invalid_entry_message(int type, unsigned long esr, unsigned long address)
