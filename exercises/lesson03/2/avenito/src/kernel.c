@@ -14,6 +14,5 @@ void kernel_main(void)
 	enable_irq();
 
 	while (1){
-		uart_send(uart_recv());
 	}	
 }

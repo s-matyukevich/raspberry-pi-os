@@ -6,7 +6,7 @@
 #define IRQ_BASIC_PENDING	(PBASE+0x0000B200)
 #define IRQ_PENDING_1		(PBASE+0x0000B204)
 #define IRQ_PENDING_2		(PBASE+0x0000B208)
-#define FIQ_CONTROL		(PBASE+0x0000B20C)
+#define FIQ_CONTROL			(PBASE+0x0000B20C)
 #define ENABLE_IRQS_1		(PBASE+0x0000B210)
 #define ENABLE_IRQS_2		(PBASE+0x0000B214)
 #define ENABLE_BASIC_IRQS	(PBASE+0x0000B218)
@@ -18,5 +18,10 @@
 #define SYSTEM_TIMER_IRQ_1	(1 << 1)
 #define SYSTEM_TIMER_IRQ_2	(1 << 2)
 #define SYSTEM_TIMER_IRQ_3	(1 << 3)
+
+// Page 9. Enable mini UART interrupt
+#define miniUART_IRQ		(1 << 0)
+// Page 113. Enable AUx int
+#define en_AUX_INT			(1 << 29)
 
 #endif  /*_P_IRQ_H */
