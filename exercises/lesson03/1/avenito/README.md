@@ -13,7 +13,9 @@
 # Steps to setup the "Local Timer"
 
 Following the "kernel.c" ...  
-1. timer_init() - reload the time interval - Page 17 - Address: 0x4000_0034 Bits 0:27. According to the information, the value to generate an interruption each 1 sec can be calculated by the equation "Interval(Hz) = 38.4*10^6 / value", but it doesn't work for me, then, I simply got an "aleatory" value. Enable Timer (1<<28).  
+1. timer_init() - reload the time interval - Page 17 - Address: 0x4000_0034 Bits 0:27.  
+According to the information, the value to generate an interruption each 1 sec can be calculated by the equation "Interval(Hz) = 38.4*10^6 / value", but it doesn't work for me, then, I simply got an "aleatory" value.  
+Enable Timer (1<<28).  
 1. enable_interrupt_controller() - it isn't enabling interrupt controller, instead, it's enabling local timer interrupt.  
 1. enable_irq() - nothing to change.  
 1. handle_timer_irq() - clear the interrupt flag and reload timer at 0x4000_0038.  

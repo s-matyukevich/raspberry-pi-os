@@ -16,4 +16,12 @@
 #define TIMER_CS_M2	(1 << 2)
 #define TIMER_CS_M3	(1 << 3)
 
+// Local timer
+
+#define	TIMER_CTRL		(PERIPHERAL_BASE+0x34)
+#define	TIMER_FLAG		(PERIPHERAL_BASE+0x38)
+
+
+
+
 #endif  /*_P_TIMER_H */
