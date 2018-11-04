@@ -4,6 +4,12 @@ get_el:
 	lsr x0, x0, #2
 	ret
 
+.globl get_cnt
+get_cnt:
+	mrs x0, CNTPCT_EL0
+	lsr x0, x0, #2
+	ret
+
 .globl put32
 put32:
 	str w1,[x0]
@@ -19,3 +25,18 @@ delay:
 	subs x0, x0, #1
 	bne delay
 	ret
+
+/* Looking at See AArch64-referenc-manual p.5667 */
+
+.globl generic_timer_init
+generic_timer_init:
+	mov x0, #1
+	msr CNTP_CTL_EL0, x0
+	ret
+
+.globl generic_timer_reset
+generic_timer_reset:
+    mov x0, #1
+	lsl x0, x0, #24 
+	msr CNTP_TVAL_EL0, x0
+    ret
