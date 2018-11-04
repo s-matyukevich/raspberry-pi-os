@@ -13,7 +13,6 @@ void timer_init ( void )
 
 void handle_timer_irq( void ) 
 {
-	printf("Timer interrupt received, Local Timer\n\r");
-	put32(TIMER_FLAG, (3<<30));				// clear interrupt flag and reload timer
-
+	printf("Timer interrupt received, Generic Timer\n\r");
+	generic_timer_reset();
 }

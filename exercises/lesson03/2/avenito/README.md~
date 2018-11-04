@@ -8,3 +8,4 @@
 1. Enable uart interrupt on "enable_interrupt_controller()".
 1. Page 9. Look at AUX_IRQ Bit 0 for mini UART interrupt pending in "handle_irq(void)".
 1. Create interrupt handler: handle_uart_irq().
+1. 

@@ -19,7 +19,10 @@
 #define SYSTEM_TIMER_IRQ_2	(1 << 2)
 #define SYSTEM_TIMER_IRQ_3	(1 << 3)
 
+#define CORE0_INT_CTR		(PERIPHERAL_BASE+0x40)
 #define CORE0_INT_SOURCE	(PERIPHERAL_BASE+0x60)
 #define LOCAL_TIMER_INT		(1 << 11)
+
+#define CNTPNSIRQ_Int		(1 << 1)
 
 #endif  /*_P_IRQ_H */

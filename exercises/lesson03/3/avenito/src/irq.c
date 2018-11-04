@@ -29,9 +29,8 @@ const char *entry_error_messages[] = {
 
 void enable_interrupt_controller()
 {
-	// it isn't the interrupt controller, but enable local timer interrupt
-	unsigned int local_timer_ctrl = get32(TIMER_CTRL);
-	put32(TIMER_CTRL, (local_timer_ctrl | (1 << 29)));
+	// Enable IRQ Core 0 - Pag. 13 BCM2836_ARM-local_peripherals
+	put32(CORE0_INT_CTR, (1 << 1));
 }
 
 void show_invalid_entry_message(int type, unsigned long esr, unsigned long address)
@@ -43,7 +42,7 @@ void handle_irq(void)
 {
 	unsigned int irq = get32(CORE0_INT_SOURCE);
 	switch (irq) {
-		case (LOCAL_TIMER_INT):
+		case (CNTPNSIRQ_Int):
 			handle_timer_irq();
 			break;
 		default:
