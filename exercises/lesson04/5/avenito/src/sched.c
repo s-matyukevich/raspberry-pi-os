@@ -9,20 +9,19 @@ int nr_tasks = 1;
 
 void preempt_disable(void)
 {
+	printf("Preempt disable 0x%08x...\r\n", current); // ###
 	current->preempt_count++;
 }
 
 void preempt_enable(void)
 {
+	printf("Preempt enable 0x%08x...\r\n", current); // ###
 	current->preempt_count--;
 }
 
 
 void _schedule(void)
 {
-	printf("\n _shedule chamado\r\n"); //###
-	printf("NR_TASKS: %d\r\n", NR_TASKS); //###
-		
 	preempt_disable();
 	int next,c;
 	struct task_struct * p;
@@ -31,14 +30,13 @@ void _schedule(void)
 		next = 0;
 		for (int i = 0; i < NR_TASKS; i++){
 			p = task[i];
-			//printf("\ntask[%d]=%d\n\r", i, task[i]); //###
-			//printf("state=%d\n\r", p->state); //###
-			//printf("counter=%d\n\r", p->counter); //###
 			if (p && p->state == TASK_RUNNING && p->counter > c) {
 				c = p->counter;
 				next = i;
 			}
 		}
+		
+		
 		if (c) {
 			break;
 		}
@@ -49,20 +47,19 @@ void _schedule(void)
 			}
 		}
 	}
-	printf("switch_to(task[%d])\n\r;", next);
 	switch_to(task[next]);
 	preempt_enable();
 }
 
 void schedule(void)
 {
-	printf("shedule chamado\r\n"); //###
 	current->counter = 0;
 	_schedule();
 }
 
 void switch_to(struct task_struct * next) 
 {
+	printf("Switch to function ... Next = %d\n\r", next);
 	if (current == next) 
 		return;
 	struct task_struct * prev = current;

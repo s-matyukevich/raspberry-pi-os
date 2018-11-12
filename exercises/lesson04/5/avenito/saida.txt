@@ -1,15474 +1,5 @@
 
  _shedule chamado
 NR_TASKS: 6
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=-1
-
- task[1]=0
-state=0
-counter=0
-
- task[2]=0
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-Copy of proccess 1
-Copy proccess ...
-p->priority = current->priority (0)
-Ctask[pid] = 4194304;
-Copy of proccess 2
-Copy proccess ...
-p->priority = current->priority (0)
-Ctask[pid] = 4198400;
-Starting schedule ...
-shedule chamado
-
- _shedule chamado
-NR_TASKS: 6
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=12936
-state=0
-counter=0
-
- task[1]=4194304
-state=0
-counter=0
-
- task[2]=4198400
-state=0
-counter=0
-
- task[3]=0
-state=0
-counter=0
-
- task[4]=0
-state=0
-counter=0
-
- task[5]=0
-state=0
-counter=0
-
- task[0]=1
+switch_to(task[0])
+;

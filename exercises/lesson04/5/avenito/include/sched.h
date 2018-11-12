@@ -3,6 +3,8 @@
 
 #define THREAD_CPU_CONTEXT			0 		// offset of cpu_context in task_struct 
 
+#define DEBUG
+
 #ifndef __ASSEMBLER__
 
 #define THREAD_SIZE				4096

@@ -8,6 +8,7 @@
 
 void process(char *array)
 {
+	printf("Entrou no processo ...\n\r");
 	while (1){
 		for (int i = 0; i < 5; i++){
 			uart_send(array[i]);
