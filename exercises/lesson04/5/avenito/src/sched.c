@@ -9,13 +9,17 @@ int nr_tasks = 1;
 
 void preempt_disable(void)
 {
+#ifdef DEBUG
 	printf("Preempt disable 0x%08x...\r\n", current); // ###
+#endif
 	current->preempt_count++;
 }
 
 void preempt_enable(void)
 {
+#ifdef DEBUG
 	printf("Preempt enable 0x%08x...\r\n", current); // ###
+#endif
 	current->preempt_count--;
 }
 
@@ -59,7 +63,9 @@ void schedule(void)
 
 void switch_to(struct task_struct * next) 
 {
+#ifdef DEBUG
 	printf("Switch to function ... Next = %d\n\r", next);
+#endif
 	if (current == next) 
 		return;
 	struct task_struct * prev = current;
