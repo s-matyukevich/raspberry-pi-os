@@ -15,7 +15,7 @@ void timer_init ( void )
 
 void handle_timer_irq( void ) 
 {
-	printf("Timer interrupt received, Generic Timer\n\r");
+	printf("\r\nTimer interrupt received, Generic Timer\n\r"); // ###
 	generic_timer_reset();
 	timer_tick();
 }

@@ -11,8 +11,12 @@ int copy_process(unsigned long fn, unsigned long arg)
 	struct task_struct *p;
 
 	p = (struct task_struct *) get_free_page();
+
+	printf("Free page: 0x%08x\r\n", p); //###
+		
 	if (!p)
 		return 1;
+	
 	p->priority = current->priority;
 	p->state = TASK_RUNNING;
 	
@@ -27,10 +31,14 @@ int copy_process(unsigned long fn, unsigned long arg)
 	int pid = nr_tasks++;
 	task[pid] = p;	
 	
-	printf("\ntask[%d] = %d\r\n", pid, p); //###
+	printf("task[%d] = 0x%08x\r\n", pid, p); //###
 	printf("p->priority = current->priority = %d\n\r", current->priority); //###
 	printf("p->state = TASK_RUNNING = %d\r\n", p->state); //###
 	printf("p->counter = p->priority = %d\r\n", p->counter); //###;
+	printf("p->cpu_context.x19 = 0x%08x\r\n", p->cpu_context.x19); // ###
+	printf("p->cpu_context.x20 = 0x%08x\r\n", p->cpu_context.x20); // ###
+	printf("p->cpu_context.pc = (unsigned long)ret_from_fork = 0x%08x\r\n", p->cpu_context.pc); // ###
+	printf("p->cpu_context.sp = (unsigned long)p + THREAD_SIZE = 0x%08x\r\n", p->cpu_context.sp); // ###
 	
 	preempt_enable();
 	return 0;
