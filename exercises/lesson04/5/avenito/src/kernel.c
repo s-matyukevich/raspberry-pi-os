@@ -42,7 +42,7 @@ void kernel_main(void)
 		return;
 	}
 
-	printf("\n\rStarting schedule ...\n\r"); //###
+	printf("\n\rStarting schedule ... current = 0x%08x\n\r", current); //###
 
 	while (1){
 		schedule();

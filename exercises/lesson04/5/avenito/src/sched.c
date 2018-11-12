@@ -40,6 +40,9 @@ void _schedule(void)
 			}
 		}
 		
+#ifdef DEBUG
+			printf("c = %d | next = %d\n\r", c, next);
+#endif
 		
 		if (c) {
 			break;
@@ -84,6 +87,9 @@ void timer_tick()
 	if (current->counter>0 || current->preempt_count >0) {
 		return;
 	}
+#ifdef DEBUG
+	printf("current->counter = %d\n\r", current->counter);
+#endif
 	current->counter=0;
 	enable_irq();
 	_schedule();
