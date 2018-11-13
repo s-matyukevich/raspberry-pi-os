@@ -37,6 +37,6 @@ generic_timer_init:
 .globl generic_timer_reset
 generic_timer_reset:
     mov x0, #1
-	lsl x0, x0, #24 
+	lsl x0, x0, #63 
 	msr CNTP_TVAL_EL0, x0
     ret

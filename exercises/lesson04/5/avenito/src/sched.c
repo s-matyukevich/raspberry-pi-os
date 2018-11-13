@@ -9,17 +9,11 @@ int nr_tasks = 1;
 
 void preempt_disable(void)
 {
-#ifdef DEBUG
-	printf("Preempt disable 0x%08x...\r\n", current); // ###
-#endif
 	current->preempt_count++;
 }
 
 void preempt_enable(void)
 {
-#ifdef DEBUG
-	printf("Preempt enable 0x%08x...\r\n", current); // ###
-#endif
 	current->preempt_count--;
 }
 
@@ -40,13 +34,10 @@ void _schedule(void)
 			}
 		}
 		
-#ifdef DEBUG
-			printf("c = %d | next = %d\n\r", c, next);
-#endif
-		
 		if (c) {
 			break;
 		}
+		
 		for (int i = 0; i < NR_TASKS; i++) {
 			p = task[i];
 			if (p) {
@@ -66,8 +57,8 @@ void schedule(void)
 
 void switch_to(struct task_struct * next) 
 {
-#ifdef DEBUG
-	printf("Switch to function ... Next = %d\n\r", next);
+#ifdef DEBUG	
+	printf("Switch to task[%d] ...\n\r", next); // ###
 #endif
 	if (current == next) 
 		return;
@@ -83,13 +74,13 @@ void schedule_tail(void) {
 
 void timer_tick()
 {
+#ifdef DEBUG	
+	//printf("\r\nTimer tick. | Current = 0x%08x | Counter = %d | Preempt_Counter = %d\n\r", current, current->counter, current->preempt_count); // ###
+#endif
 	--current->counter;
 	if (current->counter>0 || current->preempt_count >0) {
 		return;
 	}
-#ifdef DEBUG
-	printf("current->counter = %d\n\r", current->counter);
-#endif
 	current->counter=0;
 	enable_irq();
 	_schedule();
