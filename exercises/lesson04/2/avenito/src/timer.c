@@ -1,7 +1,6 @@
 #include "utils.h"
 #include "printf.h"
 #include "sched.h"
-#include "timer.h"
 #include "peripherals/timer.h"
 
 const unsigned int interval = 200000;
@@ -9,12 +8,15 @@ unsigned int curVal = 0;
 
 void timer_init ( void )
 {
-	// Set value, enable Timer and Interrupt
-	put32(TIMER_CTRL, ((1<<28) | interval));
+	curVal = get32(TIMER_CLO);
+	curVal += interval;
+	put32(TIMER_C1, curVal);
 }
 
 void handle_timer_irq( void ) 
 {
-	generic_timer_reset();
+	curVal += interval;
+	put32(TIMER_C1, curVal);
+	put32(TIMER_CS, TIMER_CS_M1);
 	timer_tick();
 }

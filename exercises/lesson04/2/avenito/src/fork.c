@@ -3,7 +3,9 @@
 #include "sched.h"
 #include "entry.h"
 
-int copy_process(unsigned long fn, unsigned long arg)
+// Parameter pri added to assign priority
+
+int copy_process(unsigned long fn, unsigned long arg, unsigned int pri)
 {
 	preempt_disable();
 	struct task_struct *p;
@@ -11,9 +13,9 @@ int copy_process(unsigned long fn, unsigned long arg)
 	p = (struct task_struct *) get_free_page();
 	if (!p)
 		return 1;
-	p->priority = current->priority;
+	p->priority = pri;
 	p->state = TASK_RUNNING;
-	p->counter = p->priority;
+	p->counter = pri;
 	p->preempt_count = 1; //disable preemtion until schedule_tail
 
 	p->cpu_context.x19 = fn;
