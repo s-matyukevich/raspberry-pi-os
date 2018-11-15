@@ -12,7 +12,7 @@ ARM Architecture Reference Manual ARMv8, for ARMv8-A architecture profile, avail
 
 ARM Cortex-A53 MPCore Processor Advanced SIMD and Floating-point Extension, available [here](http://infocenter.arm.com/help/topic/com.arm.doc.ddi0502e/DDI0502E_cortex_a53_fpu_r0p3_trm.pdf), page 14 describes the processor Advanced SIMD and Floating-point system registers.
 
-# To save the FP/SIMD registers
+# To save and restore the FP/SIMD registers
 
 1. Add a struct to save the registers in 'sched.h': 32 x 128 bits to V0-V31 + Floating-point Control Register (FPCR) + Floating-point Status Register (FPSR).
 1. Change also in INIT_TASK.

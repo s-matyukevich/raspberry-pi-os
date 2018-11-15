@@ -7,10 +7,10 @@
 
 #define THREAD_SIZE				4096
 
-#define NR_TASKS				3		// changed to 3 to be easier 
+// #define NR_TASKS				3			// we don't need more 
 
-#define FIRST_TASK task[0]
-#define LAST_TASK task[NR_TASKS-1]
+// #define FIRST_TASK task[0]				// we don't need more 
+// #define LAST_TASK task[NR_TASKS-1]		// we don't need more 
 
 #define TASK_RUNNING				0
 
@@ -40,6 +40,7 @@ struct task_struct {
 	long counter;
 	long priority;
 	long preempt_count;
+	unsigned int next_task;					// point to the next task
 };
 
 extern void sched_init(void);
@@ -52,7 +53,7 @@ extern void cpu_switch_to(struct task_struct* prev, struct task_struct* next);
 
 #define INIT_TASK \
 /*cpu_context*/	{ {0,0,0,0,0,0,0,0,0,0,0,0,0}, \
-/* state etc */	0,0,1, 0 \
+/* state etc */	0,0,1, 0, 0 \
 }
 
 #endif
