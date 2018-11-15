@@ -24,8 +24,6 @@ void kernel_main(void)
 	timer_init();
 	enable_interrupt_controller();
 	enable_irq();
-	
-	printf("Comecou ...");
 
 	int res = copy_process((unsigned long)&process, (unsigned long)"12345");
 	if (res != 0) {
