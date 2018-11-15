@@ -1,7 +1,9 @@
 #ifndef _SCHED_H
 #define _SCHED_H
 
-#define THREAD_CPU_CONTEXT			0 		// offset of cpu_context in task_struct 
+#define THREAD_CPU_CONTEXT			0 			// offset of cpu_context in task_struct 
+#define THREAD_FPSIMD_CONTEXT		(14*64/8) 	// 14 = 13 registers of cpu_context + 1 to point to the next free position
+												// each register (Xn) 64 bits and 8 bits/byte => 14 * 64 / 8 = offset of struct
 
 #ifndef __ASSEMBLER__
 
@@ -17,6 +19,13 @@
 extern struct task_struct *current;
 extern struct task_struct * task[NR_TASKS];
 extern int nr_tasks;
+
+// Add a struct to save the FP/SIMD registers
+struct fpsimd_context {
+	__uint128_t v[32];
+	unsigned int fpsr;
+	unsigned int fpcr;
+};
 
 struct cpu_context {
 	unsigned long x19;
@@ -36,6 +45,7 @@ struct cpu_context {
 
 struct task_struct {
 	struct cpu_context cpu_context;
+	struct fpsimd_context fpsimd_context;
 	long state;	
 	long counter;
 	long priority;
@@ -50,10 +60,11 @@ extern void preempt_enable(void);
 extern void switch_to(struct task_struct* next);
 extern void cpu_switch_to(struct task_struct* prev, struct task_struct* next);
 
+// Change also in INIT_TASK
 #define INIT_TASK \
 /*cpu_context*/	{ {0,0,0,0,0,0,0,0,0,0,0,0,0}, \
-/* state etc */	0,0,1, 0 \
-}
+/*fpsimd_context*/	{ {0}, 0,0}, \
+/* state etc */ 0,0,1,0}
 
 #endif
 #endif
