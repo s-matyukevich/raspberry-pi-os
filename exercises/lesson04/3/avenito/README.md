@@ -6,9 +6,14 @@ Remove the "-mgeneral-regs-only" option in Makefile.
 
 To use these registers, we have to store and restore as exactly as we do to the CPU registers.
 
-ARM Architecture Reference Manual ARMv8, for ARMv8-A architecture profile, avaliable [here](https://developer.arm.com/docs/ddi0487/latest/arm-architecture-reference-manual-armv8-for-armv8-a-architecture-profile), page 146 describes the 32 registers in the SIMD and floating-point register file, V0-V31.
+ARM Architecture Reference Manual ARMv8, for ARMv8-A architecture profile, available [here](https://developer.arm.com/docs/ddi0487/latest/arm-architecture-reference-manual-armv8-for-armv8-a-architecture-profile), page 146 describes the 32 registers in the SIMD and floating-point register file, V0-V31.
 
-Cortex -A9 Floating-Point Unit Technical Reference Manual, available [here](https://www.google.com/search?q=Cortex-A9+Floating-Point+Unit+%28FPU%29Technical+Reference+Manual&ie=utf-8&oe=utf-8&client=firefox-b-ab), page 22 we find the "Floating-Point Status and Control Register" description.
+ARM Cortex-A53 MPCore Processor Advanced SIMD and Floating-point Extension, available [here](http://infocenter.arm.com/help/topic/com.arm.doc.ddi0502e/DDI0502E_cortex_a53_fpu_r0p3_trm.pdf), page 14 describes the processor Advanced SIMD and Floating-point system registers.
 
+# To save the FP/SIMD registers
+
+1. Add a struct to save the registers in "sched.h": 32 x 128 bits to V0-V31 + Floating-point Control Register (FPCR) + Floating-point Status Register (FPSR).
+1. Change also in INIT_TASK.
+1. Add code to store and restore the FP/SIMD register in sched.S
 
 
