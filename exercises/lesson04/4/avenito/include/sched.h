@@ -15,8 +15,8 @@
 #define TASK_RUNNING				0
 
 extern struct task_struct *current;
-extern struct task_struct * task[NR_TASKS];
-extern int nr_tasks;
+//extern struct task_struct * task[NR_TASKS];		// we don't need more
+//extern int nr_tasks;								// we don't need more
 
 struct cpu_context {
 	unsigned long x19;
@@ -34,13 +34,14 @@ struct cpu_context {
 	unsigned long pc;
 };
 
+// Change the structure task
 struct task_struct {
 	struct cpu_context cpu_context;
 	long state;	
 	long counter;
 	long priority;
 	long preempt_count;
-	unsigned int next_task;					// point to the next task
+	struct task_struct* next_task;					// point to the next task
 };
 
 extern void sched_init(void);
@@ -51,6 +52,7 @@ extern void preempt_enable(void);
 extern void switch_to(struct task_struct* next);
 extern void cpu_switch_to(struct task_struct* prev, struct task_struct* next);
 
+// Change the INIT_TASK adding 0
 #define INIT_TASK \
 /*cpu_context*/	{ {0,0,0,0,0,0,0,0,0,0,0,0,0}, \
 /* state etc */	0,0,1, 0, 0 \
