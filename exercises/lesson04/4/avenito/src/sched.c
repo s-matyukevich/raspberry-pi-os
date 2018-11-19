@@ -4,7 +4,8 @@
 
 static struct task_struct init_task = INIT_TASK;
 struct task_struct *current = &(init_task);
-// struct task_struct * task[NR_TASKS] = {&(init_task), };	// we don't need create the tasks now
+// struct task_struct * task[NR_TASKS] = {&(init_task), };	// we don't need create the tasks now, instead
+struct task_struct *initial_task = &(init_task);			// we create a initial task (reference task)
 int nr_tasks = 1;
 
 void preempt_disable(void)
