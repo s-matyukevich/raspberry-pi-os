@@ -3,14 +3,11 @@
 
 #define THREAD_CPU_CONTEXT			0 		// offset of cpu_context in task_struct 
 
-#define DEBUG
-
 #ifndef __ASSEMBLER__
 
 #define THREAD_SIZE				4096
 
-//#define NR_TASKS				64 
-#define NR_TASKS				6
+#define NR_TASKS				3		// changed to 3 to be easier 
 
 #define FIRST_TASK task[0]
 #define LAST_TASK task[NR_TASKS-1]
