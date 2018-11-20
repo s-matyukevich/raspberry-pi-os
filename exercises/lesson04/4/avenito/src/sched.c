@@ -6,7 +6,7 @@ static struct task_struct init_task = INIT_TASK;
 struct task_struct *current = &(init_task);
 // struct task_struct * task[NR_TASKS] = {&(init_task), };	// we don't need create the tasks now, instead
 struct task_struct *initial_task = &(init_task);			// we create a initial task (reference task)
-int nr_tasks = 1;
+// int nr_tasks = 1;										// we don't need more
 
 void preempt_disable(void)
 {
@@ -22,29 +22,31 @@ void preempt_enable(void)
 void _schedule(void)
 {
 	preempt_disable();
-	int next,c;
-	struct task_struct * p;
+	int c;
+	struct task_struct * p, * next_task;
 	while (1) {
 		c = -1;
-		next = 0;
-		for (int i = 0; i < NR_TASKS; i++){
-			p = task[i];
+		//next = 0;
+		// Point to the first task (initial_task) and loop until p != 0
+		for (p = initial_task; p; p = p->next_task){
+			//p = task[i];   we don't need more
 			if (p && p->state == TASK_RUNNING && p->counter > c) {
 				c = p->counter;
-				next = i;
+				next_task = p;			// point to next task
 			}
 		}
 		if (c) {
 			break;
 		}
-		for (int i = 0; i < NR_TASKS; i++) {
-			p = task[i];
+		// Same here
+		for (p = initial_task; p; p = p->next_task) {
+			//p = task[i]; we don't need more
 			if (p) {
 				p->counter = (p->counter >> 1) + p->priority;
 			}
 		}
 	}
-	switch_to(task[next]);
+	switch_to(next_task);		// next_task is a pointer to a task
 	preempt_enable();
 }
 
@@ -56,18 +58,6 @@ void schedule(void)
 
 void switch_to(struct task_struct * next) 
 {
-	struct task_struct * p;
-	printf("\n\r\n\r----------- Task switch -----------\r\n");
-	for(int t=0; t < NR_TASKS; t++) {
-		p = task[t];
-		printf("\n\rtask[%d] counter = %d\n\r", t, p->counter);
-		printf("task[%d] priority = %d\n\r", t, p->priority);
-		printf("task[%d] preempt_count = %d\n\r", t, p->preempt_count);
-		printf("task[%d] sp = 0x%08x\n\r", t, p->cpu_context.sp);
-		printf("\n\r------------------------------\r\n");
-	}
-	printf("\n\rtask output: ");
-	
 	if (current == next) 
 		return;
 	struct task_struct * prev = current;

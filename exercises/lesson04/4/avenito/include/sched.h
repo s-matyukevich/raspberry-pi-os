@@ -15,6 +15,7 @@
 #define TASK_RUNNING				0
 
 extern struct task_struct *current;
+extern struct task_struct *initial_task;			// we declare here as extern to be accessible from other files
 //extern struct task_struct * task[NR_TASKS];		// we don't need more
 //extern int nr_tasks;								// we don't need more
 
