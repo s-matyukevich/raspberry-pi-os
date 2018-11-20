@@ -20,11 +20,12 @@ void kernel_main(void)
 {
 	uart_init();
 	init_printf(0, putc);
+	
 	irq_vector_init();
 	timer_init();
 	enable_interrupt_controller();
 	enable_irq();
-
+	
 	int res = copy_process((unsigned long)&process, (unsigned long)"12345");
 	if (res != 0) {
 		printf("error while starting process 1");

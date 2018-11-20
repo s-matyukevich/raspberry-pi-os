@@ -33,11 +33,9 @@ void _schedule(void)
 				next = i;
 			}
 		}
-		
 		if (c) {
 			break;
 		}
-		
 		for (int i = 0; i < NR_TASKS; i++) {
 			p = task[i];
 			if (p) {
@@ -57,9 +55,18 @@ void schedule(void)
 
 void switch_to(struct task_struct * next) 
 {
-#ifdef DEBUG	
-	printf("Switch to task[%d] ...\n\r", next); // ###
-#endif
+	struct task_struct * p;
+	printf("\n\r\n\r----------- Task switch -----------\r\n");
+	for(int t=0; t < NR_TASKS; t++) {
+		p = task[t];
+		printf("\n\rtask[%d] counter = %d\n\r", t, p->counter);
+		printf("task[%d] priority = %d\n\r", t, p->priority);
+		printf("task[%d] preempt_count = %d\n\r", t, p->preempt_count);
+		printf("task[%d] sp = 0x%08x\n\r", t, p->cpu_context.sp);
+		printf("\n\r------------------------------\r\n");
+	}
+	printf("\n\rtask output: ");
+	
 	if (current == next) 
 		return;
 	struct task_struct * prev = current;
@@ -74,9 +81,6 @@ void schedule_tail(void) {
 
 void timer_tick()
 {
-#ifdef DEBUG	
-	//printf("\r\nTimer tick. | Current = 0x%08x | Counter = %d | Preempt_Counter = %d\n\r", current, current->counter, current->preempt_count); // ###
-#endif
 	--current->counter;
 	if (current->counter>0 || current->preempt_count >0) {
 		return;
