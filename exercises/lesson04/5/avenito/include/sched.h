@@ -7,7 +7,7 @@
 
 #define THREAD_SIZE				4096
 
-#define NR_TASKS				3		// changed to 3 to be easier 
+#define NR_TASKS				3		// changed to 4 to be easier 
 
 #define FIRST_TASK task[0]
 #define LAST_TASK task[NR_TASKS-1]

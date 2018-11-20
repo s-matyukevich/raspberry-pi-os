@@ -1,5 +1,6 @@
 #include "utils.h"
 #include "printf.h"
+#include "sched.h"
 #include "peripherals/timer.h"
 
 const unsigned int interval = 20000000;
@@ -13,6 +14,6 @@ void timer_init ( void )
 
 void handle_timer_irq( void ) 
 {
-	printf("Timer interrupt received, Generic Timer\n\r");
 	generic_timer_reset();
+	timer_tick();
 }

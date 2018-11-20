@@ -11,7 +11,7 @@ void process(char *array)
 	while (1){
 		for (int i = 0; i < 5; i++){
 			uart_send(array[i]);
-			delay(100000);
+			delay(1000000);
 		}
 	}
 }
@@ -21,7 +21,7 @@ void kernel_main(void)
 	uart_init();
 	init_printf(0, putc);
 	irq_vector_init();
-	timer_init();
+	generic_timer_init();
 	enable_interrupt_controller();
 	enable_irq();
 	
@@ -37,6 +37,7 @@ void kernel_main(void)
 	}
 
 	while (1){
+		printf("\n\rSched");
 		schedule();
 	}	
 }

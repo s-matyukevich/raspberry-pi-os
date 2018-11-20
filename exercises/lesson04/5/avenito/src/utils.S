@@ -26,11 +26,13 @@ delay:
 generic_timer_init:
 	mov x0, #1
 	msr CNTP_CTL_EL0, x0
-	ret
+	lsl x0, x0, #23 
+	msr CNTP_TVAL_EL0, x0
+    ret
 
 .globl generic_timer_reset
 generic_timer_reset:
     mov x0, #1
-	lsl x0, x0, #24 
+	lsl x0, x0, #23 
 	msr CNTP_TVAL_EL0, x0
     ret

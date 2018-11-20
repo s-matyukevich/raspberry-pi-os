@@ -11,9 +11,11 @@ int copy_process(unsigned long fn, unsigned long arg)
 	p = (struct task_struct *) get_free_page();
 	if (!p)
 		return 1;
-	p->priority = current->priority;
+	//p->priority = current->priority;
+	p->priority = 1;
 	p->state = TASK_RUNNING;
-	p->counter = p->priority;
+	//p->counter = current->priority;
+	p->counter = 1;
 	p->preempt_count = 1; //disable preemtion until schedule_tail
 
 	p->cpu_context.x19 = fn;
@@ -29,6 +31,7 @@ int copy_process(unsigned long fn, unsigned long arg)
 	printf("p->cpu_context.x20 = 0x%08x. (arg)\r\n", p->cpu_context.x20);
 	printf("p->cpu_context.pc  = 0x%08x. (ret_from_fork)\r\n", p->cpu_context.pc);
 	printf("p->cpu_context.sp  = 0x%08x. (sp)\r\n", p->cpu_context.sp);
+	printf("p->counter  = %d.\r\n", p->counter);
 
 	preempt_enable();
 	return 0;
