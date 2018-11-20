@@ -34,13 +34,15 @@ int copy_process(unsigned long fn, unsigned long arg)
 	
 	previous_task->next_task = p;			// point the last one to this just created one			
 	
-	printf("\n\r----------- Task[%d] created -----------\r\n", pid);
+	printf("\n\r----------- Task created -----------\r\n");
 	printf("\n\rStruct task allocated at 0x%08x.\r\n", p);
 	printf("p->cpu_context.x19 = 0x%08x. (fn)\r\n", p->cpu_context.x19);
 	printf("p->cpu_context.x20 = 0x%08x. (arg)\r\n", p->cpu_context.x20);
 	printf("p->cpu_context.pc  = 0x%08x. (ret_from_fork)\r\n", p->cpu_context.pc);
 	printf("p->cpu_context.sp  = 0x%08x. (sp)\r\n", p->cpu_context.sp);
-
+	printf("\n\r----------- Previous task -----------\r\n");
+	printf("previous_task->next_task  = 0x%08x.\r\n", previous_task->next_task);
+		
 	preempt_enable();
 	return 0;
 }
