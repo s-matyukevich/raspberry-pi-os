@@ -1,0 +1,21 @@
+#include "printf.h"
+#include "utils.h"
+#include "mini_uart.h"
+
+void kernel_el2(void)
+{
+    uart_init();
+    init_printf(0, putc);
+    int el = get_el();
+    printf("Exception level: %d \r\n", el);
+}
+
+void kernel_el1(void)
+{
+    int el = get_el();
+    printf("Exception level: %d \r\n", el);
+
+    while (1) {
+        uart_send(uart_recv());
+    }
+}
