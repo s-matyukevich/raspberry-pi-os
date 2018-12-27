@@ -24,7 +24,7 @@ For more information about project goals and history, please read the [Introduct
   </a>
 </p>
 
-## Table of Content
+## Table of Contents
 
 * **[Introduction](docs/Introduction.md)**
 * **[Contribution guide](docs/Contributions.md)**
