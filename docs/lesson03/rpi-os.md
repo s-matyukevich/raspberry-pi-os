@@ -60,11 +60,11 @@ After `show_invalid_entry_message`  function prints all this information to the 
 
 ### Saving register state
 
-After an exception handler finishes execution, we wand all general purpose registers to have the same values they had before the exception was generated. If we don't implement such functionality, an interrupt that has nothing to do with currently executing code, can influence the behavior of this code unpredictably. That's why the first thing we must do after an exception is generated is to save the processor state. This is done in the [kernel_entry](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S) macro. This macro is very simple: it just stores registers `x0 - x30` to the stack. There is also a corresponding macro [kernel_exit](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S#L37), which is called after an exception handler finishes execution. `kernel_exit` restores processor state by copying back the values of `x0 - x30` registers. It also executes `eret` instruction, which returns us back to normal execution flow. By the way, general purpose registers are not the only thing that needs to be saved before executing an exception handler, but it is enough for our simple kernel for now. In later lessons, we will add more functionality to the `kernel_entry` and `kernel_exit` macros.
+After an exception handler finishes execution, we want all general purpose registers to have the same values they had before the exception was generated. If we don't implement such functionality, an interrupt that has nothing to do with currently executing code, can influence the behavior of this code unpredictably. That's why the first thing we must do after an exception is generated is to save the processor state. This is done in the [kernel_entry](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S) macro. This macro is very simple: it just stores registers `x0 - x30` to the stack. There is also a corresponding macro [kernel_exit](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S#L37), which is called after an exception handler finishes execution. `kernel_exit` restores processor state by copying back the values of `x0 - x30` registers. It also executes `eret` instruction, which returns us back to normal execution flow. By the way, general purpose registers are not the only thing that needs to be saved before executing an exception handler, but it is enough for our simple kernel for now. In later lessons, we will add more functionality to the `kernel_entry` and `kernel_exit` macros.
 
 ### Setting the vector table
 
-Ok, now we have prepared the vector table, but the processor doesn't know where it is located and therefore can't use it. In order for the exception handling to work, we must set `vbar_el1` (Vector Base Address Register) to the vector table address. This is done [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/irq.S#L2)
+Ok, now we have prepared the vector table, but the processor doesn't know where it is located and therefore can't use it. In order for the exception handling to work, we must set `vbar_el1` (Vector Base Address Register) to the vector table address. This is done [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/irq.S#L2).
 
 ```
 .globl irq_vector_init
@@ -94,7 +94,7 @@ disable_irq:
         ret
 ```
 
-ARM processor state has 4 bits that are responsible for holding mask status for different types of interrupts. Those bits are defined as following
+ARM processor state has 4 bits that are responsible for holding mask status for different types of interrupts. Those bits are defined as following.
 
 * **D**  Masks debug exceptions. These are a special type of synchronous exceptions. For obvious reasons, it is not possible to mask all synchronous exceptions, but it is convenient to have a separate flag that can mask debug exceptions.
 * **A** Masks `SErrors`. It is called `A` because `SErrors` sometimes are called asynchronous aborts. 
@@ -107,7 +107,7 @@ The last thing you may wonder about is why do we use constant value `2` in both 
 
 ### Configuring interrupt controller
 
-Devices usually don't interrupt processor directly: instead, they rely on interrupt controller to do the job. Interrupt controller can be used to enable/disable interrupts send by the hardware. We can also use interrupt controller to figure out which device generates an interrupt. Raspberry PI has its own interrupt controller that is described on page 109 of [BCM2837 ARM Peripherals manual](https://github.com/raspberrypi/documentation/files/1888662/BCM2837-ARM-Peripherals.-.Revised.-.V2-1.pdf) 
+Devices usually don't interrupt processor directly: instead, they rely on interrupt controller to do the job. Interrupt controller can be used to enable/disable interrupts sent by the hardware. We can also use interrupt controller to figure out which device generates an interrupt. Raspberry PI has its own interrupt controller that is described on page 109 of [BCM2837 ARM Peripherals manual](https://github.com/raspberrypi/documentation/files/1888662/BCM2837-ARM-Peripherals.-.Revised.-.V2-1.pdf).
 
 Raspberry Pi interrupt controller has 3 registers that hold enabled/disabled status for all types of interrupts. For now, we are only interested in timer interrupts, and those interrupts can be enabled using [ENABLE_IRQS_1](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/include/peripherals/irq.h#L10) register, which is described at page 116 of `BCM2837 ARM Peripherals manual`. According to the documentation, interrupts are divided into 2 banks. The first bank consists of interrupts `0 - 31`, each of these interrupts can be enabled or disabled by setting different bits of `ENABLE_IRQS_1` register. There is also a corresponding register for the last 32 interrupts - `ENABLE_IRQS_2` and a register that controls some common interrupts together with ARM local interrupts - `ENABLE_BASIC_IRQS` (We will talk about ARM local interrupts in the next chapter of this lesson). The Peripherals manual, however, has a lot of mistakes and one of those is directly relevant to our discussion. Peripheral interrupt table (which is described at page 113 of the manual) should contain 4 interrupts from system timer at lines `0 - 3`. From reverse engineering Linux source code and reading [some other sources](http://embedded-xinu.readthedocs.io/en/latest/arm/rpi/BCM2835-System-Timer.html) I was able to figure out that timer interrupts 0 and 2 are reserved and used by GPU and interrupts 1 and 3 can be used for any other purposes. So here is the [function](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/irq.c#L29) that enables system timer IRQ number 1.
 
@@ -120,7 +120,7 @@ void enable_interrupt_controller()
 
 ### Generic IRQ handler
 
-From our previous discussion, you should remember that we have a single exception handler that is responsible for handling all `IRQs`. This handler is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/irq.c#L39)]
+From our previous discussion, you should remember that we have a single exception handler that is responsible for handling all `IRQs`. This handler is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/irq.c#L39).
 
 ```
 void handle_irq(void)

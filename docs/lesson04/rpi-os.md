@@ -38,7 +38,7 @@ This struct has the following members:
 * `state` This is the state of the currently running task. For tasks that are just doing some work on the CPU the state will always be [TASK_RUNNING](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/include/sched.h#L15). Actually, this is the only state that the RPi OS is going to support for now. However, later we will have to add a few additional states. For example, a task that is waiting for an interrupt should be moved to a different state, because it doesn't make sense to awake the task while the required interrupt hasn't yet happened.
 * `counter` This field is used to determine how long the current task has been running. `counter` decreases by 1 each timer tick and when it reaches 0 another task is scheduled.
 * `priority`  When a new task is scheduled its `priority` is copied to `counter`. By setting tasks priority, we can regulate the amount of processor time that the task gets relative to other tasks.
-* `preempt_count` If this field has a non-zero value it is an indicator that right now the current task is executing some critical function that must not be interrupted (for example, it runs the scheduling function) If timer tick occurs at such time it is ignored and rescheduling is not triggered.
+* `preempt_count` If this field has a non-zero value it is an indicator that right now the current task is executing some critical function that must not be interrupted (for example, it runs the scheduling function.). If timer tick occurs at such time it is ignored and rescheduling is not triggered.
 
 After the kernel startup, there is only one task running: the one that runs [kernel_main](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/kernel.c#L19) function. It is called "init task". Before the scheduler functionality is enabled, we must fill `task_struct` corresponding to the init task. This is done [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/include/sched.h#L53). 
 
@@ -124,7 +124,7 @@ void free_page(unsigned long p){
 ```
 The allocator can work only with memory pages (each page is 4 KB in size). There is an array called `mem_map` that for each page in the system holds its status: whether it is allocated or free. Whenever we need to allocate a new page, we just loop through this array and return the first free page. This implementation is based on 2 assumptions: 
 
-1. We know the total amount of memory in the system. It is `1 GB - 1 MB` (the last megabyte of memory is reserved for device registers) This value is stored in the [HIGH_MEMORY](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/include/mm.h#L14) constant.
+1. We know the total amount of memory in the system. It is `1 GB - 1 MB` (the last megabyte of memory is reserved for device registers.). This value is stored in the [HIGH_MEMORY](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/include/mm.h#L14) constant.
 1. First 4 MB of memory are reserved for the kernel image and init task stack. This value is stored in [LOW_MEMORY](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/include/mm.h#L13) constant. All memory allocations start right after this point. 
 
 ### Creating a new task
@@ -180,7 +180,7 @@ Next, a new page is allocated. At the bottom of this page, we are putting the `t
     p->preempt_count = 1; //disable preemtion until schedule_tail
 ```
 
-After the `task_struct` is allocated, we can initialize its properties.  Priority and initial counter are set based on the current task priority. The state is set to `TASK_RUNNING`, indicating that the new task is ready to be started. `preempt_count` is set to 1, meaning that after the task is executed it should not be rescheduled until it completes some initialization work.
+After the `task_struct` is allocated, we can initialize its properties.  Priority and initial counters are set based on the current task priority. The state is set to `TASK_RUNNING`, indicating that the new task is ready to be started. `preempt_count` is set to 1, meaning that after the task is executed it should not be rescheduled until it completes some initialization work.
 
 ```
     p->cpu_context.x19 = fn;
@@ -218,7 +218,7 @@ An important thing to understand about the `copy_process` function is that after
 
 Before we get into the details of the `schedule` function, lets first figure out how `schedule` is called. There are 2 scenarios.
 
-1. When some task doesn't have anything to do right now, but it nevertheless can't be terminated, it can call `schedule` voluntarily. That is something `kernel_main` function does.
+1. When one task doesn't have anything to do right now, but it nevertheless can't be terminated, it can call `schedule` voluntarily. That is something `kernel_main` function does.
 1. `schedule` is also called on a regular basis from the [timer interrupt handler](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/timer.c#L21).
 
 Now let's take a look at [timer_tick](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L70) function, which is called from the timer interrupt.
@@ -240,7 +240,7 @@ First of all, it decreases current task's counter. If the counter is greater the
 
 ### Scheduling algorithm
 
-Finally, we are ready to look at the scheduler algorithm. I almost precisely copied this algorithm from the first release of the Linux kernel. You can find the original version [here](https://github.com/zavg/linux-0.01/blob/master/kernel/sched.c#L68)
+Finally, we are ready to look at the scheduler algorithm. I almost precisely copied this algorithm from the first release of the Linux kernel. You can find the original version [here](https://github.com/zavg/linux-0.01/blob/master/kernel/sched.c#L68).
 
 ```
 void _schedule(void)
@@ -278,7 +278,7 @@ The algorithm works like the following:
  * The first inner `for` loop iterates over all tasks and tries to find a task in `TASK_RUNNING` state with the maximum counter. If such task is found and its counter is greater then 0, we immediately break from the outer `while` loop and switch to this task. If no such task is found this means that no tasks in `TASK_RUNNING`  state currently exist or all such tasks have 0 counters. In a real OS, the first case might happen, for example, when all tasks are waiting for an interrupt. In this case, the second nested `for` loop is executed. For each task (no matter what state it is in) this loop increases its counter. The counter increase is done in a very smart way:
 
     1. The more iterations of the second `for` loop a task passes, the more its counter will be increased.
-    2. A task counter can never get larger than `2 * priority` 
+    2. A task counter can never get larger than `2 * priority`.
 
 * Then the process is repeated. If there are at least one task in `TASK_RUNNIG` state, the second iteration of the outer `while` loop will be the last one because after the first iteration all counters are already non-zero. However, if no `TASK_RUNNING` tasks are there, the process is repeated over and over again until some of the tasks will move to `TASK_RUNNING` state. But if we are running on a single CPU, how then a task state can change while this loop is running? The answer is that if some task is waiting for an interrupt, this interrupt can happen while `schedule` function is executed and interrupt handler can change the state of the task. This actually explains why interrupts must be enabled during `schedule` execution. This also demonstrates an important distinction between disabling interrupts and disabling preemption. `schedule` disables preemption for the duration of the whole function. This ensures that nester` schedule` will not be called while we are in the middle of the original function execution. However, interrupts can legally happen during `schedule` function execution.
 
@@ -333,7 +333,7 @@ This is the place where the real context switch happens. Let's examine it line b
     add    x8, x0, x10
 ```
 
-`THREAD_CPU_CONTEXT` constant contains offset of the `cpu_context` structure in the `task_struct`. `x0` contains a pointer to the first argument, which is the current `task_struct` (by current here I mean the one we are switching from).  After the copied 2 lines are executed, `x8` will contain a pointer to the current `cpu_context`
+`THREAD_CPU_CONTEXT` constant contains offset of the `cpu_context` structure in the `task_struct`. `x0` contains a pointer to the first argument, which is the current `task_struct` (by current here I mean the one we are switching from).  After the copied 2 lines are executed, `x8` will contain a pointer to the current `cpu_context`.
 
 ```
     mov    x9, sp
@@ -374,7 +374,7 @@ Function returns to the location pointed to by the link register (`x30`) If we a
 
 ### How scheduling works with exception entry/exit?
 
-In the previous lesson, we have seen how [kernel_entry](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L17) and [kernel_exit](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L4) macros are used to save and restore the processor state. After the scheduler has been introduced, a new problem arrives: now it becomes fully legal to enter an interrupt as one task and leave it as a different one. This is a problem, because `eret` instruction, which we are using to return from an interrupts, relies on the fact that return address should be stored in `elr_el1` and processor state in `spsr_el1` registers. So, if we want to switch tasks while processing an interrupt, we must save and restore those 2 registers alongside with all other general purpose registers. The code that does this is very straightforward, you can find the save part [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L35) and restore [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L46)
+In the previous lesson, we have seen how [kernel_entry](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L17) and [kernel_exit](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L4) macros are used to save and restore the processor state. After the scheduler has been introduced, a new problem arrives: now it becomes fully legal to enter an interrupt as one task and leave it as a different one. This is a problem, because `eret` instruction, which we are using to return from an interrupts, relies on the fact that return address should be stored in `elr_el1` and processor state in `spsr_el1` registers. So, if we want to switch tasks while processing an interrupt, we must save and restore those 2 registers alongside with all other general purpose registers. The code that does this is very straightforward, you can find the save part [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L35) and restore [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L46).
 
 ### Tracking system state during a context switch
 

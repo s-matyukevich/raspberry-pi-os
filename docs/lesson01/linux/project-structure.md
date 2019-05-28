@@ -6,7 +6,7 @@ This is the first time we are going to talk about Linux. The idea is first to co
 
 Whenever you start investigating any large software project, it worth taking a quick look at the project structure. This is very important because it allows you to understand what modules compose the project and what is the high-level architecture. Let's try to explore project structure of the Linux kernel.
 
-First of all, you need to clone the Linux repository
+First of all, you need to clone the Linux repository.
 
 ```
 git clone https://github.com/torvalds/linux.git 

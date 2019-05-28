@@ -53,5 +53,5 @@ void uart_init ( void )
     int baudrate_reg = (int) ((SYSTEM_FREQ_CLOCK / (8 * BAUD_RATE)) - 1);
 	put32(AUX_MU_BAUD_REG, baudrate_reg);   //Set baund rate to 115200
 
-	put32(AUX_MU_CNTL_REG,3);               //Finaly, enable transmitter and receiver
+	put32(AUX_MU_CNTL_REG,3);               //Finally, enable transmitter and receiver
 }

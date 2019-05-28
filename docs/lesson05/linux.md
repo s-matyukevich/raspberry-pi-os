@@ -65,7 +65,7 @@ void * const sys_call_table[__NR_syscalls] __aligned(4096) = {
 };
 ``` 
 
-All syscalls are initially allocated to point to `sys_ni_syscall` function ("ni" here means "non-existent"). Syscall with number `0` and all syscalls that aren't defined for the current architecture will keep this handler. All other syscall handlers in the `sys_call_table` array are rewritten in the [asm/unistd.h](https://github.com/torvalds/linux/blob/v4.14/include/uapi/asm-generic/unistd.h) header file. As you might see, this file simply provide a mapping between syscall number and syscall handler function.
+All syscalls are initially allocated to point to `sys_ni_syscall` function ("ni" here means "non-existent"). Syscall with number `0` and all syscalls that aren't defined for the current architecture will keep this handler. All other syscall handlers in the `sys_call_table` array are rewritten in the [asm/unistd.h](https://github.com/torvalds/linux/blob/v4.14/include/uapi/asm-generic/unistd.h) header file. As you might see, this file simply provides a mapping between syscall number and syscall handler function.
 
 ### Low-level syscall handling code
 
@@ -155,7 +155,7 @@ Interrupts and debug exceptions are enabled.
     ct_user_exit 1
 ``` 
 
-The event of switching from user mode to kernel mode is recorded.
+The event of switching from the user mode to the kernel mode is recorded.
 
 ```
     ldr    x16, [tsk, #TSK_TI_FLAGS]    // check for syscall hooks
