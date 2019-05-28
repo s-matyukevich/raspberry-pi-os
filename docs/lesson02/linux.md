@@ -78,7 +78,7 @@ CPU_LE(    bic    x0, x0, #(3 << 24)    )    // Clear the EE and E0E bits for EL
     ret
 ```
 
-If it happens that we execute at EL1, `sctlr_el1` register is updated so that CPU works in either `big-endian` of `little-endian` mode depending on the value of [CPU_BIG_ENDIAN](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/Kconfig#L612) config setting. Then we just exit from the `el2_setup` function and return [BOOT_CPU_MODE_EL1](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/virt.h#L55) constant. Accordingly to [ARM64 Function Calling Conventions](http://infocenter.arm.com/help/topic/com.arm.doc.ihi0055b/IHI0055B_aapcs64.pdf) return value should be placed in `x0` register (or `w0` in our case. You can think about `w0` register as the first 32 bit of `x0`)
+If it happens that we execute at EL1, `sctlr_el1` register is updated so that CPU works in either `big-endian` of `little-endian` mode depending on the value of [CPU_BIG_ENDIAN](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/Kconfig#L612) config setting. Then we just exit from the `el2_setup` function and return [BOOT_CPU_MODE_EL1](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/virt.h#L55) constant. Accordingly to [ARM64 Function Calling Conventions](http://infocenter.arm.com/help/topic/com.arm.doc.ihi0055b/IHI0055B_aapcs64.pdf) return value should be placed in `x0` register (or `w0` in our case. You can think about `w0` register as the first 32 bit of `x0`.).
 
 ```
 1:    mrs    x0, sctlr_el2
@@ -87,7 +87,7 @@ CPU_LE(    bic    x0, x0, #(1 << 25)    )    // Clear the EE bit for EL2
     msr    sctlr_el2, x0
 ```
 
-If it appears that we are booted in EL2 we are doing the same kind of setup for EL2 ( note that this time `sctlr_el2` register is used instead of `sctlr_el1`)
+If it appears that we are booted in EL2 we are doing the same kind of setup for EL2 (note that this time `sctlr_el2` register is used instead of `sctlr_el1`.).
 
 ```
 #ifdef CONFIG_ARM64_VHE
@@ -180,7 +180,7 @@ The provided code is responsible for enabling SRE (System Register Interface) Th
 #endif
 ```
 
-When the processor is executing in 32-bit execution mode, there is a concept of "coprocessor". The coprocessor can be used to access information, that in 64-bit execution mode is typically accessed via system registers. You can read about what exactly is accessible via coprocessor [in the official documentation](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0311d/I1014521.html). `msr    hstr_el2, xzr` instruction allows using coprocessor from lower exception levels. This makes sense to do only when compatibility mode is enabled (in this mode kernel can run 32-bit user applications on top of 64-bit kernel) 
+When the processor is executing in 32-bit execution mode, there is a concept of "coprocessor". The coprocessor can be used to access information, that in 64-bit execution mode is typically accessed via system registers. You can read about what exactly is accessible via coprocessor [in the official documentation](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0311d/I1014521.html). `msr    hstr_el2, xzr` instruction allows using coprocessor from lower exception levels. This makes sense to do only when compatibility mode is enabled (in this mode kernel can run 32-bit user applications on top of 64-bit kernel.).
 
 ```
     /* EL2 debug */
@@ -271,7 +271,7 @@ The only new thing here is the way how `elr_el2` is initialized. `lr` or Link Re
 
 ### Processor initialization at EL1
 
-Now we are back to the `stext` function. Next few lines are not very important for us, but I wand to explain them for the sake of completeness.
+Now we are back to the `stext` function. Next few lines are not very important for us, but I want to explain them for the sake of completeness.
 
 ```
     adrp    x23, __PHYS_OFFSET

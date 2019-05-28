@@ -1,6 +1,6 @@
 ## 3.2: Low-level exception handling in Linux
 
-Given huge Linux kernel source code, what is a good way to find the code that is responsible for interrupt handling? I can suggest one idea. Vector table base address should be stored in the 'vbar_el1' register, so, if you search for `vbar_el1`, you should be able to figure out where exactly the vector table is initialized. Indeed, the search gives us just a few usages, one of which belongs to already familiar to us [head.S](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/head.S). This code is inside [__primary_switched](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/head.S#L323) function. This function is executed after the MMU is switched on. The code looks like the following
+Given huge Linux kernel source code, what is a good way to find the code that is responsible for interrupt handling? I can suggest one idea. Vector table base address should be stored in the 'vbar_el1' register, so, if you search for `vbar_el1`, you should be able to figure out where exactly the vector table is initialized. Indeed, the search gives us just a few usages, one of which belongs to already familiar to us [head.S](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/head.S). This code is inside [__primary_switched](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/head.S#L323) function. This function is executed after the MMU is switched on. The code looks like the following.
 
 ```
     adr_l    x8, vectors            // load VBAR_EL1 with virtual

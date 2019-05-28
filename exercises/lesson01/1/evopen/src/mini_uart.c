@@ -32,7 +32,7 @@ void uart_init(void) {
           get_reg_baud(CORE_FREQ, BAUD_FREQ));  // Set baud rate to 115200
     put32(AUX_MU_IIR_REG, 6);                   // Clear FIFO
 
-    put32(AUX_MU_CNTL_REG, 3);  // Finaly, enable transmitter and receiver
+    put32(AUX_MU_CNTL_REG, 3);  // Finally, enable transmitter and receiver
 }
 
 void uart_send(char c) {

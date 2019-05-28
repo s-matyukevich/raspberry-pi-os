@@ -12,7 +12,7 @@ The main idea behind system calls (syscalls for short) is very simple: each syst
 
 1. `write` This syscall outputs something on the screen using UART device. It accepts a buffer with the text to be printed as the first argument. 
 1. `clone` This syscall creates a new user thread. The location of the stack for the newly created thread is passed as the first argument.
-1. `malloc` This system call allocates a memory page for a user process. There is no analog of this syscall in Linux (and I think in any other OS as well) The only reason why we need it is that RPi OS doesn't implement virtual memory yet, and all user processes work with physical memory. That's why each process needs a way to figure out which memory page isn't occupied and can be used. `malloc` syscall return pointer to the newly allocated page or -1 in case of an error.
+1. `malloc` This system call allocates a memory page for a user process. There is no analog of this syscall in Linux (and I think in any other OS as well.) The only reason why we need it is that RPi OS doesn't implement virtual memory yet, and all user processes work with physical memory. That's why each process needs a way to figure out which memory page isn't occupied and can be used. `malloc` syscall return pointer to the newly allocated page or -1 in case of an error.
 1. `exit` Each process must call this syscall after it finishes execution. It will do all necessary cleanup.
 
 All syscalls are defined in the [sys.c](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/sys.c) file. There is also an array [sys_call_table](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/sys.c) that contains pointers to all syscall handlers. Each syscall has a "syscall number" — this is just an index in the `sys_call_table` array. All syscall numbers are defined [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/include/sys.h#L6) — they are used by the assembler code to specify which syscall we are interested in. Let's use `write` syscall as an example and take a look at the syscall wrapper function. You can find it [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/sys.S#L4).
@@ -65,7 +65,7 @@ ni_sys:
     handle_invalid_entry 0, SYSCALL_ERROR
 ```
 
-`el0_svc` first loads the address of the syscall table in the `stbl` (it is just an alias to the `x27` register) and syscall number in the `scno` variable. Then interrupts are enabled and syscall number is compared to the total number of syscalls in the system — if it is greater or equal an error message is shown. If syscall number falls within the required range, it is used as an index in the syscall table array to obtain a pointer to the syscall handler. Next, the handler is executed and after it finishes `ret_from_syscall` is called. Note, that we don't touch here registers `x0` – `x7` — they are transparently passed to the handler.
+`el0_svc` first loads the address of the syscall table in the `stbl` (it is just an alias to the `x27` register.) and syscall number in the `scno` variable. Then interrupts are enabled and syscall number is compared to the total number of syscalls in the system — if it is greater or equal an error message is shown. If syscall number falls within the required range, it is used as an index in the syscall table array to obtain a pointer to the syscall handler. Next, the handler is executed and after it finishes `ret_from_syscall` is called. Note, that we don't touch here registers `x0` – `x7` — they are transparently passed to the handler.
 
 ```
 ret_from_syscall:
@@ -95,7 +95,7 @@ If you read previous lessons carefully you might notice a change in the `kernel_
 
 We are using 2 distinct stack pointers for EL0 and EL1, that's why right after an exception is taken from EL0 the stack pointer is overwritten. The original stack pointer can be found in the `sp_el0` register. The value of this register must be stored and restored before and after taking an exception, even if we don't touch `sp_el0` in the exception handler. If you don't do this you will end up having wrong value in the `sp` register after a context switch. 
 
-You may also ask why don't we restore the value of the `sp` register in the case when an exception was taken from EL1? That is because we are reusing the same kernel stack for the exception handler. Even if a context switch happens during an exception processing, by the time of `kernel_exit`, `sp` will be already switched by the `cpu_switch_to` function. (By the way, in Linux the behavior is different because Linux uses a different stack for interrupt handlers)
+You may also ask why don't we restore the value of the `sp` register in the case when an exception was taken from EL1? That is because we are reusing the same kernel stack for the exception handler. Even if a context switch happens during an exception processing, by the time of `kernel_exit`, `sp` will be already switched by the `cpu_switch_to` function. (By the way, in Linux the behavior is different because Linux uses a different stack for interrupt handlers.)
 
 It is also worth noticing that we don't need to explicitly specify to which exception level we need to return before the `eret` instruction. This is because this information is encoded in the `spsr_el1` register, so we always return to the level from which the exception was taken.
 
@@ -170,7 +170,7 @@ As you might notice `ret_from_fork` has been updated. Now, after a kernel thread
 
 ### Forking user processes
 
-Now let's go back to the `kernel.c` file. As we've seen in the previous section, after `kernel_process` finishes, [user_process](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/kernel.c#L22) function will be executed in the user mode. This function calls `clone` system call 2 times in order to  execute [user_process1](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/kernel.c#L10) function in 2 parallel threads. `clone` system call requires that the location of a new user stack will be passed to it, we also need to call `malloc` syscall in order to allocate 2 new memory pages. Let's now take a look at what the `clone` syscall wrapping function looks like. You can find it [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/sys.S#L22)
+Now let's go back to the `kernel.c` file. As we've seen in the previous section, after `kernel_process` finishes, [user_process](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/kernel.c#L22) function will be executed in the user mode. This function calls `clone` system call 2 times in order to execute [user_process1](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/kernel.c#L10) function in 2 parallel threads. `clone` system call requires that the location of a new user stack will be passed to it, we also need to call `malloc` syscall in order to allocate 2 new memory pages. Let's now take a look at what the `clone` syscall wrapping function looks like. You can find it [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/sys.S#L22).
 
 ```
 .globl call_sys_clone
@@ -264,7 +264,7 @@ In case, when we are creating a new kernel thread, the function behaves exactly 
         p->stack = stack;
 ```
 
-The first thing that we are doing here is getting access to the processor state, saved by the `kernel_entry` macro. It is not obvious, however, why we can use the same `task_pt_regs` function, which just returns `pt_regs` area at the top of the kernel stack. Why isn't it possible that `pt_regs` will be stored somewhere else on the stack? The answer is that this code can be executed only after `clone` syscall was called. At the time when syscall was triggered the current kernel stack was empty (we left it empty after moving to user mode). That's why `pt_regs` will always be stored at the top of the kernel stack. This rule will be kept for all subsequent syscalls because each of them will leave kernel stack empty before returning to user mode.
+The first thing that we are doing here is getting access to the processor state, saved by the `kernel_entry` macro. It is not obvious, however, why we can use the same `task_pt_regs` function, which just returns `pt_regs` area at the top of the kernel stack. Why isn't it possible that `pt_regs` will be stored somewhere else on the stack? The answer is that this code can be executed only after `clone` syscall was called. At the time when syscall was triggered the current kernel stack was empty (we left it empty after moving to the user mode). That's why `pt_regs` will always be stored at the top of the kernel stack. This rule will be kept for all subsequent syscalls because each of them will leave kernel stack empty before returning to the user mode.
 
 In the second line current processor state is copied to the new task's state. `x0` in the new state is set to `0`, because `x0` will be interpreted by the caller as a return value of the syscall. We've just seen how clone wrapper function uses this value to determine whether we are still executing as a part of the original thread or a new one.
 
@@ -272,7 +272,7 @@ Next `sp` for the new task is set to point to the top of the new user stack page
 
 ### Exiting a task
 
-After each user tasks finishes it should call `exit` syscall (In the current implementation `exit` is called implicitly by the `clone` wrapper function).  `exit` syscall then calls [exit_process](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/sched.c) function, which is responsible for deactivating a task. The function is listed below.
+After each user tasks finishes it should call `exit` syscall (In the current implementation `exit` is called implicitly by the `clone` wrapper function.).  `exit` syscall then calls [exit_process](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/src/sched.c) function, which is responsible for deactivating a task. The function is listed below.
 
 ```
 void exit_process(){

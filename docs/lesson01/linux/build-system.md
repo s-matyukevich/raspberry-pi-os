@@ -1,4 +1,4 @@
-## 1.3: Kernel build system.
+## 1.3: Kernel build system
 
 After we examined Linux kernel structure, it worth spending some time investigating how we can build and run it. Linux also uses `make` utility to build the kernel, though Linux makefile is much more complicated. Before we will take a look at the makefile, let's learn some important concepts about Linux build system, which is called "kbuild".
 
@@ -18,7 +18,7 @@ After we examined Linux kernel structure, it worth spending some time investigat
   obj-y += some_file.o
   ```
 
-  An example of the nested Makefile can be found [here](https://github.com/torvalds/linux/tree/v4.14/kernel/Makefile)
+  An example of the nested Makefile can be found [here](https://github.com/torvalds/linux/tree/v4.14/kernel/Makefile).
 
 * Before we move forward, you need to understand the structure of a basic make rule and be comfortable with make terminology. Common rule structure is illustrated in the following diagram. 
 
@@ -30,8 +30,8 @@ After we examined Linux kernel structure, it worth spending some time investigat
     * `targets` are file names, separated by spaces. Targets are generated after the rule is executed. Usually, there is only one target per rule.
     * `prerequisites` are files that `make` trackes to see whether it needs to update the targets.
     * `recipe` is a bash script. Make calls it when some of the prerequisites have been updated. The recipe is responsible for generating the targets.
-    * Both targets and prerequisites can include wildcards (`%`) When wildcards are used the recipe is executed for each of the mached prerequisites separately. In this case, you can use `$<` and `$@` variables to refer to the prerequisite and the target inside the recipe. We already did it in the [RPi OS makefile](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson01/Makefile#L14)
-  For additional information about make rules, please refer to the [official documentation](https://www.gnu.org/software/make/manual/html_node/Rule-Syntax.html#Rule-Syntax)
+    * Both targets and prerequisites can include wildcards (`%`). When wildcards are used the recipe is executed for each of the mached prerequisites separately. In this case, you can use `$<` and `$@` variables to refer to the prerequisite and the target inside the recipe. We already did it in the [RPi OS makefile](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson01/Makefile#L14).
+  For additional information about make rules, please refer to the [official documentation](https://www.gnu.org/software/make/manual/html_node/Rule-Syntax.html#Rule-Syntax).
 
 * `make` is very good in detecting whether any of the prerequisites have been changed and updating only targets that need to be rebuilt. However, if a recipe is dynamically updated, `make` is unable to detect this change. How can this happen? Very easily. One good example is when you change some configuration variable, which results in appending an additional option to the recipe. By default, in this case, `make` will not recompile previously generated object files, because their prerequisites haven't been changed, only the recipe have been updated. To overcome this behavior Linux introduces [if_changed](https://github.com/torvalds/linux/blob/v4.14/scripts/Kbuild.include#L264) function. To see how it works let's consider the following example.
 
@@ -42,7 +42,7 @@ After we examined Linux kernel structure, it worth spending some time investigat
       $(call if_changed,compile)
   ```
 
-  Here for each `.c` file we build corresponding `.o` file by calling `if_changed` function with the argument `compile`. `if_changed` then looks for `cmd_compile` variable (it adds `cmd_` prefix to the first argument) and checks whether this variable has been updated since the last execution, or any of the prerequisites has been changed. If yes - `cmd_compile` command is executed and object file is regenerated. Our sample rule has 2 prerequisites: source `.c` file and `FORCE`. `FORCE` is a special prerequisite that forces the recipe to be called each time when `make` command is called. Without it, the recipe would be called only if `.c` file was changed. You can read more about `FORCE` target [here](https://www.gnu.org/software/make/manual/html_node/Force-Targets.html) 
+  Here for each `.c` file we build corresponding `.o` file by calling `if_changed` function with the argument `compile`. `if_changed` then looks for `cmd_compile` variable (it adds `cmd_` prefix to the first argument) and checks whether this variable has been updated since the last execution, or any of the prerequisites has been changed. If yes - `cmd_compile` command is executed and object file is regenerated. Our sample rule has 2 prerequisites: source `.c` file and `FORCE`. `FORCE` is a special prerequisite that forces the recipe to be called each time when `make` command is called. Without it, the recipe would be called only if `.c` file was changed. You can read more about `FORCE` target [here](https://www.gnu.org/software/make/manual/html_node/Force-Targets.html).
 
 ### Building the kernel
 
@@ -55,7 +55,7 @@ We are going to tackle the second question first.
 
 #### Link stage 
 
-* As you might see from the output of `make help` command, the default target, which is responsible for building the kernel, is called `vmlinux`
+* As you might see from the output of `make help` command, the default target, which is responsible for building the kernel, is called `vmlinux`.
 
 * `vmlinux` target definition can be found [here](https://github.com/torvalds/linux/blob/v4.14/Makefile#L1004) and it looks like this.
 
@@ -74,11 +74,11 @@ We are going to tackle the second question first.
 
 * `link-vmlinux.sh` script first creates `thin archive` from all available object files. `thin archive` is a special object that contains references to a set of object files as well as their combined symbol table. This is done inside [archive_builtin](https://github.com/torvalds/linux/blob/v4.14/scripts/link-vmlinux.sh#L56) function. In order to create `thin archive` this function uses [ar](https://sourceware.org/binutils/docs/binutils/ar.html) utility. Generated `thin archive` is stored as `built-in.o` file and has the format that is understandable by the linker, so it can be used as any other normal object file.
 
-* Next [modpost_link](https://github.com/torvalds/linux/blob/v4.14/scripts/link-vmlinux.sh#L69) is called. This function calls linker and generates `vmlinux.o` object file. We need this object file to perform [Section mismatch analysis](https://github.com/torvalds/linux/blob/v4.14/lib/Kconfig.debug#L308) This analysis is performed by the [modpost](https://github.com/torvalds/linux/tree/v4.14/scripts/mod) program and is triggered at [this](https://github.com/torvalds/linux/blob/v4.14/scripts/link-vmlinux.sh#L260) line.
+* Next [modpost_link](https://github.com/torvalds/linux/blob/v4.14/scripts/link-vmlinux.sh#L69) is called. This function calls linker and generates `vmlinux.o` object file. We need this object file to perform [Section mismatch analysis](https://github.com/torvalds/linux/blob/v4.14/lib/Kconfig.debug#L308). This analysis is performed by the [modpost](https://github.com/torvalds/linux/tree/v4.14/scripts/mod) program and is triggered at [this](https://github.com/torvalds/linux/blob/v4.14/scripts/link-vmlinux.sh#L260) line.
 
 * Next kernel symbol table is generated. It contains information about all functions and global variables as well as their location in the `vmlinux` binary. The main work is done inside [kallsyms](https://github.com/torvalds/linux/blob/v4.14/scripts/link-vmlinux.sh#L146) function. This function first uses [nm](https://sourceware.org/binutils/docs/binutils/nm.html) to extract all symbols from `vmlinux` binary. Then it uses [scripts/kallsyms](https://github.com/torvalds/linux/blob/v4.14/scripts/kallsyms.c)  utility to generate a special assembler file containing all symbols in a special format, understandable by the Linux kernel. Next, this assembler file is compiled and linked together with the original binary.  This process is repeated several times because after the final link addresses of some symbols can be changed.  Information from the kernel symbol table is used to generate '/proc/kallsyms' file at runtime.
 
-* Finally `vmlinux` binary is ready and `System.map`  is build. `System.map` contains the same information as `/proc/kallsyms` but this is static file and unlike `/proc/kallsyms` it is not generated at runtime. `System.map` is mostly used to resolve addresses to symbol names during [kernel oops](https://en.wikipedia.org/wiki/Linux_kernel_oops). The same `nm` utility is used to build `System.map`. This is done [here](https://github.com/torvalds/linux/blob/v4.14/scripts/mksysmap#L44)
+* Finally `vmlinux` binary is ready and `System.map`  is build. `System.map` contains the same information as `/proc/kallsyms` but this is static file and unlike `/proc/kallsyms` it is not generated at runtime. `System.map` is mostly used to resolve addresses to symbol names during [kernel oops](https://en.wikipedia.org/wiki/Linux_kernel_oops). The same `nm` utility is used to build `System.map`. This is done [here](https://github.com/torvalds/linux/blob/v4.14/scripts/mksysmap#L44).
 
 #### Build stage 
 
@@ -132,7 +132,7 @@ We are going to tackle the second question first.
 
   This line just calls another makefile  ([scripts/Makefile.build](https://github.com/torvalds/linux/blob/v4.14/scripts/Makefile.build)) and passes `obj` variable, which contains a folder to be compiled. 
 
-* Next logical step is to take a look at [scripts/Makefile.build](https://github.com/torvalds/linux/blob/v4.14/scripts/Makefile.build). The first important thing that happens after it is executed is that all variables from `Makefile` or `Kbuild` files, defined in the current directory, are included. By current directory I mean the directory referenced by the `obj` variable. The inclusion is done in the [following 3 lines](https://github.com/torvalds/linux/blob/v4.14/scripts/Makefile.build#L43-L45)
+* Next logical step is to take a look at [scripts/Makefile.build](https://github.com/torvalds/linux/blob/v4.14/scripts/Makefile.build). The first important thing that happens after it is executed is that all variables from `Makefile` or `Kbuild` files, defined in the current directory, are included. By current directory I mean the directory referenced by the `obj` variable. The inclusion is done in the [following 3 lines](https://github.com/torvalds/linux/blob/v4.14/scripts/Makefile.build#L43-L45).
 
   ```
   kbuild-dir := $(if $(filter /%,$(src)),$(src),$(srctree)/$(src))

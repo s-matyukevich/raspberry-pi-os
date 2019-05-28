@@ -1,6 +1,6 @@
 ## 2.1: Processor initialization 
 
-In this lesson, we are going to work more closely with the ARM processor. It has some essential features that can be utilized by the OS. The first such feature is called "Exception levels"
+In this lesson, we are going to work more closely with the ARM processor. It has some essential features that can be utilized by the OS. The first such feature is called "Exception levels".
 
 ### Exception levels
 
@@ -20,11 +20,11 @@ EL3 is used for transitions from ARM "Secure World" to "Insecure world". This ab
 
 Next thing that I want to do is to figure out which Exception level we are currently using. But when I tried to do this, I realized that the kernel could only print some constant string on a screen, but what I need is some analog of [printf](https://en.wikipedia.org/wiki/Printf_format_string) function. With `printf` I can easily display values of different registers and variables. Such functionality is essential for the kernel development because you don't have any other debugger support and `printf` becomes the only mean by which you can figure out what is going on inside your program.
 
-For the RPi OS I decided not to reinvent the wheel and use one of  [existing printf implementations](http://www.sparetimelabs.com/tinyprintf/tinyprintf.php) This function consists mostly from string manipulations and is not very interesting from a kernel developer point of view. The implementation that I used is very small and don't have external dependencies, that allows it to be easily integrated into the kernel. The only thing that I have to do is to define `putc`  function that can send a single character to the screen. This function is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/mini_uart.c#L59) and it just uses already existing `uart_send` function. Also, we need to initialize the `printf` library and specify the location of the `putc` function. This is done in a single [line of code](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/kernel.c#L8)
+For the RPi OS I decided not to reinvent the wheel and use one of  [existing printf implementations](http://www.sparetimelabs.com/tinyprintf/tinyprintf.php) This function consists mostly from string manipulations and is not very interesting from a kernel developer point of view. The implementation that I used is very small and don't have external dependencies, that allows it to be easily integrated into the kernel. The only thing that I have to do is to define `putc`  function that can send a single character to the screen. This function is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/mini_uart.c#L59) and it just uses already existing `uart_send` function. Also, we need to initialize the `printf` library and specify the location of the `putc` function. This is done in a single [line of code](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/kernel.c#L8).
 
 ### Finding current Exception level
 
-Now, when we are equipped with the `printf` function, we can complete our original task: figure out at which exception level the OS is booted. A small function that can answer this question is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/utils.S#L1) and looks like this
+Now, when we are equipped with the `printf` function, we can complete our original task: figure out at which exception level the OS is booted. A small function that can answer this question is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/utils.S#L1) and looks like this.
 
 ```
 .globl get_el
@@ -34,7 +34,7 @@ get_el:
     ret
 ```
 
-Here we use `mrs` instruction to read the value from `CurrentEL` system register into `x0` register. Then we shift this value 2 bits to the right (we need to do this because first 2 bits in the `CurrentEL` register are reserved and always have value 0) And finally in the register `x0` we have an integer number indicating current exception level. Now the only thing that is left is to display this value, like [this](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/kernel.c#L10)
+Here we use `mrs` instruction to read the value from `CurrentEL` system register into `x0` register. Then we shift this value 2 bits to the right (we need to do this because first 2 bits in the `CurrentEL` register are reserved and always have value 0) And finally in the register `x0` we have an integer number indicating current exception level. Now the only thing that is left is to display this value, like [this](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/kernel.c#L10).
 
 ```
     int el = get_el();
@@ -93,8 +93,8 @@ Here we set the value of the `sctlr_el1` system register. `sctlr_el1` is respons
 
 `SCTLR_VALUE_MMU_DISABLED` constant is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/include/arm/sysregs.h#L16) Individual bits of this value are defined like this:
 
-* `#define SCTLR_RESERVED                  (3 << 28) | (3 << 22) | (1 << 20) | (1 << 11)` Some bits in the description of `sctlr_el1` register are marked as `RES1`. Those bits are reserved for future ussage and should be initialized with `1`.
-* `#define SCTLR_EE_LITTLE_ENDIAN          (0 << 25)` Exception [Endianness](https://en.wikipedia.org/wiki/Endianness) This field controls endianess of explicit data access at EL1. We are going to configure the processor to work only with `little-endian` format.
+* `#define SCTLR_RESERVED                  (3 << 28) | (3 << 22) | (1 << 20) | (1 << 11)` Some bits in the description of `sctlr_el1` register are marked as `RES1`. Those bits are reserved for future usage and should be initialized with `1`.
+* `#define SCTLR_EE_LITTLE_ENDIAN          (0 << 25)` Exception [Endianness](https://en.wikipedia.org/wiki/Endianness). This field controls endianess of explicit data access at EL1. We are going to configure the processor to work only with `little-endian` format.
 * `#define SCTLR_EOE_LITTLE_ENDIAN         (0 << 24)` Similar to previous field but this one controls endianess of explicit data access at EL0, instead of EL1. 
 * `#define SCTLR_I_CACHE_DISABLED          (0 << 12)` Disable instruction cache. We are going to disable all caches for simplicity. You can find more information about data and instruction caches [here](https://stackoverflow.com/questions/22394750/what-is-meant-by-data-cache-and-instruction-cache).
 * `#define SCTLR_D_CACHE_DISABLED          (0 << 2)` Disable data cache.
@@ -107,7 +107,7 @@ Here we set the value of the `sctlr_el1` system register. `sctlr_el1` is respons
     msr    hcr_el2, x0
 ```
 
-We are not going to implement our own [hypervisor](https://en.wikipedia.org/wiki/Hypervisor). Stil we need to use this register because, among other settings, it controls the execution state at EL1. Execution state must be `AArch64` and not `AArch32`. This is configured [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/include/arm/sysregs.h#L22) 
+We are not going to implement our own [hypervisor](https://en.wikipedia.org/wiki/Hypervisor). Stil we need to use this register because, among other settings, it controls the execution state at EL1. Execution state must be `AArch64` and not `AArch32`. This is configured [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/include/arm/sysregs.h#L22).
 
 #### SCR_EL3, Secure Configuration Register (EL3), Page 2648 of AArch64-Reference-Manual.
 
