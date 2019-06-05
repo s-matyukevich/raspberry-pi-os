@@ -1,0 +1,10 @@
+This is a simple uart loader for raspberryPi,can download img file less than 2M
+
+build:
+	make
+
+use:
+	./raspiloader /dev/ttyUSBx kernel8.img
+
+
+
