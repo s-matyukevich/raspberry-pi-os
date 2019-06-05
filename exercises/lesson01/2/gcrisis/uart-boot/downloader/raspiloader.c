@@ -20,7 +20,7 @@
 
 
 
-#define BUF_SIZE 4096
+#define BUF_SIZE 65536
 
 void do_exit(int fd, int res) {
     // close FD
@@ -166,6 +166,7 @@ int main(int argc, char *argv[]) {
 
     int fd;
     char buf[BUF_SIZE];
+    fd_set rfds, wfds, efds;
 
     printf("raspiloader v1.0\n");
 
@@ -206,6 +207,32 @@ int main(int argc, char *argv[]) {
         send_kernel(fd, argv[2]);
         break;        
     }
+    struct termios old_tio, new_tio;
+    tcgetattr(STDIN_FILENO, &old_tio);
+    new_tio = old_tio;
+    new_tio.c_lflag &= (~ICANON & ~ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &new_tio);
+    while(1)
+    {
+		FD_ZERO(&rfds);
+		FD_SET(0, &rfds);
+		FD_SET(fd, &rfds);
+		int ret=select(fd+1, &rfds, &wfds, &efds, NULL);
+		if(ret)
+		{
+			// input from the user, copy to RPi
+			if (FD_ISSET(STDIN_FILENO, &rfds)) {
+				ssize_t len = read(STDIN_FILENO, &buf[0], BUF_SIZE);
+				ssize_t len2 = write(fd, buf, len);
+			}
+			if (FD_ISSET(fd, &rfds)) {
+				 char buf2[BUF_SIZE];
+				ssize_t len = read(fd, buf2, BUF_SIZE);
+				ssize_t len2 = write(STDOUT_FILENO, buf2, len);		    
+			}
+		}
+	}
+    
     close(fd);
     return 0;
 }
