@@ -293,7 +293,7 @@ void uart_init ( void )
     put32(AUX_MU_MCR_REG,0);                //Set RTS line to be always high
     put32(AUX_MU_BAUD_REG,270);             //Set baud rate to 115200
 
-    put32(AUX_MU_CNTL_REG,3);               //Finaly, enable transmitter and receiver
+    put32(AUX_MU_CNTL_REG,3);               //Finally, enable transmitter and receiver
 }
 ``` 
 
@@ -369,7 +369,7 @@ Now our Mini UART is connected to the GPIO pins, and the pins are configured. Th
     put32(AUX_MU_BAUD_REG,270);             //Set baud rate to 115200
     put32(AUX_MU_IIR_REG,6);                //Clear FIFO
 
-    put32(AUX_MU_CNTL_REG,3);               //Finaly, enable transmitter and receiver
+    put32(AUX_MU_CNTL_REG,3);               //Finally, enable transmitter and receiver
 ```
 Let's examine this code snippet line by line. 
 
@@ -408,7 +408,7 @@ baudrate = system_clock_freq / (8 * ( baudrate_reg + 1 ))
 The `system_clock_freq` is 250 MHz, so we can easily calculate the value of `baudrate_reg` as 270.
 
 ``` 
-    put32(AUX_MU_CNTL_REG,3);               //Finaly, enable transmitter and receiver
+    put32(AUX_MU_CNTL_REG,3);               //Finally, enable transmitter and receiver
 ```
 After this line is executed, the Mini UART is ready for work!
 

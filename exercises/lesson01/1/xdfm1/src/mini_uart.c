@@ -57,5 +57,5 @@ void uart_init ( void )
 	baudrate = uart_get_baudrate();
 	put32(AUX_MU_BAUD_REG,baudrate);             //Set baund rate to 115200
 
-	put32(AUX_MU_CNTL_REG,3);               //Finaly, enable transmitter and receiver
+	put32(AUX_MU_CNTL_REG,3);               //Finally, enable transmitter and receiver
 }
