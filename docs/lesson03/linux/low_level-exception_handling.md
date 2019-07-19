@@ -349,7 +349,7 @@ The following is done inside this function.
 * Code inside `#ifdef CONFIG_PREEMPT` block access current task flags to check whether we need to call the scheduler. This code will be examined details in the next lesson. 
 * `irq_handler` - this is the place were actual interrupt handling is performed. 
 
-[irg_handler](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L351) is a macro and it is defined as the follows.
+[irq_handler](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L351) is a macro and it is defined as the follows.
 
 ```
     .macro    irq_handler
