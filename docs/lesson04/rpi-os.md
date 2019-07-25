@@ -42,7 +42,7 @@ This struct has the following members:
 
 After the kernel startup, there is only one task running: the one that runs [kernel_main](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/kernel.c#L19) function. It is called "init task". Before the scheduler functionality is enabled, we must fill `task_struct` corresponding to the init task. This is done [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/include/sched.h#L53). 
 
-All tasks are stored in [task](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/include/sched.h#L53) array. This array has only 64 slots - that is the maximum number of simultaneous tasks that we can have in the RPi OS. It is definitely not the best solution for the production-ready OS, but it is ok for our goals.
+All tasks are stored in [task](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L7) array. This array has only 64 slots - that is the maximum number of simultaneous tasks that we can have in the RPi OS. It is definitely not the best solution for the production-ready OS, but it is ok for our goals.
 
 There is also a very important variable called [current](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L6) that always points to the currently executing task. Both `current` and `task` array are initially set to hold a pointer to the init task. There is also a global variable called [nr_tasks](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L8) - it contains the number of currently running tasks in the system.
 
@@ -82,7 +82,7 @@ void kernel_main(void)
 There are a few important things about this code.
 
 1. New function [copy_process](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/fork.c#L5) is introduced. `copy_process` takes 2 arguments: a function to execute in a new thread and an argument that need to be passed to this function. `copy_process` allocates a new `task_struct`  and makes it available for the scheduler.
-1. Another new function for us is called [schedule](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L21). This is the core scheduler function: it checks whether there is a new task that needs to preemt the current one. A task can voluntarily call `schedule` if it doesn't have any work to do at the moment. `schedule` is also called from the timer interrupt handler.
+1. Another new function for us is called [schedule](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L21). This is the core scheduler function: it checks whether there is a new task that needs to preempt the current one. A task can voluntarily call `schedule` if it doesn't have any work to do at the moment. `schedule` is also called from the timer interrupt handler.
 
 We are calling `copy_process` 2 times, each time passing a pointer to the [process](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/kernel.c#L9) function as the first argument. `process` function is very simple.
 
@@ -437,7 +437,7 @@ We have already examined all source code related to the context switch. However,
                | device registers |
     0x40000000 +------------------+
     ```
-1. `kernel_main` volantirely calls [schedule](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L21) function and it desides to run task 1.
+1. `kernel_main` voluntarily calls [schedule](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.c#L21) function and it decides to run task 1.
 1. [cpu_switch_to](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/sched.S#L4) saves calee-saved registers in the init task `cpu_context`, wich is located inside the kernel image.
 1. `cpu_switch_to` restores calee-saved registers from task 1 `cpu_context`. `sp` now points to `0x00401000`, link register to [ret_from_fork](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/entry.S#L146) function, `x19` contains a pointer to [process](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson04/src/kernel.c#L9) function and `x20` a pointer to string "12345", wich is located somewhere in the kernel image.
 1. `cpu_switch_to` calls `ret` instruction, which jums to the `ret_from_fork` function.
