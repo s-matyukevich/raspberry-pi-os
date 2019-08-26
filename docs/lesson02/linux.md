@@ -267,7 +267,7 @@ We don't plan to use EL2 now, though some functionality requires it. We need it,
 
 Finally, we need to initialize processor state at EL1 and switch exception levels. We already did it for the [RPi OS](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson02/src/boot.S#L27-L33) so I am not going to explain the details of this code. 
 
-The only new thing here is the way how `elr_el2` is initialized. `lr` or Link Register is an alias for `x30`. Whenever you execute `br` (Branch Link) instruction `x30` is automatically populated with the address of the current instruction. This fact is usually used by `ret` instruction, so it knows where exactly to return. In our case, `lr` points [here](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/head.S#L119) and, because of the way how we initialized  `elr_el2`, this is also the place from which the execution is going to be resumed after switching to EL1.
+The only new thing here is the way how `elr_el2` is initialized. `lr` or Link Register is an alias for `x30`. Whenever you execute `bl` (Branch Link) instruction `x30` is automatically populated with the address of the current instruction. This fact is usually used by `ret` instruction, so it knows where exactly to return. In our case, `lr` points [here](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/head.S#L119) and, because of the way how we initialized  `elr_el2`, this is also the place from which the execution is going to be resumed after switching to EL1.
 
 ### Processor initialization at EL1
 
