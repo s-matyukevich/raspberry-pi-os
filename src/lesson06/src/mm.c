@@ -91,7 +91,7 @@ int copy_virt_memory(struct task_struct *dst) {
 		if( kernel_va == 0) {
 			return -1;
 		}
-		memcpy(src->mm.user_pages[i].virt_addr, kernel_va, PAGE_SIZE);
+		memcpy(kernel_va, src->mm.user_pages[i].virt_addr, PAGE_SIZE);
 	}
 	return 0;
 }

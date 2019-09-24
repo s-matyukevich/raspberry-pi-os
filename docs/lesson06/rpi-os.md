@@ -399,7 +399,7 @@ int move_to_user_mode(unsigned long start, unsigned long size, unsigned long pc)
     if (code_page == 0)    {
         return -1;
     }
-    memcpy(start, code_page, size);
+    memcpy(code_page, start, size);
     set_pgd(current->mm.pgd);
     return 0;
 }
@@ -435,7 +435,7 @@ We made a simple convention that our user program will not exceed 1 page in size
 `allocate_user_page` reserves 1  memory page and maps it to the virtual address, provided as a second argument. In the process of mapping it populates page tables, associated with the current process. We will investigate in details how this function works later in this chapter.
 
 ```
-    memcpy(start, code_page, size);
+    memcpy(code_page, start, size);
 ```
 
 Next, we copy the whole user region to the page that we have just mapped. 
@@ -629,7 +629,7 @@ int copy_virt_memory(struct task_struct *dst) {
         if( kernel_va == 0) {
             return -1;
         }
-        memcpy(src->mm.user_pages[i].virt_addr, kernel_va, PAGE_SIZE);
+        memcpy(kernel_va, src->mm.user_pages[i].virt_addr, PAGE_SIZE);
     }
     return 0;
 }
