@@ -21,7 +21,7 @@ int copy_process(unsigned long clone_flags, unsigned long fn, unsigned long arg)
 		p->cpu_context.x20 = arg;
 	} else {
 		struct pt_regs * cur_regs = task_pt_regs(current);
-		*cur_regs = *childregs;
+		*childregs = *cur_regs;
 		childregs->regs[0] = 0;
 		copy_virt_memory(p);
 	}
@@ -51,7 +51,7 @@ int move_to_user_mode(unsigned long start, unsigned long size, unsigned long pc)
 	if (code_page == 0)	{
 		return -1;
 	}
-	memcpy(start, code_page, size);
+	memcpy(code_page, start, size);
 	set_pgd(current->mm.pgd);
 	return 0;
 }

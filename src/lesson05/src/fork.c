@@ -24,7 +24,7 @@ int copy_process(unsigned long clone_flags, unsigned long fn, unsigned long arg,
 		p->cpu_context.x20 = arg;
 	} else {
 		struct pt_regs * cur_regs = task_pt_regs(current);
-		*cur_regs = *childregs;
+		*childregs = *cur_regs;
 		childregs->regs[0] = 0;
 		childregs->sp = stack + PAGE_SIZE; 
 		p->stack = stack;
