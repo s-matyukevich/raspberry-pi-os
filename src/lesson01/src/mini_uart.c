@@ -49,7 +49,8 @@ void uart_init ( void )
 	put32(AUX_MU_IER_REG,0);                //Disable receive and transmit interrupts
 	put32(AUX_MU_LCR_REG,3);                //Enable 8 bit mode
 	put32(AUX_MU_MCR_REG,0);                //Set RTS line to be always high
-	put32(AUX_MU_BAUD_REG,541);             //Set baud rate to 115200, new GPU clock rate is 500MHz, not 250MHz
+	/* baudrate = system_clock_freq / (8 * ( baudrate_reg + 1 )) */
+	put32(AUX_MU_BAUD_REG,270);             //Set baud rate to 115200, system clock rate is 250MHz
 
 	put32(AUX_MU_CNTL_REG,3);               //Finally, enable transmitter and receiver
 }

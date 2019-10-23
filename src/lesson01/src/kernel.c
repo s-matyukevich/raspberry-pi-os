@@ -3,8 +3,11 @@
 void kernel_main(void)
 {
 	uart_init();
-	uart_send_string("Hello, world!\r\n");
+	delay(1000);
 
+	/* Explain the function of kernal */
+	// FIXME: Show string is mix code, Why? 
+	uart_send_string("Show you what you input!\r\n");
 	while (1) {
 		uart_send(uart_recv());
 	}
