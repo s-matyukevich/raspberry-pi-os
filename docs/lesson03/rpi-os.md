@@ -1,12 +1,12 @@
-## 3.1: Interrupts 
+## 3.1: Interrupts
 
-From the lesson 1, we already know how to communicate with hardware. However, most of the time the pattern of communication is not that simple. Usually, this pattern is asynchronous: we send some command to a device, but it doesn't respond immediately. Instead, it notifies us when the work is completed. Such asynchronous notifications are called "interrupts" because they interrupt normal execution flow and force the processor to execute an "interrupt handler". 
+From the lesson 1, we already know how to communicate with hardware. However, most of the time the pattern of communication is not that simple. Usually, this pattern is asynchronous: we send some command to a device, but it doesn't respond immediately. Instead, it notifies us when the work is completed. Such asynchronous notifications are called "interrupts" because they interrupt normal execution flow and force the processor to execute an "interrupt handler".
 
 There is one device that is particularly useful in operating system development: system timer. It is a device that can be configured to periodically interrupt a processor with some predefined frequency. One particular application of the timer that it is used in the process scheduling. A scheduler needs to measure for how long each process has been executed and use this information to select the next process to run. This measurement is based on timer interrupts.
 
-We are going to talk about process scheduling in details in the next lesson, but for now, our task will be to initialize system timer and implement a timer interrupt handler. 
+We are going to talk about process scheduling in details in the next lesson, but for now, our task will be to initialize system timer and implement a timer interrupt handler.
 
-### Interrupts vs exceptions 
+### Interrupts vs exceptions
 
 In ARM.v8 architecture, interrupts are part of a more general term: exceptions. There are 4 types of exceptions
 
@@ -53,7 +53,7 @@ Vector table is defined [here](https://github.com/s-matyukevich/raspberry-pi-os/
 ```
 
 In the first line, you can see that another macro is used: `kernel_entry`. We will discuss it shortly.
-Then we call [show_invalid_entry_message](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/irq.c#L34) and prepare 3 arguments for it. The first argument is exception type that can take one of [this](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/include/entry.h#L6) values. It tells us which exactly exception handler has been executed.
+Then we call [show_invalid_entry_message](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/irq.c#L34) and prepare 3 arguments for it. The first argument is exception type that can take one of [these](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/include/entry.h#L6) values. It tells us exactly which exception handler has been executed.
 The second parameter is the most important one, it is called `ESR` which stands for Exception Syndrome Register. This argument is taken from `esr_el1` register, which is described on page 2431 of `AArch64-Reference-Manual`. This register contains detaild information about what causes an exception. 
 The third argument is important mostly in case of synchronous exceptions. Its value is taken from already familiar to us `elr_el1` register, which contains the address of the instruction that had been executed when the exception was generated. For synchronous exceptions, this is also the instruction that causes the exception.
 After `show_invalid_entry_message`  function prints all this information to the screen we put the processor in an infinite loop because there is not much else we can do.
@@ -76,7 +76,7 @@ irq_vector_init:
 
 ### Masking/unmasking interrupts
 
-Another thing that we need to do is to unmask all types of interrupts. Let me explain what I mean by "unmasking" an interrupt. Sometimes there is a need to tell that a particular piece of code must never be intercepted by an asynchronous interrupt. Imagine, for example, what happens if an interrupt occurs right in the middle of `kernel_entry` macro? In this case, processor state would be overwritten and lost. That's why whenever an exception handler is executed, the processor automatically disables all types of interrupts. This is called "masking", and this also can be done manually if we need to do so. 
+Another thing that we need to do is to unmask all types of interrupts. Let me explain what I mean by "unmasking" an interrupt. Sometimes there is a need to tell that a particular piece of code must never be intercepted by an asynchronous interrupt. Imagine, for example, what happens if an interrupt occurs right in the middle of `kernel_entry` macro? In this case, processor state would be overwritten and lost. That's why whenever an exception handler is executed, the processor automatically disables all types of interrupts. This is called "masking", and this also can be done manually if we need to do so.
 
 Many people mistakenly think that interrupts must be masked for the whole duration of the exception handler. This isn't true - it is perfectly legal to unmask interrupts after you saved processor state and therefore it is also legal to have nested interrupts. We are not going to do this right now, but this is important information to keep in mind.
 
@@ -85,7 +85,7 @@ The [following two functions](https://github.com/s-matyukevich/raspberry-pi-os/b
 ```
 .globl enable_irq
 enable_irq:
-    msr    daifclr, #2 
+    msr    daifclr, #2
     ret
 
 .globl disable_irq
@@ -97,13 +97,13 @@ disable_irq:
 ARM processor state has 4 bits that are responsible for holding mask status for different types of interrupts. Those bits are defined as following.
 
 * **D**  Masks debug exceptions. These are a special type of synchronous exceptions. For obvious reasons, it is not possible to mask all synchronous exceptions, but it is convenient to have a separate flag that can mask debug exceptions.
-* **A** Masks `SErrors`. It is called `A` because `SErrors` sometimes are called asynchronous aborts. 
+* **A** Masks `SErrors`. It is called `A` because `SErrors` sometimes are called asynchronous aborts.
 * **I** Masks `IRQs`
 * **F** Masks `FIQs`
 
 Now you can probably guess why registers that are responsible for changing interrupt mask status are called `daifclr` and `daifset`. Those registers set and clear interrupt mask status bits in the processor state.
 
-The last thing you may wonder about is why do we use constant value `2` in both of the functions? This is because we only want to set and clear second (`I`) bit. 
+The last thing you may wonder about is why do we use constant value `2` in both of the functions? This is because we only want to set and clear second (`I`) bit.
 
 ### Configuring interrupt controller
 
@@ -161,7 +161,7 @@ The first line reads current counter value, the second line increases it and the
 Finally, we got to the timer interrupt handler. It is actually very simple.
 
 ```
-void handle_timer_irq( void ) 
+void handle_timer_irq( void )
 {
     curVal += interval;
     put32(TIMER_C1, curVal);
