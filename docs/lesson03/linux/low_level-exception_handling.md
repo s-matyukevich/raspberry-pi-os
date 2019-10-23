@@ -5,7 +5,7 @@ Given huge Linux kernel source code, what is a good way to find the code that is
 ```
     adr_l    x8, vectors            // load VBAR_EL1 with virtual
     msr    vbar_el1, x8            // vector table address
-``` 
+```
 
 From this code, we can infer that the vector table is called `vectors` and you should be able to easily find [its definition](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L367).
 
@@ -50,7 +50,7 @@ Looks familiar, isn't it? And indeed, I've copied most of this code and just sim
 
 ### kernel_entry
 
-[kernel_entry](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L120) macro should also be familiar to you. It is used exactly in the same way as the [corresonding macro](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S#L17) in the RPI OS. Original (Linux) version, however, is a lot more complicated. The code is listed below. 
+[kernel_entry](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L120) macro should also be familiar to you. It is used exactly in the same way as the [corresonding macro](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/entry.S#L17) in the RPI OS. Original (Linux) version, however, is a lot more complicated. The code is listed below.
 
 ```
 	.macro	kernel_entry, el, regsize = 64
@@ -160,7 +160,7 @@ Now we are going to explore the `kernel_entry` macro in details.
 
 ```
     .macro    kernel_entry, el, regsize = 64
-``` 
+```
 
 The macro accepts 2 parameters: `el` and `regsize`. `el` can be either `0` or `1` depending on whether an exception was generated at EL0 or EL1. `regsize` is 32 if we came from 32-bit EL0 or 64 otherwise.
 
@@ -206,17 +206,17 @@ This part saves all general purpose registers on the stack. Note, that stack poi
 ```
 
 `MDSCR_EL1.SS` bit is responsible for enabling "Software Step exceptions". If this bit is set and debug exceptions are unmasked, an exception is generated after any instruction has been executed. This is commonly used by debuggers. When taking exception from user mode, we need to check first whether [TIF_SINGLESTEP](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/thread_info.h#L93) flag is set for the current task. If yes, this indicates that the task is executing under a debugger and we must unset `MDSCR_EL1.SS` bit.
-The important thing to understand in this code is how information about the current task is obtained. In Linux, each process or thread (later I will reference any of them as just "task") has a [task_struct](https://github.com/torvalds/linux/blob/v4.14/include/linux/sched.h#L519) associated with it. This struct contains all metadata information about a task On `arm64` architecture `task_struct` embeds another structure that is called [thread_info](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/thread_info.h#L39) so that a pointer to `task_struct` can always be used as a pointer to `thread_info`. `thread_info` is the place were flags are stored along with some other low-level values that `entry.S` need direct access to. 
+The important thing to understand in this code is how information about the current task is obtained. In Linux, each process or thread (later I will reference any of them as just "task") has a [task_struct](https://github.com/torvalds/linux/blob/v4.14/include/linux/sched.h#L519) associated with it. This struct contains all metadata information about a task On `arm64` architecture `task_struct` embeds another structure that is called [thread_info](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/thread_info.h#L39) so that a pointer to `task_struct` can always be used as a pointer to `thread_info`. `thread_info` is the place were flags are stored along with some other low-level values that `entry.S` need direct access to.
 
 ```
     mov    x29, xzr            // fp pointed to user-space
 ```
 
-Though `x29` is a general purpose register it usually has a special meaning. It is used as a "Frame pointer". Now I want to spend some time to explain its purpose. 
+Though `x29` is a general purpose register it usually has a special meaning. It is used as a "Frame pointer". Now I want to spend some time to explain its purpose.
 
-When a function is compiled, the first couple of instructions are usually responsible for storing old frame pointer and link register values on the stack. (Just a quick reminder: `x30` is called link register and it holds a "return address" that is used by the `ret` instruction) Then a new stack frame is allocated, so that it can contain all local variables of the function, and frame pointer register is set to point to the bottom of the frame. Whenever the function needs to access some local variable it simply adds hardcoded offset to the frame pointer. Imagine now that an error has occurred and we need to generate a stack trace. We can use current frame pointer to find all local variables in the stack, and the link register can be used used to figure out the precise location of the caller. Next, we take advantage of the fact that old frame pointer and link register values are always saved at the beginning of the stack frame, and we just read them from there. After we get caller's frame pointer we can now access all its local variables as wells. This process is repeated recursively until we reach the top of the stack and is called "stack unwinding". A similar algorithm is used by [ptrace](http://man7.org/linux/man-pages/man2/ptrace.2.html) system call.
+When a function is compiled, the first couple of instructions are usually responsible for storing old frame pointer and link register values on the stack. (Just a quick reminder: `x30` is called link register and it holds a "return address" that is used by the `ret` instruction) Then a new stack frame is allocated, so that it can contain all local variables of the function, and frame pointer register is set to point to the bottom of the frame. Whenever the function needs to access some local variable it simply adds hardcoded offset to the frame pointer. Imagine now that an error has occurred and we need to generate a stack trace. We can use current frame pointer to find all local variables in the stack, and the link register can be used used to figure out the precise location of the caller. Next, we take advantage of the fact that old frame pointer and link register values are always saved at the beginning of the stack frame, and we just read them from there. After we get caller's frame pointer we can now access all its local variables as well. This process is repeated recursively until we reach the top of the stack and is called "stack unwinding". A similar algorithm is used by [ptrace](http://man7.org/linux/man-pages/man2/ptrace.2.html) system call.
 
-Now, going back to the `kernel_entry` macro, it should be clear why do we need to clear `x29` register after taking an exception from EL0. That is because in Linux each task uses a different stack for user and kernel mode, and therefore it doesn't make sense to have common stack traces. 
+Now, going back to the `kernel_entry` macro, it should be clear why do we need to clear `x29` register after taking an exception from EL0. That is because in Linux each task uses a different stack for user and kernel mode, and therefore it doesn't make sense to have common stack traces.
 
 ```
     .else
@@ -233,7 +233,7 @@ Now we are inside else clause, which mean that this code is relevant only if we 
     str    x20, [tsk, #TSK_TI_ADDR_LIMIT]
 ```
 
-Task address limit specifies the largest virtual address that can be used. When user process operates in 32-bit mode this limit is `2^32`. For 64 bit kernel it can be larger and usually is `2^48`. If it happens that an exception is taken from 32-bit EL1, task address limit need to be changed to [TASK_SIZE_64](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/memory.h#L80). Also, it is required to save the original address limit because it needs to be restored before the execution will be returned to user mode. 
+Task address limit specifies the largest virtual address that can be used. When user process operates in 32-bit mode this limit is `2^32`. For 64 bit kernel it can be larger and usually is `2^48`. If it happens that an exception is taken from 32-bit EL1, task address limit need to be changed to [TASK_SIZE_64](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/memory.h#L80). Also, it is required to save the original address limit because it needs to be restored before the execution will be returned to user mode.
 
 ```
     mrs    x22, elr_el1
@@ -344,10 +344,10 @@ ENDPROC(el1_irq)
 The following is done inside this function.
 
 * `kernel_entry` and `kernel_exit` macros are called to save and restore processor state. The first parameter indicates that the exception is taken from EL1.
-* Debug interrupts are unmasked by calling `enable_dbg` macro. At this point, it is safe to do so, because the processor state is already saved and, even if debug exception occurred in the middle of the interrupt handler, it will be processed correctly. If you wonder why is it necessary to unmask debug exceptions during an interrupt processing in the first place - read [this](https://github.com/torvalds/linux/commit/2a2830703a2371b47f7b50b1d35cb15dc0e2b717) commit message. 
+* Debug interrupts are unmasked by calling `enable_dbg` macro. At this point, it is safe to do so, because the processor state is already saved and, even if debug exception occurred in the middle of the interrupt handler, it will be processed correctly. If you wonder why is it necessary to unmask debug exceptions during an interrupt processing in the first place - read [this](https://github.com/torvalds/linux/commit/2a2830703a2371b47f7b50b1d35cb15dc0e2b717) commit message.
 * Code inside `#ifdef CONFIG_TRACE_IRQFLAGS` block is responsible for tracing interrupts. It records 2 events: interrupt start and end. 
-* Code inside `#ifdef CONFIG_PREEMPT` block access current task flags to check whether we need to call the scheduler. This code will be examined details in the next lesson. 
-* `irq_handler` - this is the place were actual interrupt handling is performed. 
+* Code inside `#ifdef CONFIG_PREEMPT` block access current task flags to check whether we need to call the scheduler. This code will be examined details in the next lesson.
+* `irq_handler` - this is the place were actual interrupt handling is performed.
 
 [irq_handler](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/entry.S#L351) is a macro and it is defined as the follows.
 
@@ -363,11 +363,11 @@ The following is done inside this function.
 
 As you might see from the code, `irq_handler` executes [handle_arch_irq](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/irq.c#L44)  function. This function is executed with special stack, that is called "irq stack".  Why is it necessary to switch to a different stack? In RPI OS, for example, we didn't do this.  Well, I guess it is not necessary, but without it, an interrupt will be handled using task stack, and we can never be sure how much of it is still left for the interrupt handler.
 
-Next, we need to look at [handle_arch_irq](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/irq.c#L44) It appears that it is not a function, but a variable. It is set inside [set_handle_irq](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/irq.c#L46) function. But who sets it, and what is the fade of an interrupt after it reaches this point? We will figure out the answer in the next chapter of this lesson.  
+Next, we need to look at [handle_arch_irq](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/irq.c#L44) It appears that it is not a function, but a variable. It is set inside [set_handle_irq](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/irq.c#L46) function. But who sets it, and what is the fade of an interrupt after it reaches this point? We will figure out the answer in the next chapter of this lesson.
 
 ### Conclusion
 
-As a conclusion, I can say that we've already explored the low-level interrupt handling code and trace the path of an interrupt from the vector table all the way to the `handle_arch_irq`. This is the point were an interrupt leaves architecture specific code and started to be handled by a driver code. Our goal in the next chapter will be to trace the path of a timer interrupt through the driver source code. 
+As a conclusion, I can say that we've already explored the low-level interrupt handling code and trace the path of an interrupt from the vector table all the way to the `handle_arch_irq`. This is the point were an interrupt leaves architecture specific code and started to be handled by a driver code. Our goal in the next chapter will be to trace the path of a timer interrupt through the driver source code.
 
 ##### Previous Page
 

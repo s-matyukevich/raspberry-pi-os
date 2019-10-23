@@ -117,6 +117,7 @@ It starts with mapping memory registers and obtaining register base address. You
     }
 
     system_clock = base + REG_COUNTER_LO;
+    sched_clock_register(bcm2835_sched_read, 32, freq);
 ```
 
 Next, `sched_clock` subsystem is initialized. `sched_clock` need to access timer counter registers each time it is executed and [bcm2835_sched_read](https://github.com/torvalds/linux/blob/v4.14/drivers/clocksource/bcm2835_timer.c#L52) is passed as the first argument to assist with this task. The second argument corresponds to the number of bits that the timer counter has (in our case it is 32). the number of bits is used to calculate how soon the counter is going to wrap to 0. The last argument specifies timer frequency - it is used to convert values of the timer counter to nanoseconds. Timer frequency is defined in the device tree at [this](https://github.com/torvalds/linux/blob/v4.14/arch/arm/boot/dts/bcm283x.dtsi#L65) line.
@@ -126,11 +127,11 @@ Next, `sched_clock` subsystem is initialized. `sched_clock` need to access timer
         freq, 300, 32, clocksource_mmio_readl_up);
 ```
 
-Next line initializes clock source framework. [clocksource_mmio_init](https://github.com/torvalds/linux/blob/v4.14/drivers/clocksource/mmio.c#L52) initializes a simple clock source based on memory mapped registers. The clock source framework, in some aspects, duplicates the functionality of `sched_clock` and it needs access to the same 3 basic parameters. 
+Next line initializes clock source framework. [clocksource_mmio_init](https://github.com/torvalds/linux/blob/v4.14/drivers/clocksource/mmio.c#L52) initializes a simple clock source based on memory mapped registers. The clock source framework, in some aspects, duplicates the functionality of `sched_clock` and it needs access to the same 3 basic parameters.
 
 * The location of the timer counter register.
-* The number of valid bits in the counter. 
-* Timer frequency. 
+* The number of valid bits in the counter.
+* Timer frequency.
 
 Another 3 parameters include the name of the clock source, its rating, which is used to rate clock source devices, and a function that can read timer counter register.
 
@@ -143,7 +144,7 @@ Another 3 parameters include the name of the clock source, its rating, which is 
     }
 ```
 
-This code snippet is used to find Linux irq number, corresponding to the third timer interrupt (Number 3 is hardcoded as [DEFAULT_TIMER](https://github.com/torvalds/linux/blob/v4.14/drivers/clocksource/bcm2835_timer.c#L108) constant). Just a quick reminder: Raspberry Pi system timer has 4 independent set of timer registers, and here the third one is used.  If you go back to the devise tree, you can find [interrupts](https://github.com/torvalds/linux/blob/v4.14/arch/arm/boot/dts/bcm283x.dtsi#L60) property. This property describes all interrupts, supported by a device, and how those interrupts are mapped to interrupt controller lines. It is an array, where each item represents one interrupt. The format of the items is specific to the interrupt controller. In our case, each item consists of 2 numbers: the first one specifies an interrupt bank and the second - interrupt number inside the bank. [irq_of_parse_and_map](https://github.com/torvalds/linux/blob/v4.14/drivers/of/irq.c#L41) reads the value of `interrupts` property, then it uses the second argument to find which of the supported interrupts we are interested in and returns Linux irq number for the requested interrupt.
+This code snippet is used to find Linux irq number, corresponding to the third timer interrupt (Number 3 is hardcoded as [DEFAULT_TIMER](https://github.com/torvalds/linux/blob/v4.14/drivers/clocksource/bcm2835_timer.c#L108) constant). Just a quick reminder: Raspberry Pi system timer has 4 independent set of timer registers, and here the third one is used.  If you go back to the device tree, you can find [interrupts](https://github.com/torvalds/linux/blob/v4.14/arch/arm/boot/dts/bcm283x.dtsi#L60) property. This property describes all interrupts, supported by a device, and how those interrupts are mapped to interrupt controller lines. It is an array, where each item represents one interrupt. The format of the items is specific to the interrupt controller. In our case, each item consists of 2 numbers: the first one specifies an interrupt bank and the second - interrupt number inside the bank. [irq_of_parse_and_map](https://github.com/torvalds/linux/blob/v4.14/drivers/of/irq.c#L41) reads the value of `interrupts` property, then it uses the second argument to find which of the supported interrupts we are interested in and returns Linux irq number for the requested interrupt.
 
 ```
     timer = kzalloc(sizeof(*timer), GFP_KERNEL);
@@ -171,7 +172,7 @@ Next, the addresses of the control and compare registers are calculated and `mat
     timer->evt.cpumask = cpumask_of(0);
 ```
 
-In this code snippet [clock_event_device](https://github.com/torvalds/linux/blob/v4.14/include/linux/clockchips.h#L100) struct is initialized. The most important property here is `set_next_event` wich points to [bcm2835_time_set_next_event](https://github.com/torvalds/linux/blob/v4.14/drivers/clocksource/bcm2835_timer.c#L57)  function. This function is called by the clock events framework to schedule next interrupt. `bcm2835_time_set_next_event` is very simple - it updates compare register so that interrupt will be scheduled after a desied interval. This is analogaus to what we did [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/timer.c#L17) for the RPi OS.
+In this code snippet [clock_event_device](https://github.com/torvalds/linux/blob/v4.14/include/linux/clockchips.h#L100) struct is initialized. The most important property here is `set_next_event` which points to [bcm2835_time_set_next_event](https://github.com/torvalds/linux/blob/v4.14/drivers/clocksource/bcm2835_timer.c#L57)  function. This function is called by the clock events framework to schedule next interrupt. `bcm2835_time_set_next_event` is very simple - it updates compare register so that interrupt will be scheduled after a desied interval. This is analogaus to what we did [here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson03/src/timer.c#L17) for the RPi OS.
 
 ```
     timer->act.flags = IRQF_TIMER | IRQF_SHARED;
@@ -189,7 +190,7 @@ Next, irq action is initialized. The most important property here is `handler`, 
     }
 ```
 
-After the irq action is configured, it is added to the list of irq actions of the timer interrupt. 
+After the irq action is configured, it is added to the list of irq actions of the timer interrupt.
 
 ```
     clockevents_config_and_register(&timer->evt, freq, 0xf, 0xffffffff);
@@ -197,7 +198,7 @@ After the irq action is configured, it is added to the list of irq actions of th
 
 And finally clock events framework is initialized by calling [clockevents_config_and_register](https://github.com/torvalds/linux/blob/v4.14/kernel/time/clockevents.c#L504). `evt` structure and timer frequency are passed as first 2 arguments. Last 2 arguments are used only in "one-shot" timer mode and are not relevant to our current discussion.
 
-Now, we have traced the path of a timer interrupt all the way up to the `bcm2835_time_interrupt` function, but we still didn't find the place were the actual work is done. In the next section, we are going to dig even deeper and find out how an interrupt is processed when it enters the clock events framework. 
+Now, we have traced the path of a timer interrupt all the way up to the `bcm2835_time_interrupt` function, but we still didn't find the place were the actual work is done. In the next section, we are going to dig even deeper and find out how an interrupt is processed when it enters the clock events framework.
 
 ### How an interrupt is processed in the clock events framework
 
@@ -211,7 +212,7 @@ In the previous section, we have seen that the real work of handling a timer int
 
 Now our goal will be to figure out were exactly `event_handler`  is set and what happens after it is called.
 
-[clockevents_config_and_register](https://github.com/torvalds/linux/blob/v4.14/kernel/time/clockevents.c#L504) function is a good place to start the exploration because this is the place were clock events framework is configured and, if we follow the logic of this function, eventually we should find how `event_handler` is set. 
+[clockevents_config_and_register](https://github.com/torvalds/linux/blob/v4.14/kernel/time/clockevents.c#L504) function is a good place to start the exploration because this is the place where clock events framework is configured and, if we follow the logic of this function, eventually we should find how `event_handler` is set.
 
 Now let me show you the chain of function calls that leads us to the place we need.
 
@@ -220,7 +221,7 @@ Now let me show you the chain of function calls that leads us to the place we ne
 1. [tick_check_new_device](https://github.com/torvalds/linux/blob/v4.14/kernel/time/tick-common.c#L300)  This function checks whether the current device is a good candidate to be used as a "tick device". If yes, such device will be used to generate periodic ticks that the rest of the kernel will use to do all work that needs to be done on a regular basis. 
 1. [tick_setup_device](https://github.com/torvalds/linux/blob/v4.14/kernel/time/tick-common.c#L177) This function starts device configuration.
 1. [tick_setup_periodic](https://github.com/torvalds/linux/blob/v4.14/kernel/time/tick-common.c#L144) This is the place were device is configured for periodic tics.
-1. [tick_set_periodic_handler](https://github.com/torvalds/linux/blob/v4.14/kernel/time/tick-broadcast.c#L432)  Finally we reached the place were the handler is assigned!
+1. [tick_set_periodic_handler](https://github.com/torvalds/linux/blob/v4.14/kernel/time/tick-broadcast.c#L432)  Finally we reached the place where the handler is assigned!
 
 If you take a look at the last function in the call chain, you will see that Linux uses different handlers depending on whether broadcast is enabled or not. Tick broadcast is used to awake idle CPUs, you can read more about it [here](https://lwn.net/Articles/574962/) but we are going to ignore it and concentrate on a more general tick handler instead.
 
@@ -252,11 +253,11 @@ A few important things are done in this function:
 
 1. `tick_next_period` is calculated so that next tick event can be scheduled.
 1.  [do_timer](https://github.com/torvalds/linux/blob/v4.14/kernel/time/timekeeping.c#L2200) is called, which is responsible for setting 'jiffies'. `jiffies` is a number of ticks since the last system reboot. `jiffies` can be used in the same way as `sched_clock` function, in cases when you don't need nanosecond precision.
-1. [update_process_times](https://github.com/torvalds/linux/blob/v4.14/kernel/time/timer.c#L1583) is called. This is the place were currently executing process is given a chance to do all work that needed to be done periodically. This work includes, for example, running local process timers, or, most importantly, notifying the scheduler about the tick event.
+1. [update_process_times](https://github.com/torvalds/linux/blob/v4.14/kernel/time/timer.c#L1583) is called. This is the place where currently executing process is given a chance to do all work that needed to be done periodically. This work includes, for example, running local process timers, or, most importantly, notifying the scheduler about the tick event.
 
 ### Conclusion
 
-Now you see how long is the way of an ordinary timer interrupt, but we followed it from the beginning to the very end. One of the things that are the most important, is that we finally reached the place were the shceduler is called. The scheduler is one of the most critical parts of any operating system and it relies heavily on timer interrupts. So now, when we've seen where the scheduler functionality is triggered, its time to discuss its implementation - that is something we are going to do in the next lesson.
+Now you see how long is the way of an ordinary timer interrupt, but we followed it from the beginning to the very end. One of the things that are the most important, is that we finally reached the place where the scheduler is called. The scheduler is one of the most critical parts of any operating system and it relies heavily on timer interrupts. So now, when we've seen where the scheduler functionality is triggered, its time to discuss its implementation - that is something we are going to do in the next lesson.
 
 ##### Previous Page
 
