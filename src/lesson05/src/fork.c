@@ -26,7 +26,7 @@ int copy_process(unsigned long clone_flags, unsigned long fn, unsigned long arg,
 		struct pt_regs * cur_regs = task_pt_regs(current);
 		*childregs = *cur_regs;
 		childregs->regs[0] = 0;
-		childregs->sp = stack + PAGE_SIZE; 
+		childregs->sp = stack + PAGE_SIZE;
 		p->stack = stack;
 	}
 	p->flags = clone_flags;
@@ -38,7 +38,7 @@ int copy_process(unsigned long clone_flags, unsigned long fn, unsigned long arg,
 	p->cpu_context.pc = (unsigned long)ret_from_fork;
 	p->cpu_context.sp = (unsigned long)childregs;
 	int pid = nr_tasks++;
-	task[pid] = p;	
+	task[pid] = p;
 	preempt_enable();
 	return pid;
 }
@@ -50,11 +50,11 @@ int move_to_user_mode(unsigned long pc)
 	memzero((unsigned long)regs, sizeof(*regs));
 	regs->pc = pc;
 	regs->pstate = PSR_MODE_EL0t;
-	unsigned long stack = get_free_page(); //alocate new user stack
+	unsigned long stack = get_free_page(); //allocate new user stack
 	if (!stack) {
 		return -1;
 	}
-	regs->sp = stack + PAGE_SIZE; 
+	regs->sp = stack + PAGE_SIZE;
 	current->stack = stack;
 	return 0;
 }
