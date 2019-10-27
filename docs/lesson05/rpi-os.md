@@ -1,6 +1,6 @@
-## 5.1: User processes and system calls 
+## 5.1: User processes and system calls
 
-We have already added a lot of features to the RPi OS that makes it looks like an actual operating system instead of just a bare metal program. The RPi OS can now manage processes, but there is still a major drawback in this functionality: there is no process isolation at all. In this lesson, we are going to fix this issue. First of all, we will move all user processes to EL0, which restricts their access to privileged processor operations. Without this step any other isolation technics don't make sense, because any user program will be able to rewrite our security settings, thus breaking from isolation. 
+We have already added a lot of features to the RPi OS that makes it looks like an actual operating system instead of just a bare metal program. The RPi OS can now manage processes, but there is still a major drawback in this functionality: there is no process isolation at all. In this lesson, we are going to fix this issue. First of all, we will move all user processes to EL0, which restricts their access to privileged processor operations. Without this step any other isolation techniques don't make sense, because any user program will be able to rewrite our security settings, thus breaking from isolation. 
 
 If we restrict user programs from direct access to kernel functions, this brings us a different problem. What if a user program needs, for example, to print something to a user? We definitely don't want it to work with the UART device directly. Instead, it would be nice if the OS provides each program with a set of API methods. Such API can't be implemented as a simple set of methods, because each time a user program wants to call one of the API methods current exception level should be raised to EL1. Individual methods in such API are called "system calls", and in this lesson, we will add a set of system calls to the RPi OS.
 
@@ -10,7 +10,7 @@ There is also a third aspect of process isolation: each process should have its 
 
 The main idea behind system calls (syscalls for short) is very simple: each system call is actually a synchronous exception. If a user program need to execute a  syscall, it first has to to prepare all necessary arguments, and then run `svc` instruction. This instruction generates a synchronous exception. Such exceptions are handled at EL1 by the operating system. The OS then validates all arguments, performs the requested action and execute normal exception return, which ensures that the execution will resume at EL0 right after the `svc` instruction. The RPi OS defines 4 simple syscalls: 
 
-1. `write` This syscall outputs something on the screen using UART device. It accepts a buffer with the text to be printed as the first argument. 
+1. `write` This syscall outputs something on the screen using UART device. It accepts a buffer with the text to be printed as the first argument.
 1. `clone` This syscall creates a new user thread. The location of the stack for the newly created thread is passed as the first argument.
 1. `malloc` This system call allocates a memory page for a user process. There is no analog of this syscall in Linux (and I think in any other OS as well.) The only reason why we need it is that RPi OS doesn't implement virtual memory yet, and all user processes work with physical memory. That's why each process needs a way to figure out which memory page isn't occupied and can be used. `malloc` syscall return pointer to the newly allocated page or -1 in case of an error.
 1. `exit` Each process must call this syscall after it finishes execution. It will do all necessary cleanup.
@@ -20,12 +20,12 @@ All syscalls are defined in the [sys.c](https://github.com/s-matyukevich/raspber
 ```
 .globl call_sys_write
 call_sys_write:
-    mov w8, #SYS_WRITE_NUMBER    
+    mov w8, #SYS_WRITE_NUMBER
     svc #0
     ret
 ```
 
-The function is very simple: it just stores syscall number in the `w8` register and generates a synchronous exception by executing `svc` instruction. `w8` is used for the syscall number by convention: registers `x0` — `x7`are used for syscall arguments and `x8` is used to store syscall number, this allows a syscall to have up to 8 arguments. 
+The function is very simple: it just stores syscall number in the `w8` register and generates a synchronous exception by executing `svc` instruction. `w8` is used for the syscall number by convention: registers `x0` — `x7`are used for syscall arguments and `x8` is used to store syscall number, this allows a syscall to have up to 8 arguments.
 
 Such wrapper functions are usually not included in the kernel itself — you are more likely to find them in the different language's standard libraries, such as [glibc](https://www.gnu.org/software/libc/).
 
@@ -43,7 +43,7 @@ el0_sync:
     handle_invalid_entry 0, SYNC_ERROR
 ```
 
-First of all, as for all exception handlers, `kernel_entry` macro is called. Then `esr_el1` (Exception Syndrome Register) is checked. This register contains "exception class" field at offset [ESR_ELx_EC_SHIFT](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/include/arm/sysregs.h#L46). If exception class is equal to [ESR_ELx_EC_SVC64](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/include/arm/sysregs.h#L47) this means that the current exception is caused by the `svc` instruction and it is a system call. In this case, we jump to `el0_svc` label and show an error message otherwise. 
+First of all, as for all exception handlers, `kernel_entry` macro is called. Then `esr_el1` (Exception Syndrome Register) is checked. This register contains "exception class" field at offset [ESR_ELx_EC_SHIFT](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/include/arm/sysregs.h#L46). If exception class is equal to [ESR_ELx_EC_SVC64](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/include/arm/sysregs.h#L47) this means that the current exception is caused by the `svc` instruction and it is a system call. In this case, we jump to `el0_svc` label and show an error message otherwise.
 
 ```
 sc_nr   .req    x25                  // number of system calls
@@ -69,7 +69,7 @@ ni_sys:
 
 ```
 ret_from_syscall:
-    bl    disable_irq                
+    bl    disable_irq
     str   x0, [sp, #S_X0]             // returned x0
     kernel_exit 0
 ```
@@ -93,7 +93,7 @@ If you read previous lessons carefully you might notice a change in the `kernel_
     .endif /* \el == 0 */
 ```
 
-We are using 2 distinct stack pointers for EL0 and EL1, that's why right after an exception is taken from EL0 the stack pointer is overwritten. The original stack pointer can be found in the `sp_el0` register. The value of this register must be stored and restored before and after taking an exception, even if we don't touch `sp_el0` in the exception handler. If you don't do this you will end up having wrong value in the `sp` register after a context switch. 
+We are using 2 distinct stack pointers for EL0 and EL1, that's why right after an exception is taken from EL0 the stack pointer is overwritten. The original stack pointer can be found in the `sp_el0` register. The value of this register must be stored and restored before and after taking an exception, even if we don't touch `sp_el0` in the exception handler. If you don't do this you will end up having wrong value in the `sp` register after a context switch.
 
 You may also ask why don't we restore the value of the `sp` register in the case when an exception was taken from EL1? That is because we are reusing the same kernel stack for the exception handler. Even if a context switch happens during an exception processing, by the time of `kernel_exit`, `sp` will be already switched by the `cpu_switch_to` function. (By the way, in Linux the behavior is different because Linux uses a different stack for interrupt handlers.)
 
@@ -113,7 +113,7 @@ The function that actually does the job is called [move_to_user_mode](https://gi
     }
 ```
 
-First, in the `kernel_main` function we create a new kernel thread. We do this in the same way as we did it in the previous lesson. After the scheduler runs the newly created task,  `kernel_process` function will be executed in kernel mode.   
+First, in the `kernel_main` function we create a new kernel thread. We do this in the same way as we did it in the previous lesson. After the scheduler runs the newly created task,  `kernel_process` function will be executed in kernel mode.
 
 ```
 void kernel_process(){
@@ -121,7 +121,7 @@ void kernel_process(){
     int err = move_to_user_mode((unsigned long)&user_process);
     if (err < 0){
         printf("Error while moving process to user mode\n\r");
-    } 
+    }
 }
 ```
 
@@ -134,17 +134,17 @@ int move_to_user_mode(unsigned long pc)
     memzero((unsigned long)regs, sizeof(*regs));
     regs->pc = pc;
     regs->pstate = PSR_MODE_EL0t;
-    unsigned long stack = get_free_page(); //alocate new user stack
+    unsigned long stack = get_free_page(); //allocate new user stack
     if (!stack) {
         return -1;
     }
-    regs->sp = stack + PAGE_SIZE; 
+    regs->sp = stack + PAGE_SIZE;
     current->stack = stack;
     return 0;
 }
 ```
 
-Right now we are in the middle of execution of a kernel thread that was created by forking from the init task. In the previous lesson we've discussed the forking process, and we've seen that a small area (`pt_regs` area) was reserved at the top of the stack of the newly created task. This is the first time we are going to use this area: we will save manually prepared processor state there. This state will have exactly the same format as `kernel_exit` macro expects and its structure is described by the [pt_regs](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/include/fork.h#L21) struct. 
+Right now we are in the middle of execution of a kernel thread that was created by forking from the init task. In the previous lesson we've discussed the forking process, and we've seen that a small area (`pt_regs` area) was reserved at the top of the stack of the newly created task. This is the first time we are going to use this area: we will save manually prepared processor state there. This state will have exactly the same format as `kernel_exit` macro expects and its structure is described by the [pt_regs](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson05/include/fork.h#L21) struct.
 
 The following fields of the `pt_regs` struct are initialized in the `move_to_user_mode` function.
 
@@ -162,8 +162,8 @@ ret_from_fork:
     mov   x0, x20
     blr   x19
 ret_to_user:
-    bl disable_irq                
-    kernel_exit 0 
+    bl disable_irq
+    kernel_exit 0
 ```
 
 As you might notice `ret_from_fork` has been updated. Now, after a kernel thread finishes, the execution goes to the `ret_to_user` label, here we disable interrupts and perform normal exception return, using previously prepared processor state.
@@ -205,8 +205,8 @@ In the design of the `clone` syscall wrapping function, I tried to emulate the b
 
 1. Saves registers `x0` – `x3`, those registers contain parameters of the syscall and later will be overwritten by the syscall handler.
 1. Calls syscall handler.
-1. Checks return value of the syscall handler: if it is `0` this means that we return here right after the syscall finishes and we are executing inside the original thread — just return to the caller in this case.
-1. If the return value is non-zero, then it is PID of the new task and we are executing inside of the newly created thread.  In this case, execution goes to `thread_start`  label.
+1. Checks return value of the syscall handler: if it is `0`, we are executing inside of the newly created thread. In this case, execution goes to `thread_start` label.
+1. If the return value is non-zero, then it is the PID of the new task. This means that we return here right after the syscall finishes and we are executing inside the original thread — just return to the caller in this case.
 1. The function, originally passed as the first argument, is called in a new thread.
 1. After the function finishes, `exit` syscall is performed — it never returns.
 
@@ -236,7 +236,7 @@ int copy_process(unsigned long clone_flags, unsigned long fn, unsigned long arg,
         struct pt_regs * cur_regs = task_pt_regs(current);
         *childregs = *cur_regs;
         childregs->regs[0] = 0;
-        childregs->sp = stack + PAGE_SIZE; 
+        childregs->sp = stack + PAGE_SIZE;
         p->stack = stack;
     }
     p->flags = clone_flags;
@@ -248,7 +248,7 @@ int copy_process(unsigned long clone_flags, unsigned long fn, unsigned long arg,
     p->cpu_context.pc = (unsigned long)ret_from_fork;
     p->cpu_context.sp = (unsigned long)childregs;
     int pid = nr_tasks++;
-    task[pid] = p;    
+    task[pid] = p;
     preempt_enable();
     return pid;
 }
@@ -260,7 +260,7 @@ In case, when we are creating a new kernel thread, the function behaves exactly 
         struct pt_regs * cur_regs = task_pt_regs(current);
         *childregs = *cur_regs;
         childregs->regs[0] = 0;
-        childregs->sp = stack + PAGE_SIZE; 
+        childregs->sp = stack + PAGE_SIZE;
         p->stack = stack;
 ```
 
@@ -291,7 +291,7 @@ void exit_process(){
 }
 ```
 
-Following Linux convention, we are not deleting the task at once but set its state to `TASK_ZOMBIE` instead. This prevents the task from being selected and executed by the scheduler. In Linux such approach is used to allow parent process to query information about the child even after it finishes.  
+Following Linux convention, we are not deleting the task at once but set its state to `TASK_ZOMBIE` instead. This prevents the task from being selected and executed by the scheduler. In Linux such approach is used to allow parent process to query information about the child even after it finishes.
 
 `exit_process` also deletes now unnecessary user stack and calls `schedule`. After `schedule` is called new task will be selected, that's why this system call never returns.
 
