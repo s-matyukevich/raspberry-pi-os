@@ -1,4 +1,4 @@
-## 6.1: Virtual memory management 
+## 6.1: Virtual memory management
 
 The RPi OS now can run and schedule user processes, but the isolation between them is not complete - all processes and the kernel itself share the same memory. This allows any process to easily access somebody else's data and even kernel data. And even if we assume that all our processes are not malicious, there is another drawback: before allocating memory each process need to know which memory regions are already occupied - this makes memory allocation for a process more complicated.
 
@@ -42,7 +42,7 @@ The following facts are critical to understand this diagram and memory translati
   * Bits [12 - 20] contain an index in the PTE table. MMU uses this index to find a page in the physical memory.
   * Bits [0 - 11] contain an offset in the physical page. MMU uses this offset to determine the exact position in the previously found page that corresponds to the original virtual address.
 
-Now, let's make a small exercise and calculate the size of a page table. From the diagram above we know that index in a page table occupies 9 bits (this is true for all page table levels). This means that each page table contains `2^9 = 512` items. Each item in a page table is an address of either the next page table in the hierarchy or a physical page in case of PTE. As we are using a 64-bit processor, each address must be 64 bit or 8 bytes in size. Putting all of this together we can calculate that the size of a page table must be `512 * 8 = 4096` bytes or 4 KB. But this is exactly the size of a page! This might give you an intuition why MMU designers chose such numbers. 
+Now, let's make a small exercise and calculate the size of a page table. From the diagram above we know that index in a page table occupies 9 bits (this is true for all page table levels). This means that each page table contains `2^9 = 512` items. Each item in a page table is an address of either the next page table in the hierarchy or a physical page in case of PTE. As we are using a 64-bit processor, each address must be 64 bit or 8 bytes in size. Putting all of this together we can calculate that the size of a page table must be `512 * 8 = 4096` bytes or 4 KB. But this is exactly the size of a page! This might give you an intuition why MMU designers chose such numbers.
 
 ### Section mapping
 
@@ -71,7 +71,7 @@ There is one more thing that I want to discuss before we start looking at the so
                                                                                        +------------------+
 ```
 
-As you can see the difference here is that now PMD contains a pointer to the physical section. Also, the offset occupies 21 bits instead of 12 bits (this is because we need 21 bit2 to encode a 2MB range) 
+As you can see the difference here is that now PMD contains a pointer to the physical section. Also, the offset occupies 21 bits instead of 12 bits (this is because we need 21 bits to encode a 2MB range)
 
 ### Page descriptor format
 
@@ -79,11 +79,11 @@ You may ask how does the MMU know whether PMD item points to a PTE or a physical
 
 
 ```
-                           Descriptor format                               
+                           Descriptor format
 `+------------------------------------------------------------------------------------------+
  | Upper attributes | Address (bits 47:12) | Lower attributes | Block/table bit | Valid bit |
  +------------------------------------------------------------------------------------------+
- 63                 47                     11                 2                 1           0 
+ 63                 47                     11                 2                 1           0
 ```
 
 The key thing to understand here is that each descriptor always points to something that is page aligned (either a physical page, a section or the next page table in the hierarchy). This means that last 12 bits of the address, stored in a descriptor, will always be 0. This also means that MUU can use those bits to store something more useful - and that is exactly what it does. Now let me explain the meaning of all bits in a descriptor.
@@ -92,13 +92,13 @@ The key thing to understand here is that each descriptor always points to someth
 * **Bit 1** This bit indicates whether the current descriptor points to a next page table in the hierarchy (we call such descriptor a "table descriptor") or it points instead to a physical page or a section (such descriptors are called "block descriptors").
 * **Bits [11:2]** Those bits are ignored for table descriptors. For block descriptors they contain some attributes that control, for example, whether the mapped page is cachable, executable, etc.
 * **Bits [47:12]**. This is the place where the address that a descriptor points to is stored. As I mentioned previously, only bits [47:12] of the address need to be stored, because all other bits are always 0.
-* **Bits [63:48] Another set of attributes.
+* **Bits [63:48]** Another set of attributes.
 
 ### Configuring page attributes
 
 As I mentioned in the previous section, each block descriptor contains a set of attributes that controls various virtual page parameters. However, the attributes that are most important for our discussion are not configured directly in the descriptor. Instead, ARM processors implement a trick, which allows them to save some space in the descriptor attributes section.
 
-ARM.v8 architecture introduces `mair_el1` register. This register consists of 8 sections, each being 8 bits long. Each such section configures a common set of attributes. A descriptor then specifies just an index of the `mair` section, instead of specifying all attributes directly. This allows using only 2 bits in the descriptor to reference a `mair` section. The meaning of each bit in the `mair` section is described on the page 2609 of the `AArch64-Reference-Manual`. In the RPi OS we are using only a few of available attribute options. [Here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/include/arm/mmu.h#L11)  is the code that prepares values for the `mair` register.
+ARM.v8 architecture introduces `mair_el1` register. This register consists of 8 sections, each being 8 bits long. Each such section configures a common set of attributes. A descriptor then specifies just an index of the `mair` section, instead of specifying all attributes directly. This allows using only 3 bits in the descriptor to reference a `mair` section. The meaning of each bit in the `mair` section is described on the page 2609 of the `AArch64-Reference-Manual`. In the RPi OS we are using only a few of available attribute options. [Here](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/include/arm/mmu.h#L11)  is the code that prepares values for the `mair` register.
 
 ```
 /*
@@ -135,7 +135,7 @@ The process of creating kernel page tables is something that we need to handle v
 ```
 __create_page_tables:
     mov    x29, x30                        // save return address
-``` 
+```
 
 First, the function saves `x30` (link register). As we are going to call other functions from `__create_page_tables`, `x30` will be overwritten. Usually `x30` is saved on the stack but, as we know that we are not going to use recursion and nobody else will use `x29` during `__create_page_tables` execution, this simple method of preserving link register also works fine.
 
@@ -146,28 +146,28 @@ First, the function saves `x30` (link register). As we are going to call other f
 ```
 
 Next, we clear the initial page tables area. An important thing to understand here is where this area is located and how do we know its size? Initial page tables area is defined in the [linker script](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/linker.ld#L20) - this means that we are allocating the spot for this area in the kernel image itself. Calculating the size of this area is a little bit trickier. First, we need to understand the structure of the initial kernel page tables. We know that all our mappings are all inside 1 GB region (this is the size of RPi memory). One PGD descriptor can cover `2^39 = 512 GB`  and one PUD descriptor can cover `2^30 = 1 GB` of continuous virtual mapping area. (Those values are calculated based on the PGD and PUD indexes location in the virtual address.) This means that we need just one PGD and one PUD to map the whole RPi memory, and even more - both PGD and PUD will contain a single descriptor. If we have a single PUD entry there also must be a single PMD table, to which this entry will point. (Single PMD entry covers 2 MB, there are 512 items in a PMD, so in total the whole PMD table covers the same 1 GB of memory that is covered by a single PUD descriptor.)
-Next, we know that we need to map 1 GB region of memory, which is a multiple of 2 MB - so we can use section mapping. This means that we don't need PTE at all. So in total, we need 3 pages: one for PGD, PUD and PMD - this is precisely the size of the initial page table area. 
+Next, we know that we need to map 1 GB region of memory, which is a multiple of 2 MB - so we can use section mapping. This means that we don't need PTE at all. So in total, we need 3 pages: one for PGD, PUD and PMD - this is precisely the size of the initial page table area.
 
 Now we are going to step outside `__create_page_tables` function and take a look on 2 essential macros: [create_table_entry](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/boot.S#L68) and [create_block_map](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/boot.S#L77).
 
-`create_table_entry`s responsible for allocating a new page table (In our case either PGD or PUD) The source code is listed below.
+`create_table_entry` is responsible for allocating a new page table (In our case either PGD or PUD) The source code is listed below.
 
 ```
     .macro    create_table_entry, tbl, virt, shift, tmp1, tmp2
     lsr    \tmp1, \virt, #\shift
     and    \tmp1, \tmp1, #PTRS_PER_TABLE - 1            // table index
     add    \tmp2, \tbl, #PAGE_SIZE
-    orr    \tmp2, \tmp2, #MM_TYPE_PAGE_TABLE    
+    orr    \tmp2, \tmp2, #MM_TYPE_PAGE_TABLE
     str    \tmp2, [\tbl, \tmp1, lsl #3]
     add    \tbl, \tbl, #PAGE_SIZE                    // next level table page
     .endm
-``` 
+```
 
 This macro accepts the following arguments.
 
 * `tbl` - a pointer to a memory region were new table has to be allocated.
 * `virt` - virtual address that we are currently mapping.
-* `shift` - shift that we need to apply to the virtual address in order to extract current table index. (39 in case of PGD and 30 in case of PUD) 
+* `shift` - shift that we need to apply to the virtual address in order to extract current table index. (39 in case of PGD and 30 in case of PUD)
 * `tmp1`, `tmp2` - temporary registers.
 
 This macro is very important, so we are going to spend some time understanding it.
@@ -186,7 +186,7 @@ The first two lines of the macro are responsible for extracting table index from
 Then the address of the next page table is calculated. Here we are using the convention that all our initial page tables are located in one continuous memory region. We simply assume that the next page table in the hierarchy will be adjacent to the current page table. 
 
 ```
-    orr    \tmp2, \tmp2, #MM_TYPE_PAGE_TABLE    
+    orr    \tmp2, \tmp2, #MM_TYPE_PAGE_TABLE
 ```
 
 Next, a pointer to the next page table in the hierarchy is converted to a table descriptor. (A descriptor must have 2 lower bits set to `1`)
@@ -201,7 +201,7 @@ Then the descriptor is stored in the current page table. We use previously calcu
     add    \tbl, \tbl, #PAGE_SIZE                    // next level table page
 ```
 
-Finally, we change `tbl` parameter to point to the next page table in the hierarchy. This is convenient because now we can call `create_table_entry` one more time for the next table in the hierarchy without making any adjustments to the `tbl` parameter. This is precisely what we are doing in the [create_pgd_entry]((https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/boot.S#L63) macro, with is just a wrapper that allocates both PGD and PUD. 
+Finally, we change `tbl` parameter to point to the next page table in the hierarchy. This is convenient because now we can call `create_table_entry` one more time for the next table in the hierarchy without making any adjustments to the `tbl` parameter. This is precisely what we are doing in the [create_pgd_entry](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/boot.S#L63) macro, which is just a wrapper that allocates both PGD and PUD.
 
 Next important macro is`create_block_map` As you might guess this macro is responsible for populating entries of the PMD table. It looks like the following.
 
@@ -226,8 +226,8 @@ Parameters here are a little bit different.
 
 * `tbl` - a pointer to the PMD table.
 * `phys` - the start of the physical region to be mapped.
-* `start` - virtual address of the first section to be mapped. 
-* `end` - virtual address of the last section to be mapped. 
+* `start` - virtual address of the first section to be mapped.
+* `end` - virtual address of the last section to be mapped.
 * `flags` - flags that need to be copied into lower attributes of the block descriptor.
 * `tmp1` - temporary register.
 
@@ -253,7 +253,7 @@ The same thing is repeated for the `end` address. Now both `start` and `end` con
     orr    \phys, \tmp1, \phys, lsl #SECTION_SHIFT            // table entry
 ```
 
-Next, block descriptor is prepared and stored in the `tmp1` variable. In order to prepare the descriptor `phys` parameter is first shifted to right then shifted back and merged with the `flags` parameter using `orr` instruction. If you wonder why do we have to shift the address back and forth - the answer is that this clears first 21 bit in the `phys` address and makes our macro universal, allowing it to be used with any address, not just the first address of the section. 
+Next, block descriptor is prepared and stored in the `tmp1` variable. In order to prepare the descriptor `phys` parameter is first shifted to right then shifted back and merged with the `flags` parameter using `orr` instruction. If you wonder why do we have to shift the address back and forth - the answer is that this clears first 21 bit in the `phys` address and makes our macro universal, allowing it to be used with any address, not just the first address of the section.
 
 ```
 9999:    str    \phys, [\tbl, \start, lsl #3]                // store the entry
@@ -269,7 +269,7 @@ Now, when you understand how `create_table_entry` and `create_block_map` macros 
 
 ```
     adrp    x0, pg_dir
-    mov    x1, #VA_START 
+    mov    x1, #VA_START
     create_pgd_entry x0, x1, x2, x3
 ```
 
@@ -283,11 +283,11 @@ Here we create both PGD and PUD. We configure them to start mapping from [VA_STA
     create_block_map x0, x1, x2, x3, MMU_FLAGS, x4
 ```
 
-Next, we create virtuall mapping of the whole memory, excluding device registers region. We use [MMU_FLAGS](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/include/arm/mmu.h#L24) constant as `flags` parameter - this marks all sections to be mapped as normal noncacheable memory. (Note, that `MM_ACCESS` flag is also specified as part of `MMU_FLAGS` constant. Without this flag each memory access will generate a synchronous exception.)
+Next, we create virtual mapping of the whole memory, excluding device registers region. We use [MMU_FLAGS](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/include/arm/mmu.h#L24) constant as `flags` parameter - this marks all sections to be mapped as normal noncacheable memory. (Note, that `MM_ACCESS` flag is also specified as part of `MMU_FLAGS` constant. Without this flag each memory access will generate a synchronous exception.)
 
 ```
     /* Mapping device memory*/
-    mov     x1, #DEVICE_BASE                    // start mapping from device base address 
+    mov     x1, #DEVICE_BASE                    // start mapping from device base address
     ldr     x2, =(VA_START + DEVICE_BASE)                // first virtual address
     ldr    x3, =(VA_START + PHYS_MEMORY_SIZE - SECTION_SIZE)    // last virtual address
     create_block_map x0, x1, x2, x3, MMU_DEVICE_FLAGS, x4
@@ -307,21 +307,21 @@ Finally, the function restored link register and returns to the caller.
 Now page tables are created and we are back to the `el1_entry` function. But there is still some work to be done before we can switch on the MMU. Here is what happens.
 
 ```
-    mov    x0, #VA_START            
+    mov    x0, #VA_START
     add    sp, x0, #LOW_MEMORY
 ```
 
 We are updating init task stack pointer. Now it uses a virtual address, instead of a physical one. (Therefore it could be used only after MMU is on.)
 
 ```
-    adrp    x0, pg_dir                
+    adrp    x0, pg_dir
     msr    ttbr1_el1, x0
 ```
 
-`ttbr1_el1` is updated to point to the previously populated PGD table. 
+`ttbr1_el1` is updated to point to the previously populated PGD table.
 
 ```
-    ldr    x0, =(TCR_VALUE)        
+    ldr    x0, =(TCR_VALUE)
     msr    tcr_el1, x0
 ```
 
@@ -332,12 +332,12 @@ We are updating init task stack pointer. Now it uses a virtual address, instead 
     msr    mair_el1, x0
 ```
 
-We already discussed `mair` register in the "Configuring page attributes" section. Here we just set its value. 
+We already discussed `mair` register in the "Configuring page attributes" section. Here we just set its value.
 
 ```
     ldr    x2, =kernel_main
 
-    mov    x0, #SCTLR_MMU_ENABLED                
+    mov    x0, #SCTLR_MMU_ENABLED
     msr    sctlr_el1, x0
 
     br     x2
@@ -380,7 +380,7 @@ void kernel_process(){
     int err = move_to_user_mode(begin, end - begin, process - begin);
     if (err < 0){
         printf("Error while moving process to user mode\n\r");
-    } 
+    }
 }
 ```
 
@@ -394,7 +394,7 @@ int move_to_user_mode(unsigned long start, unsigned long size, unsigned long pc)
     struct pt_regs *regs = task_pt_regs(current);
     regs->pstate = PSR_MODE_EL0t;
     regs->pc = pc;
-    regs->sp = 2 *  PAGE_SIZE;  
+    regs->sp = 2 *  PAGE_SIZE;
     unsigned long code_page = allocate_user_page(current, 0);
     if (code_page == 0)    {
         return -1;
@@ -417,10 +417,10 @@ As it was the case in the previous lesson, we obtain a pointer to `pt_regs` area
     regs->pc = pc;
 ```
 
-`pc` now points to the offset of the startup function in the user region. Next, we are going to copy the whole user region to the new address space, starting from offset 0, so the offset in the user region will become an actual virtual address of the starting point.
+`pc` now points to the offset of the startup function in the user region.
 
 ```
-    regs->sp = 2 *  PAGE_SIZE;  
+    regs->sp = 2 *  PAGE_SIZE;
 ```
 
 We made a simple convention that our user program will not exceed 1 page in size. We allocate the second page to the stack.
@@ -438,13 +438,13 @@ We made a simple convention that our user program will not exceed 1 page in size
     memcpy(code_page, start, size);
 ```
 
-Next, we copy the whole user region to the page that we have just mapped. 
+Next, we are going to copy the whole user region to the new address space (in the page that we have just mapped), starting from offset 0, so the offset in the user region will become an actual virtual address of the starting point.
 
 ```
     set_pgd(current->mm.pgd);
 ```
 
-Finally, we call [set_pgd](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/utils.S#L24), wich updates `ttbr0_el1` register and thus activate current process translation tables.
+Finally, we call [set_pgd](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson06/src/utils.S#L24), which updates `ttbr0_el1` register and thus activate current process translation tables.
 
 ### TLB (Translation lookaside buffer)
 
@@ -526,7 +526,7 @@ This function has the following arguments.
 * `va` Virtual address itself.
 * `new_table` This is an output parameter. It is set to 1 if a new child table has been allocated and left 0 otherwise.
 
-You can think of this function as an analog of the `create_table_entry` macro. It extracts table index from the virtual address and prepares a descriptor in the parent table that points to the child table. Unlike `create_table_entry` macro we don't assume that the child table should be adjacent into memory with the parent table - instead, we rely on `get_free_table` function to return whatever page is available. It also might be the case that child table was already allocated (This might happen if child page table covers the region were another page has been allocated previously.). In this case we set `new_table` to 1 and read child page table address from the parent table.
+You can think of this function as an analog of the `create_table_entry` macro. It extracts table index from the virtual address and prepares a descriptor in the parent table that points to the child table. Unlike `create_table_entry` macro we don't assume that the child table should be adjacent into memory with the parent table - instead, we rely on `get_free_table` function to return whatever page is available. It also might be the case that child table was already allocated (This might happen if child page table covers the region where another page has been allocated previously.). In this case we set `new_table` to 0 and read child page table address from the parent table.
 
 `map_page` calls `map_table` 3 times: once for PGD, PUD and PMD. The last call allocates PTE and sets a descriptor in the PMD. Next, `map_table_entry` is called. You can see this function below.
 
@@ -534,7 +534,7 @@ You can think of this function as an analog of the `create_table_entry` macro. I
 void map_table_entry(unsigned long *pte, unsigned long va, unsigned long pa) {
     unsigned long index = va >> PAGE_SHIFT;
     index = index & (PTRS_PER_TABLE - 1);
-    unsigned long entry = pa | MMU_PTE_FLAGS; 
+    unsigned long entry = pa | MMU_PTE_FLAGS;
     pte[index] = entry;
 }
 ```
@@ -599,7 +599,7 @@ int copy_process(unsigned long clone_flags, unsigned long fn, unsigned long arg)
         p->cpu_context.x20 = arg;
     } else {
         struct pt_regs * cur_regs = task_pt_regs(current);
-        *cur_regs = *childregs;
+        *childregs = *cur_regs;
         childregs->regs[0] = 0;
         copy_virt_memory(p);
     }
@@ -612,7 +612,7 @@ int copy_process(unsigned long clone_flags, unsigned long fn, unsigned long arg)
     p->cpu_context.pc = (unsigned long)ret_from_fork;
     p->cpu_context.sp = (unsigned long)childregs;
     int pid = nr_tasks++;
-    task[pid] = p;    
+    task[pid] = p;
 
     preempt_enable();
     return pid;
@@ -643,7 +643,7 @@ All other details of the forking procedure work exactly in the same way, as they
 
 If you go back and take a look at the `move_to_user_mode` function, you may notice that we only map a single page, starting at offset 0. But we also assume that the second page will be used as a stack. Why don't we map the second page as well? If you think it is a bug, it is not - it is a feature! Stack page, as well as any other page that a process needs to access will be mapped as soon as it will be requested for the first time. Now we are going to explore the inner-workings of this mechanism.
 
-When a process tries to access some address which belongs to the page that is not yet mapped a synchronous exception is generated. This is the second type of synchronous exception that we are going to support (the first type is an exception generated by the `svc` instruction which is a system call). Syncronos exception handler now looks like the following.
+When a process tries to access some address which belongs to the page that is not yet mapped a synchronous exception is generated. This is the second type of synchronous exception that we are going to support (the first type is an exception generated by the `svc` instruction which is a system call). Synchronous exception handler now looks like the following.
 
 ```
 el0_sync:
@@ -663,13 +663,13 @@ Here we use `esr_el1` register to determine exception type. If it is a page faul
 el0_da:
     bl    enable_irq
     mrs    x0, far_el1
-    mrs    x1, esr_el1            
+    mrs    x1, esr_el1
     bl    do_mem_abort
     cmp x0, 0
     b.eq 1f
     handle_invalid_entry 0, DATA_ABORT_ERROR
 1:
-    bl disable_irq                
+    bl disable_irq
     kernel_exit 0
 ```
 
