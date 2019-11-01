@@ -61,7 +61,7 @@
 
 ##### 다음 페이지
 
-[Prerequisites](../Prerequisites.md)
+[Prerequisites](../ko/Prerequisites.md)
 
 ##### 추가 사항
 

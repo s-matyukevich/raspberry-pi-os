@@ -20,7 +20,7 @@ ARMv8 아키텍처를 지원하는 64비트 프로세서를 사용하도록 설�
 
 ##### 이전 페이지
 
-[Introduction](../Introduction.md)
+[Introduction](../ko/Introduction.md)
 
 ##### 다음 페이지
 
