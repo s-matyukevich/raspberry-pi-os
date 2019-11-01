@@ -24,7 +24,7 @@ ARMv8 아키텍처를 지원하는 64비트 프로세서를 사용하도록 설�
 
 ##### 다음 페이지
 
-1.1 [Kernel Initialization: Introducing RPi OS, or bare metal "Hello, world!"](../lesson01/rpi-os.md)
+1.1 [Kernel Initialization: Introducing RPi OS, or bare metal "Hello, world!"](../ko/lesson01/rpi-os.md)
 
 ##### 추가 사항
 
