@@ -20,12 +20,12 @@ ARMv8 아키텍처를 지원하는 64비트 프로세서를 사용하도록 설�
 
 ##### 이전 페이지
 
-[Introduction](../docs/Introduction.md)
+[Introduction](../Introduction.md)
 
 ##### 다음 페이지
 
-1.1 [Kernel Initialization: Introducing RPi OS, or bare metal "Hello, world!"](../docs/lesson01/rpi-os.md)
+1.1 [Kernel Initialization: Introducing RPi OS, or bare metal "Hello, world!"](../lesson01/rpi-os.md)
 
 ##### 추가 사항
 
-이 문서는 훌륭한 오픈소스 운영체제 학습 프로젝트인 Sergey Matyukevich의 문서를 영어에 능숙하지 않는 한국인들이 학습할 수 있도록 번역한 것입니다. 오타 및 오역이 있을 수 있습니다. Sergey Matyukevich는 한국어를 능숙하게 다루지 못합니다. 대신 저에게 elxm6123@gmail.com으로 연락주세요.
+이 문서는 훌륭한 오픈소스 운영체제 학습 프로젝트인 Sergey Matyukevich의 문서를 영어에 능숙하지 않은 한국인들이 학습할 수 있도록 번역한 것입니다. 오타 및 오역이 있을 수 있습니다. Sergey Matyukevich는 한국어를 능숙하게 다루지 못합니다. 대신 저에게 elxm6123@gmail.com으로 연락해주세요.
