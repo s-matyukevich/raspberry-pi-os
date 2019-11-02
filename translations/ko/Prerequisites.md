@@ -8,7 +8,7 @@ ARMv8 아키텍처를 지원하는 64비트 프로세서를 사용하도록 설�
 
 직렬 케이블을 연결한 후에는 연결을 테스트해야 합니다. 이 가이드에 따르라고 권고하기 전에 이 작업을 수행한 적이 없는 경우, 직렬 케이블을 통해 라즈베리 파이를 연결하는 과정을 자세히 설명합니다. 이 가이드에서는 직렬 케이블을 사용하여 라즈베리 파이에 전력을 공급하는 방법도 설명합니다. RPi OS는 그러한 종류의 설정과 잘 작동하지만, 이 경우에는 케이블을 꽂은 후 바로 단말 에뮬레이터를 실행해야합니다. 자세한 내용은 [이 문제](https://github.com/s-matyukevich/raspberry-pi-os/issues/2)를 확인하십시오.
 
-### 3. [라즈비언 OS가 설치된 SD 카드](https://www.raspberrypi.org/documentation/installation/sd-cards.md) with installed [Raspbian OS](https://www.raspberrypi.org/downloads/raspbian/)
+### 3. [라즈비언 OS](https://www.raspberrypi.org/downloads/raspbian/)가 설치된 [SD 카드](https://www.raspberrypi.org/documentation/installation/sd-cards.md)
 
 우리는 처음에 USB와 TTL 케이블의 연결을 테스트하기 위해 라즈비언이 필요합니다. 또 다른 이유는 설치 후 SD 카드를 올바른 방식으로 포맷한 상태로 방치하기 때문입니다.
 
