@@ -119,7 +119,7 @@ unsigned long get_free_page()
 }
 
 void free_page(unsigned long p){
-    mem_map[p / PAGE_SIZE] = 0;
+    mem_map[(p - LOW_MEMORY) / PAGE_SIZE] = 0;
 }
 ```
 The allocator can work only with memory pages (each page is 4 KB in size). There is an array called `mem_map` that for each page in the system holds its status: whether it is allocated or free. Whenever we need to allocate a new page, we just loop through this array and return the first free page. This implementation is based on 2 assumptions:
