@@ -178,7 +178,7 @@ We are going to tackle the second question first.
       $(call if_changed,link_o_target)
   ```
 
-  This target depends on `$(obj-y)` target and `obj-y` is a list of all object files that need to be built in the current folder. After those files become ready `cmd_link_o_target` command is executed. In case if `obj-y` variable is empty `cmd_make_empty_builtin` is called, wich just creates an empty `built-in.o`. Otherwise, `cmd_make_builtin` command is executed; it uses familiar to us `ar` tool to create `built-in.o` thin archive.
+  This target depends on `$(obj-y)` target and `obj-y` is a list of all object files that need to be built in the current folder. After those files become ready `cmd_link_o_target` command is executed. In case if `obj-y` variable is empty `cmd_make_empty_builtin` is called, which just creates an empty `built-in.o`. Otherwise, `cmd_make_builtin` command is executed; it uses familiar to us `ar` tool to create `built-in.o` thin archive.
 
 * Finally we got to the point where we need to compile something. You remember that our last unexplored dependency is `$(obj-y)` and `obj-y` is just a list of object files. The target that compiles all object files from corresponding `.c` files is defined [here](https://github.com/torvalds/linux/blob/v4.14/scripts/Makefile.build#L313). Let's examine all lines, needed to understand this target.
 
