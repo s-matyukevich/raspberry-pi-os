@@ -70,5 +70,5 @@ compatible = "brcm,bcm2835-aux-uart";
 
 ##### Next Page
 
-1.5 [Kernel Initialization: Exercises](../../../docs/lesson01/exercises.md)
+1.5 [Kernel Initialization: Exercises](../exercises.md)
 

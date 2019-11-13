@@ -27,8 +27,8 @@ git checkout v4.14
 
 ##### 이전 페이지
 
-1.1 [Kernel Initialization: Introducing RPi OS, or bare metal "Hello, world!"](../../lesson01/rpi-os.md)
+1.1 [Kernel Initialization: Introducing RPi OS, or bare metal "Hello, world!"](./lesson01/rpi-os.md)
 
 ##### 다음 페이지
 
-1.3 [Kernel Initialization: Kernel build system](../../lesson01/linux/build-system.md)
+1.3 [Kernel Initialization: Kernel build system](./build-system.md)

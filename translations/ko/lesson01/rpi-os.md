@@ -500,7 +500,7 @@ disable_commandline_tags=1
 
 #### 다음 페이지
 
-1.2 [Kernel Initialization: Linux project structure](/linux/project-structure.md)
+1.2 [Kernel Initialization: Linux project structure](./linux/project-structure.md)
 
 ##### 추가 사항
 
