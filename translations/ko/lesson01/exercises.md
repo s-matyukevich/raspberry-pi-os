@@ -1,4 +1,3 @@
-
 ## 1.5: 연습
 
 연습하기는 선택사항이지만 소스코드를 조금 실험해 볼 것을 강력히 권합니다. 연습 중 하나를 완료할 수 있는 경우 소스 코드를 다른 사람과 공유하십시오.
@@ -10,8 +9,8 @@
 
 ##### Previous Page
 
-1.4  [커널 초기화: 리눅스 스타트업 순서](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson01/linux/kernel-startup.md)
+1.4  [Kernel Initialization: Linux startup sequence](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson01/linux/kernel-startup.md)
 
 ##### Next Page
 
-2.1  [프로세스 초기화: RPi OS](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson02/rpi-os.md)
+2.1  [Processor initialization: RPi OS](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson02/rpi-os.md)

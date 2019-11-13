@@ -27,8 +27,8 @@ git checkout v4.14
 
 ##### 이전 페이지
 
-1.1 [커널 초기화:RPi OS 소개, 베어-메탈 “Hello, World”](../../lesson01/rpi-os.md)
+1.1 [Kernel Initialization: Introducing RPi OS, or bare metal "Hello, world!"](../../lesson01/rpi-os.md)
 
 ##### 다음 페이지
 
-1.3 [커널 초기화: 커널 빌드 시스템](../../lesson01/linux/build-system.md)
+1.3 [Kernel Initialization: Kernel build system](../../lesson01/linux/build-system.md)

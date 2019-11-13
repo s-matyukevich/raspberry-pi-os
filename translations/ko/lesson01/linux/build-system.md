@@ -218,9 +218,9 @@
 나의 주된 목표는 이 장을 읽고 나면 위의 모든 사항에 대한 일반적인 이해를 얻는 것이었습니다.
 ##### Previous Page
 
-1.2 [커널 초기화: 리눅스 프로젝트 구성](../../../docs/lesson01/linux/project-structure.md)
+1.2 [Kernel Initialization: Linux project structure](../../../docs/lesson01/linux/project-structure.md)
 
 ##### Next Page
 
-1.4 [커널 초기화: 리눅스 스타트업 순서](../../../docs/lesson01/linux/kernel-startup.md)
+1.4 [Kernel Initialization: Linux startup sequence](../../../docs/lesson01/linux/kernel-startup.md)
 

@@ -496,7 +496,7 @@ disable_commandline_tags=1
 
 #### 이전 페이지
 
-[필수 요건](../Prerequisites.md)
+[Prerequisites](../Prerequisites.md)
 
 #### 다음 페이지
 
