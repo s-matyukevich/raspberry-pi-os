@@ -496,11 +496,11 @@ disable_commandline_tags=1
 
 #### 이전 페이지
 
-[필수 요건](../Prerequisites.md)
+[Prerequisites](../Prerequisites.md)
 
 #### 다음 페이지
 
-1.2 [Kernel Initialization: Linux project structure](/linux/project-structure.md)
+1.2 [Kernel Initialization: Linux project structure](./linux/project-structure.md)
 
 ##### 추가 사항
 

@@ -66,9 +66,9 @@ compatible = "brcm,bcm2835-aux-uart";
 
 ##### Previous Page
 
-1.3 [커널 초기화: 커널 빌드 시스템](../../../docs/lesson01/linux/build-system.md)
+1.3 [Kernel Initialization: Kernel build system](../../../docs/lesson01/linux/build-system.md)
 
 ##### Next Page
 
-1.5 [커널 초기화: 연습](../../../docs/lesson01/exercises.md)
+1.5 [Kernel Initialization: Exercises](../exercises.md)
 
