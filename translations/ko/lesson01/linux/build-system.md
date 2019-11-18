@@ -33,7 +33,7 @@
     * `recipe` 는 bash 스크립트입니다.  prerequisites 중 일부가 업데이트되었을 때 호출됩니다. recipe은 목표물을 생성하는데 책임이 있습니다.
     * 타겟과 prerequisites는 모두 와일드 카드("%")를 포함할 수 있습니다. 와일드 카드를 사용할 경우, 각각의 캐시된 prerequisites에 대해 별도의 recipe를 실행합니다. 이 경우, `$<`와 `$@` 변수를 사용하여 recipe 내부의 prerequisites와 타겟을 참조할 수 있습니다. 우리는 이미 [RPi OS makefile](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson01/Makefile#L14)을 완성했습니다. 좀 더 추가적인 make 규칙을 알고 싶다면 [공식 문서](https://www.gnu.org/software/make/manual/html_node/Rule-Syntax.html#Rule-Syntax)를 참조하세요.
 
-* `make` 는 prerequisites가 변경되었는지 탐지하고 재구축해야 하는 대상만을 업데이트할 때 유용합니다. 그러나 recipe이 동적으로 업데이트되면 `make` 는 이 변화를 감지할 수 없습니다. 어떻게 이런 일이 일어날 수 있을까요? 메우 쉽게 한 가지 좋은 예는 일부 구성 변수를 변경할 때 레시피에 추가 옵션을 추가하는 것이다. 기본적으로, 이 경우,  `make`는 이전에 생성된 객체 파일을 재구성하지 않습니다. 그 prerequisites은 변경되지 않았고, recipe만 업데이트되었기 때문입니다. 이 동작을 해결하기 위해서 리눅스는 [if_changed](https://github.com/torvalds/linux/blob/v4.14/scripts/Kbuild.include#L264) 함수를 도입했습니다. 어떻게 작동하는지 보기 위해서 다음의 예를 생각해봅시다.
+* `make` 는 prerequisites가 변경되었는지 탐지하고 재구축해야 하는 대상만을 업데이트할 때 유용합니다. 그러나 recipe이 동적으로 업데이트되면 `make` 는 이 변화를 감지할 수 없습니다. 어떻게 이런 일이 일어날 수 있을까요? 메우 쉽게 한 가지 좋은 예는 일부 구성 변수를 변경할 때 레시피에 추가 옵션을 추가하는 것입니다. 기본적으로, 이 경우,  `make`는 이전에 생성된 객체 파일을 재구성하지 않습니다. 그 prerequisites은 변경되지 않았고, recipe만 업데이트되었기 때문입니다. 이 동작을 해결하기 위해서 리눅스는 [if_changed](https://github.com/torvalds/linux/blob/v4.14/scripts/Kbuild.include#L264) 함수를 도입했습니다. 어떻게 작동하는지 보기 위해서 다음의 예를 생각해봅시다.
 
   ```
   cmd_compile = gcc $(flags) -o $@ $<
@@ -51,7 +51,7 @@
 1. 소스 파일이 객체 파일로 정확히 어떻게 컴파일되는가?
 1. 오브젝트 파일이 OS 이미지에 어떻게 연결되어 있는가?
 
-우리는 두 번째 문제를 먼저 다룰 것이다.
+우리는 두 번째 문제를 먼저 다룰 것입니다.
 
 #### 링크 스테이지
 
@@ -205,11 +205,6 @@
 
 와우, 커널 빌드 시스템 내부로 가는 긴 여정이었어요! 그럼에도 불구하고, 우리는 많은 세부사항을 생략했고, 이 주제에 대해 더 알고 싶어하는 사람들을 위해 나는 다음의 [문서](https://github.com/torvalds/linux/blob/v4.14/Documentation/kbuild/makefiles.txt)들을 읽는 것을 추천하고 Makefiles 코드 읽는 것을 계속하겠습니다. 지금 중요한 점을 강조하는 당신이 이 장에서 가져갈 중요한 메시지입니다.
 
-1. How `.c` files are compiled into object files.
-1. How object files are combined into `build-in.o` files.
-1. How  recursive build pick up all child `build-in.o` files and combines them into a single one.
-1. How `vmlinux` is linked from all top-level `build-in.o` files.
-
 1. 어떻게 `.c` 파일들이 오브젝트 파일들로 컴파일되는지.
 1. 어떻게 오브젝트파일들이 `build-in.o` 파일들로 합쳐지는지.
 1. 어떻게 재귀적인 빌드가 모든 하위  `build-in.o` 파일들을 선택하고 하나로 결합 시키는지.
@@ -223,4 +218,8 @@
 ##### Next Page
 
 1.4 [Kernel Initialization: Linux startup sequence](./kernel-startup.md)
+
+##### 추가 사항
+
+이 문서는 훌륭한 오픈소스 운영체제 학습 프로젝트인 Sergey Matyukevich의 문서를 영어에 능숙하지 않은 한국인들이 학습할 수 있도록 번역한 것입니다. 오타 및 오역이 있을 수 있습니다. Sergey Matyukevich는 한국어를 능숙하게 다루지 못합니다. 대신 저에게 elxm6123@gmail.com으로 연락해주세요.
 

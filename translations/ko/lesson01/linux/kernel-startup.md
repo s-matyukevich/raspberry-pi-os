@@ -36,7 +36,7 @@
 
 장치 트리는 위에 언급된 문제에 대한 해결책을 우리에게 제공합니다. 컴퓨터 하드웨어를 설명하는 데 사용할 수 있는 특수한 형식입니다. 장치 트리는 [여기](https://www.devicetree.org/)에서 볼 수 있습니다. 커널이 실행되기 전에 부트로더는 적절한 장치 트리 파일을 선택하여 커널에 인수로 전달합니다. 라즈베리 PI SD카드의 부트 파티션에 있는 파일을 보면 여기서 `.dtb` 파일을 많이 찾을 수 있습니다. `.dtb`는 장치 트리 파일을 컴파일한 것입니다. `config.txt` 에서 그 중 일부를 선택하여 일부 라즈베리 파이 하드웨어를 활성화하거나 비활성화 할수 있습니다. 커널이 실행되기 전에 부트로더는 적절한 장치 트리 파일을 선택하여 커널에 인수로 전달합니다. Raspberry PI SD 카드의 부팅 파티션에 있는 파일을 보면, 여기서 `.dtb` 파일을 많이 찾을 수 있습니다. `.dtb`는 장치 트리 파일을 컴파일한 것입니다. "config.txt"에서 일부를 선택하여 일부 Raspberry PI 하드웨어를 활성화하거나 비활성화할 수 있습니다. 이 프로세스는 [Raspberry PI 공식 설명서](https://www.raspberrypi.org/documentation/configuration/device-tree.md)에 자세히 설명되어 있습니.
 
-자, 이제 실제 장치 트리가 어떻게 생겼는지 살펴봅시다. 간단한 연습으로 [Rasperry PI 3 Model B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/)의 장치 트리를 찾아보자. [문서](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2837/README.md)로부터  우리는 `BCM2837`를 사용하는 `Raspberry PI 3 Model B`를 이해할 수 있습니다. 이 파일 [/arch/arm64/boot/dts/broadcom/bcm2837-rpi-3-b.dts](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/boot/dts/broadcom/bcm2837-rpi-3-b.dts)을 검색하면 찾을 수 있습니다. 여러분이 볼 수 있듯이, 그것은 단지 `arm` 구조의 동일한 파일을 포함하고 있을 뿐이다. `ARM.v8` 프로세서도 32비트 모드를 지원한다는 점에서 일리가 있다.
+자, 이제 실제 장치 트리가 어떻게 생겼는지 살펴봅시다. 간단한 연습으로 [Rasperry PI 3 Model B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/)의 장치 트리를 찾아보자. [문서](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2837/README.md)로부터  우리는 `BCM2837`를 사용하는 `Raspberry PI 3 Model B`를 이해할 수 있습니다. 이 파일 [/arch/arm64/boot/dts/broadcom/bcm2837-rpi-3-b.dts](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/boot/dts/broadcom/bcm2837-rpi-3-b.dts)을 검색하면 찾을 수 있습니다. 여러분이 볼 수 있듯이, 그것은 단지 `arm` 구조의 동일한 파일을 포함하고 있을 뿐입니다. `ARM.v8` 프로세서도 32비트 모드를 지원한다는 점에서 일리가 있다.
 
 다음에, [arm](https://github.com/torvalds/linux/tree/v4.14/arch/arm) 아키텍처를 포함하고 있는 [bcm2837-rpi-3-b.dts](https://github.com/torvalds/linux/blob/v4.14/arch/arm/boot/dts/bcm2837-rpi-3-b.dts)를 찾을 수 있습니다. 우리는 이미 장치 트리 파일이 다른 파일에 포함될 수 있다는 것을 보았습니다. 이는 `bcm2837-rpi-3-b.dts`의 경우로, `BCM2837`에 특정한 정의만을 포함하고 있으며, 그 밖의 모든 것을 재사용하고 있습니다. 예를 들어, `bcm2837-rpi-3-b.dts`는 [기기는 현재 1GB 메모리를 가지고 있다](https://github.com/torvalds/linux/blob/v4.14/arch/arm/boot/dts/bcm2837-rpi-3-b.dts#L18)라고 명시하고 있습니다. 
 
@@ -71,4 +71,8 @@ compatible = "brcm,bcm2835-aux-uart";
 ##### Next Page
 
 1.5 [Kernel Initialization: Exercises](../exercises.md)
+
+##### 추가 사항
+
+이 문서는 훌륭한 오픈소스 운영체제 학습 프로젝트인 Sergey Matyukevich의 문서를 영어에 능숙하지 않은 한국인들이 학습할 수 있도록 번역한 것입니다. 오타 및 오역이 있을 수 있습니다. Sergey Matyukevich는 한국어를 능숙하게 다루지 못합니다. 대신 저에게 elxm6123@gmail.com으로 연락해주세요.
 

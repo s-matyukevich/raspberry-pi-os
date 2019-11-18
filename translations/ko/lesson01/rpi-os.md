@@ -321,7 +321,7 @@ void uart_init ( void )
 
 GPIO 핀을 사용할 때 종종 pull-up/pull-down이라는 용어를 만날 것입니다. 이 개념들은 [여기](https://grantwinney.com/using-pullup-and-pulldown-resistors-on-the-raspberry-pi/)에 자세하게 설명되어 있습니다. 이 기사를 읽기에 너무 게으른 사람들을 위해 pull-up/pull-down 개념에 대해 짧게 설명하겠습니다.
 
-특정 핀을 입력으로 사용하고 이 핀에 아무것도 연결하지 않으면 핀의 값이 1인지 0인지를 식별할 수 없습니다. 사실, 이 장치는 무작위 값을 보고할 것이다. pull-up/pull-down 메커니즘은 당신이 이 문제를 극복할 수 있게 해줍니다. 핀을 풀업 상태로 설정했는데 아무 것도 연결되어 있지 않으면 항상 "1"이 보고됩니다(풀다운 상태의 경우 값은 항상 0이 됩니다). 우리의 경우 14핀과 15핀 모두 항상 연결되기 때문에 풀업 상태도 풀다운 상태도 필요하지 않습니다. 핀 상태는 재부팅 후에도 보존되기 때문에 핀을 사용하기 전에 항상 초기화를 해야 합니다. 3가지 상태(풀업, 풀다운, 둘다 아닌)가 있습니다.
+특정 핀을 입력으로 사용하고 이 핀에 아무것도 연결하지 않으면 핀의 값이 1인지 0인지를 식별할 수 없습니다. 사실, 이 장치는 무작위 값을 보고할 것입니다. pull-up/pull-down 메커니즘은 당신이 이 문제를 극복할 수 있게 해줍니다. 핀을 풀업 상태로 설정했는데 아무 것도 연결되어 있지 않으면 항상 "1"이 보고됩니다(풀다운 상태의 경우 값은 항상 0이 됩니다). 우리의 경우 14핀과 15핀 모두 항상 연결되기 때문에 풀업 상태도 풀다운 상태도 필요하지 않습니다. 핀 상태는 재부팅 후에도 보존되기 때문에 핀을 사용하기 전에 항상 초기화를 해야 합니다. 3가지 상태(풀업, 풀다운, 둘다 아닌)가 있습니다.
 
 핀 상태들 간의 스위칭은 전기 회로 위의 물리적인 토글링 전환이 필요하기 때문에 간단한 절차가 아닙니다. 이 과정은 `GPPUD`과 `GPPUDCLK` 레지스터를 포함하고 이것은 `BCM2837 ARM Peripherals` 메뉴얼 101 페이지에 설명되어 있습니다. 여기에 그것을 복사했습니다.
 
@@ -353,7 +353,7 @@ retain their previous state.
 
 #### 미니 UART 초기화하기
 
-이제 미니 UART가 GPIO 핀에 연결되어 있으며 핀이 구성되어 있다. 나머지 `uart_init` 함수는 미니 UART를 초기화하는 전용이다.
+이제 미니 UART가 GPIO 핀에 연결되어 있으며 핀이 구성되어 있다. 나머지 `uart_init` 함수는 미니 UART를 초기화하는 전용입니다.
 
 ```
     put32(AUX_ENABLES,1);                   //Enable mini uart (this also enables access to its registers)
@@ -492,7 +492,7 @@ disable_commandline_tags=1
 1.  라즈베리파이에 전원을 ON합니다.
 1.  터미널 에뮬레이터를 활용하여 RPi OS에 연결합니다.
 
-불행하게도, 라즈베리파이 펌웨어 파일들을 모두 비공개이다. 라즈베리 파이 시작을 순서에 대한 많은 정보를 위해 [이것](https://raspberrypi.stackexchange.com/questions/10442/what-is-the-boot-sequence)와 [이것](https://github.com/DieterReuter/workshop-raspberrypi-64bit-os/blob/master/part1-bootloader.md)과 같은 비공식적 소스를 참고할 수도 있습니다.
+불행하게도, 라즈베리파이 펌웨어 파일들을 모두 비공개입니다. 라즈베리 파이 시작을 순서에 대한 많은 정보를 위해 [이것](https://raspberrypi.stackexchange.com/questions/10442/what-is-the-boot-sequence)와 [이것](https://github.com/DieterReuter/workshop-raspberrypi-64bit-os/blob/master/part1-bootloader.md)과 같은 비공식적 소스를 참고할 수도 있습니다.
 
 #### 이전 페이지
 
