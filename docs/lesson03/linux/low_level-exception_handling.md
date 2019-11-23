@@ -170,7 +170,7 @@ The macro accepts 2 parameters: `el` and `regsize`. `el` can be either `0` or `1
     .endif
 ```
 
-In 32-bit mode, we use 32-bit general purpose registers (`w0` instead of `x0`).  `w0` is architecturally mapped to the lower part of `x0`. The provided code snippet zeroes upper 32 bits of the `x0` register by writing `w0` to itself
+In 32-bit mode, we use 32-bit general purpose registers (`w0` instead of `x0`).  `w0` is architecturally mapped to the lower part of `x0`. The provided code snippet zeroes upper 32 bits of the `x0` register by writing `w0` to itself.
 
 ```
     stp    x0, x1, [sp, #16 * 0]
@@ -206,7 +206,7 @@ This part saves all general purpose registers on the stack. Note, that stack poi
 ```
 
 `MDSCR_EL1.SS` bit is responsible for enabling "Software Step exceptions". If this bit is set and debug exceptions are unmasked, an exception is generated after any instruction has been executed. This is commonly used by debuggers. When taking exception from user mode, we need to check first whether [TIF_SINGLESTEP](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/thread_info.h#L93) flag is set for the current task. If yes, this indicates that the task is executing under a debugger and we must unset `MDSCR_EL1.SS` bit.
-The important thing to understand in this code is how information about the current task is obtained. In Linux, each process or thread (later I will reference any of them as just "task") has a [task_struct](https://github.com/torvalds/linux/blob/v4.14/include/linux/sched.h#L519) associated with it. This struct contains all metadata information about a task On `arm64` architecture `task_struct` embeds another structure that is called [thread_info](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/thread_info.h#L39) so that a pointer to `task_struct` can always be used as a pointer to `thread_info`. `thread_info` is the place were flags are stored along with some other low-level values that `entry.S` need direct access to.
+The important thing to understand in this code is how information about the current task is obtained. In Linux, each process or thread (later I will reference any of them as just "task") has a [task_struct](https://github.com/torvalds/linux/blob/v4.14/include/linux/sched.h#L519) associated with it. This struct contains all metadata information about a task. On `arm64` architecture `task_struct` embeds another structure that is called [thread_info](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/include/asm/thread_info.h#L39) so that a pointer to `task_struct` can always be used as a pointer to `thread_info`. `thread_info` is the place were flags are stored along with some other low-level values that `entry.S` need direct access to.
 
 ```
     mov    x29, xzr            // fp pointed to user-space
@@ -363,7 +363,7 @@ The following is done inside this function.
 
 As you might see from the code, `irq_handler` executes [handle_arch_irq](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/irq.c#L44)  function. This function is executed with special stack, that is called "irq stack".  Why is it necessary to switch to a different stack? In RPI OS, for example, we didn't do this.  Well, I guess it is not necessary, but without it, an interrupt will be handled using task stack, and we can never be sure how much of it is still left for the interrupt handler.
 
-Next, we need to look at [handle_arch_irq](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/irq.c#L44) It appears that it is not a function, but a variable. It is set inside [set_handle_irq](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/irq.c#L46) function. But who sets it, and what is the fade of an interrupt after it reaches this point? We will figure out the answer in the next chapter of this lesson.
+Next, we need to look at [handle_arch_irq](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/irq.c#L44). It appears that it is not a function, but a variable. It is set inside [set_handle_irq](https://github.com/torvalds/linux/blob/v4.14/arch/arm64/kernel/irq.c#L46) function. But who sets it, and what is the fade of an interrupt after it reaches this point? We will figure out the answer in the next chapter of this lesson.
 
 ### Conclusion
 

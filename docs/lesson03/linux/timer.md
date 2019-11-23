@@ -223,7 +223,7 @@ Now let me show you the chain of function calls that leads us to the place we ne
 1. [tick_setup_periodic](https://github.com/torvalds/linux/blob/v4.14/kernel/time/tick-common.c#L144) This is the place were device is configured for periodic tics.
 1. [tick_set_periodic_handler](https://github.com/torvalds/linux/blob/v4.14/kernel/time/tick-broadcast.c#L432)  Finally we reached the place where the handler is assigned!
 
-If you take a look at the last function in the call chain, you will see that Linux uses different handlers depending on whether broadcast is enabled or not. Tick broadcast is used to awake idle CPUs, you can read more about it [here](https://lwn.net/Articles/574962/) but we are going to ignore it and concentrate on a more general tick handler instead.
+If you take a look at the last function in the call chain, you will see that Linux uses different handlers depending on whether broadcast is enabled or not. Tick broadcast is used to awake idle CPUs, you can read more about it [here](https://lwn.net/Articles/574962/). But we are going to ignore it and concentrate on a more general tick handler instead.
 
 In general case [tick_handle_periodic](https://github.com/torvalds/linux/blob/v4.14/kernel/time/tick-common.c#L99) and then [tick_periodic](https://github.com/torvalds/linux/blob/v4.14/kernel/time/tick-common.c#L79) functions are called. The later one is exactly the function that we are interested in. Let me copy its content here.
 
