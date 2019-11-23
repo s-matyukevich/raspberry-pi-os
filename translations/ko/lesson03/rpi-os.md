@@ -175,8 +175,12 @@ void handle_timer_irq( void )
 
 ##### 이전 페이지
 
-2.3 [Processor initialization: Exercises](../../docs/lesson02/exercises.md)
+2.3 [Processor initialization: Exercises](../lesson03/exercises.md)
 
 ##### 다음 페이지
 
-3.2 [Interrupt handling: Low-level exception handling in Linux](../../docs/lesson03/linux/low_level-exception_handling.md)
+3.2 [Interrupt handling: Low-level exception handling in Linux](./linux/low_level-exception_handling.md)
+
+##### 추가 사항
+
+이 문서는 훌륭한 오픈소스 운영체제 학습 프로젝트인 Sergey Matyukevich의 문서를 영어에 능숙하지 않은 한국인들이 학습할 수 있도록 번역한 것입니다. 오타 및 오역이 있을 수 있습니다. Sergey Matyukevich는 한국어를 능숙하게 다루지 못합니다. 대신 저에게 elxm6123@gmail.com으로 연락해주세요.

@@ -260,8 +260,12 @@ static void tick_periodic(int cpu)
 
 ##### 이전 페이지
 
-3.3 [Interrupt handling: Interrupt controllers](../../../docs/lesson03/linux/interrupt_controllers.md)
+3.3 [Interrupt handling: Interrupt controllers](./linux/interrupt_controllers.md)
 
 ##### 다음 페이지
 
-3.5 [Interrupt handling: Exercises](../../../docs/lesson03/exercises.md)
+3.5 [Interrupt handling: Exercises](../exercises.md)
+
+##### 추가 사항
+
+이 문서는 훌륭한 오픈소스 운영체제 학습 프로젝트인 Sergey Matyukevich의 문서를 영어에 능숙하지 않은 한국인들이 학습할 수 있도록 번역한 것입니다. 오타 및 오역이 있을 수 있습니다. Sergey Matyukevich는 한국어를 능숙하게 다루지 못합니다. 대신 저에게 elxm6123@gmail.com으로 연락해주세요.
