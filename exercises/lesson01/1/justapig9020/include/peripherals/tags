@@ -1,0 +1,28 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AUX_ENABLES	mini_uart.h	7;"	d
+AUX_MU_BAUD_REG	mini_uart.h	18;"	d
+AUX_MU_CNTL_REG	mini_uart.h	16;"	d
+AUX_MU_IER_REG	mini_uart.h	9;"	d
+AUX_MU_IIR_REG	mini_uart.h	10;"	d
+AUX_MU_IO_REG	mini_uart.h	8;"	d
+AUX_MU_LCR_REG	mini_uart.h	11;"	d
+AUX_MU_LSR_REG	mini_uart.h	13;"	d
+AUX_MU_MCR_REG	mini_uart.h	12;"	d
+AUX_MU_MSR_REG	mini_uart.h	14;"	d
+AUX_MU_SCRATCH	mini_uart.h	15;"	d
+AUX_MU_STAT_REG	mini_uart.h	17;"	d
+GPCLR0	gpio.h	8;"	d
+GPFSEL1	gpio.h	6;"	d
+GPPUD	gpio.h	9;"	d
+GPPUDCLK0	gpio.h	10;"	d
+GPSET0	gpio.h	7;"	d
+PBASE	base.h	4;"	d
+SYS_CLK_FRQ	mini_uart.h	6;"	d
+_P_BASE_H	base.h	2;"	d
+_P_GPIO_H	gpio.h	2;"	d
+_P_MINI_UART_H	mini_uart.h	2;"	d
