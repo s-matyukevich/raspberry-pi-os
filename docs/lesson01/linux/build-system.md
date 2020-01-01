@@ -46,7 +46,7 @@ After we examined Linux kernel structure, it worth spending some time investigat
 
 ### Building the kernel
 
-Now, when we learned some important concepts about the Linux build system, let's try to figure out what exactly is going on after you type `make` command. This process is very complicated and includes a lot of details, most of which we will skip. Our goal will be to answer 2 questions.
+Now, that we learned some important concepts about the Linux build system, let's try to figure out what exactly is going on after you type `make` command. This process is very complicated and includes a lot of details, most of which we will skip. Our goal will be to answer 2 questions.
 
 1. How exactly are source files compiled into object files?
 1. How are object files linked into the OS image?
@@ -106,7 +106,7 @@ We are going to tackle the second question first.
   vmlinux-deps := $(KBUILD_LDS) $(KBUILD_VMLINUX_INIT) $(KBUILD_VMLINUX_MAIN) $(KBUILD_VMLINUX_LIBS)
   ```
 
-  It all starts with variables like `init-y`, `core-y`, etc., which combined contains all subfolders of the Linux kernel that contains buildable source code. Then `built-in.o` is appended to all the subfolder names, so, for example, `drivers/` becomes `drivers/built-in.o`. `vmlinux-deps` then just aggregates all resulting values. This explains how `vmlinux` eventually becomes dependent on all `build-in.o` files.
+  It all starts with variables like `init-y`, `core-y`, etc., which combined contains all subfolders of the Linux kernel that contains buildable source code. Then `built-in.o` is appended to all the subfolder names, so, for example, `drivers/` becomes `drivers/built-in.o`. `vmlinux-deps` then just aggregates all resulting values. This explains how `vmlinux` eventually becomes dependent on all `built-in.o` files.
 
 * Next question is how all `built-in.o` objects are created? Once again, let me copy all relevant lines and explain how it all works.
 
@@ -205,9 +205,9 @@ We are going to tackle the second question first.
 Wow, it was a long journey inside kernel build system internals! Still, we skipped a lot of details and, for those who want to learn more about the subject, I can recommend to read the following [document](https://github.com/torvalds/linux/blob/v4.14/Documentation/kbuild/makefiles.txt) and continue reading Makefiles source code. Let me now emphasize the important points, that you should take as a take-home message from this chapter.
 
 1. How `.c` files are compiled into object files.
-1. How object files are combined into `build-in.o` files.
-1. How  recursive build pick up all child `build-in.o` files and combines them into a single one.
-1. How `vmlinux` is linked from all top-level `build-in.o` files.
+1. How object files are combined into `built-in.o` files.
+1. How  recursive build pick up all child `built-in.o` files and combines them into a single one.
+1. How `vmlinux` is linked from all top-level `built-in.o` files.
 
 My main goal was that after reading this chapter you will gain a general understanding of all above points.
 
