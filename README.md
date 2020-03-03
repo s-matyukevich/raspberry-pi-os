@@ -15,7 +15,7 @@ For more information about project goals and history, please read the [Introduct
     <img src="https://raw.githubusercontent.com/s-matyukevich/raspberry-pi-os/master/images/facebook.png" alt="Follow Raspberry Pi OS on facebook" height="34" >
   </a>
 
-  <a href="https://join.slack.com/t/rpi-os/shared_invite/enQtNDQ1NTg2ODc1MDEwLTUxNjc5ZGUzN2EyNWEyNGEyZWU1ZDY1MWJjZTBjYTQzNDBhMzIzNzJhMWNmYzQ1YzQwOGRjOTEzOWYzYzM1YmE" target="_blank">
+  <a href="https://join.slack.com/t/rpi-os/shared_invite/enQtNDQ1NTg2ODc1MDEwLWVjMTZlZmMyZDE4OGEyYmMzNTY1YjljZjU5YWI1NDllOWEwMjI5YzVkM2RiMzliYjEzN2RlYmUzNzBiYmQyMjY" target="_blank">
     <img src="https://raw.githubusercontent.com/s-matyukevich/raspberry-pi-os/master/images/slack.png" alt="Join Raspberry Pi OS in slack" height="34" >
   </a>
 
