@@ -27,7 +27,7 @@ void uart_send_string(char* str)
 	}
 }
 
-void uart_init (int rate)
+void uart_init (unsigned int rate)
 {
 	unsigned int selector;
 
