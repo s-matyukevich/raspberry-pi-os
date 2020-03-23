@@ -37,4 +37,4 @@ git checkout v4.14
 
 #### 下一页
 
-1.3 [内核初始化：内核构建系统](../../../docs/lesson01/linux/build-system.md)
+1.3 [内核初始化：内核构建系统](../linux/build-system.md)
