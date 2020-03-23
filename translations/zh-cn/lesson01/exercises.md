@@ -9,8 +9,8 @@
 
 ##### 上一页
 
-1.4 [Kernel Initialization: Linux startup sequence](../../docs/lesson01/linux/kernel-startup.md)
+1.4 [Kernel 初始化: Linux启动顺序](../../../translations/zh-cn/lesson01/linux/kernel-startup.md)
 
 ##### 下一页
 
-2.1 [Processor initialization: RPi OS](../../docs/lesson02/rpi-os.md)
+2.1 [处理器初始化: RPi OS](../../../translations/zh-cn/lesson02/rpi-os.md)
