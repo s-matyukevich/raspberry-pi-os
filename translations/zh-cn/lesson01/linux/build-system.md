@@ -217,8 +217,8 @@ Linux也使用`make`实用程序来构建内核，尽管`Linux makefile`要复�
 
 ##### 上一页
 
-1.2 [Kernel Initialization: Linux project structure](../../../docs/lesson01/linux/project-structure.md)
+1.2 [Kernel 初始化: Linux 项目结构](./project-structure.md)
 
 ##### 下一页
 
-1.4 [Kernel Initialization: Linux startup sequence](../../../docs/lesson01/linux/kernel-startup.md)
+1.4 [Kernel 初始化: Linux 启动顺序](./kernel-startup.md)
