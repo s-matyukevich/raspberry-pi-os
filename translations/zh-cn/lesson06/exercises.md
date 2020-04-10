@@ -1,6 +1,6 @@
 ## 6.3 练习题
 
-1. 改编第06课以在qemu上运行。 你必须实现 [identity mapping](https://wiki.osdev.org/Identity_Paging) 为此。 查看 [this](https://github.com/s-matyukevich/raspberry-pi-os/issues/8) issue 供参考.
+1. 改编第06课以在qemu上运行.  你必须实现 [identity mapping](https://wiki.osdev.org/Identity_Paging) 为此.  查看 [this](https://github.com/s-matyukevich/raspberry-pi-os/issues/8) issue 供参考.
 
 ##### 上一页
 
@@ -9,4 +9,4 @@
 
 ##### 下一页
 
-7.1 信号和中断等待：RPi OS（待完成）
+7.1 信号和中断等待：RPi OS(待完成)
