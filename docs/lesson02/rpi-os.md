@@ -41,7 +41,7 @@ Here we use `mrs` instruction to read the value from `CurrentEL` system register
     printf("Exception level: %d \r\n", el);
 ```
 
-If you reproduce this experiment, you should see `Exception level: 3` on the screen.
+If you reproduce this experiment, you should see `Exception level: 2` on the screen.
 
 ### Changing current exception level
 
