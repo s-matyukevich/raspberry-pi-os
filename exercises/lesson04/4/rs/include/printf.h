@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-This library is realy just two files: 'printf.h' and 'printf.c'.
+This library is really just two files: 'printf.h' and 'printf.c'.
 
 They provide a simple and small (+200 loc) printf functionality to
 be used in embedded systems.
@@ -64,7 +64,7 @@ character output function with something like:
 Notice the 'NULL' in 'init_printf' and the parameter 'void* p' in 'putc',
 the NULL (or any pointer) you pass into the 'init_printf' will eventually be
 passed to your 'putc' routine. This allows you to pass some storage space (or
-anything realy) to the character output function, if necessary.
+anything really) to the character output function, if necessary.
 This is not often needed but it was implemented like that because it made
 implementing the sprintf function so neat (look at the source code).
 
