@@ -8,7 +8,7 @@ In this lesson, we are going to fix all issues mentioned above by introducing vi
 
 ```
                            Virtual address                                                                 Physical Memory
-+-----------------------------------------------------------------------+                                +-----------------_+
++-----------------------------------------------------------------------+                                +------------------+
 |         | PGD Index | PUD Index | PMD Index | PTE Index | Page offset |                                |                  |
 +-----------------------------------------------------------------------+                                |                  |
 63        47     |    38      |   29     |    20    |     11      |     0                                |     Page N       |
@@ -50,7 +50,7 @@ There is one more thing that I want to discuss before we start looking at the so
 
 ```
                            Virtual address                                               Physical Memory
-+-----------------------------------------------------------------------+              +-----------------_+
++-----------------------------------------------------------------------+              +------------------+
 |         | PGD Index | PUD Index | PMD Index |      Section offset     |              |                  |
 +-----------------------------------------------------------------------+              |                  |
 63        47     |    38      |   29     |    20            |           0              |    Section N     |
