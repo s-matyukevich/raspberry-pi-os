@@ -5,7 +5,7 @@
 void uart_send ( char c )
 {
 	while(1) {
-		if(get32(AUX_MU_LSR_REG)&0x20) 
+		if(get32(AUX_MU_LSR_REG)&0x20)
 			break;
 	}
 	put32(AUX_MU_IO_REG,c);
@@ -14,7 +14,7 @@ void uart_send ( char c )
 char uart_recv ( void )
 {
 	while(1) {
-		if(get32(AUX_MU_LSR_REG)&0x01) 
+		if(get32(AUX_MU_LSR_REG)&0x01)
 			break;
 	}
 	return(get32(AUX_MU_IO_REG)&0xFF);
@@ -30,7 +30,7 @@ void uart_send_string(char* str)
 void uart_init ( int baudrate )
 {
 	unsigned int selector;
-	
+
 	if(baudrate == 0) baudrate = 270;
 
 	selector = get32(GPFSEL1);
@@ -46,7 +46,7 @@ void uart_init ( int baudrate )
 	delay(150);
 	put32(GPPUDCLK0,0);
 
-	put32(AUX_ENABLES,1);                   //Enable mini uart (this also enables access to it registers)
+	put32(AUX_ENABLES,1);                   //Enable mini uart (this also enables access to its registers)
 	put32(AUX_MU_CNTL_REG,0);               //Disable auto flow control and disable receiver and transmitter (for now)
 	put32(AUX_MU_IER_REG,0);                //Disable receive and transmit interrupts
 	put32(AUX_MU_LCR_REG,3);                //Enable 8 bit mode

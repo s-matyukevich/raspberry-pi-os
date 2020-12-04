@@ -7,7 +7,7 @@
 void uart_send ( char c )
 {
 	while(1) {
-		if(get32(AUX_MU_LSR_REG)&0x20) 
+		if(get32(AUX_MU_LSR_REG)&0x20)
 			break;
 	}
 	put32(AUX_MU_IO_REG,c);
@@ -16,7 +16,7 @@ void uart_send ( char c )
 char uart_recv ( void )
 {
 	while(1) {
-		if(get32(AUX_MU_LSR_REG)&0x01) 
+		if(get32(AUX_MU_LSR_REG)&0x01)
 			break;
 	}
 	return(get32(AUX_MU_IO_REG)&0xFF);
@@ -34,9 +34,9 @@ void uart_init ( miniuart_baud_t baud_rate )
 	unsigned int selector;
 
 	/* Final baudrate = system_clock_freq / (8 * ( baudrate_reg + 1 ))
-	 *  From docs, system_clock_freq = 250MHz 
+	 *  From docs, system_clock_freq = 250MHz
 	 *  Solve for baudrate_reg:
-	 *       baudrate_reg = (system_clock_freq / (8*baudrate)) - 1 
+	 *       baudrate_reg = (system_clock_freq / (8*baudrate)) - 1
 	 *       baudrate_reg = 31.25MHz/baudrate - 1
 	 *       baudrate_reg = 31250000/baudrate -1
 	 * baudrate_reg is a 32 bit register, but per BCM2835-ARM-Peripherals.pdf, only bottom 16 are read
@@ -57,7 +57,7 @@ void uart_init ( miniuart_baud_t baud_rate )
 	delay(150);
 	put32(GPPUDCLK0,0);
 
-	put32(AUX_ENABLES,1);                   //Enable mini uart (this also enables access to it registers)
+	put32(AUX_ENABLES,1);                   //Enable mini uart (this also enables access to its registers)
 	put32(AUX_MU_CNTL_REG,0);               //Disable auto flow control and disable receiver and transmitter (for now)
 	put32(AUX_MU_IER_REG,0);                //Disable receive and transmit interrupts
 	put32(AUX_MU_LCR_REG,3);                //Enable 8 bit mode
