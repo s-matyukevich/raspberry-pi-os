@@ -41,7 +41,7 @@ void uart_init(void) {
   put32(GPPUDCLK0, 0);
 
   put32(AUX_ENABLES, 1);       // Enable mini uart
-                               // (this also enables access to it registers)
+                               // (this also enables access to its registers)
   put32(AUX_MU_CNTL_REG, 0);   // Disable auto flow control and disable receiver
                                // and transmitter (for now)
   put32(AUX_MU_IER_REG, 0);    // Disable receive and transmit interrupts

@@ -21,7 +21,7 @@
 ARMGNU ?= aarch64-linux-gnu
 
 COPS = -Wall -nostdlib -nostartfiles -ffreestanding -Iinclude -mgeneral-regs-only
-ASMOPS = -Iinclude 
+ASMOPS = -Iinclude
 
 BUILD_DIR = build
 SRC_DIR = src
@@ -29,7 +29,7 @@ SRC_DIR = src
 all : kernel8.img
 
 clean :
-    rm -rf $(BUILD_DIR) *.img 
+    rm -rf $(BUILD_DIR) *.img
 
 $(BUILD_DIR)/%_c.o: $(SRC_DIR)/%.c
     mkdir -p $(@D)
@@ -49,7 +49,7 @@ DEP_FILES = $(OBJ_FILES:%.o=%.d)
 kernel8.img: $(SRC_DIR)/linker.ld $(OBJ_FILES)
     $(ARMGNU)-ld -T $(SRC_DIR)/linker.ld -o $(BUILD_DIR)/kernel8.elf  $(OBJ_FILES)
     $(ARMGNU)-objcopy $(BUILD_DIR)/kernel8.elf -O binary kernel8.img
-``` 
+```
 
 이제 파일을 자세히 살펴봅시다.
 
@@ -61,7 +61,7 @@ Makefile은 변수 정의로 시작합니다. `ARMGNU`는 크로스 컴파일러
 
 ```
 COPS = -Wall -nostdlib -nostartfiles -ffreestanding -Iinclude -mgeneral-regs-only
-ASMOPS = -Iinclude 
+ASMOPS = -Iinclude
 ```
 
 `COPS`와 `ASMOPS`는 각각 C와 어셈블리 코드를 컴파일 할 때 컴파일러에게 전달하는 옵션입니다. 아래 옵션들은 짧은 설명이 필요합니다.
@@ -84,7 +84,7 @@ SRC_DIR = src
 all : kernel8.img
 
 clean :
-    rm -rf $(BUILD_DIR) *.img 
+    rm -rf $(BUILD_DIR) *.img
 ```
 
 다음으로 Makefile에서 타겟을 만듭니다. 첫 번째 두 개의 타겟은 매우 간단합니다. 'all' 타겟은 기본 타겟이며, 아무 인자 없이 'make'를 입력할 때마다 실행됩니다("make"는 항상 첫 번째 타겟을 기본 타겟으로 사용합니다). 이 대상은 모든 작업을 다른 대상인kernel8.img로 리디렉션할 뿐입니다. 'clean' 대상은 모든 컴파일된 아티팩트와 컴파일된 커널 이미지를 삭제하는 역할을 합니다.
@@ -117,7 +117,7 @@ DEP_FILES = $(OBJ_FILES:%.o=%.d)
 다음 두 줄은 좀 까다롭습니다. C와 어셈블리 소스 파일의 컴파일 목표를 어떻게 정의했는지 살펴보면, 우리가 `-MMD` 매개변수를 사용했다는 것을 알 수 있습니다. 이 매개변수는 생성된 각 개체 파일에 대한 모든 종속성을 정의합니다. 이러한 종속성에는 일반적으로 포함된 모든 헤더의 목록이 포함됩니다. 헤더가 변경될 경우 정확히 무엇을 다시 컴파일해야 하는지 알 수 있도록 생성된 모든 종속 파일을 포함해야합니다.
 ```
 $(ARMGNU)-ld -T $(SRC_DIR)/linker.ld -o kernel8.elf  $(OBJ_FILES)
-``` 
+```
 
 우리는 `kernel8.elf` 파일을 빌드하기 위해서 `OBJ_FILES` 배열을 사용합니다. 우리는 결과적으로 실행가능한 이미지의 기본적인 레이아웃을 정의하기 위해서 링커 스크립트 `src/linker.ld`를 사용합니다(다음 섹션에서 링커 스크립트에 대해 논의합니다).
 
@@ -140,12 +140,12 @@ SECTIONS
     .data : { *(.data) }
     . = ALIGN(0x8);
     bss_begin = .;
-    .bss : { *(.bss*) } 
+    .bss : { *(.bss*) }
     bss_end = .;
 }
-``` 
+```
 
-시작 후 라즈베리 파이는 `kernel8.img`를 메모리에 로드하고 이미지 파일 시작 부분부터 실행을 시작합니다. 그래서 `.text.boot` 섹센이 먼저 있어야합니다. 이 섹션 안에 OS의 시작 코드를 넣겠습니다. `.text`, `.rodata`, `.data` 섹션에는 커널을 컴파일한 명령어, 읽기 전용 데이터, 일반 데이터 등이 수록되어 있어 특별한 추가 사항은 없습니다. 
+시작 후 라즈베리 파이는 `kernel8.img`를 메모리에 로드하고 이미지 파일 시작 부분부터 실행을 시작합니다. 그래서 `.text.boot` 섹센이 먼저 있어야합니다. 이 섹션 안에 OS의 시작 코드를 넣겠습니다. `.text`, `.rodata`, `.data` 섹션에는 커널을 컴파일한 명령어, 읽기 전용 데이터, 일반 데이터 등이 수록되어 있어 특별한 추가 사항은 없습니다.
 `.bss` 섹션에는 0으로 초기화해야할 데이터들이 들어 있습니다. 이러한 데이터들을 별도의 섹션에 배치함으로써 컴파일러는 ELF 이진 수에 약간의 공간을 절약할 수 있습니다. 단, 섹션 크기는 ELF 헤더에 저장되지만 섹션 자체는 생략됩니다. 이미지를 메모리에 로드한 이후, `.bss` 섹션을 0으로 초기화해야합니다. 그렇기 때문에 섹션의 시작과 끝(`bss_begin`과 `bss_end`)을 기록하고 섹션이 8의 배수로 시작되도록 정렬해야합니다. 이 구간이 정렬되지 않으면 8바이트 정렬 주소로만 `str`을 사용할 수 있기 때문에 `bss` 섹션의 시작 부분에 0을 저장하는 `str`명령어를 사용하는 것이 더 어려울 것입니다.
 
 
@@ -160,12 +160,12 @@ SECTIONS
 
 .globl _start
 _start:
-    mrs    x0, mpidr_el1        
+    mrs    x0, mpidr_el1
     and    x0, x0,#0xFF        // Check processor id
     cbz    x0, master        // Hang for all non-primary CPU
     b    proc_hang
 
-proc_hang: 
+proc_hang:
     b proc_hang
 
 master:
@@ -185,7 +185,7 @@ master:
 ```
 .globl _start
 _start:
-    mrs    x0, mpidr_el1        
+    mrs    x0, mpidr_el1
     and    x0, x0,#0xFF        // Check processor id
     cbz    x0, master        // Hang for all non-primary CPU
     b    proc_hang
@@ -245,11 +245,11 @@ void kernel_main(void)
 
 ### 라즈베리 파이 디바이스
 
-이제 라즈베리 파이 특징을 파헤칠 것입니다. 시작하기 전에 [BCM2837 ARM Peripherals 설명서](https://github.com/raspberrypi/documentation/files/1888662/BCM2837-ARM-Peripherals.-.Revised.-.V2-1.pdf)를 다운로드하십시오. BCM2837은 라즈베리 파이 3 모델 B와 B+에서 사용하는 보드입니다. 논의 중에 BCM2835와 BCM2836도 언급할 것입니다. 이들은 라즈베리 파이 이전 버전에서 사용되는 보드의 이름입니다. 구현 세부사항으로 진행하기 전에 메모리 매핑된 장치와 함께 작동하는 방법에 대한 몇 가지 기본 개념을 공유하고자 합니다. BCM2837은 단순한 [SOC(System on a chip)](https://en.wikipedia.org/wiki/System_on_a_chip) 보드입니다. 이러한 보드에서는 메모리 매핑된 레지스터를 통해 모든 장치에 대한 액세스가 수행됩니다. 라즈베리 파이 3는 장치에 0x3F000000 주소를 초과하는 메모리를 예약합니다. 특정 장치를 활성화하거나 구성하려면 장치의 레지스터 중 하나에 일부 데이터를 기록해야 합니다. 장치 레지스터는 메모리의 32비트 영역일 뿐입니다. 각 기기 레지스터의 각 비트의 의미는 `BCM2837 ARM Peripherals` 매뉴얼에 설명되어 있습니다. 메뉴얼에서 `0x7E000000`이 사용됨에도 불구하고 기본 주소로 `0x3F000000`을 사용하는 이유에 대한 자세한 내용은 매뉴얼의 섹션 1.2.3 ARM 물리적 주소와 주변 설명서를 참조하십시오. 
+이제 라즈베리 파이 특징을 파헤칠 것입니다. 시작하기 전에 [BCM2837 ARM Peripherals 설명서](https://github.com/raspberrypi/documentation/files/1888662/BCM2837-ARM-Peripherals.-.Revised.-.V2-1.pdf)를 다운로드하십시오. BCM2837은 라즈베리 파이 3 모델 B와 B+에서 사용하는 보드입니다. 논의 중에 BCM2835와 BCM2836도 언급할 것입니다. 이들은 라즈베리 파이 이전 버전에서 사용되는 보드의 이름입니다. 구현 세부사항으로 진행하기 전에 메모리 매핑된 장치와 함께 작동하는 방법에 대한 몇 가지 기본 개념을 공유하고자 합니다. BCM2837은 단순한 [SOC(System on a chip)](https://en.wikipedia.org/wiki/System_on_a_chip) 보드입니다. 이러한 보드에서는 메모리 매핑된 레지스터를 통해 모든 장치에 대한 액세스가 수행됩니다. 라즈베리 파이 3는 장치에 0x3F000000 주소를 초과하는 메모리를 예약합니다. 특정 장치를 활성화하거나 구성하려면 장치의 레지스터 중 하나에 일부 데이터를 기록해야 합니다. 장치 레지스터는 메모리의 32비트 영역일 뿐입니다. 각 기기 레지스터의 각 비트의 의미는 `BCM2837 ARM Peripherals` 매뉴얼에 설명되어 있습니다. 메뉴얼에서 `0x7E000000`이 사용됨에도 불구하고 기본 주소로 `0x3F000000`을 사용하는 이유에 대한 자세한 내용은 매뉴얼의 섹션 1.2.3 ARM 물리적 주소와 주변 설명서를 참조하십시오.
 
-`kernal_main` 함수로부터, 작은 UART 디바이스와 함께 진행해야함을 추측할 수 있을 것입니다. UART는 [Universal asynchronous receiver-transmitter](https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter)입니다. 이 장치는 메모리 매핑된 레지스터 중 하나에 저장된 값을 일련의 고전압 및 저전압으로 변환할 수 있습니다. 이 시퀀스는 "TTL 대 시리얼 케이블"을 통해 컴퓨터로 전달되며 단말 에뮬레이터에 의해 해석됩니다. 라즈베리 파이와의 통신을 용이하게 하기 위해 미니 UART를 사용할 것입니다. 미니 UART 레지스터의 사양을 보려면 `BCM2837 ARM Peripherals` 매뉴얼의 8페이지로 이동하세요. 
+`kernal_main` 함수로부터, 작은 UART 디바이스와 함께 진행해야함을 추측할 수 있을 것입니다. UART는 [Universal asynchronous receiver-transmitter](https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter)입니다. 이 장치는 메모리 매핑된 레지스터 중 하나에 저장된 값을 일련의 고전압 및 저전압으로 변환할 수 있습니다. 이 시퀀스는 "TTL 대 시리얼 케이블"을 통해 컴퓨터로 전달되며 단말 에뮬레이터에 의해 해석됩니다. 라즈베리 파이와의 통신을 용이하게 하기 위해 미니 UART를 사용할 것입니다. 미니 UART 레지스터의 사양을 보려면 `BCM2837 ARM Peripherals` 매뉴얼의 8페이지로 이동하세요.
 
-라즈베리 파이는 두 개의 UART를 가지고 있습니다: 미니 UART와 PL011 UART. 이 튜토리얼에서는, 미니 UART로만 작업할 것입니다. 그것이 더 간단하기 때문입니다. 그러나 PL011 UART와 함께 작업하는 방법을 보여주는 선택적 [연습](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson01/exercises.md)도 있습니다. 라즈베리 파이의 UART들에 대해 자세히 알아보고 그 차이를 알고 싶다면 [공식 문서](https://www.raspberrypi.org/documentation/configuration/uart.md)를 참조하십시오. 
+라즈베리 파이는 두 개의 UART를 가지고 있습니다: 미니 UART와 PL011 UART. 이 튜토리얼에서는, 미니 UART로만 작업할 것입니다. 그것이 더 간단하기 때문입니다. 그러나 PL011 UART와 함께 작업하는 방법을 보여주는 선택적 [연습](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson01/exercises.md)도 있습니다. 라즈베리 파이의 UART들에 대해 자세히 알아보고 그 차이를 알고 싶다면 [공식 문서](https://www.raspberrypi.org/documentation/configuration/uart.md)를 참조하십시오.
 
 더 친숙해져야할 또 다른 디바이스는 GPIO[General-purpose input/output](https://en.wikipedia.org/wiki/General-purpose_input/output)입니다. GPIO는 `GPIO 핀`들을 제어합니다. 이를 아래 이미지에서 쉽게 알아볼 수 있어야합니다.
 
@@ -281,7 +281,7 @@ void uart_init ( void )
     delay(150);
     put32(GPPUDCLK0,0);
 
-    put32(AUX_ENABLES,1);                   //Enable mini uart (this also enables access to it registers)
+    put32(AUX_ENABLES,1);                   //Enable mini uart (this also enables access to its registers)
     put32(AUX_MU_CNTL_REG,0);               //Disable auto flow control and disable receiver and transmitter (for now)
     put32(AUX_MU_IER_REG,0);                //Disable receive and transmit interrupts
     put32(AUX_MU_LCR_REG,3);                //Enable 8 bit mode
@@ -290,7 +290,7 @@ void uart_init ( void )
 
     put32(AUX_MU_CNTL_REG,3);               //Finally, enable transmitter and receiver
 }
-``` 
+```
 
 여기서는 `put32`와 `get32`의 두 가지 함수를 사용합니다. 이 함수들은 매우 간단합니다. 32비트 레지스터에서 데이터를 읽고 쓸 수 있게 합니다. 이 함수들은 [utils.S](https://github.com/s-matyukevich/raspberry-pi-os/blob/master/src/lesson01/src/utils.S)에서 어떻게 구현되어 있는지 볼 수 있습니다. `uart_init`은 이 레슨에서 가장 복잡하고 중요한 함수 중 하나이며, 다음 세 개의 섹션에서 계속 검토할 것입니다.
 
@@ -339,7 +339,7 @@ retain their previous state.
 4. Wait 150 cycles – this provides the required hold time for the control signal
 5. Write to GPPUD to remove the control signal
 6. Write to GPPUDCLK0/1 to remove the clock
-``` 
+```
 
 이 절차는 우리가 어떻게 핀으로부터 풀업과 풀다운 상태를 제거할 수 있는지 설명합니다. 그런데 그 핀들은 아래 코드에서 핀 14번과 15번을 위해 행해지고 있는 것입니다.
 
@@ -403,10 +403,10 @@ RTS 라인은 흐름 제어에 활용되며 우리는 사용하지 않습니다.
 ```
 보드 비율은 통신 채널에서 정보가 전송되는 속도입니다. “115200 보드는 직렬 포트가 초당 최대 115200 비트를 전송할 수 있다는 것을 의미합니다. 라즈베리 파이 미니 UART 장치의 보드 속도는 터미널 에뮬레이터의 보드 속도와 동일해야합니다.
 ```
-baudrate = system_clock_freq / (8 * ( baudrate_reg + 1 )) 
+baudrate = system_clock_freq / (8 * ( baudrate_reg + 1 ))
 ```
 `system_clock_frq`는 250MHz이므로 `baudrate_reg` 값을 270으로 쉽게 계산할 수 있습니다.
-``` 
+```
     put32(AUX_MU_CNTL_REG,3);               //Finally, enable transmitter and receiver
 ```
 마지막으로 수신기와 송신기를 활성화합니다. 미니 UART 작업 준비가 완료됩니다.
@@ -419,7 +419,7 @@ baudrate = system_clock_freq / (8 * ( baudrate_reg + 1 ))
 void uart_send ( char c )
 {
     while(1) {
-        if(get32(AUX_MU_LSR_REG)&0x20) 
+        if(get32(AUX_MU_LSR_REG)&0x20)
             break;
     }
     put32(AUX_MU_IO_REG,c);
@@ -428,7 +428,7 @@ void uart_send ( char c )
 char uart_recv ( void )
 {
     while(1) {
-        if(get32(AUX_MU_LSR_REG)&0x01) 
+        if(get32(AUX_MU_LSR_REG)&0x01)
             break;
     }
     return(get32(AUX_MU_IO_REG)&0xFF);
@@ -471,11 +471,11 @@ disable_commandline_tags=1
 
 이제 모든 소스 코드를 다 살펴봤으니 실행해볼 때가 되었습니다. 커널을 만들고 테스트 하려면 다음을 수행해야합니다.
 
-1. [src/lesson01](https://github.com/s-matyukevich/raspberry-pi-os/tree/master/src/lesson01)에서 온 `./build.sh`이나 `./build.bat`을 커널을 빌드하기 위해서 실행하세요. 
+1. [src/lesson01](https://github.com/s-matyukevich/raspberry-pi-os/tree/master/src/lesson01)에서 온 `./build.sh`이나 `./build.bat`을 커널을 빌드하기 위해서 실행하세요.
 1. 라즈베리 파이의 플래시 메모리의 `boot` 파티션으로 `kernel8.img`를 복사하세요. 그리고 `kernel7.img`을 삭제하세요. 부트 파티션의 다른 파일들은 모두 그대로 둡니다.([여기](https://github.com/s-matyukevich/raspberry-pi-os/issues/43)를 참고할 수 있습니다.)
 1. 이전 섹션의 설명대로 `config.txt`를 수정하세요.
 1. USB-to-TTL 시리얼 케이블을 연결하세요.  [Prerequisites](../Prerequisites.md).
-1. 라즈베리 파이에 전원을 키세요. 
+1. 라즈베리 파이에 전원을 키세요.
 1. 터미널 에뮬레이터를 킵니다. 이제 `Hello, World!` 메시지를 확인할 수 있습니다.
 
 위에 설명된 단계 순서는 당신이 당신의 SD 카드에 라즈비언을 설치한 것으로 간주합니다. 또한 빈 SD 카드를 사용하여 RPi OS를 실행할 수도 있습니다.

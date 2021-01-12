@@ -5,7 +5,7 @@
 void uart_send ( char c )
 {
 	while(1) {
-		if(get32(AUX_MU_LSR_REG)&0x20) 
+		if(get32(AUX_MU_LSR_REG)&0x20)
 			break;
 	}
 	put32(AUX_MU_IO_REG,c);
@@ -14,7 +14,7 @@ void uart_send ( char c )
 char uart_recv ( void )
 {
 	while(1) {
-		if(get32(AUX_MU_LSR_REG)&0x01) 
+		if(get32(AUX_MU_LSR_REG)&0x01)
 			break;
 	}
 	return(get32(AUX_MU_IO_REG)&0xFF);
@@ -44,7 +44,7 @@ void uart_init ( void )
 	delay(150);
 	put32(GPPUDCLK0,0);
 
-	put32(AUX_ENABLES,1);                   //Enable mini uart (this also enables access to it registers)
+	put32(AUX_ENABLES,1);                   //Enable mini uart (this also enables access to its registers)
 	put32(AUX_MU_CNTL_REG,0);               //Disable auto flow control and disable receiver and transmitter (for now)
 	put32(AUX_MU_IER_REG, IER_REG_VALUE);   //Enable receive interrupts
 	put32(AUX_MU_LCR_REG,3);                //Enable 8 bit mode
@@ -66,6 +66,6 @@ void handle_uart_irq( void )
 	// There may be more than one byte in the FIFO.
 	while((get32(AUX_MU_IIR_REG) & IIR_REG_REC_NON_EMPTY) ==
 	      IIR_REG_REC_NON_EMPTY) {
-		uart_send(uart_recv()); 
+		uart_send(uart_recv());
 	}
 }
