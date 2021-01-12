@@ -106,7 +106,7 @@ OBJ_FILES = $(C_FILES:$(SRC_DIR)/%.c=$(BUILD_DIR)/%_c.o)
 OBJ_FILES += $(ASM_FILES:$(SRC_DIR)/%.S=$(BUILD_DIR)/%_s.o)
 ```
 
-Here we are building an array of all object files (`OBJ_FILES`) created from the concatenation of both C and assembler source files.
+Here we are building an array of all object files (`OBJ_FILES`) created from the concatenation of both C and assembler source files (see [Substitution References](https://www.gnu.org/software/make/manual/html_node/Substitution-Refs.html)).
 
 ```
 DEP_FILES = $(OBJ_FILES:%.o=%.d)
