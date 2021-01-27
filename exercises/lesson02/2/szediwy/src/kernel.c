@@ -1,6 +1,8 @@
 #include "custom_printf.h"
+#include "timer.h"
 #include "utils.h"
 #include "mini_uart.h"
+#include "irq.h"
 
 void kernel_main(unsigned long processor_index)
 {
@@ -9,7 +11,11 @@ void kernel_main(unsigned long processor_index)
 	if (processor_index == 0)
 	{
 		uart_init();
-		init_printf(0, putc);	
+		init_printf(0, putc);
+		irq_vector_init();
+		timer_init();
+		enable_interrupt_controller();
+		enable_irq();
 	}
 
 	while (processor_index != current_processor_index)
