@@ -247,7 +247,7 @@ Now, let's investigate this function in more details.
 
 ```
 
-The function starts with the code that reads device base address from the device three and initializes the irq domain. This part should be already familiar to you because we have seen similar code in the local irq controller driver.
+The function starts with the code that reads device base address from the device tree and initializes the irq domain. This part should be already familiar to you because we have seen similar code in the local irq controller driver.
 
 ```
     for (b = 0; b < NR_BANKS; b++) {
