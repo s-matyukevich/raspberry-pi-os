@@ -52,9 +52,9 @@ In ARM architecture there is no way how a program can increase its own exception
 1. An exception handler is executed and does whatever job it needs to do.
 1. Exception handler calls `eret` instruction. This instruction restores processor state from `SPSR_ELn` and resumes execution starting from the address, stored in the `ELR_ELn`  register.
 
-In practice the process is a little more complicated because exception handler also needs to store the state of all general purpose registers and restore it back afterwards, but we will discuss this process in details in the next lesson. For now, we need just to understand the process in general and remember the meaning of the `ELR_ELm` and `SPSR_ELn` registers.
+In practice the process is a little more complicated because exception handler also needs to store the state of all general purpose registers and restore it back afterwards, but we will discuss this process in details in the next lesson. For now, we need just to understand the process in general and remember the meaning of the `ELR_ELn` and `SPSR_ELn` registers.
 
-An important thing to know is that exception handler is not obliged to return to the same location from which the exception originates. Both `ELR_ELm` and `SPSR_ELn` are writable and exception handler can modify them if it wants to. We are going to use this technique to our advantage when we try to switch from EL3 to EL1 in our code.
+An important thing to know is that exception handler is not obliged to return to the same location from which the exception originates. Both `ELR_ELn` and `SPSR_ELn` are writable and exception handler can modify them if it wants to. We are going to use this technique to our advantage when we try to switch from EL3 to EL1 in our code.
 
 ### Switching to EL1
 
