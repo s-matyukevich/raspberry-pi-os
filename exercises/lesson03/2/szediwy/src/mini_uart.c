@@ -110,7 +110,7 @@ void handle_uart_interrupt(void)
 		uart = 5;
 		break;
 	default:
-		uart = -1;
+		uart = 1;
 	}
 
 	static unsigned int uart_bases[] = {UART0_BASE, -1, UART2_BASE, UART3_BASE, UART4_BASE, UART5_BASE};
